@@ -14,15 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fire:
     BaseValue: 25
+    FinalValue: 65
   water:
     BaseValue: 200
+    FinalValue: 0
   earth:
     BaseValue: 50
+    FinalValue: 0
   air:
     BaseValue: 125
+    FinalValue: 0
   thunder:
     BaseValue: 100
+    FinalValue: 0
   light:
     BaseValue: 100
+    FinalValue: 0
   dark:
     BaseValue: 125
+    FinalValue: 0

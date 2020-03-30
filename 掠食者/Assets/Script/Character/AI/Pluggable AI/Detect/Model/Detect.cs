@@ -1,4 +1,6 @@
-﻿public abstract class Detect : AIHaviourBase
+﻿using UnityEngine;
+
+public abstract class Detect : AIHaviourBase
 {
     public abstract bool StartDetectHaviour();
 }

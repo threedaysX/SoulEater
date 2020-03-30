@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using StatsModifierModel;
 using UnityEngine;
 
@@ -8,29 +9,32 @@ namespace StatsModel
     [Serializable]
     public class Stats
     {
-        private List<StatModifier> modifiers;
-        private bool isDirty = true;
-
-        [SerializeField]
         public float BaseValue;
-        private float FinalValue;
         public float Value
         {
             get
             {
-                if (isDirty)
+                if (isDirty || BaseValue != lastBaseValue)
                 {
-                    FinalValue = GetFinalValue();
-                    isDirty = false;
+                    lastBaseValue = BaseValue;
+                    ResetDirtyFinalValue();
                 }
                 return FinalValue;
             }
         }
 
-        public Stats(float baseValue)
+        [ReadOnly][SerializeField] protected float FinalValue;
+        protected float lastBaseValue = float.MinValue;
+        protected bool isDirty = true;
+        public List<StatModifier> modifiers = new List<StatModifier>();
+
+        public Stats()
+        {
+            modifiers = new List<StatModifier>();
+        }
+        public Stats(float baseValue) : this()
         {
             BaseValue = baseValue;
-            modifiers = new List<StatModifier>();
         }
 
         private float GetFinalValue()
@@ -53,10 +57,10 @@ namespace StatsModel
                     case StatModType.TimesOfAdd:
                         timesOfAddMod += mod.Value;
                         break;
-                    case StatModType.PercentMult:
+                    case StatModType.Magnification:
                         timesMod *= (1 + (mod.Value / 100));
                         break;
-                    case StatModType.PercentAdd:
+                    case StatModType.MagnificationAdd:
                         timesOfAddMod += (mod.Value / 100);
                         break;
                 }
@@ -84,13 +88,12 @@ namespace StatsModel
         /// 增、減能力。
         /// </summary>
         /// <param name="mod">增加的數值</param>
-        /// <param name="duration">Buff持續多久的時間</param>
         public void AddModifier(StatModifier mod)
         {
             if (mod.Value != 0)
             {
-                isDirty = true;
                 modifiers.Add(mod);
+                ResetDirtyFinalValue();
             }
         }
 
@@ -98,13 +101,20 @@ namespace StatsModel
         {
             if (mod.Value != 0)
             {
-                if (modifiers.Remove(mod))
+                var getTrueModInList = modifiers.FirstOrDefault(item => item.SourceName.Equals(mod.SourceName) && item.Type.Equals(mod.Type) && item.Value.Equals(mod.Value));
+                if (modifiers.Remove(getTrueModInList))
                 {
-                    isDirty = true;
+                    ResetDirtyFinalValue();
                     return true;
                 }
             }
             return false;
+        }
+
+        private void ResetDirtyFinalValue()
+        {
+            FinalValue = GetFinalValue();
+            isDirty = false;
         }
     }
 }

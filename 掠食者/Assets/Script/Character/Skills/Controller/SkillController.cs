@@ -1,51 +1,103 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System.Collections;
+using UnityEngine;
 
 public class SkillController : MonoBehaviour
 {
-    protected Skill skill;
+    public Character character;
+    public Skill lastSkill;
 
-    public void Trigger(Character character, Skill usedSkill)
+    private void Start()
     {
-        // 哪個技能
-        skill = usedSkill;
+        character = GetComponent<Character>();
+        ResetAllSkillCoolDownOnStart();
+    }
 
-        // 沒魔力了
-        if (character.currentMana < skill.cost)
+    public void Trigger(Skill skill)
+    {
+        // 技能冷卻中
+        if (skill.cooling)
         {
-            Debug.Log("沒有魔力啦！");
+            Debug.Log("冷卻中！！");
             return;
         }
-        // 技能冷卻中
-        //if (skill.coolDown...)
-        //{
-        //    return;
-        //}
 
+        // 消耗
+        switch (skill.costType)
+        {
+            case CostType.Health:
+                if (character.currentHealth < skill.cost)
+                {
+                    Debug.Log("沒有生命啦！");
+                    return;
+                }
+                character.currentHealth -= skill.cost;
+                break;
+            case CostType.Mana:
+                if (character.currentMana < skill.cost)
+                {
+                    Debug.Log("沒有魔力啦！");
+                    return;
+                }
+                character.currentMana -= skill.cost;
+                break;
+        }
 
-        // 補冷卻、詠唱加進Event? 分開?
-        // 施放後，把技能的Event在此時加進去
-        character.currentMana -= skill.cost;
-        if (skill.animator != null)
-            skill.animator.Play(skill.skillName);
-        skill.InvokeEffect(character);
+        // 詠唱
+        if (skill.castTime > 0)
+        {
+            Casting(character, skill.castTime, false);
+        }
+        
+        if (skill.prefab != null)
+        {
+            var skillEvent = skill.prefab.GetComponent<SkillEventBase>();
+            skillEvent.InstantiateSkill(character, skill);
+        }
+
+        StartCoroutine(GetIntoCoolDown(skill));
+        this.lastSkill = skill;
     }
 
     /// <summary>
-    /// 施放技能時，不能操作。
+    /// 施放技能，是否可操作的控制切換。
     /// </summary>
-    public void CastingSkill()
+    protected void Casting(Character character, float castTime, bool canDo)
     {
+        character.canSkill = canDo;
+        character.canMove = canDo;
+        character.canJump = canDo;
+        character.canEvade = canDo;
+        character.canAttack = canDo;
 
+        float timer = 0;
+        while (timer < castTime)
+        {
+            var frameTime = Time.deltaTime;
+            timer += frameTime;
+
+            // Render Casting GUI
+        }
     }
 
-    public void GetIntoCoolDown()
+    protected IEnumerator GetIntoCoolDown(Skill skill)
     {
+        skill.cooling = true;
+        float timer = skill.coolDown;
+        while (timer > 0)
+        {
+            var frameTime = Time.deltaTime;
+            timer -= frameTime;
+            yield return new WaitForSeconds(frameTime);
+        }
 
+        skill.cooling = false;
     }
 
-    public void AddEffect(UnityAction call)
+    private void ResetAllSkillCoolDownOnStart()
     {
-        skill.effect.AddListener(call);
+        foreach (var skill in character.skills)
+        {
+            skill.cooling = false;
+        }
     }
 }

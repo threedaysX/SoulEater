@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Animation\AnimationController.cs" />
+    <Compile Include="Assets\Script\Animation\DestroyOnExit.cs" />
     <Compile Include="Assets\Script\Character\AI\AI.cs" />
     <Compile Include="Assets\Script\Character\AI\AIHaviourBase.cs" />
     <Compile Include="Assets\Script\Character\AI\Enemy\Instances\Ifrit.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Assets\Script\Character\Data\Stats\StatModifier.cs" />
     <Compile Include="Assets\Script\Character\Data\Stats\Stats.cs" />
     <Compile Include="Assets\Script\Character\Data\Status.cs" />
+    <Compile Include="Assets\Script\Character\FormulaSystem\DamageController.cs" />
     <Compile Include="Assets\Script\Character\Player.cs" />
     <Compile Include="Assets\Script\Character\Skills\Controller\SkillController.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Flamethrower.cs" />

@@ -5,11 +5,13 @@ public class BasicMove : Action
 {
     public override void StartActHaviour()
     {
-        Test();
+        Move();
     }
 
-    private void Test()
+    private void Move()
     {
-        ai.transform.position += new Vector3(ai.data.moveSpeed.Value * Time.deltaTime, 0, 0);
+        Vector3 chaseDirection = ai.chaseTarget.position - ai.transform.position;
+        ai.transform.position += chaseDirection * ai.data.moveSpeed.Value * Time.deltaTime;
+        Debug.Log(ai.characterName + "要移動摟！！");
     }
 }

@@ -52,9 +52,9 @@ public abstract class AI : Character
         // 判斷哪些動作符合條件，代表可以做
         foreach (var action in actions)
         {
+            action.GetCurrentAI(this);
             if (action.CheckActionThatCanDo())
             {
-                action.GetCurrentAI(this);
                 actionToDoList.Add(action, action.actionWeight);
             }
         }
@@ -62,7 +62,8 @@ public abstract class AI : Character
         // 如果沒動作可以做，就隨機抓一個
         if (actionToDoList.Count == 0)
         {
-            Action randomAct = actions[Random.Range(0, actions.Length)];
+            int random = Random.Range(0, actions.Length);
+            Action randomAct = actions[random];
             actionToDoList.Add(randomAct, randomAct.actionWeight);
         }
 
@@ -94,4 +95,11 @@ public abstract class AI : Character
     /// 偵測到敵人，重新調整偵測範圍(擴大、不變或縮小)
     /// </summary>
     public abstract void ChangeInDetectRange();
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        //Use the same vars you use to draw your Overlap SPhere to draw your Wire Sphere.
+        Gizmos.DrawWireSphere(transform.position, detectDistance);
+    }
 }

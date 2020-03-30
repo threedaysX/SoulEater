@@ -5,7 +5,7 @@ using StatsModel;
 public class Data : ScriptableObject
 {
     [Header("基本參數")]
-    public Stats maxHealth; 
+    public Stats maxHealth;
     public Stats mana;
     public Stats attack;
     public Stats magicAttack;
@@ -15,14 +15,16 @@ public class Data : ScriptableObject
     public Stats knockBackDamage;
     public Stats manaRecovering; 
     public Stats manaRecoveringOfDamage;
+    public Stats penetrationValue;  // 穿甲值
+    public Stats penetrationMagnification;   // 穿甲倍率
     public Resistance resistance;
     public Status status;
 
     [Header("功能參數")]
-    public Stats jumpForce;
-    public Stats moveSpeed;
-    public Stats attackSpeed;
-    public Stats attackRange;
+    public Stats jumpForce = new Stats(1);
+    public Stats moveSpeed = new Stats(1);
+    public Stats attackSpeed = new Stats(1);
+    public Stats attackRange = new Stats(1);
     public Stats reduceSkillCoolDown;
     public Stats reduceChantTime;
     public Stats reduceEvadeCoolDown;

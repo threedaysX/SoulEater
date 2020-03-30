@@ -1,9 +1,22 @@
 ﻿using StatsModel;
 using UnityEngine;
 
+public enum ElementType
+{
+    None,
+    Fire,
+    Water,
+    Earth,
+    Air,
+    Thunder,
+    Light,
+    Dark
+}
+
 [CreateAssetMenu(menuName = "Character/Data/Resistance/Empty")]
 public class Resistance : ScriptableObject
 {
+    public Stats none;
     public Stats fire;
     public Stats water;
     public Stats earth;
@@ -18,6 +31,7 @@ public class FireResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(25);
         water = new Stats(200);
         earth = new Stats(50);
@@ -33,6 +47,7 @@ public class WaterResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(50);
         water = new Stats(25);
         earth = new Stats(100);
@@ -48,6 +63,7 @@ public class EarthResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(200);
         water = new Stats(100);
         earth = new Stats(25);
@@ -63,6 +79,7 @@ public class AirResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(100);
         water = new Stats(100);
         earth = new Stats(100);
@@ -78,6 +95,7 @@ public class ThunderResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(100);
         water = new Stats(50);
         earth = new Stats(200);
@@ -93,6 +111,7 @@ public class LightResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(100);
         water = new Stats(100);
         earth = new Stats(100);
@@ -108,6 +127,7 @@ public class DarkResistance : Resistance
 {
     private void Awake()
     {
+        none = new Stats(100);
         fire = new Stats(125);
         water = new Stats(125);
         earth = new Stats(125);

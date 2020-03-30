@@ -1,34 +1,62 @@
 ﻿using UnityEngine;
 using StatsModifierModel;
+using System.Collections;
 
-[CreateAssetMenu(menuName = "Character/Skill/Flamethrower")]
-public class Flamethrower : Skill
+public class Flamethrower : SkillEventBase
 {
-    /// <summary>
-    /// 擊退效果
-    /// </summary>
-    public void KnockBack()
+    protected override void AddAffectEvent()
     {
-        character.transform.position -= new Vector3(character.data.moveSpeed.Value * Time.deltaTime, 0, 0);
-        foreach (var hit in hits)
-        {
-            hit.transform.position -= new Vector3(hit.GetComponent<Character>().data.moveSpeed.Value * Time.deltaTime, 0, 0);
-        }
+        immediatelyAffect.AddListener(KnockBackSelf);
+        immediatelyAffect.AddListener(BuffFireResistance);
+        hitAffect.AddListener(KnockBackEnemy);
+        hitAffect.AddListener(DebuffFireResistance);
+    }
+
+    public string buffName = "烈焰鎧甲";
+    /// <summary>
+    /// 增加自身+20%火炕，持續5秒
+    /// </summary>
+    private void BuffFireResistance()
+    {
+        sourceCaster.buffController.AddModifier(sourceCaster.data.resistance.fire, new StatModifier(20, StatModType.FlatAdd, buffName), 5f);
+    }
+
+    public string debuffName = "烈焰崩毀";
+    /// <summary>
+    /// 減少目標20%火炕，持續5秒
+    /// </summary>
+    private void DebuffFireResistance()
+    {
+        target.buffController.AddModifier(target.data.resistance.fire, new StatModifier(-20, StatModType.FlatAdd, debuffName), 5f);
     }
 
     /// <summary>
-    /// 增加敵人火炕、減少敵人火炕
+    /// 擊退效果
     /// </summary>
-    public void ImproveFireResistance()
+    private void KnockBackSelf()
     {
-        // 自身+20%火炕，持續5秒
-        BuffController.Instance.AddModifier(character.data.resistance.fire, new StatModifier(20, StatModType.FlatAdd), 5f);
-
-        // 敵人-20%火炕，持續5秒
-        foreach (var hit in hits)
+        StartCoroutine(KnockBackCoroutine(sourceCaster, -0.5f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
+    }
+    private void KnockBackEnemy()
+    {
+        StartCoroutine(KnockBackCoroutine(target, -2f * target.data.moveSpeed.Value, currentSkill.duration));
+    }
+    private IEnumerator KnockBackCoroutine(Character target, float knockbackforce, float duration)
+    {
+        // knockbackforce => 向後退移，所以力道為負值。
+        Vector3 directionForce = target.transform.right * knockbackforce;
+        Vector3 direction = target.transform.rotation * directionForce;
+        float timeleft = 3f; //currentSkill.duartion;
+        while (timeleft > 0)
         {
-            var enemyFireResistance = hit.GetComponent<Character>().data.resistance.fire;
-            BuffController.Instance.AddModifier(enemyFireResistance, new StatModifier(-20, StatModType.FlatAdd), 5f);
+            if (timeleft > Time.deltaTime)
+                target.transform.Translate(direction * Time.deltaTime / duration);
+            else
+                target.transform.Translate(direction * timeleft / duration);
+
+            timeleft -= Time.deltaTime;
+            yield return null;
         }
+        sourceCaster.transform.position -= new Vector3(sourceCaster.data.moveSpeed.Value * Time.deltaTime, 0, 0);
     }
 }

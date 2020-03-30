@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Detect/OverlapCircleDecision")]
 public class OverlapCircleDecision : Detect

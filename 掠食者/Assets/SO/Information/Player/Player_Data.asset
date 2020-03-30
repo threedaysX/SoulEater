@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c621d20715d767746a38d75db32de46a, type: 3}
+  m_Name: Player_Data
+  m_EditorClassIdentifier: 
+  maxHealth:
+    BaseValue: 200
+    FinalValue: 0
+  mana:
+    BaseValue: 6
+    FinalValue: 0
+  attack:
+    BaseValue: 0
+    FinalValue: 0
+  magicAttack:
+    BaseValue: 0
+    FinalValue: 0
+  defense:
+    BaseValue: 0
+    FinalValue: 0
+  critical:
+    BaseValue: 0
+    FinalValue: 0
+  criticalDamage:
+    BaseValue: 0
+    FinalValue: 0
+  knockBackDamage:
+    BaseValue: 0
+    FinalValue: 0
+  manaRecovering:
+    BaseValue: 0
+    FinalValue: 0
+  manaRecoveringOfDamage:
+    BaseValue: 0
+    FinalValue: 0
+  penetrationValue:
+    BaseValue: 0
+    FinalValue: 0
+  penetrationMult:
+    BaseValue: 0
+    FinalValue: 0
+  resistance: {fileID: 11400000, guid: 0c4788fe7788aa14cabe278bca1bea79, type: 2}
+  status: {fileID: 11400000, guid: 1ab81751b173d454496b33a3ac4ed2b2, type: 2}
+  jumpForce:
+    BaseValue: 1
+    FinalValue: 0
+  moveSpeed:
+    BaseValue: 1
+    FinalValue: 0
+  attackSpeed:
+    BaseValue: 1
+    FinalValue: 0
+  attackRange:
+    BaseValue: 1
+    FinalValue: 0
+  reduceSkillCoolDown:
+    BaseValue: 0
+    FinalValue: 0
+  reduceChantTime:
+    BaseValue: 0
+    FinalValue: 0
+  reduceEvadeCoolDown:
+    BaseValue: 0
+    FinalValue: 0

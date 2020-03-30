@@ -13,38 +13,61 @@ MonoBehaviour:
   m_Name: Ifrit_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 100
+    BaseValue: 500
+    FinalValue: 500
   mana:
-    BaseValue: 0
+    BaseValue: 12
+    FinalValue: 6
   attack:
     BaseValue: 0
+    FinalValue: 0
   magicAttack:
-    BaseValue: 0
+    BaseValue: 20
+    FinalValue: 20
   defense:
     BaseValue: 0
+    FinalValue: 0
   critical:
     BaseValue: 0
+    FinalValue: 0
   criticalDamage:
     BaseValue: 0
+    FinalValue: 0
   knockBackDamage:
     BaseValue: 0
+    FinalValue: 0
   manaRecovering:
     BaseValue: 0
+    FinalValue: 0
   manaRecoveringOfDamage:
     BaseValue: 0
+    FinalValue: 0
+  penetrationValue:
+    BaseValue: 0
+    FinalValue: 0
+  penetrationMagnification:
+    BaseValue: 0
+    FinalValue: 0
   resistance: {fileID: 11400000, guid: e8fe3e069c468e74fbe5ee01ab8adc15, type: 2}
   status: {fileID: 11400000, guid: b11631bd49701d14ba2e8a4af3a0f3f8, type: 2}
   jumpForce:
     BaseValue: 0
+    FinalValue: 0
   moveSpeed:
-    BaseValue: 0
+    BaseValue: 1.5
+    FinalValue: 1.5
   attackSpeed:
-    BaseValue: 0
+    BaseValue: 1
+    FinalValue: 0
   attackRange:
-    BaseValue: 0
+    BaseValue: 3
+    FinalValue: 3
   reduceSkillCoolDown:
     BaseValue: 0
+    FinalValue: 0
   reduceChantTime:
     BaseValue: 0
+    FinalValue: 0
   reduceEvadeCoolDown:
     BaseValue: 0
+    FinalValue: 0
