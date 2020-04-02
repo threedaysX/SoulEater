@@ -38,7 +38,7 @@ public abstract class SkillEventBase : MonoBehaviour
     public void InstantiateSkill(Character caster, Skill skill)
     {
         // 根據技能定義生成於特定位置。
-        var skillObj = Instantiate(skill.prefab, caster.transform.position + caster.transform.right * skill.range, caster.transform.rotation, caster.transform);
+        var skillObj = Instantiate(skill.prefab, caster.transform.position + caster.transform.right * skill.range, caster.transform.rotation);
         skillObj.GetComponent<SkillEventBase>().Init(caster, skill);
     }
 
@@ -48,51 +48,24 @@ public abstract class SkillEventBase : MonoBehaviour
         currentSkill = skill;
     }
 
-    private void InvokeAffect(UnityEvent affectEvent)
+    protected void InvokeAffect(UnityEvent affectEvent)
     {
         if (affectEvent == null)
             return;
         affectEvent.Invoke();
     }
 
-    /// <summary>
-    /// [針對各個技能]
-    /// 當技能碰觸到物件時 (造成傷害、異常...)
-    /// 該技能的目標為何？
-    /// </summary>
-    private void OnTriggerEnter2D(Collider2D target)
+    protected virtual void DamageTarget()
     {
-        this.target = target.GetComponent<Character>();
-
-        #region 傷害階段
-        if (currentSkill.skillType != SkillType.Effect)
-        {
-            if (canDamageSelf)
-            {
-                DamageTarget();
-            }
-            else
-            {
-                if (!target.CompareTag(sourceCaster.tag))
-                {
-                    DamageTarget();
-                }
-            }
-        }
-        #endregion
-
-        #region 效果影響階段
-        if (!target.CompareTag(sourceCaster.tag))
-        {
-            InvokeAffect(hitAffect);
-        }
-        #endregion
-
+        target.TakeDamage(DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill));
     }
 
-    private void DamageTarget()
+    protected virtual UnityEvent CreateAffectEvent(UnityAction call)
     {
-        target.TakeDamage(DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill), currentSkill.timesOfPerDamage, currentSkill.duration);
+        UnityEvent affect = new UnityEvent();
+        affect.AddListener(call);
+
+        return affect;
     }
 
     protected abstract void AddAffectEvent();

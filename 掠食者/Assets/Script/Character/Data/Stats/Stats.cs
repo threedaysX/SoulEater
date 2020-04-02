@@ -10,13 +10,15 @@ namespace StatsModel
     public class Stats
     {
         public float BaseValue;
+        public float AdditionalValue;
         public float Value
         {
             get
             {
-                if (isDirty || BaseValue != lastBaseValue)
+                if (isDirty || BaseValue != lastBaseValue || AdditionalValue != lastAdditionalValue)
                 {
                     lastBaseValue = BaseValue;
+                    lastAdditionalValue = AdditionalValue;
                     ResetDirtyFinalValue();
                 }
                 return FinalValue;
@@ -25,6 +27,7 @@ namespace StatsModel
 
         [ReadOnly][SerializeField] protected float FinalValue;
         protected float lastBaseValue = float.MinValue;
+        protected float lastAdditionalValue = float.MinValue;
         protected bool isDirty = true;
         public List<StatModifier> modifiers = new List<StatModifier>();
 
@@ -39,7 +42,7 @@ namespace StatsModel
 
         private float GetFinalValue()
         {
-            float finalValue = BaseValue;
+            float finalValue = BaseValue + AdditionalValue;
             float addMod = 0;
             float timesMod = 1;
             float timesOfAddMod = 0;

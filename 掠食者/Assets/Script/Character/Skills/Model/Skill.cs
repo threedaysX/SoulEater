@@ -1,24 +1,11 @@
 ﻿using UnityEngine;
 
-public enum SkillType
-{
-    Attack,
-    MagicAttack,
-    Effect
-}
-
-public enum CostType
-{
-    Health,
-    Mana
-}
-
-[CreateAssetMenu(menuName = "Character/Skill")]
 [System.Serializable]
+[CreateAssetMenu(menuName = "Character/Skill")]
 public class Skill : ScriptableObject
 {
     public Sprite icon;
-    public SkillType skillType;
+    public AttackType skillType;
     public ElementType elementType = ElementType.None;
     public string skillName;
     public string description;
@@ -62,3 +49,4 @@ public class Skill : ScriptableObject
 
     public Transform prefab;
 }
+

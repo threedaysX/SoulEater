@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7390867264986258557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.67, y: -2.64, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,15 +115,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f362312e82207442866434b5f16f818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  sound: {fileID: -3810707497331995506}
-  particle: {fileID: 0}
   immediatelyAffect:
     m_PersistentCalls:
       m_Calls: []
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
+  anim: {fileID: 0}
+  sound: {fileID: -3810707497331995506}
+  particle: {fileID: 0}
   buffName: "\u70C8\u7130\u93A7\u7532"
   debuffName: "\u70C8\u7130\u5D29\u6BC0"
 --- !u!82 &-3810707497331995506

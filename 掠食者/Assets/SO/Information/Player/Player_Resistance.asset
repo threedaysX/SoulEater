@@ -13,26 +13,34 @@ MonoBehaviour:
   m_Name: Player_Resistance
   m_EditorClassIdentifier: 
   none:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
+    FinalValue: 100
   fire:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
+    FinalValue: 100
   water:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0
   earth:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0
   air:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0
   thunder:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0
   light:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0
   dark:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0

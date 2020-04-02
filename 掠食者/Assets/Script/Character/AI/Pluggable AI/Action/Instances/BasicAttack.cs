@@ -10,6 +10,9 @@ public class BasicAttack : Action
 
     private void Attack()
     {
-        Debug.Log(ai.characterName + "要攻擊你摟><");
+        if (ai.combat.StartAttack())
+        {
+            Debug.Log(ai.characterName + "要攻擊你摟><");
+        }
     }
 }

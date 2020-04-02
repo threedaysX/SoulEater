@@ -19,23 +19,37 @@ public class Character : MonoBehaviour
     [Header("能力值")]
     public Data data;
     [Header("技能欄")]
-    public Skill[] skills;
+    public Skill[] skillFields;
 
     [HideInInspector] public SkillController skillController;
     [HideInInspector] public BuffController buffController;
+    [HideInInspector] public Combat combat;
+    [HideInInspector] public Animator animator;
 
     private void Awake()
     {
         this.gameObject.AddComponent(typeof(SkillController));
         this.gameObject.AddComponent(typeof(BuffController));
+        this.gameObject.AddComponent(typeof(Combat));
         skillController = GetComponent<SkillController>();
         buffController = GetComponent<BuffController>();
+        combat = GetComponent<Combat>();
+        animator = GetComponent<Animator>();
+
+        ResetBaseData();
 
         currentHealth = data.maxHealth.Value;
-        currentMana = data.mana.Value;
+        currentMana = data.maxMana.Value;
     }   
 
-    public void TakeDamage(float damage, float timesOfPerDamage = 0, float duration = 0)
+    /// <summary>
+    /// 受到傷害
+    /// </summary>
+    /// <param name="damage">單次傷害</param>
+    /// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
+    /// <param name="duration">持續時間</param>
+    /// <param name="damageImmediate">是否立即造成傷害</param>
+    public void TakeDamage(float damage, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
     {
         if (timesOfPerDamage <= 0 || duration <= 0)
         {
@@ -44,7 +58,7 @@ public class Character : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TakeDamagePerSecondInTimes(damage, timesOfPerDamage, duration));
+            StartCoroutine(TakeDamagePerSecondInTimes(damage, timesOfPerDamage, duration, damageImmediate));
         }
 
         if (currentHealth <= 0)
@@ -53,13 +67,17 @@ public class Character : MonoBehaviour
         }
     }
 
-    private IEnumerator TakeDamagePerSecondInTimes(float damage, float timesOfPerDamage, float duration)
+    private IEnumerator TakeDamagePerSecondInTimes(float damage, float timesOfPerDamage, float duration, bool damageImmediate)
     {
-        while(duration > 0)
+        while(duration >= 0)
         {
-            TakeDamage(damage);
+            if (damageImmediate)
+            {
+                TakeDamage(damage);
+            }
             yield return new WaitForSeconds(timesOfPerDamage);
             duration -= timesOfPerDamage;
+            damageImmediate = true;
         }
         yield break;
     }
@@ -69,7 +87,6 @@ public class Character : MonoBehaviour
         if (!canSkill)
             return;
 
-        Debug.Log(skills[0].skillName);
         Debug.Log(this.data.resistance.fire.Value);
         skillController.Trigger(skill);
         Debug.Log(this.data.resistance.fire.Value);
@@ -77,9 +94,31 @@ public class Character : MonoBehaviour
 
     public virtual void Die()
     {
-
+        Destroy(this.gameObject);
     }
 
+    #region DataInitialize
+    protected void ResetBaseData()
+    {
+        DataInitializer dataInitializer = new DataInitializer(data.status);
+        this.data.maxHealth.BaseValue = dataInitializer.GetMaxHealth();
+        this.data.maxMana.BaseValue = dataInitializer.GetMaxMana();
+        this.data.attack.BaseValue = dataInitializer.GetAttack();
+        this.data.magicAttack.BaseValue = dataInitializer.GetMagicAttack();
+        this.data.defense.BaseValue = dataInitializer.GetDefense();
+        this.data.critical.BaseValue = dataInitializer.GetCritical();
+        this.data.knockBackDamage.BaseValue = dataInitializer.GetKnockbackDamage();
+        this.data.manaRecoveringOfDamage.BaseValue = dataInitializer.GetManaRecoveringOfDamage();
+        this.data.jumpForce.BaseValue = dataInitializer.GetJumpForce();
+        this.data.moveSpeed.BaseValue = dataInitializer.GetMoveSpeed();
+        this.data.attackSpeed.BaseValue = dataInitializer.GetAttackSpeed();
+        this.data.reduceSkillCoolDown.BaseValue = dataInitializer.GetSkillCoolDownReduce();
+        this.data.reduceCastTime.BaseValue = dataInitializer.GetCastTimeReduce();
+        this.data.reduceEvadeCoolDown.BaseValue = dataInitializer.GetEvadeCoolDownReduce();
+    }
+    #endregion
+
+    #region GetData
     public float GetSkillCost(CostType costType)
     {
         float resultCost = currentMana;
@@ -95,14 +134,14 @@ public class Character : MonoBehaviour
         return resultCost;
     }
 
-    public Stats GetAttack(SkillType skillType)
+    public Stats GetAttackData(AttackType skillType)
     {
         Stats resultAttack = data.attack;
         switch (skillType)
         {
-            case SkillType.Attack:
+            case AttackType.Attack:
                 break;
-            case SkillType.MagicAttack:
+            case AttackType.MagicAttack:
                 resultAttack = data.magicAttack;
                 break;
         }
@@ -110,7 +149,7 @@ public class Character : MonoBehaviour
         return resultAttack;
     }
 
-    public Stats GetResistance(ElementType elementType)
+    public Stats GetResistance(ElementType elementType = ElementType.None)
     {
         Stats resultResistance = data.resistance.none;
         switch (elementType)
@@ -142,4 +181,5 @@ public class Character : MonoBehaviour
 
         return resultResistance;
     }
+    #endregion
 }

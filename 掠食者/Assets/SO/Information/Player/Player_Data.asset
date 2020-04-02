@@ -13,61 +13,80 @@ MonoBehaviour:
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 200
-    FinalValue: 0
-  mana:
-    BaseValue: 6
-    FinalValue: 0
+    BaseValue: 519
+    AdditionalValue: 0
+    FinalValue: 519
+  maxMana:
+    BaseValue: 4
+    AdditionalValue: 0
+    FinalValue: 4
   attack:
-    BaseValue: 0
+    BaseValue: 28
+    AdditionalValue: 0
     FinalValue: 0
   magicAttack:
-    BaseValue: 0
+    BaseValue: 20
+    AdditionalValue: 0
     FinalValue: 0
   defense:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 1
   critical:
-    BaseValue: 0
+    BaseValue: 8
+    AdditionalValue: 0
     FinalValue: 0
   criticalDamage:
     BaseValue: 0
+    AdditionalValue: 0
     FinalValue: 0
   knockBackDamage:
-    BaseValue: 0
+    BaseValue: 84
+    AdditionalValue: 0
     FinalValue: 0
   manaRecovering:
     BaseValue: 0
+    AdditionalValue: 0
     FinalValue: 0
   manaRecoveringOfDamage:
-    BaseValue: 0
+    BaseValue: 100
+    AdditionalValue: 0
     FinalValue: 0
   penetrationValue:
     BaseValue: 0
+    AdditionalValue: 0
     FinalValue: 0
-  penetrationMult:
+  penetrationMagnification:
     BaseValue: 0
+    AdditionalValue: 0
     FinalValue: 0
   resistance: {fileID: 11400000, guid: 0c4788fe7788aa14cabe278bca1bea79, type: 2}
   status: {fileID: 11400000, guid: 1ab81751b173d454496b33a3ac4ed2b2, type: 2}
   jumpForce:
     BaseValue: 1
-    FinalValue: 0
+    AdditionalValue: 0
+    FinalValue: 1
   moveSpeed:
     BaseValue: 1
-    FinalValue: 0
+    AdditionalValue: 0
+    FinalValue: 1
   attackSpeed:
-    BaseValue: 1
+    BaseValue: 2
+    AdditionalValue: 0
     FinalValue: 0
   attackRange:
     BaseValue: 1
-    FinalValue: 0
+    AdditionalValue: 0
+    FinalValue: 1
   reduceSkillCoolDown:
-    BaseValue: 0
+    BaseValue: 4
+    AdditionalValue: 0
     FinalValue: 0
-  reduceChantTime:
-    BaseValue: 0
+  reduceCastTime:
+    BaseValue: 5
+    AdditionalValue: 0
     FinalValue: 0
   reduceEvadeCoolDown:
-    BaseValue: 0
+    BaseValue: 5.64
+    AdditionalValue: 0
     FinalValue: 0

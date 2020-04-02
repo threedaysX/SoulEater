@@ -3,9 +3,14 @@ using UnityEngine;
 
 public class AnimationController : Singleton<AnimationController>
 {
+    public float GetCurrentAnimationLength(Animator anim)
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length;
+    }
+
     public void PlayAnimation(Animator anim, float duration)
     {
-        StartCoroutine(PlayAnimInterval(anim, anim.GetCurrentAnimatorStateInfo(0).length, duration));
+        StartCoroutine(PlayAnimInterval(anim, GetCurrentAnimationLength(anim), duration));
     }
 
     /// <summary>

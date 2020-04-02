@@ -8,28 +8,23 @@ public abstract class AI : Character
     [SerializeField] protected Detect[] detects;
     [Header("行為模式")]
     [SerializeField] protected Action[] actions;
+    // 上一個行動
+    private Action lastAction;
 
     [Header("偵測距離")]
     public float detectDistance;
+    [Header("行為共通延遲時間(秒)")]
+    public float actionDelay = 2f;  
+    private float nextActTimes = 0f;
 
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public LayerMask playerLayer;
-
-    private void Start()
-    {
-
-    }
 
     void Update()
     {
         playerLayer = LayerMask.GetMask("Player");
 
         DoDetects();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UseSkill(skills[0]);
-        }
         // Debug.Log(this);
     }
 
@@ -40,7 +35,11 @@ public abstract class AI : Character
             detect.GetCurrentAI(this);
             if (detect.StartDetectHaviour())
             {
-                DoActions();
+                if (Time.time >= nextActTimes)
+                {
+                    DoActions();
+                    nextActTimes = Time.time + actionDelay + GetAnimationLength(animator);
+                }
             }
         }
     }
@@ -71,19 +70,36 @@ public abstract class AI : Character
         DoHightestWeightAction(actionToDoList);
     }
 
-    public void DoHightestWeightAction(Dictionary<Action, int> actionToDoList)
+    protected void DoHightestWeightAction(Dictionary<Action, int> actionToDoList)
     {
+        Action currentAction;
         if (actionToDoList.Count == 1)
         {
-            actionToDoList.Keys.First().StartActHaviour();
+            currentAction = actionToDoList.Keys.First();
+            currentAction.StartActHaviour();
+            lastAction = currentAction;
             return;
         }
 
-        // 找到權重最高的那些動作
+        // 找到權重最高和-N點權重的那些動作
+        int diff = 1;
         int maxWeight = actionToDoList.Values.Max();
-        Action[] keyActionsOfMaxWeight = actionToDoList.Where(x => x.Value == maxWeight).Select(x => x.Key).ToArray();
-        // 執行任一動作
-        keyActionsOfMaxWeight[Random.Range(0, keyActionsOfMaxWeight.Length)].StartActHaviour();
+        Action[] keyActionsOfMaxWeight = actionToDoList.Where(x => x.Value <= maxWeight && x.Value >= maxWeight - diff).Select(x => x.Key).ToArray();
+        // 執行任一動作，但除了移動以外，不會做相同的動作
+        currentAction = keyActionsOfMaxWeight[Random.Range(0, keyActionsOfMaxWeight.Length)];
+        if (currentAction == lastAction && currentAction.actionType != ActionType.Move)
+        {
+            return;
+        }
+        currentAction.StartActHaviour();
+        lastAction = currentAction;
+    }
+
+    protected float GetAnimationLength(Animator anim)
+    {
+        if (anim == null)
+            return 0;
+        return AnimationController.Instance.GetCurrentAnimationLength(anim);
     }
 
     /// <summary>

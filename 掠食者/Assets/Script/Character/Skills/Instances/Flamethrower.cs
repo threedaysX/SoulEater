@@ -2,7 +2,7 @@
 using StatsModifierModel;
 using System.Collections;
 
-public class Flamethrower : SkillEventBase
+public class Flamethrower : LastingSkill
 {
     protected override void AddAffectEvent()
     {
@@ -14,20 +14,26 @@ public class Flamethrower : SkillEventBase
 
     public string buffName = "烈焰鎧甲";
     /// <summary>
-    /// 增加自身+20%火炕，持續5秒
+    /// 增加自身+20%火抗(-20%傷害)，持續5秒
     /// </summary>
     private void BuffFireResistance()
     {
-        sourceCaster.buffController.AddModifier(sourceCaster.data.resistance.fire, new StatModifier(20, StatModType.FlatAdd, buffName), 5f);
+        var fireStat = sourceCaster.data.resistance.fire;
+        void affect() { fireStat.AddModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
+        void remove() { fireStat.RemoveModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
+        sourceCaster.buffController.AddBuffEvent(buffName, CreateAffectEvent(affect), CreateAffectEvent(remove), 5f);
     }
 
     public string debuffName = "烈焰崩毀";
     /// <summary>
-    /// 減少目標20%火炕，持續5秒
+    /// 減少目標20%火抗(+20%傷害)，持續5秒
     /// </summary>
     private void DebuffFireResistance()
     {
-        target.buffController.AddModifier(target.data.resistance.fire, new StatModifier(-20, StatModType.FlatAdd, debuffName), 5f);
+        var fireStat = target.data.resistance.fire;
+        void affect() { fireStat.AddModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
+        void remove() { fireStat.RemoveModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
+        target.buffController.AddBuffEvent(debuffName, CreateAffectEvent(affect), CreateAffectEvent(remove), 5f);
     }
 
     /// <summary>
@@ -39,7 +45,7 @@ public class Flamethrower : SkillEventBase
     }
     private void KnockBackEnemy()
     {
-        StartCoroutine(KnockBackCoroutine(target, -2f * target.data.moveSpeed.Value, currentSkill.duration));
+        StartCoroutine(KnockBackCoroutine(target, -0.2f * target.data.moveSpeed.Value, currentSkill.duration));
     }
     private IEnumerator KnockBackCoroutine(Character target, float knockbackforce, float duration)
     {
@@ -49,6 +55,8 @@ public class Flamethrower : SkillEventBase
         float timeleft = 3f; //currentSkill.duartion;
         while (timeleft > 0)
         {
+            if (target == null)
+                yield break;
             if (timeleft > Time.deltaTime)
                 target.transform.Translate(direction * Time.deltaTime / duration);
             else

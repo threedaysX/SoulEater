@@ -7,11 +7,12 @@
 [CreateAssetMenu(menuName = "Character/AI/Judgement")]
 public class Judgement : AIHaviourBase
 {
-    public int conditionTrueCount = 0;
+    public int conditionTrueCount;
     public JudgeCondition[] conditions;
 
     public void StartCheckActCondition()
     {
+        conditionTrueCount = 0;
         foreach (JudgeCondition condition in conditions)
         {
             condition.GetCurrentAI(ai);

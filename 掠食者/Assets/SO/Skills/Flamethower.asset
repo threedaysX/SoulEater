@@ -20,7 +20,7 @@ MonoBehaviour:
   range: 3
   cost: 2
   costType: 1
-  damageMagnification: 100
+  damageMagnification: 30
   castTime: 0
   coolDown: 2
   cooling: 0

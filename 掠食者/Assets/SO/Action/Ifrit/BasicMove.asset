@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicMove
   m_EditorClassIdentifier: 
   actionWeight: 0
+  actionType: 2
   actionAnimator: {fileID: 0}
   judjements:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: c4ce9c1b5c2c43f4fbdac3ce09e23fe7, type: 2}

@@ -13,20 +13,26 @@ MonoBehaviour:
   m_Name: Player_Status
   m_EditorClassIdentifier: 
   strength:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5
   agility:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5
   vitality:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5
   dexterity:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5
   intelligence:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5
   lucky:
-    BaseValue: 0
-    FinalValue: 0
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5

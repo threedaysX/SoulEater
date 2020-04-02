@@ -1,19 +1,6 @@
 ﻿using StatsModel;
 using UnityEngine;
 
-public enum ElementType
-{
-    None,
-    Fire,
-    Water,
-    Earth,
-    Air,
-    Thunder,
-    Light,
-    Dark
-}
-
-[CreateAssetMenu(menuName = "Character/Data/Resistance/Empty")]
 public class Resistance : ScriptableObject
 {
     public Stats none;
@@ -24,6 +11,22 @@ public class Resistance : ScriptableObject
     public Stats thunder;
     public Stats light;
     public Stats dark;
+}
+
+[CreateAssetMenu(menuName = "Character/Data/Resistance/None")]
+public class NoneResistance : Resistance
+{
+    private void Awake()
+    {
+        none = new Stats(100);
+        fire = new Stats(100);
+        water = new Stats(100);
+        earth = new Stats(100);
+        air = new Stats(100);
+        thunder = new Stats(100);
+        light = new Stats(100);
+        dark = new Stats(100);
+    }
 }
 
 [CreateAssetMenu(menuName = "Character/Data/Resistance/Fire")]

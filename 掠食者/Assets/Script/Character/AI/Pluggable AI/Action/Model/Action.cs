@@ -6,7 +6,8 @@ public abstract class Action : AIHaviourBase
 {
     // 此動作的權重
     public int actionWeight;
-    public Animation actionAnimation;
+    public ActionType actionType;
+    public Animator actionAnimator;
     public Judgement[] judjements;
 
     public bool CheckActionThatCanDo()
@@ -27,3 +28,15 @@ public abstract class Action : AIHaviourBase
 
     public abstract void StartActHaviour();
 }
+
+public enum ActionType 
+{
+    Idle,
+    FackAction, // 不做任何實際行動，類似威嚇、咆嘯、示威...等動作
+    Move,
+    Retreat,
+    Attack,
+    MagicAttack,
+    Effect,
+}
+

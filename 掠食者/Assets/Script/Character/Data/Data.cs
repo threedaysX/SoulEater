@@ -6,7 +6,7 @@ public class Data : ScriptableObject
 {
     [Header("基本參數")]
     public Stats maxHealth;
-    public Stats mana;
+    public Stats maxMana;
     public Stats attack;
     public Stats magicAttack;
     public Stats defense;
@@ -26,6 +26,6 @@ public class Data : ScriptableObject
     public Stats attackSpeed = new Stats(1);
     public Stats attackRange = new Stats(1);
     public Stats reduceSkillCoolDown;
-    public Stats reduceChantTime;
+    public Stats reduceCastTime;
     public Stats reduceEvadeCoolDown;
 }

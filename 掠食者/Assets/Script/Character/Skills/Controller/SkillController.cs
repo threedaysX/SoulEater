@@ -95,9 +95,11 @@ public class SkillController : MonoBehaviour
 
     private void ResetAllSkillCoolDownOnStart()
     {
-        foreach (var skill in character.skills)
+        if (character.skillFields == null)
+            return;
+        foreach (var field in character.skillFields)
         {
-            skill.cooling = false;
+            field.cooling = false;
         }
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CloseBasicAttack
   m_EditorClassIdentifier: 
   actionWeight: 0
+  actionType: 4
   actionAnimator: {fileID: 0}
   judjements:
   - {fileID: 11400000, guid: da4fedc9fc10426419c6e006fa0956e1, type: 2}
