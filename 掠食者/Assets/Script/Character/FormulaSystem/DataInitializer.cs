@@ -44,7 +44,7 @@ public class DataInitializer
 
     public float GetDefense()
     {
-        return (float)(Math.Max(Math.Round((100 + Vit / 2 + Str / 2 - 50 * (20 / (Vit)) * (1 + (Vit / 50) * (Vit / 100) * (Str / 50))) * 0.5, 0), 1));
+        return (float)(0.4 * Vit);
     }
 
     public float GetCritical()

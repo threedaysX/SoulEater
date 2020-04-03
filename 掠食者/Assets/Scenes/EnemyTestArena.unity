@@ -173,7 +173,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a41c4a5fa90d10b458970379ddac6633, type: 2}
   - {fileID: 11400000, guid: d67d0f814085d6e4882cd907092ffb17, type: 2}
   detectDistance: 10
-  actionDelay: 0.8
+  actionDelay: 0.5
   chaseTarget: {fileID: 0}
   playerLayer:
     serializedVersion: 2
@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408142394}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 5.68, y: -2.4, z: 0}
+  m_LocalPosition: {x: 5, y: -2.4, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -404,7 +404,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471013452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.68, y: -2.37, z: 0}
+  m_LocalPosition: {x: -7, y: -2.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

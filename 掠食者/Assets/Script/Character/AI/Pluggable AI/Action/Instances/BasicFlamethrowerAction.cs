@@ -4,13 +4,13 @@
 public class BasicFlamethrowerAction : Action
 {
     public Skill flamethrowerObject;
-    public override void StartActHaviour()
+    public override bool StartActHaviour()
     {
-        Flame();
+        return Flame();
     }
 
-    private void Flame()
+    private bool Flame()
     {
-        ai.skillController.Trigger(flamethrowerObject);
+        return ai.skillController.Trigger(flamethrowerObject);
     }
 }

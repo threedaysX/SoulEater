@@ -10,6 +10,7 @@ public abstract class AI : Character
     [SerializeField] protected Action[] actions;
     // 上一個行動
     private Action lastAction;
+    private bool lastActionSuccess;
 
     [Header("偵測距離")]
     public float detectDistance;
@@ -49,13 +50,19 @@ public abstract class AI : Character
         Dictionary<Action, int> actionToDoList = new Dictionary<Action, int>();
 
         // 判斷哪些動作符合條件，代表可以做
+        // 若上一個動作執行失敗，則該動作的權重降低2一次。
         foreach (var action in actions)
         {
             action.GetCurrentAI(this);
             if (action.CheckActionThatCanDo())
             {
-                actionToDoList.Add(action, action.actionWeight);
-            }
+                int weight = action.actionWeight;
+                if (action == lastAction && !lastActionSuccess)
+                {
+                    weight -= 2;
+                }
+                actionToDoList.Add(action, weight);
+            }            
         }
 
         // 如果沒動作可以做，就隨機抓一個
@@ -76,7 +83,7 @@ public abstract class AI : Character
         if (actionToDoList.Count == 1)
         {
             currentAction = actionToDoList.Keys.First();
-            currentAction.StartActHaviour();
+            lastActionSuccess = currentAction.StartActHaviour();
             lastAction = currentAction;
             return;
         }
@@ -91,7 +98,7 @@ public abstract class AI : Character
         {
             return;
         }
-        currentAction.StartActHaviour();
+        lastActionSuccess = currentAction.StartActHaviour();
         lastAction = currentAction;
     }
 

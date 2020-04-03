@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 519
+    BaseValue: 13000
     AdditionalValue: 0
-    FinalValue: 519
+    FinalValue: 13000
   maxMana:
     BaseValue: 4
     AdditionalValue: 0
     FinalValue: 4
   attack:
-    BaseValue: 28
+    BaseValue: 187
     AdditionalValue: 0
     FinalValue: 0
   magicAttack:
@@ -29,9 +29,9 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 0
   defense:
-    BaseValue: 1
+    BaseValue: 20
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 20
   critical:
     BaseValue: 8
     AdditionalValue: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 0
   knockBackDamage:
-    BaseValue: 84
+    BaseValue: 9425
     AdditionalValue: 0
     FinalValue: 0
   manaRecovering:
@@ -63,15 +63,15 @@ MonoBehaviour:
   resistance: {fileID: 11400000, guid: 0c4788fe7788aa14cabe278bca1bea79, type: 2}
   status: {fileID: 11400000, guid: 1ab81751b173d454496b33a3ac4ed2b2, type: 2}
   jumpForce:
-    BaseValue: 1
+    BaseValue: 1.5
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 1.5
   moveSpeed:
-    BaseValue: 1
+    BaseValue: 1.5
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 1.5
   attackSpeed:
-    BaseValue: 2
+    BaseValue: 10.4
     AdditionalValue: 0
     FinalValue: 0
   attackRange:
@@ -87,6 +87,6 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 0
   reduceEvadeCoolDown:
-    BaseValue: 5.64
+    BaseValue: 68.16
     AdditionalValue: 0
     FinalValue: 0

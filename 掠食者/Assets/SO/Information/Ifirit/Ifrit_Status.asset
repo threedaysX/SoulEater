@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Ifrit_Status
   m_EditorClassIdentifier: 
   strength:
-    BaseValue: 15
+    BaseValue: 50
     AdditionalValue: 0
-    FinalValue: 15
+    FinalValue: 50
   agility:
-    BaseValue: 15
+    BaseValue: 40
     AdditionalValue: 0
-    FinalValue: 15
+    FinalValue: 40
   vitality:
     BaseValue: 15
     AdditionalValue: 0

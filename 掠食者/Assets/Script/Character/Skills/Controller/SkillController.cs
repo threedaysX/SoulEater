@@ -12,13 +12,13 @@ public class SkillController : MonoBehaviour
         ResetAllSkillCoolDownOnStart();
     }
 
-    public void Trigger(Skill skill)
+    public bool Trigger(Skill skill)
     {
         // 技能冷卻中
         if (skill.cooling)
         {
             Debug.Log("冷卻中！！");
-            return;
+            return false;
         }
 
         // 消耗
@@ -28,7 +28,7 @@ public class SkillController : MonoBehaviour
                 if (character.currentHealth < skill.cost)
                 {
                     Debug.Log("沒有生命啦！");
-                    return;
+                    return false;
                 }
                 character.currentHealth -= skill.cost;
                 break;
@@ -36,7 +36,7 @@ public class SkillController : MonoBehaviour
                 if (character.currentMana < skill.cost)
                 {
                     Debug.Log("沒有魔力啦！");
-                    return;
+                    return false;
                 }
                 character.currentMana -= skill.cost;
                 break;
@@ -56,6 +56,7 @@ public class SkillController : MonoBehaviour
 
         StartCoroutine(GetIntoCoolDown(skill));
         this.lastSkill = skill;
+        return true;
     }
 
     /// <summary>
