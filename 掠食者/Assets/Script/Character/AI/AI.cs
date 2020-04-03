@@ -56,12 +56,11 @@ public abstract class AI : Character
             action.GetCurrentAI(this);
             if (action.CheckActionThatCanDo())
             {
-                int weight = action.actionWeight;
                 if (action == lastAction && !lastActionSuccess)
                 {
-                    weight -= 2;
+                    action.ActionWeight -= 2;
                 }
-                actionToDoList.Add(action, weight);
+                actionToDoList.Add(action, action.ActionWeight);
             }            
         }
 
@@ -70,7 +69,7 @@ public abstract class AI : Character
         {
             int random = Random.Range(0, actions.Length);
             Action randomAct = actions[random];
-            actionToDoList.Add(randomAct, randomAct.actionWeight);
+            actionToDoList.Add(randomAct, randomAct.ActionWeight);
         }
 
         // 決定最後的動作
@@ -96,7 +95,7 @@ public abstract class AI : Character
         currentAction = keyActionsOfMaxWeight[Random.Range(0, keyActionsOfMaxWeight.Length)];
         if (currentAction == lastAction && currentAction.actionType != ActionType.Move)
         {
-            currentAction.actionWeight -= 1;    // 做重複的動作，導致權重下降1，降低這個對於動作的慾望
+            currentAction.ActionWeight -= 1;    // 做重複的動作，導致權重下降1，降低這個對於動作的慾望
             return;
         }
         lastActionSuccess = currentAction.StartActHaviour();

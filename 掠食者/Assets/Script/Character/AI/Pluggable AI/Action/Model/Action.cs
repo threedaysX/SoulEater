@@ -14,7 +14,19 @@ public abstract class Action : AIHaviourBase
     /// [10] 超想這麼做
     /// </summary>
     public int originalActionWeight;
-    public int actionWeight;
+    private int _ActionWeight;
+    public int ActionWeight { 
+        get 
+        {
+            return _ActionWeight;
+        } 
+        set 
+        {
+            diffCount += (_ActionWeight - value);
+            _ActionWeight = value;
+        }
+    }
+    private int diffCount; // 這個行動已經被降低過了N點權重
     public ActionType actionType;
     public Animator actionAnimator;
     public Judgement[] judjements;
@@ -22,9 +34,10 @@ public abstract class Action : AIHaviourBase
     public bool CheckActionThatCanDo()
     {
         // 若權重已經小於原始權重的一半，則重置權重。
-        if (actionWeight < originalActionWeight / 2)
+        if (ActionWeight < originalActionWeight / 2)
         {
-            actionWeight = originalActionWeight;
+            ActionWeight = originalActionWeight;
+            diffCount = 0;
         }
         foreach (Judgement judje in judjements)
         {
@@ -34,8 +47,9 @@ public abstract class Action : AIHaviourBase
             judje.StartCheckActCondition();     // 開始檢查該動作的各個觸發條件
             if (judje.CheckTrueConditionCount())
             {
+                // 將判斷後的權重設在動作權重上
                 if (judje.actionWeightAfterJudge != 0)
-                    actionWeight = judje.actionWeightAfterJudge;
+                    ActionWeight = judje.actionWeightAfterJudge - diffCount;
                 return true;
             }
         }
