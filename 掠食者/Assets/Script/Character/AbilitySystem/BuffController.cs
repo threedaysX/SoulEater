@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using StatsModel;
-using StatsModifierModel;
 using System.Collections.Concurrent;
 
 public class BuffContent

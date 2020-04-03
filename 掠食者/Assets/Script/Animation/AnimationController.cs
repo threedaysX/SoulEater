@@ -20,11 +20,19 @@ public class AnimationController : Singleton<AnimationController>
     /// <param name="animInterval">動畫撥放一次性時間</param>
     private IEnumerator PlayAnimInterval(Animator anim, float animInterval, float duration)
     {
-        while (duration > 0)
+        if (duration == 0)
         {
             anim.Play("Trigger", -1, 0f);
-            yield return new WaitForSeconds(animInterval);
-            duration -= animInterval;
+            yield return new WaitForSeconds(GetCurrentAnimationLength(anim));
+        }
+        else
+        {
+            while (duration > 0)
+            {
+                anim.Play("Trigger", -1, 0f);
+                yield return new WaitForSeconds(animInterval);
+                duration -= animInterval;
+            }
         }
 
         DestroyAfterAnimationStop(anim);
