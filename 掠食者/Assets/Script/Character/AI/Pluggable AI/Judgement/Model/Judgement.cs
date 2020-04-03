@@ -7,6 +7,7 @@
 [CreateAssetMenu(menuName = "Character/AI/Judgement")]
 public class Judgement : AIHaviourBase
 {
+    public int actionWeightAfterJudge;
     public int conditionTrueCount;
     public JudgeCondition[] conditions;
 

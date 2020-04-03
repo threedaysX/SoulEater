@@ -28,6 +28,8 @@ public abstract class Action : AIHaviourBase
             judje.StartCheckActCondition();     // 開始檢查該動作的各個觸發條件
             if (judje.CheckTrueConditionCount())
             {
+                if (judje.actionWeightAfterJudge != 0)
+                    actionWeight = judje.actionWeightAfterJudge;
                 return true;
             }
         }
