@@ -50,7 +50,7 @@ public abstract class AI : Character
         Dictionary<Action, int> actionToDoList = new Dictionary<Action, int>();
 
         // 判斷哪些動作符合條件，代表可以做
-        // 若上一個動作執行失敗，則該動作的權重降低2一次。
+        // 若上一個動作執行失敗，則該動作的權重降低2一次
         foreach (var action in actions)
         {
             action.GetCurrentAI(this);
@@ -96,6 +96,7 @@ public abstract class AI : Character
         currentAction = keyActionsOfMaxWeight[Random.Range(0, keyActionsOfMaxWeight.Length)];
         if (currentAction == lastAction && currentAction.actionType != ActionType.Move)
         {
+            currentAction.actionWeight -= 1;    // 做重複的動作，導致權重下降1，降低這個對於動作的慾望
             return;
         }
         lastActionSuccess = currentAction.StartActHaviour();

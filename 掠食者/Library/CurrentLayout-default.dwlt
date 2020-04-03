@@ -116,7 +116,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 166
+  controlID: 139
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 126
+  controlID: 99
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 147
+  controlID: 120
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -653,7 +653,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 6a360000
+      m_SelectedIDs: 7e2c0000
       m_LastClickedID: 0
       m_ExpandedIDs: 6cfbffff
       m_RenameOverlay:
@@ -718,20 +718,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/SO/Judgement/Ifrit
+    - Assets/Script/Character/AI
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/SO/Judgement/Ifrit
+  - Assets/Script/Character/AI
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\Users\\user\\Desktop\\SideProject\\\u63A0\u98DF\u8005\\SoulEater\\\u63A0\u98DF\u8005"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 204}
-    m_SelectedIDs: 32370000
-    m_LastClickedID: 14130
-    m_ExpandedIDs: 00000000cc360000ce360000d0360000d2360000d4360000d6360000d8360000da360000dc360000de360000e0360000e2360000e4360000e6360000e8360000ea360000ec360000ee360000f03600000237000000ca9a3b
+    m_SelectedIDs: d6360000
+    m_LastClickedID: 14038
+    m_ExpandedIDs: 00000000cc360000ce360000d0360000d2360000d4360000d6360000d8360000da360000dc360000de360000e0360000e2360000e4360000e6360000e8360000ea360000ec360000ee360000f0360000f236000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -759,7 +759,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000cc360000ce360000d0360000d2360000d4360000d6360000d8360000da360000dc360000de360000e0360000e2360000e4360000e6360000e8360000ea360000ec360000ee360000f0360000
+    m_ExpandedIDs: 00000000cc360000ce360000d0360000d2360000d4360000d6360000d8360000da360000dc360000de360000e0360000e2360000e4360000e6360000e8360000ea360000ec360000ee360000f0360000f2360000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -784,8 +784,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 7e2c0000
+    m_LastClickedInstanceID: 11390
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: e40b0000f60b000000000000
     m_RenameOverlay:
@@ -851,7 +851,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: -1
+  m_LastInspectedObjectInstanceID: 11390
   m_LastVerticalScrollValue: 0
 --- !u!114 &21
 MonoBehaviour:

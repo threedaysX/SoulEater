@@ -13,6 +13,7 @@ public abstract class Action : AIHaviourBase
     /// [8~9] 擅長而且喜歡選擇的動作
     /// [10] 超想這麼做
     /// </summary>
+    public int originalActionWeight;
     public int actionWeight;
     public ActionType actionType;
     public Animator actionAnimator;
@@ -20,6 +21,11 @@ public abstract class Action : AIHaviourBase
 
     public bool CheckActionThatCanDo()
     {
+        // 若權重已經小於原始權重的一半，則重置權重。
+        if (actionWeight < originalActionWeight / 2)
+        {
+            actionWeight = originalActionWeight;
+        }
         foreach (Judgement judje in judjements)
         {
             if (judje == null)
