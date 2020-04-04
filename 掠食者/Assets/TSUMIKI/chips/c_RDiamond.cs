@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //右菱形
-//  左         右
-//上下左     上下右
+/*             
+ *         ----------
+ *        /  \ (1,0)/
+ *       /    \    /  
+ *      / (0,0)\  /    
+ *     -----------
+ *                 
+ */
+
 public class c_RDiamond : chip
 {
 

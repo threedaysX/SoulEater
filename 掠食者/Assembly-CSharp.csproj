@@ -105,6 +105,7 @@
     <Compile Include="Assets\Script\Endowment\Fragment\Frag.cs" />
     <Compile Include="Assets\Script\Tools\ReadOnlyDrawer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
+    <Compile Include="Assets\TSUMIKI\AllChips.cs" />
     <Compile Include="Assets\TSUMIKI\AllStar.cs" />
     <Compile Include="Assets\TSUMIKI\chip.cs" />
     <Compile Include="Assets\TSUMIKI\chips\c_DownTri.cs" />
