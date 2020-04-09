@@ -34,12 +34,12 @@ public class DataInitializer
 
     public float GetAttack()
     {
-        return (float)(Math.Round(10 + Str / 2 + 2 * (Str / 5) * (Str / 10) + (Str * Str / 20), 0) + Math.Round(1.8 * Dex, 0) + Math.Round(0.8 * Luk, 0));
+        return (float)(Math.Round(40 + Str / 2 + 2 * (Str / 5) * (Str / 10) + (Str * Str / 10), 0) + Math.Round(2.5 * Dex, 0) + Math.Round(2 * Luk, 0));
     }
 
     public float GetMagicAttack()
     {
-        return (float)(Math.Round(2 * (Int + Int / 10) + Int * Int / (10 - 5 / Int), 0) + Math.Round(1.2 * Luk, 0));
+        return (float)(Math.Round(8 * (Int/4 + Int / 5) + Int / 2 * Int / 10 + Int * Int / (10 - 5 / Int), 0) + Math.Round(3 * Luk, 0));
     }
 
     public float GetDefense()
@@ -49,7 +49,7 @@ public class DataInitializer
 
     public float GetCritical()
     {
-        return (float)(1.6 * Luk);
+        return 2 * Luk;
     }
 
     public float GetAttackSpeed()
@@ -59,7 +59,7 @@ public class DataInitializer
 
     public float GetMoveSpeed()
     {
-        // 無條件捨去到小數1位 => 乘以 10 再除以 10
+        // 無條件捨去到小數2位 => 乘以 10 再除以 10
         var movePoint = Math.Floor((1 + 0.2 * (Agi / 15)) * 0.1 * 100)  / 10;
         return (float)Math.Min(movePoint, 1.5);
     }

@@ -54,7 +54,12 @@ public class Character : MonoBehaviour
         if (timesOfPerDamage <= 0 || duration <= 0)
         {
             currentHealth -= damage;
-            Debug.Log(characterName + "受到 " + damage + "點傷害");
+            string criticalLog = "";
+            if (DamageController.Instance.IsCritical)
+            {
+                criticalLog = "爆擊！！  ";
+            }
+            Debug.Log(criticalLog + characterName + "受到 " + damage + "點傷害");
         }
         else
         {

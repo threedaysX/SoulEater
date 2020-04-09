@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Player_Status
   m_EditorClassIdentifier: 
   strength:
-    BaseValue: 40
+    BaseValue: 5
     AdditionalValue: 0
-    FinalValue: 40
+    FinalValue: 5
   agility:
-    BaseValue: 40
+    BaseValue: 5
     AdditionalValue: 0
-    FinalValue: 40
+    FinalValue: 5
   vitality:
-    BaseValue: 50
+    BaseValue: 5
     AdditionalValue: 0
-    FinalValue: 50
+    FinalValue: 5
   dexterity:
     BaseValue: 5
     AdditionalValue: 0

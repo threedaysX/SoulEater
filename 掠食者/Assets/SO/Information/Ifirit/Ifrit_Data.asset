@@ -13,35 +13,35 @@ MonoBehaviour:
   m_Name: Ifrit_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 1301
+    BaseValue: 519
     AdditionalValue: 300
-    FinalValue: 1601
+    FinalValue: 819
   maxMana:
-    BaseValue: 7
+    BaseValue: 4
     AdditionalValue: 99
-    FinalValue: 106
+    FinalValue: 103
   attack:
-    BaseValue: 77
+    BaseValue: 68
     AdditionalValue: 0
-    FinalValue: 20
+    FinalValue: 68
   magicAttack:
-    BaseValue: 74
+    BaseValue: 37
     AdditionalValue: 0
-    FinalValue: 74
+    FinalValue: 37
   defense:
-    BaseValue: 24
+    BaseValue: 2
     AdditionalValue: 0
     FinalValue: 0
   critical:
-    BaseValue: 24
-    AdditionalValue: 50
-    FinalValue: 0
-  criticalDamage:
-    BaseValue: 0
+    BaseValue: 10
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 10
+  criticalDamage:
+    BaseValue: 100
+    AdditionalValue: 40
+    FinalValue: 140
   knockBackDamage:
-    BaseValue: 374
+    BaseValue: 84
     AdditionalValue: 0
     FinalValue: 0
   manaRecovering:
@@ -49,7 +49,7 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 0
   manaRecoveringOfDamage:
-    BaseValue: 82
+    BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
   penetrationValue:
@@ -63,15 +63,15 @@ MonoBehaviour:
   resistance: {fileID: 11400000, guid: e8fe3e069c468e74fbe5ee01ab8adc15, type: 2}
   status: {fileID: 11400000, guid: b11631bd49701d14ba2e8a4af3a0f3f8, type: 2}
   jumpForce:
-    BaseValue: 1.2
+    BaseValue: 1
     AdditionalValue: 0
     FinalValue: 0
   moveSpeed:
-    BaseValue: 1.2
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 1.2
+    FinalValue: 1
   attackSpeed:
-    BaseValue: 4.4
+    BaseValue: 2
     AdditionalValue: 0
     FinalValue: 2
   attackRange:
@@ -79,14 +79,14 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 3
   reduceSkillCoolDown:
-    BaseValue: 12
+    BaseValue: 4
     AdditionalValue: 0
     FinalValue: 0
   reduceCastTime:
-    BaseValue: 35
+    BaseValue: 5
     AdditionalValue: 0
     FinalValue: 0
   reduceEvadeCoolDown:
-    BaseValue: 18.12
+    BaseValue: 5.64
     AdditionalValue: 0
     FinalValue: 0
