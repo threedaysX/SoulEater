@@ -31,13 +31,13 @@ public class Combat : MonoBehaviour
         bool attackSuccess = false;
         Collider2D[] hit = Physics2D.OverlapCircleAll(GetAttackPoint(), character.data.attackRange.Value);
 
-        foreach (Collider2D enemy in hit)
+        foreach (Collider2D target in hit)
         {
-            Debug.Log(enemy);
+            Debug.Log(target);
             // 不會打到自己人
-            if (enemy != null && !enemy.CompareTag(character.tag))
+            if (target != null && !target.CompareTag(character.tag))
             {
-                var enemyDetails = enemy.gameObject.GetComponent<Character>();
+                var enemyDetails = target.gameObject.GetComponent<Character>();
                 if (enemyDetails == null)
                     return attackSuccess;
 

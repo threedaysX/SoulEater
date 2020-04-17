@@ -82,7 +82,7 @@ public class BuffController : MonoBehaviour
     /// <param name="affect">持續時間內的影響效果</param>
     /// <param name="removeEvent">當持續時間結束後，觸發的效果</param>
     /// <param name="duration">持續時間</param>
-    public void AddBuffEvent(string affectName, UnityEvent affect, UnityEvent removeEvent, float duration)
+    public void AddBuffEvent(string affectName, UnityAction affect, UnityAction removeEvent, float duration)
     {
         string name = affectName;
         if (!CheckIsBuffInList(affectName))
@@ -91,7 +91,7 @@ public class BuffController : MonoBehaviour
             {
                 affect.Invoke();
             }
-            SetBuffMemory(name, CreateMemory(affect, removeEvent, duration));
+            SetBuffMemory(name, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(removeEvent), duration));
         }
         else
         {
@@ -108,5 +108,13 @@ public class BuffController : MonoBehaviour
         if (buffList.ContainsKey(name))
             return true;
         return false;
+    }
+
+    private UnityEvent CreateAffectEvent(UnityAction call)
+    {
+        UnityEvent affect = new UnityEvent();
+        affect.AddListener(call);
+
+        return affect;
     }
 }

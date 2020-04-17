@@ -60,13 +60,5 @@ public abstract class SkillEventBase : MonoBehaviour
         target.TakeDamage(DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill));
     }
 
-    protected virtual UnityEvent CreateAffectEvent(UnityAction call)
-    {
-        UnityEvent affect = new UnityEvent();
-        affect.AddListener(call);
-
-        return affect;
-    }
-
     protected abstract void AddAffectEvent();
 }

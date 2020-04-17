@@ -9,7 +9,7 @@ public class SkillController : MonoBehaviour
     private void Start()
     {
         character = GetComponent<Character>();
-        ResetAllSkillCoolDownOnStart();
+        ResetAllSkillCoolDown();
     }
 
     public bool Trigger(Skill skill)
@@ -73,8 +73,7 @@ public class SkillController : MonoBehaviour
         float timer = 0;
         while (timer < castTime)
         {
-            var frameTime = Time.deltaTime;
-            timer += frameTime;
+            timer += Time.deltaTime;
 
             // Render Casting GUI
         }
@@ -94,7 +93,7 @@ public class SkillController : MonoBehaviour
         skill.cooling = false;
     }
 
-    private void ResetAllSkillCoolDownOnStart()
+    private void ResetAllSkillCoolDown()
     {
         if (character.skillFields == null)
             return;

@@ -21,7 +21,7 @@ public class Flamethrower : LastingSkill
         var fireStat = sourceCaster.data.resistance.fire;
         void affect() { fireStat.AddModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
         void remove() { fireStat.RemoveModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
-        sourceCaster.buffController.AddBuffEvent(buffName, CreateAffectEvent(affect), CreateAffectEvent(remove), 5f);
+        sourceCaster.buffController.AddBuffEvent(buffName, affect, remove, 5f);
     }
 
     public string debuffName = "烈焰崩毀";
@@ -33,7 +33,7 @@ public class Flamethrower : LastingSkill
         var fireStat = target.data.resistance.fire;
         void affect() { fireStat.AddModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
         void remove() { fireStat.RemoveModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
-        target.buffController.AddBuffEvent(debuffName, CreateAffectEvent(affect), CreateAffectEvent(remove), 5f);
+        target.buffController.AddBuffEvent(debuffName, affect, remove, 5f);
     }
 
     /// <summary>
