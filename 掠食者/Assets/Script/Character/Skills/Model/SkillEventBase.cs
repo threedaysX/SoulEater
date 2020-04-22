@@ -7,6 +7,7 @@ using UnityEngine.Events;
 /// </summary>
 public abstract class SkillEventBase : MonoBehaviour
 {
+    private const string skillAnimTrigger = "Trigger";
     protected bool canDamageSelf = false;
     protected Skill currentSkill;
     protected Character sourceCaster;
@@ -29,16 +30,33 @@ public abstract class SkillEventBase : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        AnimationController.Instance.PlayAnimation(anim, currentSkill.duration);
+        AnimationBase.Instance.PlayAnimation(anim, skillAnimTrigger, currentSkill.duration);
         AddAffectEvent();
 
         InvokeAffect(immediatelyAffect);
     }
 
+    /// <summary>
+    /// 技能生成，相對於施法者位置。
+    /// </summary>
+    /// <param name="caster">施放技能的人</param>
+    /// <param name="skill">哪個技能</param>
     public void InstantiateSkill(Character caster, Skill skill)
-    {
-        // 根據技能定義生成於特定位置。
+    {       
         var skillObj = Instantiate(skill.prefab, caster.transform.position + caster.transform.right * skill.range, caster.transform.rotation);
+        skillObj.GetComponent<SkillEventBase>().Init(caster, skill);
+    }
+
+    /// <summary>
+    /// 技能生成，可指定位置。
+    /// </summary>
+    /// <param name="caster">施放技能的人</param>
+    /// <param name="skill">哪個技能</param>
+    /// <param name="position">技能生成位置</param>
+    /// <param name="rotation">技能生成角度</param>
+    public void InstantiateSkill(Character caster, Skill skill, Vector3 position, Quaternion rotation)
+    {
+        var skillObj = Instantiate(skill.prefab, position, rotation);
         skillObj.GetComponent<SkillEventBase>().Init(caster, skill);
     }
 

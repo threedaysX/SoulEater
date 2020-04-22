@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Player : Character
 {
-
     // Use this for initialization
     void Start()
     {
@@ -13,6 +11,9 @@ public class Player : Character
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(HotKeyController.attackKey1) || Input.GetKeyDown(HotKeyController.attackKey2))
+        {
+            operationController.StartAttack(AttackType.Attack, data.attackElement);
+        }
     }
 }

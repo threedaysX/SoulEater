@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0f300c235b7844e96197ac9a5832f0, type: 3}
+  m_Script: {fileID: 0}
   m_Name: Ifrit_Fire
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::FireResistance
   none:
-    BaseValue: 0
+    BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
   fire:
     BaseValue: 25
     AdditionalValue: 0
-    FinalValue: 25
+    FinalValue: 0
   water:
     BaseValue: 200
     AdditionalValue: 0
