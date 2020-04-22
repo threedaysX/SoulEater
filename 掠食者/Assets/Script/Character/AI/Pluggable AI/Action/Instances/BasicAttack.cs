@@ -10,7 +10,7 @@ public class BasicAttack : Action
 
     private bool Attack()
     {
-        if (ai.combat.StartAttack())
+        if (ai.operationController.StartAttack(AttackType.Attack, ai.data.attackElement))
         {
             Debug.Log(ai.characterName + "要攻擊你摟><");
             return true;

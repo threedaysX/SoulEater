@@ -116,7 +116,8 @@ public abstract class AI : Character
     {
         if (anim == null)
             return 0;
-        return AnimationController.Instance.GetCurrentAnimationLength(anim);
+        //return AnimationBase.Instance.GetCurrentAnimationLength(anim);
+        return 0;
     }
 
     private void OnDrawGizmosSelected()

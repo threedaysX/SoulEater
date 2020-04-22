@@ -347,6 +347,8 @@ GameObject:
   - component: {fileID: 408142396}
   - component: {fileID: 408142397}
   - component: {fileID: 408142395}
+  - component: {fileID: 408142399}
+  - component: {fileID: 408142398}
   m_Layer: 10
   m_Name: Ifrit
   m_TagString: Enemy
@@ -369,20 +371,21 @@ MonoBehaviour:
   characterName: "\u4F0A\u592B\u5229\u7279"
   currentHealth: 0
   currentMana: 0
-  canMove: 1
-  canJump: 1
-  canEvade: 1
-  canAttack: 1
-  canSkill: 1
   data: {fileID: 11400000, guid: 644103d6d181adc47a6f0e3cc5d4c184, type: 2}
   skillFields:
   - {fileID: 11400000, guid: 4e90e1d41879f454d83695c5eb2007a9, type: 2}
+<<<<<<< HEAD
   - {fileID: 11400000, guid: 559c5a09bc75a9845b94601840548c79, type: 2}
   - {fileID: 11400000, guid: 7ae30a60ae3401d40b23be14df53fe83, type: 2}
   - {fileID: 11400000, guid: 3137048bf3ed9974db8916e79b224978, type: 2}
   - {fileID: 11400000, guid: 84c7071e234bc4c4f9a1885c5176eacc, type: 2}
   - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
   - {fileID: 11400000, guid: d3d82ae762ecc0349b4f3887c1863c21, type: 2}
+=======
+  operationSoundController: {fileID: 0}
+  weaponController: {fileID: 0}
+  operationController: {fileID: 0}
+>>>>>>> 三天-公式&操作&機制修正
   skillController: {fileID: 0}
   buffController: {fileID: 0}
   combat: {fileID: 0}
@@ -417,7 +420,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408142394}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+<<<<<<< HEAD
   m_LocalPosition: {x: -0.92999935, y: -5.99, z: 0}
+=======
+  m_LocalPosition: {x: 5, y: -1.98, z: 0}
+>>>>>>> 三天-公式&操作&機制修正
   m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -473,12 +480,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+<<<<<<< HEAD
 --- !u!1 &511755883
 GameObject:
+=======
+--- !u!50 &408142398
+Rigidbody2D:
+  serializedVersion: 4
+>>>>>>> 三天-公式&操作&機制修正
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511755885}
@@ -521,20 +535,47 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &511755886
 PolygonCollider2D:
+=======
+  m_GameObject: {fileID: 408142394}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &408142399
+BoxCollider2D:
+>>>>>>> 三天-公式&操作&機制修正
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 511755883}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
+=======
+  m_GameObject: {fileID: 408142394}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+>>>>>>> 三天-公式&操作&機制修正
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
+<<<<<<< HEAD
     pivot: {x: 0, y: 0}
     oldSize: {x: 0, y: 0}
     newSize: {x: 0, y: 0}
@@ -549,6 +590,19 @@ PolygonCollider2D:
       - {x: -20, y: -10}
       - {x: -20, y: 10}
 --- !u!1 &517559656
+=======
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.76, y: 1.68}
+    newSize: {x: 1.76, y: 1.68}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.76, y: 1.68}
+  m_EdgeRadius: 0
+--- !u!1 &449081341
+>>>>>>> 三天-公式&操作&機制修正
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -556,17 +610,26 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 517559660}
   - component: {fileID: 517559659}
   - component: {fileID: 517559658}
   - component: {fileID: 517559657}
   m_Layer: 5
   m_Name: Canvas
+=======
+  - component: {fileID: 449081343}
+  - component: {fileID: 449081342}
+  - component: {fileID: 449081344}
+  m_Layer: 0
+  m_Name: HotKeyController
+>>>>>>> 三天-公式&操作&機制修正
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!114 &517559657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,11 +648,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
 --- !u!114 &517559658
+=======
+--- !u!114 &449081342
+>>>>>>> 三天-公式&操作&機制修正
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 517559656}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -608,10 +675,21 @@ MonoBehaviour:
   m_DynamicPixelsPerUnit: 1
 --- !u!223 &517559659
 Canvas:
+=======
+  m_GameObject: {fileID: 449081341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fbef49e70dcc75459f82f2f54cf481f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &449081343
+Transform:
+>>>>>>> 三天-公式&操作&機制修正
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 517559656}
   m_Enabled: 1
   serializedVersion: 3
@@ -629,10 +707,24 @@ Canvas:
   m_TargetDisplay: 0
 --- !u!224 &517559660
 RectTransform:
+=======
+  m_GameObject: {fileID: 449081341}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.366341, y: 0.49291173, z: -20.811874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &449081344
+Rigidbody2D:
+  serializedVersion: 4
+>>>>>>> 三天-公式&操作&機制修正
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 517559656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -647,6 +739,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+=======
+  m_GameObject: {fileID: 449081341}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+>>>>>>> 三天-公式&操作&機制修正
 --- !u!1 &702368281
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +807,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 26.991467
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -1129,6 +1237,8 @@ GameObject:
   - component: {fileID: 1471013456}
   - component: {fileID: 1471013457}
   - component: {fileID: 1471013458}
+  - component: {fileID: 1471013459}
+  - component: {fileID: 1471013460}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1175,7 +1285,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+<<<<<<< HEAD
   m_Sprite: {fileID: 21300000, guid: 75a97bfd11cf3c74084cdfdc9ea2f167, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: 37f2ea8b0ccccee4b96c2ddad6087671, type: 3}
+>>>>>>> 三天-公式&操作&機制修正
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1194,15 +1308,21 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1471013452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 19.1, y: -6.1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 708324323}
+=======
+  m_LocalPosition: {x: -7.33, y: -2.72, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+>>>>>>> 三天-公式&操作&機制修正
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1471013455
-BoxCollider2D:
+--- !u!60 &1471013455
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1218,15 +1338,86 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0.185, y: 0, z: 0.275, w: 0.25}
     pivot: {x: 0.5, y: 0.5}
+<<<<<<< HEAD
     oldSize: {x: 1.08, y: 1.275}
+=======
+    oldSize: {x: 2.16, y: 2.55}
+>>>>>>> 三天-公式&操作&機制修正
     newSize: {x: 1.76, y: 1.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
+<<<<<<< HEAD
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
+=======
+  m_Points:
+    m_Paths:
+    - - {x: -0.03, y: -0.84499997}
+      - {x: 0, y: -1.045}
+      - {x: 0.04, y: -1.265}
+      - {x: 0.06, y: -1.275}
+      - {x: 0.29999998, y: -1.275}
+      - {x: 0.31, y: -1.265}
+      - {x: 0.29999998, y: -1.135}
+      - {x: 0.32, y: -1.015}
+      - {x: 0.29, y: -0.73499995}
+      - {x: 0.52, y: -0.66499996}
+      - {x: 0.56, y: -0.625}
+      - {x: 0.55, y: -0.59499997}
+      - {x: 0.39999998, y: -0.49499997}
+      - {x: 0.32, y: -0.48499998}
+      - {x: 0.35999998, y: -0.235}
+      - {x: 0.35999998, y: 0.125}
+      - {x: 0.21, y: 0.355}
+      - {x: 0.17, y: 0.445}
+      - {x: 0.16, y: 0.695}
+      - {x: 0.06, y: 0.79499996}
+      - {x: -0.22999999, y: 0.79499996}
+      - {x: -0.25, y: 0.78499997}
+      - {x: -0.41, y: 0.615}
+      - {x: -0.42, y: 0.545}
+      - {x: -0.42, y: 0.45499998}
+      - {x: -0.37, y: 0.405}
+      - {x: -0.53, y: 0.24499999}
+      - {x: -0.59999996, y: 0.114999995}
+      - {x: -0.7, y: -0.024999999}
+      - {x: -0.71, y: -0.205}
+      - {x: -0.65999997, y: -0.375}
+      - {x: -0.71999997, y: -0.355}
+      - {x: -0.74, y: -0.36499998}
+      - {x: -0.76, y: -0.465}
+      - {x: -0.76, y: -0.505}
+      - {x: -0.75, y: -0.525}
+      - {x: -0.53, y: -0.60499996}
+      - {x: -0.47, y: -0.705}
+      - {x: -0.48999998, y: -0.935}
+      - {x: -0.52, y: -0.955}
+      - {x: -0.48999998, y: -1.0849999}
+      - {x: -0.48, y: -1.265}
+      - {x: -0.47, y: -1.275}
+      - {x: -0.22999999, y: -1.275}
+      - {x: -0.21, y: -1.255}
+      - {x: -0.21, y: -1.055}
+      - {x: -0.11, y: -0.745}
+    - - {x: -0.45, y: -0.175}
+      - {x: -0.44, y: -0.175}
+      - {x: -0.41, y: -0.145}
+      - {x: -0.35999998, y: -0.074999996}
+      - {x: -0.32999998, y: -0.044999998}
+      - {x: -0.34, y: -0.024999999}
+      - {x: -0.35, y: -0.155}
+      - {x: -0.35999998, y: -0.16499999}
+      - {x: -0.38, y: -0.21499999}
+      - {x: -0.38, y: -0.255}
+      - {x: -0.35999998, y: -0.265}
+      - {x: -0.37, y: -0.24499999}
+      - {x: -0.41, y: -0.24499999}
+      - {x: -0.45999998, y: -0.295}
+      - {x: -0.45, y: -0.295}
+>>>>>>> 三天-公式&操作&機制修正
 --- !u!50 &1471013456
 Rigidbody2D:
   serializedVersion: 4
@@ -1242,12 +1433,17 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
+<<<<<<< HEAD
   m_CollisionDetection: 1
   m_Constraints: 4
+=======
+  m_CollisionDetection: 0
+  m_Constraints: 7
+>>>>>>> 三天-公式&操作&機制修正
 --- !u!114 &1471013457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1263,13 +1459,11 @@ MonoBehaviour:
   characterName: Player
   currentHealth: 0
   currentMana: 0
-  canMove: 1
-  canJump: 1
-  canEvade: 1
-  canAttack: 1
-  canSkill: 1
   data: {fileID: 11400000, guid: a646bf1ef18fbae4e82cbd1333f032b0, type: 2}
   skillFields: []
+  operationSoundController: {fileID: 0}
+  weaponController: {fileID: 0}
+  operationController: {fileID: 0}
   skillController: {fileID: 0}
   buffController: {fileID: 0}
   combat: {fileID: 0}
@@ -1286,16 +1480,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a665b7f26813fee458b6669fb16e86d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  side: 1
-  dashSpeed: 1
-  dashCD: 1
-  startDashCD: 1
-  endDash: 0
+  horizontalMove: 0
+  basicMoveSpeed: 4
   lowJumpMultiplier: 0
   fallMultiplier: 0
   fallAcceelerator: 0
   jumpCD: 0
   bottomOffset: {x: 0, y: -0.75}
+<<<<<<< HEAD
 --- !u!1001 &1539559500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1438,16 +1630,26 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &2022611401
+=======
+--- !u!95 &1471013459
+>>>>>>> 三天-公式&操作&機制修正
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 2022611399}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 33ebe87fbbf035c4594ef408eb72449f, type: 2}
+=======
+  m_GameObject: {fileID: 1471013452}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a95f4693e9686f84089dcf416316c29e, type: 2}
+>>>>>>> 三天-公式&操作&機制修正
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1456,6 +1658,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< HEAD
 --- !u!225 &2022611402
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1469,11 +1672,15 @@ CanvasGroup:
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &2022611403
+=======
+--- !u!114 &1471013460
+>>>>>>> 三天-公式&操作&機制修正
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 2022611399}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1504,3 +1711,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022611399}
   m_CullTransparentMesh: 0
+=======
+  m_GameObject: {fileID: 1471013452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7793384519c454bbee7313a2390c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSound:
+    soundType: 0
+    audioClip: []
+  moveSound:
+    soundType: 1
+    audioClip: []
+  jumpSound:
+    soundType: 2
+    audioClip: []
+  groundTouchSound:
+    soundType: 3
+    audioClip: []
+  evadeSound:
+    soundType: 4
+    audioClip: []
+  collectionSound:
+    soundType: 5
+    audioClip: []
+  castSound:
+    soundType: 6
+    audioClip: []
+  hitSound:
+    soundType: 9
+    audioClip: []
+  attackSound:
+    soundType: 7
+    audioClip: []
+  useSkillSound:
+    soundType: 8
+    audioClip: []
+>>>>>>> 三天-公式&操作&機制修正

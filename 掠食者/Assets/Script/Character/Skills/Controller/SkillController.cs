@@ -9,7 +9,7 @@ public class SkillController : MonoBehaviour
     private void Start()
     {
         character = GetComponent<Character>();
-        ResetAllSkillCoolDownOnStart();
+        ResetAllSkillCoolDown();
     }
 
     public bool Trigger(Skill skill)
@@ -64,17 +64,16 @@ public class SkillController : MonoBehaviour
     /// </summary>
     protected void Casting(Character character, float castTime, bool canDo)
     {
-        character.canSkill = canDo;
-        character.canMove = canDo;
-        character.canJump = canDo;
-        character.canEvade = canDo;
-        character.canAttack = canDo;
+        character.operationController.canSkill = canDo;
+        character.operationController.canMove = canDo;
+        character.operationController.canJump = canDo;
+        character.operationController.canEvade = canDo;
+        character.operationController.canAttack = canDo;
 
         float timer = 0;
         while (timer < castTime)
         {
-            var frameTime = Time.deltaTime;
-            timer += frameTime;
+            timer += Time.deltaTime;
 
             // Render Casting GUI
         }
@@ -94,7 +93,7 @@ public class SkillController : MonoBehaviour
         skill.cooling = false;
     }
 
-    private void ResetAllSkillCoolDownOnStart()
+    private void ResetAllSkillCoolDown()
     {
         if (character.skillFields == null)
             return;

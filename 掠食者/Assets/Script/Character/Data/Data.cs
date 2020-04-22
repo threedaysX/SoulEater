@@ -28,4 +28,9 @@ public class Data : ScriptableObject
     public Stats reduceSkillCoolDown;
     public Stats reduceCastTime;
     public Stats reduceEvadeCoolDown;
+
+    [Header("武器")]
+    public WeaponSoundSet weaponSoundSet;
+    public WeaponType weaponType; 
+    public ElementType attackElement;
 }

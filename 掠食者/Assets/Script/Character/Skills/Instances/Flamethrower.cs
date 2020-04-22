@@ -21,7 +21,7 @@ public class Flamethrower : LastingSkill
         var fireStat = sourceCaster.data.resistance.fire;
         void affect() { fireStat.AddModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
         void remove() { fireStat.RemoveModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
-        sourceCaster.buffController.AddBuffEvent(buffName, CreateAffectEvent(affect), CreateAffectEvent(remove), 5f);
+        sourceCaster.buffController.AddBuffEvent(buffName, affect, remove, 5f);
     }
 
     public string debuffName = "烈焰崩毀";
@@ -33,7 +33,7 @@ public class Flamethrower : LastingSkill
         var fireStat = target.data.resistance.fire;
         void affect() { fireStat.AddModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
         void remove() { fireStat.RemoveModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
-        target.buffController.AddBuffEvent(debuffName, CreateAffectEvent(affect), CreateAffectEvent(remove), 5f);
+        target.buffController.AddBuffEvent(debuffName, affect, remove, 5f);
     }
 
     /// <summary>
@@ -41,16 +41,16 @@ public class Flamethrower : LastingSkill
     /// </summary>
     private void KnockBackSelf()
     {
-        StartCoroutine(KnockBackCoroutine(sourceCaster, -0.5f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
+        StartCoroutine(KnockBackCoroutine(sourceCaster, 0.5f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
     }
     private void KnockBackEnemy()
     {
-        StartCoroutine(KnockBackCoroutine(target, -0.2f * target.data.moveSpeed.Value, currentSkill.duration));
+        StartCoroutine(KnockBackCoroutine(target, 0.2f * target.data.moveSpeed.Value, currentSkill.duration));
     }
     private IEnumerator KnockBackCoroutine(Character target, float knockbackforce, float duration)
     {
-        // knockbackforce => 向後退移，所以力道為負值。
-        Vector3 directionForce = target.transform.right * knockbackforce;
+        // knockbackforce => 向後退移，所以力道為正值。
+        Vector3 directionForce = sourceCaster.transform.right * knockbackforce;
         Vector3 direction = target.transform.rotation * directionForce;
         float timeleft = 3f; //currentSkill.duartion;
         while (timeleft > 0)

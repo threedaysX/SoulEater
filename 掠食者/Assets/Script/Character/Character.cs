@@ -4,33 +4,34 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    [Header("基礎")]
+    [Header("基礎參數")]
     public string characterName;
     public float currentHealth;
     public float currentMana;
 
-    [Header("操作")]
-    public bool canMove = true;
-    public bool canJump = true;
-    public bool canEvade = true;
-    public bool canAttack = true;
-    public bool canSkill = true;
-
-    [Header("能力值")]
+    [Header("詳細參數")]
     public Data data;
     [Header("技能欄")]
     public Skill[] skillFields;
 
-    [HideInInspector] public SkillController skillController;
-    [HideInInspector] public BuffController buffController;
-    [HideInInspector] public Combat combat;
+    [HideInInspector] public OperationSoundController operationSoundController; // 操作聲音控制
+    [HideInInspector] public WeaponController weaponController; // 武器控制
+    [HideInInspector] public OerationController operationController;    // 操作控制
+    [HideInInspector] public SkillController skillController;   // 技能控制
+    [HideInInspector] public BuffController buffController; // 狀態控制
+    [HideInInspector] public Combat combat; // 戰鬥控制
     [HideInInspector] public Animator animator;
 
     private void Awake()
     {
+        this.gameObject.AddComponent(typeof(WeaponController));
+        this.gameObject.AddComponent(typeof(OerationController));
         this.gameObject.AddComponent(typeof(SkillController));
         this.gameObject.AddComponent(typeof(BuffController));
         this.gameObject.AddComponent(typeof(Combat));
+        operationSoundController = GetComponent<OperationSoundController>();
+        weaponController = GetComponent<WeaponController>();
+        operationController = GetComponent<OerationController>();
         skillController = GetComponent<SkillController>();
         buffController = GetComponent<BuffController>();
         combat = GetComponent<Combat>();
@@ -51,10 +52,18 @@ public class Character : MonoBehaviour
     /// <param name="damageImmediate">是否立即造成傷害</param>
     public void TakeDamage(float damage, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
     {
+        if (damage < 0)
+            damage = 0;
+
         if (timesOfPerDamage <= 0 || duration <= 0)
         {
             currentHealth -= damage;
-            Debug.Log(characterName + "受到 " + damage + "點傷害");
+            string criticalLog = "";
+            if (DamageController.Instance.IsCritical)
+            {
+                criticalLog = "爆擊！！  ";
+            }
+            Debug.Log(criticalLog + characterName + "受到 " + damage + "點傷害");
         }
         else
         {
@@ -84,7 +93,7 @@ public class Character : MonoBehaviour
 
     public void UseSkill(Skill skill)
     {
-        if (!canSkill)
+        if (!operationController.canSkill)
             return;
 
         Debug.Log(this.data.resistance.fire.Value);
@@ -98,7 +107,7 @@ public class Character : MonoBehaviour
     }
 
     #region DataInitialize
-    protected void ResetBaseData()
+    public void ResetBaseData()
     {
         DataInitializer dataInitializer = new DataInitializer(data.status);
         this.data.maxHealth.BaseValue = dataInitializer.GetMaxHealth();
@@ -134,10 +143,10 @@ public class Character : MonoBehaviour
         return resultCost;
     }
 
-    public Stats GetAttackData(AttackType skillType)
+    public Stats GetAttackData(AttackType attackType)
     {
         Stats resultAttack = data.attack;
-        switch (skillType)
+        switch (attackType)
         {
             case AttackType.Attack:
                 break;

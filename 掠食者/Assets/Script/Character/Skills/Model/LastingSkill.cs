@@ -12,6 +12,8 @@ public abstract class LastingSkill : SkillEventBase
     public virtual void OnTriggerStay2D(Collider2D target)
     {
         this.target = target.GetComponent<Character>();
+        if (target == null)
+            return;
 
         #region 傷害階段
         if (currentSkill.skillType != AttackType.Effect)

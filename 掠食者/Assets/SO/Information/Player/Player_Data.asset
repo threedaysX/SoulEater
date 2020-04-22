@@ -13,37 +13,37 @@ MonoBehaviour:
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 13000
-    AdditionalValue: 0
-    FinalValue: 13000
+    BaseValue: 413
+    AdditionalValue: 100
+    FinalValue: 513
   maxMana:
-    BaseValue: 4
+    BaseValue: 3
     AdditionalValue: 0
-    FinalValue: 4
+    FinalValue: 3
   attack:
-    BaseValue: 187
+    BaseValue: 45
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 45
   magicAttack:
-    BaseValue: 20
+    BaseValue: 7
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 7
   defense:
-    BaseValue: 20
+    BaseValue: 0.4
     AdditionalValue: 0
-    FinalValue: 20
+    FinalValue: 0.4
   critical:
-    BaseValue: 8
+    BaseValue: 2
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 2
   criticalDamage:
     BaseValue: 0
     AdditionalValue: 0
     FinalValue: 0
   knockBackDamage:
-    BaseValue: 9425
+    BaseValue: 46
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 80
   manaRecovering:
     BaseValue: 0
     AdditionalValue: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   manaRecoveringOfDamage:
     BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 100
   penetrationValue:
     BaseValue: 0
     AdditionalValue: 0
@@ -63,30 +63,39 @@ MonoBehaviour:
   resistance: {fileID: 11400000, guid: 0c4788fe7788aa14cabe278bca1bea79, type: 2}
   status: {fileID: 11400000, guid: 1ab81751b173d454496b33a3ac4ed2b2, type: 2}
   jumpForce:
-    BaseValue: 1.5
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 1.5
+    FinalValue: 1
   moveSpeed:
+<<<<<<< HEAD
     BaseValue: 50
     AdditionalValue: 0
     FinalValue: 50
-  attackSpeed:
-    BaseValue: 10.4
+=======
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 1
+>>>>>>> 三天-公式&操作&機制修正
+  attackSpeed:
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: 2
   attackRange:
     BaseValue: 1
     AdditionalValue: 0
     FinalValue: 1
   reduceSkillCoolDown:
-    BaseValue: 4
+    BaseValue: 0.8
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 0.8
   reduceCastTime:
-    BaseValue: 5
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 1
   reduceEvadeCoolDown:
-    BaseValue: 68.16
+    BaseValue: 1.1
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 1.1
+  weaponSoundSet: {fileID: 11400000, guid: d4e2d4bbea02d9d48b3f8b9bb91b1ff0, type: 2}
+  weaponType: 0
+  attackElement: 0

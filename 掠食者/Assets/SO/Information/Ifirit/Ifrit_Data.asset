@@ -13,45 +13,45 @@ MonoBehaviour:
   m_Name: Ifrit_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 1301
+    BaseValue: 413
     AdditionalValue: 300
-    FinalValue: 1601
+    FinalValue: 713
   maxMana:
-    BaseValue: 7
+    BaseValue: 3
     AdditionalValue: 99
-    FinalValue: 106
+    FinalValue: 102
   attack:
-    BaseValue: 77
+    BaseValue: 45
     AdditionalValue: 0
-    FinalValue: 20
+    FinalValue: 34
   magicAttack:
-    BaseValue: 74
+    BaseValue: 7
     AdditionalValue: 0
-    FinalValue: 74
+    FinalValue: -19
   defense:
-    BaseValue: 24
+    BaseValue: 0.4
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: -1.6
   critical:
-    BaseValue: 24
-    AdditionalValue: 50
-    FinalValue: 0
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: -8
   criticalDamage:
     BaseValue: 0
-    AdditionalValue: 0
-    FinalValue: 0
+    AdditionalValue: 40
+    FinalValue: 40
   knockBackDamage:
-    BaseValue: 374
+    BaseValue: 46
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 20
   manaRecovering:
     BaseValue: 0
     AdditionalValue: 0
     FinalValue: 0
   manaRecoveringOfDamage:
-    BaseValue: 82
+    BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 100
   penetrationValue:
     BaseValue: 0
     AdditionalValue: 0
@@ -60,33 +60,34 @@ MonoBehaviour:
     BaseValue: 0
     AdditionalValue: 0
     FinalValue: 0
-  resistance: {fileID: 11400000, guid: e8fe3e069c468e74fbe5ee01ab8adc15, type: 2}
+  resistance: {fileID: 11400000, guid: 0b55856e7c417104fbb1917fae8eda81, type: 2}
   status: {fileID: 11400000, guid: b11631bd49701d14ba2e8a4af3a0f3f8, type: 2}
+  attackElement: 0
   jumpForce:
-    BaseValue: 1.2
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 0.9
   moveSpeed:
-    BaseValue: 1.2
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 1.2
+    FinalValue: 1
   attackSpeed:
-    BaseValue: 4.4
+    BaseValue: 1.04
     AdditionalValue: 0
-    FinalValue: 2
+    FinalValue: 1.04
   attackRange:
-    BaseValue: 3
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 3
+    FinalValue: 1
   reduceSkillCoolDown:
-    BaseValue: 12
+    BaseValue: 0.8
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 0.8
   reduceCastTime:
-    BaseValue: 35
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 106
   reduceEvadeCoolDown:
-    BaseValue: 18.12
+    BaseValue: 1.1
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 1.1
