@@ -4,22 +4,30 @@ using UnityEngine;
 
 public abstract class AI : Character 
 {
+    
     [Header("偵測動作")]
     [SerializeField] protected Detect[] detects;
     [Header("行為模式")]
     [SerializeField] protected Action[] actions;
     // 上一個行動
-    private Action lastAction;
+    public Action lastAction;
     private bool lastActionSuccess;
 
     [Header("偵測距離")]
     public float detectDistance;
     [Header("行為共通延遲時間(秒)")]
-    public float actionDelay = 2f;  
+    public float overridedAactionDelay = 0f;  
     private float nextActTimes = 0f;
 
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public LayerMask playerLayer;
+    [HideInInspector] public DistanceDetect distanceDetect;
+
+    private void Start()
+    {
+        this.gameObject.AddComponent(typeof(DistanceDetect));
+        distanceDetect = GetComponent<DistanceDetect>();
+    }
 
     void Update()
     {
@@ -33,13 +41,13 @@ public abstract class AI : Character
     {
         foreach (var detect in detects)
         {
-            detect.GetCurrentAI(this);
+            detect.GetCurrentAIHavior(this);
             if (detect.StartDetectHaviour())
             {
                 if (Time.time >= nextActTimes)
                 {
                     DoActions();
-                    nextActTimes = Time.time + actionDelay + GetAnimationLength(animator);
+                    nextActTimes = Time.time + overridedAactionDelay + GetAnimationLength(animator);
                 }
             }
         }
@@ -53,7 +61,7 @@ public abstract class AI : Character
         // 若上一個動作執行失敗，則該動作的權重降低2一次
         foreach (var action in actions)
         {
-            action.GetCurrentAI(this);
+            action.GetCurrentAIHavior(this);
             if (action.CheckActionThatCanDo())
             {
                 if (action == lastAction && !lastActionSuccess)
@@ -82,6 +90,7 @@ public abstract class AI : Character
         if (actionToDoList.Count == 1)
         {
             currentAction = actionToDoList.Keys.First();
+            overridedAactionDelay = currentAction.actionDelay;
             lastActionSuccess = currentAction.StartActHaviour();
             lastAction = currentAction;
             return;
@@ -98,6 +107,7 @@ public abstract class AI : Character
             currentAction.ActionWeight -= 1;    // 做重複的動作，導致權重下降1，降低這個對於動作的慾望
             return;
         }
+        overridedAactionDelay = currentAction.actionDelay;
         lastActionSuccess = currentAction.StartActHaviour();
         lastAction = currentAction;
     }
@@ -108,16 +118,6 @@ public abstract class AI : Character
             return 0;
         return AnimationController.Instance.GetCurrentAnimationLength(anim);
     }
-
-    /// <summary>
-    /// 根據狀態來調整行為權重
-    /// </summary>
-    public abstract void ChangeActionWeight();
-
-    /// <summary>
-    /// 偵測到敵人，重新調整偵測範圍(擴大、不變或縮小)
-    /// </summary>
-    public abstract void ChangeInDetectRange();
 
     private void OnDrawGizmosSelected()
     {

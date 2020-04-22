@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a74d3ee2742de8419b79618835c7def, type: 3}
   m_Name: FlamethrowerAction
   m_EditorClassIdentifier: 
-  actionWeight: 0
+  originalActionWeight: 7
+  actionDelay: 0.4
   actionType: 5
   actionAnimator: {fileID: 0}
   judjements:
+  - {fileID: 11400000, guid: 18a0505d2e481654dad8c844f6485a50, type: 2}
   - {fileID: 11400000, guid: 18a0505d2e481654dad8c844f6485a50, type: 2}
   flamethrowerObject: {fileID: 11400000, guid: 4e90e1d41879f454d83695c5eb2007a9, type: 2}

@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c621d20715d767746a38d75db32de46a, type: 3}
+  m_Name: Shield
+  m_EditorClassIdentifier: 
+  maxHealth:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  maxMana:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  attack:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  magicAttack:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  defense:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  critical:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  criticalDamage:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  knockBackDamage:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  manaRecovering:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  manaRecoveringOfDamage:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  penetrationValue:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  penetrationMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  resistance: {fileID: 0}
+  status: {fileID: 0}
+  jumpForce:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+  moveSpeed:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+  attackSpeed:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+  attackRange:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+  reduceSkillCoolDown:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  reduceCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  reduceEvadeCoolDown:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0

@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd75a1391bedfda418d878f01c8d2acd, type: 3}
   m_Name: BasicMove
   m_EditorClassIdentifier: 
-  actionWeight: 0
+  originalActionWeight: 8
+  actionDelay: 0
   actionType: 2
   actionAnimator: {fileID: 0}
   judjements:
   - {fileID: 11400000, guid: c4ce9c1b5c2c43f4fbdac3ce09e23fe7, type: 2}
+  - {fileID: 11400000, guid: 834ff9a2cb60441439516abc1905cabf, type: 2}
+  - {fileID: 11400000, guid: 152a7db87a45b374d8ffc0abacc787aa, type: 2}

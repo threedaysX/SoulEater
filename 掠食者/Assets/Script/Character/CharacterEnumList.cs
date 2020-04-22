@@ -2,7 +2,7 @@
 public enum AttackType
 {
     Attack,
-    MagicAttack,
+    Magic,
     Effect
 }
 

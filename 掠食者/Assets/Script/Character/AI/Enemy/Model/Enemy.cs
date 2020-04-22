@@ -4,13 +4,5 @@ using UnityEngine;
 
 public class Enemy : AI
 {
-    public override void ChangeActionWeight()
-    {
-
-    }
-
-    public override void ChangeInDetectRange()
-    {
-
-    }
+    
 }

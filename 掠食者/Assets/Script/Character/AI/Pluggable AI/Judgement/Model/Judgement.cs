@@ -16,7 +16,9 @@ public class Judgement : AIHaviourBase
         conditionTrueCount = 0;
         foreach (JudgeCondition condition in conditions)
         {
-            condition.GetCurrentAI(ai);
+            if (condition == null)
+                continue;
+            condition.GetCurrentAIHavior(ai);
             if (condition.CheckActConditionHaviour())
             {
                 conditionTrueCount++;

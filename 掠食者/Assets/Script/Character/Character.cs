@@ -141,7 +141,7 @@ public class Character : MonoBehaviour
         {
             case AttackType.Attack:
                 break;
-            case AttackType.MagicAttack:
+            case AttackType.Magic:
                 resultAttack = data.magicAttack;
                 break;
         }

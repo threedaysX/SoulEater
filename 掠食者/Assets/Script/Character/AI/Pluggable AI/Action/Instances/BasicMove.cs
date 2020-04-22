@@ -10,7 +10,7 @@ public class BasicMove : Action
 
     private bool Move()
     {
-        Vector3 chaseDirection = ai.chaseTarget.position - ai.transform.position;
+        Vector3 chaseDirection = Vector3.Normalize(ai.chaseTarget.position - ai.transform.position);
         ai.transform.position += chaseDirection * ai.data.moveSpeed.Value * Time.deltaTime;
         Debug.Log(ai.characterName + "要移動摟！！");
         return true;

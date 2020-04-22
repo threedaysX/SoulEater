@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Animation\AnimationController.cs" />
+    <Compile Include="Assets\Script\Animation\Camera\TransitionPlayer.cs" />
     <Compile Include="Assets\Script\Animation\DestroyOnExit.cs" />
     <Compile Include="Assets\Script\Character\AI\AI.cs" />
     <Compile Include="Assets\Script\Character\AI\AIHaviourBase.cs" />
@@ -73,14 +74,34 @@
     <Compile Include="Assets\Script\Character\AI\NPC\NPC.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicAttack.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicFlamethrowerAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicIdle.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicMove.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicRetreat.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\CrackSlamAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\DashAttackAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\EvadeAreaAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\SelfHealAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\ShockWaveAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\StepBackAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\TypeExample.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Model\Action.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Detect\Instances\OverlapCircleDecision.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Detect\Instances\RayCastDecision.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Detect\Model\Detect.cs" />
-    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\CloseAttackDistance.cs" />
-    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\SeemsLikeHealthy.cs" />
-    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\TooFar.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\DistanceDetect.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\ChanceToAct.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\CheckCustomDamageInTime.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\CheckHitsInTime.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\CheckLastAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\CheckLastActionType.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\GreaterThanCustomHealth.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\InAttackRange.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\InCustomRange.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\LessThanCustomHealth.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\OutOfAttackRange.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\OutOfCustomRange.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\PlayerCloseAttack.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\PlayerGetCloser.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Model\JudgeCondition.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\Model\Judgement.cs" />
     <Compile Include="Assets\Script\Character\AbilitySystem\BuffController.cs" />
@@ -107,61 +128,67 @@
     <Compile Include="Assets\Script\Tools\ReadOnlyDrawer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -341,13 +368,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/1qaz9/OneDrive/Desktop/Unity Project/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

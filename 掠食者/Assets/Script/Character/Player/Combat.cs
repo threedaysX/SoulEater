@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Combat : MonoBehaviour
 {
@@ -7,12 +8,17 @@ public class Combat : MonoBehaviour
 
     [SerializeField] private float attackPointBasicRange = 1f;
 
+    public bool hasHit = false;  //AI用
+    public float hasHitInTime;  //AI用
+    public float takeHowMuchDamage;  //AI用
+
     private void Start()
     {
         nextAttackTime = 0;
         character = GetComponent<Character>();
     }
 
+    //要攻擊抓StartAttack這個方法(為了動畫
     public bool StartAttack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
     {
         bool attackSuccess = false;
@@ -22,10 +28,11 @@ public class Combat : MonoBehaviour
             attackSuccess = Attack(attackType, elementType);
             nextAttackTime = Time.time + 1 / character.data.attackSpeed.Value;
         }
-
+        
         return attackSuccess;
     }
 
+    //這個為了計算傷害
     private bool Attack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
     {
         bool attackSuccess = false;
@@ -41,14 +48,24 @@ public class Combat : MonoBehaviour
                 if (enemyDetails == null)
                     return attackSuccess;
 
+                takeHowMuchDamage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType);
                 enemyDetails.TakeDamage(DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType));
                 attackSuccess = true;
+                StartCoroutine(HasHit());
             }
         }
 
         return attackSuccess;
     }
 
+    IEnumerator HasHit()
+    {
+        hasHit = true;
+        yield return new WaitForSeconds(hasHitInTime); 
+        hasHit = false;
+        yield break;
+    }
+    
     private void OnDrawGizmos()
     {
         if (character == null)

@@ -3,7 +3,7 @@
 public class AIHaviourBase : ScriptableObject
 {
     protected AI ai;
-    public void GetCurrentAI(AI currentAi)
+    public void GetCurrentAIHavior(AI currentAi)
     {
         ai = currentAi;
     }

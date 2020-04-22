@@ -15,6 +15,7 @@ public abstract class Action : AIHaviourBase
     /// </summary>
     public int originalActionWeight;
     private int _ActionWeight;
+    public float actionDelay;
     public int ActionWeight { 
         get 
         {
@@ -43,7 +44,7 @@ public abstract class Action : AIHaviourBase
         {
             if (judje == null)
                 continue;
-            judje.GetCurrentAI(ai);
+            judje.GetCurrentAIHavior(ai);
             judje.StartCheckActCondition();     // 開始檢查該動作的各個觸發條件
             if (judje.CheckTrueConditionCount())
             {
@@ -66,7 +67,7 @@ public enum ActionType
     Move,
     Retreat,
     Attack,
-    MagicAttack,
+    Magic,
     Effect,
 }
 
