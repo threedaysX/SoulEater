@@ -83,8 +83,8 @@ namespace StatsModel
                 finalValue *= timesMod;
             }
 
-            // 取至小數點後兩位
-            return (float)Math.Round(finalValue, 2);
+            // 取至小數點後4位
+            return (float)Math.Round(finalValue, 4);
         }
 
         /// <summary>

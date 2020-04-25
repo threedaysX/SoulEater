@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 一次性技能
+/// </summary>
 public abstract class DisposableSkill : SkillEventBase
 {
     /// <summary>

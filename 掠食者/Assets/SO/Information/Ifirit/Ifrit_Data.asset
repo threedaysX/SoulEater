@@ -23,19 +23,19 @@ MonoBehaviour:
   attack:
     BaseValue: 45
     AdditionalValue: 0
-    FinalValue: 34
+    FinalValue: 45
   magicAttack:
     BaseValue: 7
     AdditionalValue: 0
-    FinalValue: -19
+    FinalValue: 7
   defense:
     BaseValue: 0.4
     AdditionalValue: 0
-    FinalValue: -1.6
+    FinalValue: 0.4
   critical:
     BaseValue: 2
     AdditionalValue: 0
-    FinalValue: -8
+    FinalValue: 2
   criticalDamage:
     BaseValue: 0
     AdditionalValue: 40
@@ -62,7 +62,6 @@ MonoBehaviour:
     FinalValue: 0
   resistance: {fileID: 11400000, guid: 0b55856e7c417104fbb1917fae8eda81, type: 2}
   status: {fileID: 11400000, guid: b11631bd49701d14ba2e8a4af3a0f3f8, type: 2}
-  attackElement: 0
   jumpForce:
     BaseValue: 1
     AdditionalValue: 0
@@ -72,13 +71,13 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 1
   attackSpeed:
-    BaseValue: 1.04
+    BaseValue: 2
     AdditionalValue: 0
-    FinalValue: 1.04
+    FinalValue: 2
   attackRange:
-    BaseValue: 1
+    BaseValue: 5
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 5
   reduceSkillCoolDown:
     BaseValue: 0.8
     AdditionalValue: 0
@@ -91,3 +90,6 @@ MonoBehaviour:
     BaseValue: 1.1
     AdditionalValue: 0
     FinalValue: 1.1
+  weaponSoundSet: {fileID: 0}
+  weaponType: 0
+  attackElement: 0

@@ -41,7 +41,7 @@ public class Flamethrower : LastingSkill
     /// </summary>
     private void KnockBackSelf()
     {
-        StartCoroutine(KnockBackCoroutine(sourceCaster, 0.5f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
+        StartCoroutine(KnockBackCoroutine(sourceCaster, -0.5f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
     }
     private void KnockBackEnemy()
     {
@@ -49,10 +49,12 @@ public class Flamethrower : LastingSkill
     }
     private IEnumerator KnockBackCoroutine(Character target, float knockbackforce, float duration)
     {
-        // knockbackforce => 向後退移，所以力道為正值。
+        if (sourceCaster == null || target == null)
+            yield break;
+
         Vector3 directionForce = sourceCaster.transform.right * knockbackforce;
         Vector3 direction = target.transform.rotation * directionForce;
-        float timeleft = 3f; //currentSkill.duartion;
+        float timeleft = currentSkill.duration;
         while (timeleft > 0)
         {
             if (target == null)

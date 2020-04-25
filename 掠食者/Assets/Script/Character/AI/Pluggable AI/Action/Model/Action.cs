@@ -13,32 +13,21 @@ public abstract class Action : AIHaviourBase
     /// [8~9] 擅長而且喜歡選擇的動作
     /// [10] 超想這麼做
     /// </summary>
+    public int ActionWeight { get; set; }
+
     public int originalActionWeight;
-    private int _ActionWeight;
     public float actionDelay;
-    public int ActionWeight { 
-        get 
-        {
-            return _ActionWeight;
-        } 
-        set 
-        {
-            diffCount += (_ActionWeight - value);
-            _ActionWeight = value;
-        }
-    }
-    private int diffCount; // 這個行動已經被降低過了N點權重
+    public int diffCount; // 這個行動已經被降低過了N點權重
     public ActionType actionType;
     public Animator actionAnimator;
     public Judgement[] judjements;
 
     public bool CheckActionThatCanDo()
     {
-        // 若權重已經小於原始權重的一半，則重置權重。
-        if (ActionWeight < originalActionWeight / 2)
+        // 若權重已經小於0，則重置權重。
+        if (ActionWeight < 0)
         {
-            ActionWeight = originalActionWeight;
-            diffCount = 0;
+            ResetWeight();
         }
         foreach (Judgement judje in judjements)
         {
@@ -55,6 +44,17 @@ public abstract class Action : AIHaviourBase
             }
         }
         return false;
+    }
+
+    public void AddDiffCount(int diff)
+    {
+        diffCount += diff;
+    }
+
+    public void ResetWeight()
+    {
+        ActionWeight = originalActionWeight;
+        diffCount = 0;
     }
 
     public abstract bool StartActHaviour();

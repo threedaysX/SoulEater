@@ -9,6 +9,13 @@ public class Character : MonoBehaviour
     public float currentHealth;
     public float currentMana;
 
+    [Header("操作判定")]
+    public bool canMove = true;
+    public bool canJump = true;
+    public bool canEvade = true;
+    public bool canAttack = true;
+    public bool canSkill = true;
+
     [Header("詳細參數")]
     public Data data;
     [Header("技能欄")]
@@ -16,25 +23,20 @@ public class Character : MonoBehaviour
 
     [HideInInspector] public OperationSoundController operationSoundController; // 操作聲音控制
     [HideInInspector] public WeaponController weaponController; // 武器控制
-    [HideInInspector] public OerationController operationController;    // 操作控制
+    [HideInInspector] public OperationController operationController;    // 操作控制
     [HideInInspector] public SkillController skillController;   // 技能控制
     [HideInInspector] public BuffController buffController; // 狀態控制
-    [HideInInspector] public Combat combat; // 戰鬥控制
+    [HideInInspector] public CombatController combatController; // 戰鬥控制
     [HideInInspector] public Animator animator;
 
     private void Awake()
     {
-        this.gameObject.AddComponent(typeof(WeaponController));
-        this.gameObject.AddComponent(typeof(OerationController));
-        this.gameObject.AddComponent(typeof(SkillController));
-        this.gameObject.AddComponent(typeof(BuffController));
-        this.gameObject.AddComponent(typeof(Combat));
         operationSoundController = GetComponent<OperationSoundController>();
         weaponController = GetComponent<WeaponController>();
-        operationController = GetComponent<OerationController>();
+        operationController = GetComponent<OperationController>();
         skillController = GetComponent<SkillController>();
         buffController = GetComponent<BuffController>();
-        combat = GetComponent<Combat>();
+        combatController = GetComponent<CombatController>();
         animator = GetComponent<Animator>();
 
         ResetBaseData();
@@ -93,7 +95,7 @@ public class Character : MonoBehaviour
 
     public void UseSkill(Skill skill)
     {
-        if (!operationController.canSkill)
+        if (!canSkill)
             return;
 
         Debug.Log(this.data.resistance.fire.Value);
@@ -103,6 +105,7 @@ public class Character : MonoBehaviour
 
     public virtual void Die()
     {
+        this.StopAllCoroutines();
         Destroy(this.gameObject);
     }
 
@@ -120,7 +123,7 @@ public class Character : MonoBehaviour
         this.data.manaRecoveringOfDamage.BaseValue = dataInitializer.GetManaRecoveringOfDamage();
         this.data.jumpForce.BaseValue = dataInitializer.GetJumpForce();
         this.data.moveSpeed.BaseValue = dataInitializer.GetMoveSpeed();
-        this.data.attackSpeed.BaseValue = dataInitializer.GetAttackSpeed();
+        this.data.attackDelay.BaseValue = dataInitializer.GetAttackDelay();
         this.data.reduceSkillCoolDown.BaseValue = dataInitializer.GetSkillCoolDownReduce();
         this.data.reduceCastTime.BaseValue = dataInitializer.GetCastTimeReduce();
         this.data.reduceEvadeCoolDown.BaseValue = dataInitializer.GetEvadeCoolDownReduce();

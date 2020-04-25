@@ -23,7 +23,7 @@ public class TransitionPlayer : MonoBehaviour
 
     IEnumerator PlayTransition()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.1f);
         transitionController.SetTrigger("TransitionPlaying");
         yield return new WaitForSeconds(transitionWaitTime);
         transitionController.ResetTrigger("TransitionPlaying");

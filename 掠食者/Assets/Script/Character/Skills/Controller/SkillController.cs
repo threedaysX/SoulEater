@@ -14,6 +14,8 @@ public class SkillController : MonoBehaviour
 
     public bool Trigger(Skill skill)
     {
+        character.operationController.StartUseSkillAnim();
+
         // 技能冷卻中
         if (skill.cooling)
         {
@@ -45,6 +47,7 @@ public class SkillController : MonoBehaviour
         // 詠唱
         if (skill.castTime > 0)
         {
+            character.operationController.StartCastSkillAnim(skill.castTime);
             Casting(character, skill.castTime, false);
         }
         
@@ -56,6 +59,7 @@ public class SkillController : MonoBehaviour
 
         StartCoroutine(GetIntoCoolDown(skill));
         this.lastSkill = skill;
+        character.operationController.StopUseSkillAnim();
         return true;
     }
 
@@ -64,11 +68,11 @@ public class SkillController : MonoBehaviour
     /// </summary>
     protected void Casting(Character character, float castTime, bool canDo)
     {
-        character.operationController.canSkill = canDo;
-        character.operationController.canMove = canDo;
-        character.operationController.canJump = canDo;
-        character.operationController.canEvade = canDo;
-        character.operationController.canAttack = canDo;
+        character.canSkill = canDo;
+        character.canMove = canDo;
+        character.canJump = canDo;
+        character.canEvade = canDo;
+        character.canAttack = canDo;
 
         float timer = 0;
         while (timer < castTime)

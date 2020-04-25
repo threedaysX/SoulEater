@@ -10,7 +10,7 @@ public class CheckHitsInTime : JudgeCondition
         if (ai == null)
             return false;
 
-        ai.combat.hasHitInTime = customTime;
-        return ai.combat.hasHit;
+        ai.combatController.hasHitInTime = customTime;
+        return ai.combatController.hasHit;
     }
 }

@@ -9,8 +9,8 @@ public abstract class AI : Character
     [SerializeField] protected Detect[] detects;
     [Header("行為模式")]
     [SerializeField] protected Action[] actions;
-    // 上一個行動
-    public Action lastAction;
+    [Header("上一個行為模式")]
+    [SerializeField] public Action lastAction;
     private bool lastActionSuccess;
 
     [Header("偵測距離")]
@@ -18,6 +18,10 @@ public abstract class AI : Character
     [Header("行為共通延遲時間(秒)")]
     public float overridedAactionDelay = 0f;  
     private float nextActTimes = 0f;
+
+    private bool inCombatState = false; // 是否進入戰鬥狀態
+    private float outOfCombatDuration = 3f; // 脫離戰鬥狀態所需時間
+    private float nextOutOfCombatTime = 0f;
 
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public LayerMask playerLayer;
@@ -34,7 +38,31 @@ public abstract class AI : Character
         playerLayer = LayerMask.GetMask("Player");
 
         DoDetects();
-        // Debug.Log(this);
+
+        CheckOutOfCombatState();
+    }
+
+    private void CheckOutOfCombatState()
+    {
+        if (inCombatState && nextOutOfCombatTime == 0)
+        {
+            nextOutOfCombatTime = Time.time + outOfCombatDuration;
+        }
+
+        if (Time.time >= nextOutOfCombatTime && inCombatState)
+        {
+            inCombatState = false;
+        }
+
+        // 脫離戰鬥後，重置所有行動權重
+        if (!inCombatState && nextOutOfCombatTime != 0)
+        {
+            nextOutOfCombatTime = 0;
+            foreach (var action in actions)
+            {
+                action.ResetWeight();
+            }
+        }
     }
 
     public void DoDetects()
@@ -46,8 +74,13 @@ public abstract class AI : Character
             {
                 if (Time.time >= nextActTimes)
                 {
+                    inCombatState = true;
                     DoActions();
                     nextActTimes = Time.time + overridedAactionDelay + GetAnimationLength(animator);
+                }
+                else
+                {
+                    AlwaysFaceTarget(); // 在執行Action以外，會持續面對目標
                 }
             }
         }
@@ -67,6 +100,7 @@ public abstract class AI : Character
                 if (action == lastAction && !lastActionSuccess)
                 {
                     action.ActionWeight -= 2;
+                    action.AddDiffCount(2);
                 }
                 actionToDoList.Add(action, action.ActionWeight);
             }            
@@ -86,13 +120,13 @@ public abstract class AI : Character
 
     protected void DoHightestWeightAction(Dictionary<Action, int> actionToDoList)
     {
-        Action currentAction;
+        Action action;
         if (actionToDoList.Count == 1)
         {
-            currentAction = actionToDoList.Keys.First();
-            overridedAactionDelay = currentAction.actionDelay;
-            lastActionSuccess = currentAction.StartActHaviour();
-            lastAction = currentAction;
+            action = actionToDoList.Keys.First();
+            overridedAactionDelay = action.actionDelay;
+            lastActionSuccess = action.StartActHaviour();
+            lastAction = action;
             return;
         }
 
@@ -101,23 +135,39 @@ public abstract class AI : Character
         int maxWeight = actionToDoList.Values.Max();
         Action[] keyActionsOfMaxWeight = actionToDoList.Where(x => x.Value <= maxWeight && x.Value >= maxWeight - diff).Select(x => x.Key).ToArray();
         // 執行任一動作，但除了移動以外，不會做相同的動作
-        currentAction = keyActionsOfMaxWeight[Random.Range(0, keyActionsOfMaxWeight.Length)];
-        if (currentAction == lastAction && currentAction.actionType != ActionType.Move)
+        action = keyActionsOfMaxWeight[Random.Range(0, keyActionsOfMaxWeight.Length)];
+        if (action == lastAction && action.actionType != ActionType.Move)
         {
-            currentAction.ActionWeight -= 1;    // 做重複的動作，導致權重下降1，降低這個對於動作的慾望
+            action.ActionWeight -= 1;    // 做重複的動作，導致權重下降1，降低這個對於動作的慾望
+            action.AddDiffCount(1);
             return;
         }
-        overridedAactionDelay = currentAction.actionDelay;
-        lastActionSuccess = currentAction.StartActHaviour();
-        lastAction = currentAction;
+        overridedAactionDelay = action.actionDelay;
+        lastActionSuccess = action.StartActHaviour();
+        lastAction = action;
     }
 
     protected float GetAnimationLength(Animator anim)
     {
         if (anim == null)
             return 0;
-        //return AnimationBase.Instance.GetCurrentAnimationLength(anim);
-        return 0;
+        return AnimationBase.Instance.GetCurrentAnimationLength(anim);
+    }
+
+    private void AlwaysFaceTarget()
+    {
+        if (chaseTarget == null)
+            return;
+
+        float faceDirX = gameObject.transform.position.x - chaseTarget.transform.position.x;
+        if (faceDirX < 0)
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (faceDirX > 0)
+        {
+            gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
+        }
     }
 
     private void OnDrawGizmosSelected()

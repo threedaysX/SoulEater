@@ -6,40 +6,31 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("移動")]
-    public float horizontalMove;
+    public Vector2 moveDir;
+    public float x;
+    public float y;
+    public float basicJumpForce = 6f;
     public float basicMoveSpeed = 4f;
 
     [Header("跳躍")]
-    public float lowJumpMultiplier;
-    public float fallMultiplier;
-    public float fallAcceelerator;
-
-    private LayerMask groundLayer;
+    public float lowJumpMultiplier = 4f;
+    public float fallMultiplier = 2f;
 
     public float jumpCD;
-
-    private float collisionRadius = 0.25f;
-    public Vector2 bottomOffset;
 
     void Start()
     {
         character = GetComponent<Character>();
         rb = GetComponent<Rigidbody2D>();
-        groundLayer = LayerMask.GetMask("Ground");
     }
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * character.data.moveSpeed.Value * basicMoveSpeed;
-        character.operationController.StartMoveAnim(horizontalMove);
+        x = Input.GetAxis("Horizontal");
+        y = Input.GetAxis("Vertical");
+        moveDir = new Vector2(x, y);
 
         SideChange();
-
-        character.operationController.IsGrounding = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
-    }
-
-    private void FixedUpdate()
-    {
         HoriMove();
         Jump();
         BetterJump();
@@ -52,11 +43,11 @@ public class PlayerMovement : MonoBehaviour
 
     void SideChange()
     {
-        if (horizontalMove > 0)
+        if (x > 0)
         {
             gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
         }
-        else if (horizontalMove < 0)
+        else if (x < 0)
         {
             gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
         }
@@ -64,35 +55,46 @@ public class PlayerMovement : MonoBehaviour
 
     private void HoriMove()
     {
-        Vector3 movementX = new Vector3(horizontalMove, 0, 0);
-        transform.position += movementX * Time.fixedDeltaTime;
-    }
+        if (character.operationController.isEvading)
+            return;
 
-    void Jump()
-    {
-        
-    }
-
-    void BetterJump()
-    {
-        if (rb.velocity.y < 0 && Input.GetKey(HotKeyController.moveDown))
+        if (character.canMove)
         {
-            rb.gravityScale = fallAcceelerator;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetKey(HotKeyController.jumpKey))
-        {
-            rb.gravityScale = lowJumpMultiplier;
-        }
-        else if (rb.velocity.y < 0)
-        {
-            rb.gravityScale = fallMultiplier;
+            character.operationController.StartMoveAnim(x);
+            rb.velocity = new Vector2(moveDir.x * character.data.moveSpeed.Value * basicMoveSpeed, rb.velocity.y);
         }
         else
         {
-            rb.gravityScale = 1f;
+            if (rb.velocity.x > 0)
+            {
+                rb.velocity = new Vector2(0, rb.velocity.y);
+            }
         }
     }
 
+    private void Jump()
+    {
+        if (Input.GetKeyDown(HotKeyController.jumpKey) 
+            && character.canJump 
+            && character.operationController.isGrounding)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.velocity += Vector2.up * character.data.jumpForce.Value * basicJumpForce;
+            character.operationController.StartJumpAnim();
+        }
+    }
+
+    private void BetterJump()
+    {
+        if (rb.velocity.y > 0 && !Input.GetKey(HotKeyController.jumpKey))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+    }
 
     void Evade()
     {

@@ -16,7 +16,7 @@ public class DamageController : Singleton<DamageController>
             case AttackType.Attack:
                 baseFloatDamage = source.data.status.strength.BaseValue;
                 break;
-            case AttackType.MagicAttack:
+            case AttackType.Magic:
                 baseFloatDamage = source.data.status.intelligence.BaseValue;
                 break;
         }

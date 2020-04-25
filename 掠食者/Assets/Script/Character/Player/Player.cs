@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using UnityEngine;
-
-public class Player : Character
-{
-
-=======
 ﻿using UnityEngine;
 
 public class Player : Character
@@ -24,5 +16,4 @@ public class Player : Character
             operationController.StartAttack(AttackType.Attack, data.attackElement);
         }
     }
->>>>>>> 三天-公式&操作&機制修正
 }

@@ -50,8 +50,17 @@ public class OperationSoundController : MonoBehaviour
             audio.volume = ratioDistance / ratioBenchMark;
         }
 
+        if (soundSet.audioClip.Length == 0)
+        {
+            return;
+        }
         audio.clip = soundSet.audioClip[Random.Range(0, soundSet.audioClip.Length)];  // 隨機撥放
         audio.PlayOneShot(audio.clip);
+    }
+
+    public void StopSound()
+    {
+        audio.Stop();
     }
 
     public void ResetCharacterWeaponSoundData(WeaponSoundSet weaponSoundSet = null)

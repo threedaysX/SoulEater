@@ -5,21 +5,24 @@ public class AnimationBase : Singleton<AnimationBase>
 {
     public float GetCurrentAnimationLength(Animator anim, string animationName)
     {
-        float resultLength = 0;
+        if (anim == null)
+            return 0;
+
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
         foreach (var clip in clips)
         {
             if (clip.name == animationName)
             {
-                resultLength = clip.length;
-                break;
+                return clip.length;   
             }
         }
-        return resultLength;
+        return 0;
     }
 
     public float GetCurrentAnimationLength(Animator anim)
     {
+        if (anim == null)
+            return 0;
         return anim.GetCurrentAnimatorStateInfo(0).length;
     }
 
@@ -34,7 +37,7 @@ public class AnimationBase : Singleton<AnimationBase>
         resultLength = anim.GetCurrentAnimatorStateInfo(0).length;
     }
 
-    public void PlayAnimation(Animator anim, string animationName, float duration)
+    public void PlayAnimationLoop(Animator anim, string animationName, float duration)
     {
         StartCoroutine(PlayAnimInterval(anim, animationName, GetCurrentAnimationLength(anim, animationName), duration));
     }
@@ -46,6 +49,9 @@ public class AnimationBase : Singleton<AnimationBase>
     /// <param name="animInterval">動畫撥放一次性時間</param>
     private IEnumerator PlayAnimInterval(Animator anim, string animationName, float animInterval, float duration)
     {
+        if (anim == null)
+            yield break;
+
         if (duration == 0)
         {
             anim.Play(animationName, -1, 0f);

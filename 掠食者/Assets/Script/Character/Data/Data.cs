@@ -23,7 +23,7 @@ public class Data : ScriptableObject
     [Header("功能參數")]
     public Stats jumpForce = new Stats(1);
     public Stats moveSpeed = new Stats(1);
-    public Stats attackSpeed = new Stats(1);
+    public Stats attackDelay = new Stats(1);
     public Stats attackRange = new Stats(1);
     public Stats reduceSkillCoolDown;
     public Stats reduceCastTime;
@@ -31,6 +31,7 @@ public class Data : ScriptableObject
 
     [Header("武器")]
     public WeaponSoundSet weaponSoundSet;
-    public WeaponType weaponType; 
+    public WeaponType weaponType;
+    public int cycleAttackCount;
     public ElementType attackElement;
 }

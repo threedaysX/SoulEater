@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalActionWeight: 7
   actionDelay: 0.3
+  diffCount: 0
   actionType: 4
   actionAnimator: {fileID: 0}
   judjements:

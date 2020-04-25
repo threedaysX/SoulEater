@@ -16,8 +16,8 @@ public class CheckCustomDamageInTime : JudgeCondition
     {
         if (ai != null)
         {
-            ai.combat.hasHitInTime = damageInTime;
-            if ((ai.combat.takeHowMuchDamage / ai.data.maxHealth.Value) * 100 >= custumDamage)
+            ai.combatController.hasHitInTime = damageInTime;
+            if ((ai.combatController.takeHowMuchDamage / ai.data.maxHealth.Value) * 100 >= custumDamage)
                 return true;
         }
 

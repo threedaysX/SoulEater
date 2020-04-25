@@ -15,15 +15,23 @@ public class DistanceDetect : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    private void Update()
     {
-        StartCoroutine(LastSecDistance());
+        if (player != null)
+        {
+            StartCoroutine(LastSecDistance());
+        }
     }
 
-    IEnumerator LastSecDistance()
+    private IEnumerator LastSecDistance()
     {
         lastSecDistance = (player.position - transform.position).sqrMagnitude;
+
         yield return new WaitForSeconds(timeToAct);
+
+        if (player == null)
+            yield break;
+
         if (lastSecDistance - (player.position - transform.position).sqrMagnitude >= customDistance * customDistance)
         {
             hasGetClose = true;

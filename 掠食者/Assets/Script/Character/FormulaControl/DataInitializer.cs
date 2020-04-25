@@ -53,9 +53,11 @@ public class DataInitializer
         return 2 * Luk;
     }
 
-    public float GetAttackSpeed()
+    public float GetAttackDelay()
     {
-        return Mathf.Ceil(0.8f + (0.24f * Agi));
+        // 無條件捨去到小數3位 => 乘以 1000 再除以 1000
+        var delay = Mathf.Ceil((1f / (1f + 0.3f * Agi)) * 1000) / 1000;
+        return delay;
     }
 
     public float GetMoveSpeed()

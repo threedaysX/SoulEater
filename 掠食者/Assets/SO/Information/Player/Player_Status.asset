@@ -18,8 +18,8 @@ MonoBehaviour:
     FinalValue: 1
   agility:
     BaseValue: 1
-    AdditionalValue: 0
-    FinalValue: 1
+    AdditionalValue: 50
+    FinalValue: 51
   vitality:
     BaseValue: 1
     AdditionalValue: 0

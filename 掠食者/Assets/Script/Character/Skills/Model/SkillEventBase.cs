@@ -30,7 +30,7 @@ public abstract class SkillEventBase : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
-        AnimationBase.Instance.PlayAnimation(anim, skillAnimTrigger, currentSkill.duration);
+        AnimationBase.Instance.PlayAnimationLoop(anim, skillAnimTrigger, currentSkill.duration);
         AddAffectEvent();
 
         InvokeAffect(immediatelyAffect);

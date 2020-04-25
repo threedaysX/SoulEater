@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 持續性技能
+/// </summary>
 public abstract class LastingSkill : SkillEventBase
 {
     protected float nextDamageTime = 0;

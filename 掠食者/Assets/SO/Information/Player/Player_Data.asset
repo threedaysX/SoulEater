@@ -67,19 +67,13 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 1
   moveSpeed:
-<<<<<<< HEAD
-    BaseValue: 50
-    AdditionalValue: 0
-    FinalValue: 50
-=======
-    BaseValue: 1
-    AdditionalValue: 0
-    FinalValue: 1
->>>>>>> 三天-公式&操作&機制修正
-  attackSpeed:
-    BaseValue: 2
-    AdditionalValue: 0
-    FinalValue: 2
+    BaseValue: 1.5
+    AdditionalValue: 1
+    FinalValue: 2.5
+  attackDelay:
+    BaseValue: 0.062
+    AdditionalValue: 0.4
+    FinalValue: 0.462
   attackRange:
     BaseValue: 1
     AdditionalValue: 0
@@ -93,9 +87,10 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 1
   reduceEvadeCoolDown:
-    BaseValue: 1.1
+    BaseValue: 80
     AdditionalValue: 0
     FinalValue: 1.1
   weaponSoundSet: {fileID: 11400000, guid: d4e2d4bbea02d9d48b3f8b9bb91b1ff0, type: 2}
-  weaponType: 0
+  weaponType: 1
+  cycleAttackCount: 2
   attackElement: 0
