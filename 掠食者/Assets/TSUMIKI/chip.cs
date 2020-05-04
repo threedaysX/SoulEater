@@ -57,28 +57,30 @@ public class chip : MonoBehaviour
         //將此star的位置存到touchStars
         touchStars.Add(col.GetComponent<star>().pos);
 
-        FreshNeighborStars();   //只有在新增加(進入)star時，才需重新計算(因為 離開star時 也只需用到舊有的鄰居資訊)
         LockStar(col);
-
+        FreshNeighborStars();   //只有在新增加(進入)star時，才需重新計算(因為 離開star時 也只需用到舊有的鄰居資訊)
         ThisReDetectEdge();
         NeighborReDetectEdge();
     }
     /*有待替換，此方法有bug*/
     void OnTriggerExit2D(Collider2D col)                            //當此碎片離開star重疊時
     {
-        //將此star拿出touchStars
+        //將此star拿出touchStars    不改好像也沒關係
         int id = touchStars.FindIndex(x => x == col.GetComponent<star>().pos);
         if (id != -1)
             touchStars.RemoveAt(id);
 
-        FreshNeighborStars();
         UnlockStar(col);
-        ThisReDetectEdge();
         NeighborReDetectEdge();
+        FreshNeighborStars();
+        ThisReDetectEdge();
+
     }
 
     public void LockStar(Collider2D col)////////////////////////////////////////////////////////////OK
     {
+        if (col.GetComponent<star>().chip_script != null)
+            return;
         //star變紅色
         col.GetComponent<SpriteRenderer>().color = Color.red;
         //更改Star狀態
@@ -89,6 +91,8 @@ public class chip : MonoBehaviour
 
     public void UnlockStar(Collider2D col)//////////////////////////////////////////////////////////OK
     {
+        if (col.GetComponent<star>().chip_script.gameObject.name != this.name)
+            return;
         //star變回白色
         col.GetComponent<SpriteRenderer>().color = Color.white;
         //更改Star狀態
@@ -183,7 +187,7 @@ public class chip : MonoBehaviour
     void CutEdge(List<Neighbor> list, string debug_name)//////////////////////////////////////////////OK
     {
         if (list.Count == 0) return;
-        neighborList temp=new neighborList();
+        neighborList temp = new neighborList();
         temp.listNei.Add(list[0]);
 
         if (list.Count == 1)
@@ -230,8 +234,10 @@ public class chip : MonoBehaviour
             {
                 temp.listNei.Add(list[i]);
                 lastNei = list[i];
-            }
-            else
+
+                if (i == list.Count - 1)
+                    neighborRelative.Add(temp);
+            }else
             {
                 neighborRelative.Add(temp);
                 temp.listNei.Clear();
@@ -250,9 +256,9 @@ public class chip : MonoBehaviour
                 if (list[i]._Star.pos.x > list[j]._Star.pos.x)
                 {
                     //swap
-                    float temp = list[i]._Star.pos.x;
-                    list[i]._Star.pos.x = list[j]._Star.pos.x;
-                    list[j]._Star.pos.x = temp;
+                    Neighbor temp = list[i];
+                    list[i] = list[j];
+                    list[j] = temp;
                 }
             }
     }
@@ -274,7 +280,7 @@ public class chip : MonoBehaviour
         neighborStars.Clear();
         for (int i = 0; i < touchStars.Count; i++)
         {
-            if ((touchStars[i].x+ touchStars[i].y) % 2 == 0)       //x+y是偶數 >> touchStars是 倒三角 >> 鄰居在左右上
+            if ((touchStars[i].x + touchStars[i].y) % 2 == 0)       //x+y是偶數 >> touchStars是 倒三角 >> 鄰居在左右上
             {
                 NeighborFunc(new Vector2(touchStars[i].x - 1, touchStars[i].y), 1, 2);  //左邊的star pos 是正三角 觸發的邊是正三角的右邊
                 NeighborFunc(new Vector2(touchStars[i].x + 1, touchStars[i].y), 1, 3);  //右邊的star pos 是正三角 觸發的邊是正三角的左邊
