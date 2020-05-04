@@ -105,14 +105,22 @@
     <Compile Include="Assets\Script\Endowment\Fragment\Frag.cs" />
     <Compile Include="Assets\Script\Tools\ReadOnlyDrawer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
+    <Compile Include="Assets\TSUMIKI\000Final\Affix.cs" />
+    <Compile Include="Assets\TSUMIKI\000Final\Endowment.cs" />
+    <Compile Include="Assets\TSUMIKI\000Final\Fragment.cs" />
+    <Compile Include="Assets\TSUMIKI\000Final\Soul.cs" />
+    <Compile Include="Assets\TSUMIKI\000Final\Weapon.cs" />
     <Compile Include="Assets\TSUMIKI\AllChips.cs" />
     <Compile Include="Assets\TSUMIKI\AllStar.cs" />
+    <Compile Include="Assets\TSUMIKI\Button.cs" />
     <Compile Include="Assets\TSUMIKI\chip.cs" />
     <Compile Include="Assets\TSUMIKI\chips\c_DownTri.cs" />
     <Compile Include="Assets\TSUMIKI\chips\c_RDiamond.cs" />
     <Compile Include="Assets\TSUMIKI\chips\c_URTrapezoid.cs" />
     <Compile Include="Assets\TSUMIKI\chips\c_UpTri.cs" />
     <Compile Include="Assets\TSUMIKI\star.cs" />
+    <Compile Include="Assets\TSUMIKI\test\_OnMouseOver.cs" />
+    <Compile Include="Assets\TSUMIKI\test\fragment.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

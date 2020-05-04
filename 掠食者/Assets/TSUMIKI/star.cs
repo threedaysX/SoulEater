@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[SerializeField]
 public class star : MonoBehaviour
 {
     public chip chip_script;
