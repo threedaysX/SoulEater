@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c621d20715d767746a38d75db32de46a, type: 3}
+  m_Name: Ifrit_Data
+  m_EditorClassIdentifier: 
+  maxHealth:
+    BaseValue: 806
+    AdditionalValue: 2000
+    FinalValue: 200806
+  maxMana:
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 1000005
+  attack:
+    BaseValue: 104
+    AdditionalValue: 0
+    FinalValue: 104
+  magicAttack:
+    BaseValue: 82
+    AdditionalValue: 0
+    FinalValue: 82
+  defense:
+    BaseValue: 4
+    AdditionalValue: 0
+    FinalValue: 4
+  critical:
+    BaseValue: 20
+    AdditionalValue: 60
+    FinalValue: 80
+  criticalDamage:
+    BaseValue: 150
+    AdditionalValue: 150
+    FinalValue: 300
+  knockBackDamage:
+    BaseValue: 181
+    AdditionalValue: 0
+    FinalValue: 181
+  penetrationValue:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  penetrationMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  resistance: {fileID: 11400000, guid: 0b55856e7c417104fbb1917fae8eda81, type: 2}
+  status: {fileID: 11400000, guid: b11631bd49701d14ba2e8a4af3a0f3f8, type: 2}
+  jumpForce:
+    BaseValue: 1.1
+    AdditionalValue: 0
+    FinalValue: 0.9
+  moveSpeed:
+    BaseValue: 1.1
+    AdditionalValue: 0
+    FinalValue: 1.1
+  attackDelay:
+    BaseValue: 0.25
+    AdditionalValue: 0
+    FinalValue: 0.25
+  attackRange:
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: 2
+  reduceSkillCoolDown:
+    BaseValue: 8
+    AdditionalValue: 0
+    FinalValue: 8
+  reduceCastTime:
+    BaseValue: 25
+    AdditionalValue: 0
+    FinalValue: 25
+  evadeCoolDown:
+    BaseValue: 0.70696
+    AdditionalValue: 0
+    FinalValue: 0
+  recoverFromKnockStunTime:
+    BaseValue: 0.1
+    AdditionalValue: 0
+    FinalValue: 0.1
+  attackLifeSteal:
+    BaseValue: 0
+    AdditionalValue: 20
+    FinalValue: 20
+  skillLifeSteal:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+  manaStealOfPoint:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 1
+  manaStealOfDamage:
+    BaseValue: 1700
+    AdditionalValue: 0
+    FinalValue: 1700
+  cycleAttackCount: 2
+  weaponKnockBackForce: 1.6
+  hitEffectPrefab: {fileID: 200774275785904254, guid: 981e7e49479851a4ca1cfce2e6346d60,
+    type: 3}
+  attackHitBoxPrefab: {fileID: 4048988255764940626, guid: 0777d1c00768a8c438f6759e66f4ff4f,
+    type: 3}
+  weaponSoundSet: {fileID: 11400000, guid: ce21ea33860098e40853f4effecc9064, type: 2}
+  weaponType: 1
+  attackElement: 0

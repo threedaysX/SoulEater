@@ -6,6 +6,7 @@ public class Flamethrower : LastingSkill
 {
     protected override void AddAffectEvent()
     {
+        immediatelyAffect.AddListener(LockDirectionTillEnd);
         immediatelyAffect.AddListener(KnockBackSelf);
         immediatelyAffect.AddListener(BuffFireResistance);
         hitAffect.AddListener(KnockBackEnemy);
@@ -41,11 +42,11 @@ public class Flamethrower : LastingSkill
     /// </summary>
     private void KnockBackSelf()
     {
-        StartCoroutine(KnockBackCoroutine(sourceCaster, -0.5f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
+        StartCoroutine(KnockBackCoroutine(sourceCaster, -0.6f * sourceCaster.data.moveSpeed.Value, currentSkill.duration));
     }
     private void KnockBackEnemy()
     {
-        StartCoroutine(KnockBackCoroutine(target, 0.2f * target.data.moveSpeed.Value, currentSkill.duration));
+        StartCoroutine(KnockBackCoroutine(target, 0.15f * target.data.moveSpeed.Value, currentSkill.duration));
     }
     private IEnumerator KnockBackCoroutine(Character target, float knockbackforce, float duration)
     {
@@ -53,20 +54,18 @@ public class Flamethrower : LastingSkill
             yield break;
 
         Vector3 directionForce = sourceCaster.transform.right * knockbackforce;
-        Vector3 direction = target.transform.rotation * directionForce;
-        float timeleft = currentSkill.duration;
+        float timeleft = duration;
         while (timeleft > 0)
         {
             if (target == null)
                 yield break;
             if (timeleft > Time.deltaTime)
-                target.transform.Translate(direction * Time.deltaTime / duration);
+                target.transform.position += (directionForce * Time.deltaTime / duration);
             else
-                target.transform.Translate(direction * timeleft / duration);
+                target.transform.position += (directionForce * timeleft / duration);
 
             timeleft -= Time.deltaTime;
             yield return null;
         }
-        sourceCaster.transform.position -= new Vector3(sourceCaster.data.moveSpeed.Value * Time.deltaTime, 0, 0);
     }
 }

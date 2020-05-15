@@ -1,18 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Action/SelfHeal")]
-public class SelfHealAction : Action
+public class SelfHealAction : SkillAiAction
 {
-    public Skill selfHealObject;
-    public override bool StartActHaviour()
-    {
-        return SelfHeal();
-    }
-
-    private bool SelfHeal()
-    {
-        return ai.skillController.Trigger(selfHealObject);
-    }
+    
 }

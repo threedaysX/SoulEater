@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Action/BasicAttack")]
-public class BasicAttack : Action
+public class BasicAttack : AiAction
 {
     public override bool StartActHaviour()
     {
@@ -10,9 +10,8 @@ public class BasicAttack : Action
 
     private bool Attack()
     {
-        if (ai.operationController.StartAttack(AttackType.Attack, ai.data.attackElement))
+        if (ai.StartAttack(AttackType.Attack, ai.data.attackElement))
         {
-            Debug.Log(ai.characterName + "要攻擊你摟><");
             return true;
         }
         return false;

@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections;
-using System.Collections.Generic;
 
 public class CombatController : MonoBehaviour
 {
     private Character character;
-    private List<Collider2D> hitAreaList;
     public bool hasHit = false;  //AI用
     public float hasHitInTime;  //AI用
     public float takeHowMuchDamage;  //AI用
@@ -16,26 +14,34 @@ public class CombatController : MonoBehaviour
     private void Start()
     {
         character = GetComponent<Character>();
+        RenderAttackHitboxes(true);
+        RenderHitEffect(true);
     }
 
     public bool Attack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
     {
         bool attackSuccess = false;
-        Collider2D[] hit = DrawAttackRange();
-
-        foreach (Collider2D target in hit)
+        Collider2D[] hits = DrawAttackRange();
+        foreach (Collider2D target in hits)
         {
-            Debug.Log("攻擊的目標:" + target);
+            if (target.CompareTag("Untagged"))
+                continue;
+
             // 不會打到自己人
             if (target != null && !target.CompareTag(character.tag))
             {
                 var enemyDetails = target.gameObject.GetComponent<Character>();
-                if (enemyDetails != null)
+                if (enemyDetails != null && !enemyDetails.GetImmuneState())
                 {
                     // 重新確認目標位置
                     if (CheckIsTargetStillInAttackRange(target))
                     {
-                        enemyDetails.TakeDamage(DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType));
+                        // 取得傷害來源方向(KB擊退用途)
+                        float damageDirectionX = character.transform.position.x - target.transform.position.x;
+                        float damage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType);
+                        enemyDetails.TakeDamage((int)damage, damageDirectionX, character.data.weaponKnockBackForce);
+                        character.DamageDealtSteal(damage, true);
+                        TriggerHitEffect(target.transform);
                         attackSuccess = true;
                         StartCoroutine(HasHit());
                     }
@@ -63,7 +69,36 @@ public class CombatController : MonoBehaviour
     /// <returns></returns>
     private Collider2D[] DrawAttackRange()
     {
+        AttackHitboxList hitboxes = character.transform.GetComponentInChildren<AttackHitboxList>(true);
+        if (hitboxes != null)
+        {
+            int attackOrder = character.operationController.AttackAnimNumber;
+            hitboxes.gameObject.SetActive(true);
+            Collider2D[] hits = hitboxes.GetAttackHits(attackOrder);
+            hitboxes.gameObject.SetActive(false);
+            return hits;
+        }
         return Physics2D.OverlapCircleAll(GetAttackPoint(), character.data.attackRange.Value);
+    }
+
+    public void TriggerHitEffect(Transform target)
+    {
+        ParticleSystem hitEffect = character.transform.GetComponentInChildren<ParticleSystem>();
+        if (hitEffect != null)
+        {
+            hitEffect.transform.position = target.position;
+            hitEffect.Emit(1);
+        }
+    }
+
+    public void RenderAttackHitboxes(bool reRenderOnce = false)
+    {
+        PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "AttackHitboxes", false, reRenderOnce);
+    }
+
+    public void RenderHitEffect(bool reRenderOnce = false)
+    {
+        PrefabRenderer.Instance.RenderPrefabInParent<ParticleSystem>(character.transform, character.data.hitEffectPrefab, "hitEffect", true, reRenderOnce);
     }
 
     private Vector2 GetAttackPoint()

@@ -13,7 +13,7 @@ public class GreaterThanCustomHealth : JudgeCondition
     private bool CheckIfHealthy()
     {
         //healthPercentage
-        if ((ai.currentHealth / ai.data.maxHealth.Value) * 100 > healthPercentageToCheck)
+        if ((ai.CurrentHealth / ai.data.maxHealth.Value) * 100 > healthPercentageToCheck)
         {
             return true;
         }

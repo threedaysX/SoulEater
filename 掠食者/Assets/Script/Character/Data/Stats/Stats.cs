@@ -25,7 +25,7 @@ namespace StatsModel
             }
         }
 
-        [ReadOnly][SerializeField] protected float FinalValue;
+        [SerializeField] protected float FinalValue;
         protected float lastBaseValue = float.MinValue;
         protected float lastAdditionalValue = float.MinValue;
         protected bool isDirty = true;

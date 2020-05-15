@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - Transition
+  - AttackHitBox
+  - AttackHitArea
+  - PlayerUI
+  - SkillSlot
   layers:
   - Default
   - TransparentFX
@@ -19,8 +23,8 @@ TagManager:
   - Ground
   - Enemy
   - Room Boundry
-  - 
-  - 
+  - AttackHitBox
+  - Skill
   - 
   - 
   - 
@@ -42,4 +46,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FarBackGround
+    uniqueID: 515337585
+    locked: 0
+  - name: BackGround
+    uniqueID: 2860364485
+    locked: 0
+  - name: ActiveObject
+    uniqueID: 2068822577
+    locked: 0
+  - name: Object
+    uniqueID: 3745107527
+    locked: 0
+  - name: FrontObject
+    uniqueID: 3638542883
+    locked: 0
+  - name: InFront
+    uniqueID: 2077110459
     locked: 0

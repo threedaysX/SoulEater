@@ -9,14 +9,15 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 moveDir;
     public float x;
     public float y;
-    public float basicJumpForce = 6f;
-    public float basicMoveSpeed = 4f;
+    public float basicMoveSpeed = 2.5f;
 
     [Header("跳躍")]
+    public float basicJumpForce = 6f;
     public float lowJumpMultiplier = 4f;
     public float fallMultiplier = 2f;
 
-    public float jumpCD;
+    [Header("閃避")]
+    public float basicEvadeSpeed = 6f; 
 
     void Start()
     {
@@ -34,15 +35,14 @@ public class PlayerMovement : MonoBehaviour
         HoriMove();
         Jump();
         BetterJump();
-
-        if (Input.GetKeyDown(HotKeyController.evadeKey))
-        {
-            Evade();
-        }
+        Evade();
     }
 
     void SideChange()
     {
+        if (!character.freeDirection.canDo)
+            return;
+
         if (x > 0)
         {
             gameObject.transform.eulerAngles = new Vector3(0, 0, 0);
@@ -55,19 +55,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void HoriMove()
     {
-        if (character.operationController.isEvading)
-            return;
-
-        if (character.canMove)
+        if (character.move.canDo)
         {
             character.operationController.StartMoveAnim(x);
             rb.velocity = new Vector2(moveDir.x * character.data.moveSpeed.Value * basicMoveSpeed, rb.velocity.y);
         }
         else
         {
+            if (character.operationController.isEvading || character.operationController.isSkillCasting || character.operationController.isSkillUsing)
+                return;
+
+            // 若不能移動，則會隨慣性移動至停止
             if (rb.velocity.x > 0)
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                rb.velocity = new Vector2(0.6f, rb.velocity.y);
+            }
+            else if (rb.velocity.x < 0)
+            {
+                rb.velocity = new Vector2(-0.6f, rb.velocity.y);
             }
         }
     }
@@ -75,13 +80,17 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         if (Input.GetKeyDown(HotKeyController.jumpKey) 
-            && character.canJump 
-            && character.operationController.isGrounding)
+            && character.jump.canDo 
+            && character.operationController.isGrounding)   // 或有多段跳躍
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.velocity += Vector2.up * character.data.jumpForce.Value * basicJumpForce;
-            character.operationController.StartJumpAnim();
+            character.operationController.StartJumpAnim(delegate { JumpAction(); });
         }
+    }
+
+    private void JumpAction()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.velocity += Vector2.up * character.data.jumpForce.Value * basicJumpForce;
     }
 
     private void BetterJump()
@@ -96,8 +105,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void Evade()
+    private void Evade()
     {
-        
+        if (Input.GetKeyDown(HotKeyController.evadeKey)
+            && character.evade.canDo)
+        {
+            character.operationController.StartEvadeAnim(delegate { EvadeAction(); });
+        }
+    }
+
+    private void EvadeAction()
+    {
+        rb.velocity = transform.right * new Vector2(basicEvadeSpeed * character.data.moveSpeed.Value, rb.velocity.y);
     }
 }

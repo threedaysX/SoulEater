@@ -1,16 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Action/Flamethrower")]
-public class BasicFlamethrowerAction : Action
+public class BasicFlamethrowerAction : SkillAiAction
 {
-    public Skill flamethrowerObject;
-    public override bool StartActHaviour()
-    {
-        return Flame();
-    }
-
-    private bool Flame()
-    {
-        return ai.skillController.Trigger(flamethrowerObject);
-    }
+    
 }

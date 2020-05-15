@@ -88,6 +88,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -95,9 +107,9 @@ TextureImporter:
       name: main stand_0
       rect:
         serializedVersion: 2
-        x: 40
+        x: 47
         y: 0
-        width: 100
+        width: 93
         height: 205
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -116,9 +128,9 @@ TextureImporter:
       name: main stand_1
       rect:
         serializedVersion: 2
-        x: 240
+        x: 247
         y: 0
-        width: 100
+        width: 93
         height: 201
       alignment: 9
       pivot: {x: 0.5, y: 0.51}

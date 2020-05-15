@@ -9,11 +9,11 @@ public class OperationSoundController : MonoBehaviour
     public SoundSet groundTouchSound = new SoundSet(SoundType.GroundTouch);
     public SoundSet evadeSound = new SoundSet(SoundType.Evade);
     public SoundSet collectionSound = new SoundSet(SoundType.Collect);
-    public SoundSet castSound = new SoundSet(SoundType.Cast);
 
     [Header("武器音效")]
     public SoundSet hitSound = new SoundSet(SoundType.Hit);
     public SoundSet attackSound = new SoundSet(SoundType.Attack);
+    public SoundSet castSound = new SoundSet(SoundType.Cast);
     public SoundSet useSkillSound = new SoundSet(SoundType.UseSkill);
 
     private new AudioSource audio;
@@ -33,7 +33,6 @@ public class OperationSoundController : MonoBehaviour
     {
         if (soundSet.audioClip == null)
             return;
-
 
         float distanceX = Mathf.Abs(soundPoint.transform.position.x - audio.gameObject.transform.position.x);
         float distanceY = Mathf.Abs(soundPoint.transform.position.y - audio.gameObject.transform.position.y);
@@ -55,6 +54,8 @@ public class OperationSoundController : MonoBehaviour
             return;
         }
         audio.clip = soundSet.audioClip[Random.Range(0, soundSet.audioClip.Length)];  // 隨機撥放
+        if (audio.clip == null)
+            return;
         audio.PlayOneShot(audio.clip);
     }
 
@@ -69,6 +70,7 @@ public class OperationSoundController : MonoBehaviour
         {
             hitSound = weaponSoundSet.hitSound;
             attackSound = weaponSoundSet.attackSound;
+            castSound = weaponSoundSet.castSound;
             useSkillSound = weaponSoundSet.useSkillSound;
         }
     }
@@ -84,14 +86,6 @@ public class SoundSet
     {
         this.soundType = soundType;
     }
-}
-
-[CreateAssetMenu(menuName = "WeaponSounds")]
-public class WeaponSoundSet : ScriptableObject
-{
-    public SoundSet hitSound = new SoundSet(SoundType.Hit);
-    public SoundSet attackSound = new SoundSet(SoundType.Attack);
-    public SoundSet useSkillSound = new SoundSet(SoundType.UseSkill);
 }
 
 public enum SoundType

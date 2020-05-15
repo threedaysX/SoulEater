@@ -13,8 +13,6 @@ public class Data : ScriptableObject
     public Stats critical;
     public Stats criticalDamage;
     public Stats knockBackDamage;
-    public Stats manaRecovering; 
-    public Stats manaRecoveringOfDamage;
     public Stats penetrationValue;  // 穿甲值
     public Stats penetrationMagnification;   // 穿甲倍率
     public Resistance resistance;
@@ -27,11 +25,19 @@ public class Data : ScriptableObject
     public Stats attackRange = new Stats(1);
     public Stats reduceSkillCoolDown;
     public Stats reduceCastTime;
-    public Stats reduceEvadeCoolDown;
+    public Stats evadeCoolDown;
+    public Stats recoverFromKnockStunTime;
+    public Stats attackLifeSteal;
+    public Stats skillLifeSteal;
+    public Stats manaStealOfPoint; 
+    public Stats manaStealOfDamage;
 
     [Header("武器")]
+    public int cycleAttackCount;
+    public float weaponKnockBackForce;  // 武器擊退力道
+    public Transform hitEffectPrefab;    // 武器擊中效果
+    public Transform attackHitBoxPrefab;
     public WeaponSoundSet weaponSoundSet;
     public WeaponType weaponType;
-    public int cycleAttackCount;
     public ElementType attackElement;
 }

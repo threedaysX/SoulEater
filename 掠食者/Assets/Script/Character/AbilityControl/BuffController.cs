@@ -90,6 +90,10 @@ public class BuffController : MonoBehaviour
     public void AddBuffEvent(string affectName, UnityAction affect, UnityAction removeAffect, float duration)
     {
         string name = affectName;
+        if (name == "烈焰鎧甲" || name == "方向鎖定")
+        {
+
+        }
         if (!CheckIsBuffInList(affectName))
         {
             if (affect != null)

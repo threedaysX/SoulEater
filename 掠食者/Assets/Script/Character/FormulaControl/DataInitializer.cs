@@ -53,10 +53,15 @@ public class DataInitializer
         return 2 * Luk;
     }
 
+    public float GetCriticalDamage()
+    {
+        return 150f;
+    }
+
     public float GetAttackDelay()
     {
         // 無條件捨去到小數3位 => 乘以 1000 再除以 1000
-        var delay = Mathf.Ceil((1f / (1f + 0.3f * Agi)) * 1000) / 1000;
+        var delay = Mathf.Floor((1f / (1f + 0.3f * Agi)) * 1000) / 1000;
         return delay;
     }
 
@@ -80,9 +85,14 @@ public class DataInitializer
         return (float)(Math.Round(health / 10 + health / (10 * (health / Vit) / (health / 8)), 0));
     }
 
-    public float GetManaRecoveringOfDamage()
+    public float GetManaStealOfPoint()
     {
-        return (float)(Math.Max(Math.Min(Math.Round(108 - 1.6 * Int - 0.8 * (Int / 5) * (Int / 20), 0), 100), 1));
+        return 1f;
+    }
+
+    public float GetManaStealOfDamage()
+    {
+        return Math.Max(2000 - 30 * Int, 100);
     }
 
     public float GetSkillCoolDownReduce()
@@ -95,8 +105,15 @@ public class DataInitializer
         return (float)(Math.Min(Dex, 50) + Math.Max(Math.Round(30 - 15 * (10 / Int), 1), 0));
     }
 
-    public float GetEvadeCoolDownReduce()
+    public float GetEvadeCoolDownDuration()
     {
-        return (float)(Math.Min(Math.Round(1 * Agi + Math.Pow(1.05, Agi) * (Agi / 10), 2), 80));
+        var coolDownPercentage = Math.Min(Math.Round(1 * Agi + Math.Pow(1.05, Agi) * (Agi / 10), 2), 95) / 100;
+        float basicCoolDown = 0.8f;
+        return (float)(basicCoolDown - basicCoolDown * coolDownPercentage);
+    }
+
+    public float GetRecoverFromKnockStunTime()
+    {
+        return 0.1f;
     }
 }

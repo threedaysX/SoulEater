@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/JudgeCondition/ChanceToAct")]
 public class ChanceToAct : JudgeCondition
@@ -14,7 +12,6 @@ public class ChanceToAct : JudgeCondition
 
     private bool CheckChance()
     {
-        //之後可能要把random重寫
         if(Random.Range(0, 100) >= chanceToAct)
         {
             return true;

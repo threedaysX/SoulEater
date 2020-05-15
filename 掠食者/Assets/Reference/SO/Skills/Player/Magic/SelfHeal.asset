@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c44ff9a5d9fd4baefebf89b9e4601, type: 3}
+  m_Name: SelfHeal
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: af9580583c0ebc744a29adc384723b0b, type: 3}
+  skillType: 1
+  elementType: 6
+  skillName: "\u81EA\u6211\u6CBB\u6108"
+  description: "\u6062\u5FA9\u81EA\u8EAB [\u6700\u5927\u751F\u547D10% + DEX * 5 +
+    INT * 10] \u7684\u751F\u547D\u3002"
+  range: 1
+  cost: 1
+  costType: 1
+  damageMagnification: 100
+  castTime: 0
+  coolDown: 10
+  cooling: 0
+  timesOfPerDamage: 1
+  duration: 1
+  prefab: {fileID: 1386311480140111295, guid: 31516b4de09fb524980c63337c1f2643, type: 3}

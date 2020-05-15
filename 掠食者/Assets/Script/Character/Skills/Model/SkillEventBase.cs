@@ -5,7 +5,7 @@ using UnityEngine.Events;
 /// 各類技能的事件。
 /// 包含對自身的、對敵人...等等的行為模式(Buff、擊退、暈眩...事件)。
 /// </summary>
-public abstract class SkillEventBase : MonoBehaviour
+public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator
 {
     private const string skillAnimTrigger = "Trigger";
     protected bool canDamageSelf = false;
@@ -25,45 +25,39 @@ public abstract class SkillEventBase : MonoBehaviour
     private void Awake()
     {
         this.gameObject.AddComponent<PolygonCollider2D>().isTrigger = true;
-    }
+        this.gameObject.layer = LayerMask.NameToLayer("Skill");
 
-    private void Start()
-    {
-        anim = GetComponent<Animator>();
-        AnimationBase.Instance.PlayAnimationLoop(anim, skillAnimTrigger, currentSkill.duration);
+        // 附加技能效果
         AddAffectEvent();
-
-        InvokeAffect(immediatelyAffect);
     }
 
     /// <summary>
-    /// 技能生成，相對於施法者位置。
+    /// 技能生成。
     /// </summary>
     /// <param name="caster">施放技能的人</param>
-    /// <param name="skill">哪個技能</param>
-    public void InstantiateSkill(Character caster, Skill skill)
-    {       
-        var skillObj = Instantiate(skill.prefab, caster.transform.position + caster.transform.right * skill.range, caster.transform.rotation);
-        skillObj.GetComponent<SkillEventBase>().Init(caster, skill);
-    }
-
-    /// <summary>
-    /// 技能生成，可指定位置。
-    /// </summary>
-    /// <param name="caster">施放技能的人</param>
-    /// <param name="skill">哪個技能</param>
-    /// <param name="position">技能生成位置</param>
-    /// <param name="rotation">技能生成角度</param>
-    public void InstantiateSkill(Character caster, Skill skill, Vector3 position, Quaternion rotation)
-    {
-        var skillObj = Instantiate(skill.prefab, position, rotation);
-        skillObj.GetComponent<SkillEventBase>().Init(caster, skill);
-    }
-
-    private void Init(Character caster, Skill skill)
+    public void GenerateSkill(Character caster, Skill skill)
     {
         sourceCaster = caster;
         currentSkill = skill;
+        anim = GetComponent<Animator>();
+        sound = GetComponent<AudioSource>();
+        particle = GetComponent<ParticleSystem>();
+
+        // 觸發立即性效果
+        InvokeAffect(immediatelyAffect);
+
+        if (sound != null)
+        {
+            sound.PlayOneShot(sound.clip);
+        }
+        if (anim != null)
+        {
+            AnimationBase.Instance.PlayAnimationLoop(anim, skillAnimTrigger, currentSkill.duration, false, false);
+        }
+        if (particle != null)
+        {
+            particle.Play();
+        }
     }
 
     protected void InvokeAffect(UnityEvent affectEvent)
@@ -75,8 +69,20 @@ public abstract class SkillEventBase : MonoBehaviour
 
     protected virtual void DamageTarget()
     {
-        target.TakeDamage(DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill));
+        float damage = DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill);
+        target.TakeDamage((int)damage);
+        sourceCaster.DamageDealtSteal(damage, false);
     }
 
     protected abstract void AddAffectEvent();
+
+    #region 技能通用效果
+    public string lockDirectionBuffName = "方向鎖定";
+    public virtual void LockDirectionTillEnd()
+    {
+        void affect() { sourceCaster.freeDirection.Lock(); }
+        void remove() { sourceCaster.freeDirection.UnLock(); }
+        sourceCaster.buffController.AddBuffEvent(lockDirectionBuffName, affect, remove, currentSkill.duration);
+    }
+    #endregion
 }
