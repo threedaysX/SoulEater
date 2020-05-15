@@ -66,8 +66,8 @@
     <Compile Include="Assets\Script\Animation\AnimationBase.cs" />
     <Compile Include="Assets\Script\Animation\Camera\TransitionPlayer.cs" />
     <Compile Include="Assets\Script\Character\AI\AI.cs" />
+    <Compile Include="Assets\Script\Character\AI\AIHaviourBase.cs" />
     <Compile Include="Assets\Script\Character\AI\AiActionStateController.cs" />
-    <Compile Include="Assets\Script\Character\AI\AiHaviourBase.cs" />
     <Compile Include="Assets\Script\Character\AI\Enemy\Instances\Ifrit.cs" />
     <Compile Include="Assets\Script\Character\AI\Enemy\Model\Enemy.cs" />
     <Compile Include="Assets\Script\Character\AI\Enemy\Model\LandEnemy.cs" />

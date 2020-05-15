@@ -510,7 +510,7 @@ public class OperationController : MonoBehaviour
         character.attack.Lock();
         character.move.Lock();
         character.freeDirection.Lock();
-        character.GetIntoImmune(true);
+        character.GetIntoImmune(0.4f);
 
         isEvading = true;
         setOperationState(OperationStateType.Interrupt);
@@ -521,7 +521,6 @@ public class OperationController : MonoBehaviour
         float evadeAnimDuration = AnimationBase.Instance.GetCurrentAnimationLength(anim);
         yield return new WaitForSeconds(evadeAnimDuration * 0.7f);    // 等待動畫播放至準備收尾
 
-        character.GetIntoImmune(false);
         character.attack.UnLock(); // 收尾動作的時候才可以開始攻擊
 
         yield return new WaitForSeconds(evadeAnimDuration * 0.3f);    // 等待動畫播放結束
