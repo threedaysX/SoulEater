@@ -33,6 +33,7 @@ using UnityEngine.UI;
 //所有碎片繼承此物件
 public class chip : MonoBehaviour
 {
+    public Fragment theFragment;
     public int triggerCount;
     [SerializeField]
     public List<star> touchStars;                  //用來記錄此碎片和哪個star交疊
@@ -40,11 +41,17 @@ public class chip : MonoBehaviour
     public List<Neighbor> neighborStars;             //此碎片邊上的鄰居star
     [SerializeField]
     public List<neighborList> neighborRelative;  //此碎片邊上的鄰居關係
-
+    public int ChipID;
 
     public void PutOn()
     {
         LockStar();
+
+    }
+
+    public void PullUp()
+    {
+        UnlockStar();
 
     }
 
@@ -82,7 +89,7 @@ public class chip : MonoBehaviour
     {
         for(int i=0;i< touchStars.Count; i++)
         {
-            //star變紅色
+            //star變黑色
             touchStars[i].gameObject.GetComponent<Image>().color = Color.black;
             //更改Star狀態
             touchStars[i].GetComponent<star>().isLocked = true;
@@ -91,16 +98,17 @@ public class chip : MonoBehaviour
         }
     }
 
-    public void UnlockStar(Collider2D col)//////////////////////////////////////////////////////////OK
+    public void UnlockStar()//////////////////////////////////////////////////////////OK
     {
-        if (col.GetComponent<star>().chip_script.gameObject.name != this.name)
-            return;
-        //star變回白色
-        col.GetComponent<SpriteRenderer>().color = Color.white;
-        //更改Star狀態
-        col.GetComponent<star>().isLocked = false;
-        //Star取消綁定chip_script
-        col.GetComponent<star>().chip_script = null;
+        for (int i = 0; i < touchStars.Count; i++)
+        {
+            //star變回白色
+            touchStars[i].gameObject.GetComponent<Image>().color = Color.white;
+            //更改Star狀態
+            touchStars[i].GetComponent<star>().isLocked = false;
+            //Star取消綁定chip_script
+            touchStars[i].GetComponent<star>().chip_script = null;
+        }
     }
 
     //重新計算此碎片的觸發邊

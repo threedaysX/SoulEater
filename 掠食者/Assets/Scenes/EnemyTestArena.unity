@@ -1621,7 +1621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcfa5c21953ff342a94b81ce43de83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentFragment: {fileID: 11400000, guid: 2ed20e51ef5de8142ab95093b721ce66, type: 2}
+  currentFragment: {fileID: 11400000, guid: 3439bb8d745bc4f49825dffd504aca81, type: 2}
   currentStarID: 0
   lastStarID: 0
   CoverStars: []
