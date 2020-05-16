@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [SerializeField]
 public class star : MonoBehaviour
 {
-    //public chip chip_script;
+    public chip chip_script;
     public Vector2 pos;
-    public bool isLocked;
+    public bool isLocked=false;
     public int allStar_ID;
 
     void Awake()
@@ -22,6 +22,10 @@ public class star : MonoBehaviour
         AllStar.Instance.stars.Add(this);
     }
     public void EnterColor()
+    {
+        this.gameObject.GetComponent<Image>().color = Color.blue;
+    }
+    public void ErrorColor()
     {
         this.gameObject.GetComponent<Image>().color = Color.red;
     }

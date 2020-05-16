@@ -166,11 +166,17 @@
     <Compile Include="Assets\Script\UI\Menu\MenuControl.cs" />
     <Compile Include="Assets\Script\UI\Menu\MenuSkillSlot.cs" />
     <Compile Include="Assets\Script\UI\PlayerUIControl.cs" />
+    <Compile Include="Assets\Script\tsumiki\000F\Affix.cs" />
+    <Compile Include="Assets\Script\tsumiki\000F\Endowment.cs" />
+    <Compile Include="Assets\Script\tsumiki\000F\Soul.cs" />
+    <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />
+    <Compile Include="Assets\Script\tsumiki\AllChips.cs" />
     <Compile Include="Assets\Script\tsumiki\AllStar.cs" />
     <Compile Include="Assets\Script\tsumiki\CurrentData.cs" />
     <Compile Include="Assets\Script\tsumiki\ExtendedStandaloneInputModule.cs" />
     <Compile Include="Assets\Script\tsumiki\Fragment.cs" />
     <Compile Include="Assets\Script\tsumiki\RaycastMask.cs" />
+    <Compile Include="Assets\Script\tsumiki\chip.cs" />
     <Compile Include="Assets\Script\tsumiki\star.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
