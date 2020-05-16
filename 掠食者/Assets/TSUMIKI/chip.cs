@@ -22,7 +22,7 @@ using UnityEngine;
  當碎片更改位置或形狀(任何會更改使用星星的狀況)後，需手動呼叫newStart()重新計算
  
     
- 執行newStart()後，會自動往下依序執行
+ 執行 後，會自動往下依序執行
  1. FreshNeighborStars()    >>  根據占用的星星推估此碎片有"哪些鄰居星星"和"觸發邊位置(鄰居星星的角度)"，
                                 最後得到對於這個碎片哪些星星構成一條邊，存入neighborRelative
  2. ThisReDetectEdge()      >>  判斷哪些邊有完全觸發，triggerCount++
@@ -109,16 +109,16 @@ public class chip : MonoBehaviour
         //先觀察有哪些鄰居存在
         for (int i = 0; i < neighborRelative.Count; i++)
         {
-            bool AllOK = true;
+            bool allOk = true;
             for (int j = 0; j < neighborRelative[i].listNei.Count; j++)
             {
                 if (neighborRelative[i].listNei[j]._Star.chip_script == null)
                 {
-                    AllOK = false;
+                    allOk = false;
                     break;
                 }
             }
-            if (AllOK)
+            if (allOk)
             {
                 triggerCount++;
             }
