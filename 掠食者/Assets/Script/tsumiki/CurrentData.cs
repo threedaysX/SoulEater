@@ -5,48 +5,75 @@ using UnityEngine.EventSystems;
 
 public class CurrentData : MonoBehaviour
 {
-    public Fragment currentFragment;    //目前碎片圖案會用到那些相對位置
+    public Fragment testFrag;
+    public Fragment testFrag2;
+    public int currentFragmentID;       //目前碎片
+    public int testFragmentID;
     public int currentStarID;           //存放當前點(三角形)在AllStar的ID<<中心點
     public int lastStarID;
-    public List<star> CoverStars = new List<star>();           //存放 此碎片會覆蓋到的點(三角形)們
-    List<Vector2> temp_FragStars;
-    Vector2 currentVec;
-    bool error = false;                 //碎片位置卡到
-    bool putOn = false;                 //放下手中碎片
+    public List<int> CoverStarsID = new List<int>();           //存放 此碎片會覆蓋到的點(三角形)們
 
+    bool positionError = false;         //碎片位置卡到
+
+    private void Start()
+    {
+        AllFragment.Instance.fragments.Add(new Fragment());
+        currentFragmentID = AllFragment.Instance.fragments.Count - 1;
+        AllFragment.Instance.fragments[currentFragmentID].m_Data = new F_Data();
+        AllFragment.Instance.fragments[currentFragmentID].m_Data.touchStars_v2 = testFrag.m_Data.touchStars_v2;
+        AllFragment.Instance.fragments[currentFragmentID].m_Data.fragmentID = currentFragmentID;
+
+    }
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            testFrag = testFrag2;
+            AllFragment.Instance.fragments.Add(new Fragment());
+            currentFragmentID = AllFragment.Instance.fragments.Count - 1;
+            AllFragment.Instance.fragments[currentFragmentID].m_Data = new F_Data();
+            AllFragment.Instance.fragments[currentFragmentID].m_Data.touchStars_v2 = testFrag2.m_Data.touchStars_v2;
+            AllFragment.Instance.fragments[currentFragmentID].m_Data.fragmentID = currentFragmentID;
+
+        }
         if (!EventSystem.current.IsPointerOverGameObject())
             return;
         if (ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.tag != "slot")
             return;
 
-        if (currentFragment == null)        //手中沒有碎片
+        if (currentFragmentID == -1)            //手中沒有碎片
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))    //拿起來
             {
                 star getTemp = ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.GetComponent<star>();
                 if (getTemp.isLocked)
                 {
-                    currentFragment = getTemp.chip_script.theFragment;
-                    getTemp.chip_script.PullUp();
+                    currentFragmentID = getTemp.fragID;
+                    Debug.Log("拿起來currentFragmentID:" + currentFragmentID);
+                    Debug.Log("拿起來fragmentID:" + getTemp.fragID);
+                    Chip.Instance.PullUp(AllFragment.Instance.fragments[getTemp.fragID]);
                 }
             }
 
         }
-        else {                              //手中有碎片
+        else
+        {                              //手中有碎片
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////確認好位置要放下了
-            if (Input.GetMouseButtonDown(0) && !error)
+            if (Input.GetMouseButtonDown(0) && !positionError)  //放下
             {
-                putOn = true;
-                chip tempChip = new chip();
-                tempChip.touchStars = CoverStars;
-                tempChip.theFragment = currentFragment;
-                tempChip.ChipID = AllChips.Instance.chips.Count;
-                tempChip.PutOn();
+                AllFragment.Instance.fragments[currentFragmentID].m_Data.touchStarsID.Clear();
+                
+                for (int i = 0; i < CoverStarsID.Count; i++)
+                    AllFragment.Instance.fragments[currentFragmentID].m_Data.touchStarsID.Add( CoverStarsID[i]);
 
-                AllChips.Instance.chips.Add(tempChip);
-                currentFragment = null;
+                Chip.Instance.PutOn(AllFragment.Instance.fragments[currentFragmentID]);
+
+                Debug.Log("放下currentFragmentID:" + currentFragmentID);
+                Debug.Log("放下ChipID:" + AllFragment.Instance.fragments[currentFragmentID].m_Data.fragmentID);
+                CoverStarsID.Clear();
+                currentFragmentID = -1;
+                lastStarID = -1;
+                return;
             }
 
             currentStarID = ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.GetComponent<star>().allStar_ID;
@@ -55,18 +82,17 @@ public class CurrentData : MonoBehaviour
             lastStarID = currentStarID;
 
             //先將舊的刷白
-            if (!putOn)
+            for (int i = 0; i < CoverStarsID.Count; i++)
             {
-                for (int i = 0; i < CoverStars.Count; i++)
-                {
-                    CoverStars[i].ExitColor();
-                }
+                AllStar.Instance.stars[CoverStarsID[i]].ExitColor();
             }
-            CoverStars.Clear();
-            putOn = false;
+            CoverStarsID.Clear();
+
+            List<Vector2> temp_FragStars;
+            Vector2 currentVec;
 
             //計算新的CoverStars
-            temp_FragStars = currentFragment.m_Data.touchStars;
+            temp_FragStars = AllFragment.Instance.fragments[currentFragmentID].m_Data.touchStars_v2;
             currentVec = AllStar.Instance.stars[currentStarID].pos;
 
             if ((currentVec.x + currentVec.y) % 2 != 0)
@@ -74,7 +100,7 @@ public class CurrentData : MonoBehaviour
                 currentVec.x -= 1;
             }
 
-            error = false;
+            positionError = false;
             for (int i = 0; i < temp_FragStars.Count; i++)
             {
                 Vector2 tempVec = new Vector2(temp_FragStars[i].x + currentVec.x, temp_FragStars[i].y + currentVec.y);
@@ -83,22 +109,22 @@ public class CurrentData : MonoBehaviour
                 {
                     if (AllStar.Instance.stars[id].isLocked)
                     {
-                        error = true;
+                        positionError = true;
                         continue;
                     }
-                    CoverStars.Add(AllStar.Instance.stars[id]);
+                    CoverStarsID.Add(id);
                 }
             }
             //將新的上色
-            if (error)
-                for (int i = 0; i < CoverStars.Count; i++)
+            if (positionError)
+                for (int i = 0; i < CoverStarsID.Count; i++)
                 {
-                    CoverStars[i].ErrorColor();
+                    AllStar.Instance.stars[CoverStarsID[i]].ErrorColor();
                 }
             else
-                for (int i = 0; i < CoverStars.Count; i++)
+                for (int i = 0; i < CoverStarsID.Count; i++)
                 {
-                    CoverStars[i].EnterColor();
+                    AllStar.Instance.stars[CoverStarsID[i]].EnterColor();
                 }
 
         }
