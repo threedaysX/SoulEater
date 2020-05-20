@@ -6,9 +6,9 @@ using UnityEngine.UI;
 [SerializeField]
 public class star : MonoBehaviour
 {
-    public chip chip_script;
+    public int fragID;
     public Vector2 pos;
-    public bool isLocked=false;
+    public bool isLocked;
     public int allStar_ID;
 
     void Awake()

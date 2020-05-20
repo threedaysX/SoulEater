@@ -7,12 +7,22 @@ using UnityEngine;
 [System.Serializable]
 public class F_Data
 {
-    public List<Vector2> touchStars;
+    public List<Vector2> touchStars_v2;
     string name;
     int edgeCount;
     int triggerAffixIndex;
     //class[] Affix;
     enum FragmentType { }
+
+    public int fragmentID;
+    public int triggerCount;
+    [SerializeField]
+    public List<int> touchStarsID=new List<int>();                  //用來記錄此碎片和哪個star交疊
+    [SerializeField]
+    public List<Neighbor> neighborStars;             //此碎片邊上的鄰居star
+    [SerializeField]
+    public List<neighborList> neighborRelative;  //此碎片邊上的鄰居關係
+
 }
 
 [CreateAssetMenu(fileName = "Fragment",menuName ="Tsumiki/Create Fagment Asset",order =1)]

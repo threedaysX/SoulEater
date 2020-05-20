@@ -175,7 +175,7 @@
     <Compile Include="Assets\Script\tsumiki\000F\Endowment.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Soul.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />
-    <Compile Include="Assets\Script\tsumiki\AllChips.cs" />
+    <Compile Include="Assets\Script\tsumiki\AllFragment.cs" />
     <Compile Include="Assets\Script\tsumiki\AllStar.cs" />
     <Compile Include="Assets\Script\tsumiki\CurrentData.cs" />
     <Compile Include="Assets\Script\tsumiki\ExtendedStandaloneInputModule.cs" />
