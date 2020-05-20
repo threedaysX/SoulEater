@@ -7,7 +7,7 @@ public class KnockStunSystem : MonoBehaviour
     {
         // 播放擊退硬直動畫
         StartCoroutine(KnockStunCoroutine(character, damageDirectionX, knockBackForce));
-        character.IsKnockStun = true;
+        character.isKnockStun = true;
         RecoverFromKnockStun(character);
     }
     public void RecoverFromKnockStun(Character character)
@@ -42,6 +42,6 @@ public class KnockStunSystem : MonoBehaviour
         if (character == null)
             yield break;
 
-        character.IsKnockStun = false;
+        character.isKnockStun = false;
     }
 }

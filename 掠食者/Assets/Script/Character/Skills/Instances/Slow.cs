@@ -20,11 +20,11 @@ public class Slow : DisposableSkill
         target.buffController.AddBuffEvent(debuff, affect, remove, 4f);
     }
 
-    public override void OnTriggerEnter2D(Collider2D target)
+    public override void OnTriggerEnter2D(Collider2D targetCol)
     {
-        base.OnTriggerEnter2D(target);
+        base.OnTriggerEnter2D(targetCol);
 
-        if (!target.CompareTag(sourceCaster.tag))
+        if (!targetCol.CompareTag(sourceCaster.tag))
         {
             InvokeAffect(hitAffect);
         }

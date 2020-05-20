@@ -21,7 +21,7 @@ MonoBehaviour:
   cost: 3
   costType: 1
   damageMagnification: 10
-  castTime: 1.2
+  castTime: 1.5
   coolDown: 8
   cooling: 1
   timesOfPerDamage: 0.1

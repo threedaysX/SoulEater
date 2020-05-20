@@ -44,6 +44,11 @@ public class AnimationBase : Singleton<AnimationBase>
         StartCoroutine(PlayAnimInterval(anim, animationName, GetCurrentAnimationLength(anim, animationName), duration, destroyAfterAnimStop, setActiveAfterAnimStop));
     }
 
+    public void PlayAnimationLoop(Animator anim, string animationName, float duration, Action callBack)
+    {
+        StartCoroutine(PlayAnimInterval(anim, animationName, GetCurrentAnimationLength(anim, animationName), duration, callBack));
+    }
+
     /// <summary>
     /// 反覆播放動畫
     /// </summary>
@@ -73,6 +78,35 @@ public class AnimationBase : Singleton<AnimationBase>
             DestroyAfterAnimationStop(anim);
         else
             SetActiveAfterAnimationStop(anim, setActiveAfterAnimStop);
+    }
+
+    /// <summary>
+    /// 反覆播放動畫，動畫結束後執行CallBack動作
+    /// </summary>
+    /// <param name="duration">總持續時間</param>
+    /// <param name="animInterval">動畫撥放一次性時間</param>
+    /// <param name="callBack">動畫結束後啟用的動作</param>
+    private IEnumerator PlayAnimInterval(Animator anim, string animationName, float animInterval, float duration, Action callBack)
+    {
+        if (anim == null)
+            yield break;
+
+        if (duration == 0)
+        {
+            anim.Play(animationName, -1, 0f);
+            yield return new WaitForSeconds(animInterval);
+        }
+        else
+        {
+            while (duration > 0)
+            {
+                anim.Play(animationName, -1, 0f);
+                yield return new WaitForSeconds(animInterval);
+                duration -= animInterval;
+            }
+        }
+
+        callBack.Invoke();
     }
 
     private void DestroyAfterAnimationStop(Animator anim)

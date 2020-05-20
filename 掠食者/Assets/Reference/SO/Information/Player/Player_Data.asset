@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 1843
-    AdditionalValue: 100000
-    FinalValue: 101843
+    BaseValue: 1882
+    AdditionalValue: 400
+    FinalValue: 2282
   maxMana:
     BaseValue: 5
     AdditionalValue: 8
     FinalValue: 13
   attack:
-    BaseValue: 91
+    BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 91
+    FinalValue: 100
   magicAttack:
     BaseValue: 82
     AdditionalValue: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   defense:
     BaseValue: 8.8
     AdditionalValue: 0
-    FinalValue: 2.64
+    FinalValue: 34.4
   critical:
     BaseValue: 20
     AdditionalValue: 0
@@ -41,9 +41,9 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 150
   knockBackDamage:
-    BaseValue: 691
+    BaseValue: 706
     AdditionalValue: 0
-    FinalValue: 691
+    FinalValue: 706
   penetrationValue:
     BaseValue: 0
     AdditionalValue: 0
@@ -61,27 +61,27 @@ MonoBehaviour:
   moveSpeed:
     BaseValue: 1
     AdditionalValue: 1
-    FinalValue: 1.98
+    FinalValue: 1.99
   attackDelay:
-    BaseValue: 0.4
-    AdditionalValue: -0.39
-    FinalValue: 0.01
+    BaseValue: 0.322
+    AdditionalValue: 0
+    FinalValue: 0.322
   attackRange:
     BaseValue: 2
     AdditionalValue: 0
     FinalValue: 2
   reduceSkillCoolDown:
-    BaseValue: 8
+    BaseValue: 9.6
     AdditionalValue: 0
-    FinalValue: 0.8
+    FinalValue: 9.6
   reduceCastTime:
-    BaseValue: 25
+    BaseValue: 27
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 27
   evadeCoolDown:
-    BaseValue: 0.75488
+    BaseValue: 0.73616004
     AdditionalValue: 0
-    FinalValue: 0.7549
+    FinalValue: 0.7362
   recoverFromKnockStunTime:
     BaseValue: 0.1
     AdditionalValue: 0

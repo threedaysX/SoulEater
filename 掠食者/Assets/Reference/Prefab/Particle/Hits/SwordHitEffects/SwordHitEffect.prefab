@@ -600,7 +600,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 1
     size3D: 1
     rotation3D: 1
     gravityModifier:
@@ -1361,7 +1361,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.4009434, g: 0.93228966, b: 1, a: 1}
+        key0: {r: 0.7971698, g: 0.97925603, b: 1, a: 1}
         key1: {r: 0.4009434, g: 0.93228966, b: 1, a: 0.5882353}
         key2: {r: 1, g: 1, b: 1, a: 0.5882353}
         key3: {r: 1, g: 1, b: 1, a: 0}

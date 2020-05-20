@@ -15,7 +15,7 @@ MonoBehaviour:
   originalActionWeight: 7
   actionDelay: 0.4
   minusWeightAmountWhenNotSuccess: 2
-  minusWeightAmountWhenDuplicate: 1
+  minusWeightAmountAfterAction: 2
   _diffCount: 0
   actionType: 5
   actionAnimator: {fileID: 0}

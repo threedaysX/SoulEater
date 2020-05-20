@@ -46,15 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb31d1443f577d949864bbc1f230257c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoRenderCollider: 1
+  canTriggerSelf: 0
+  target: {fileID: 0}
   immediatelyAffect:
     m_PersistentCalls:
       m_Calls: []
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
-  anim: {fileID: 2754323873371978110}
-  sound: {fileID: -6661929536010798795}
-  particle: {fileID: 0}
+  castSound: {fileID: 0}
+  inUsingSound: {fileID: 8300000, guid: 29169ce12e900ac4d833b0225a110872, type: 3}
+  inUsingParticle: {fileID: 0}
   lockDirectionBuffName: "\u65B9\u5411\u9396\u5B9A"
   armorBreak: "\u7834\u7532LV1"
 --- !u!82 &-6661929536010798795

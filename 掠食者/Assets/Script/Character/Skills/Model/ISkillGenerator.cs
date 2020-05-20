@@ -1,4 +1,4 @@
 ﻿public interface ISkillGenerator
 {
-    void GenerateSkill(Character caster, Skill skill);
+    void GenerateSkill(Character character, Skill skill);
 }

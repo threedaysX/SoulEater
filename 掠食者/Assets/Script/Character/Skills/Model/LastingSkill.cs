@@ -19,27 +19,5 @@ public abstract class LastingSkill : SkillEventBase
         this.target = target.GetComponent<Character>();
         if (this.target == null || this.target.GetImmuneState())
             return;
-
-        #region 傷害階段
-        if (currentSkill.skillType != AttackType.Effect)
-        {
-            if (canDamageSelf)
-            {
-                DamageTarget();
-            }
-            else
-            {
-                if (!target.CompareTag(sourceCaster.tag))
-                {
-                    if (Time.time >= nextDamageTime)
-                    {
-                        DamageTarget();
-                        InvokeAffect(hitAffect);
-                        nextDamageTime = Time.time + currentSkill.timesOfPerDamage;
-                    }
-                }
-            }
-        }
-        #endregion
     }
 }

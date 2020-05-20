@@ -18,7 +18,7 @@ MonoBehaviour:
   skillName: "\u81EA\u6211\u6CBB\u6108"
   description: "\u6062\u5FA9\u81EA\u8EAB [\u6700\u5927\u751F\u547D10% + DEX * 5 +
     INT * 10] \u7684\u751F\u547D\u3002"
-  range: 1
+  range: 0
   cost: 1
   costType: 1
   damageMagnification: 100

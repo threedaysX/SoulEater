@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CombatController : MonoBehaviour
 {
     private Character character;
+    public ParticleSystem hitEffect;
+    public AttackHitboxList attackHitboxes;
     public bool hasHit = false;  //AI用
     public float hasHitInTime;  //AI用
     public float takeHowMuchDamage;  //AI用
@@ -69,13 +72,12 @@ public class CombatController : MonoBehaviour
     /// <returns></returns>
     private Collider2D[] DrawAttackRange()
     {
-        AttackHitboxList hitboxes = character.transform.GetComponentInChildren<AttackHitboxList>(true);
-        if (hitboxes != null)
+        if (attackHitboxes != null)
         {
             int attackOrder = character.operationController.AttackAnimNumber;
-            hitboxes.gameObject.SetActive(true);
-            Collider2D[] hits = hitboxes.GetAttackHits(attackOrder);
-            hitboxes.gameObject.SetActive(false);
+            attackHitboxes.gameObject.SetActive(true);
+            Collider2D[] hits = attackHitboxes.GetAttackHits(attackOrder);
+            attackHitboxes.gameObject.SetActive(false);
             return hits;
         }
         return Physics2D.OverlapCircleAll(GetAttackPoint(), character.data.attackRange.Value);
@@ -83,22 +85,23 @@ public class CombatController : MonoBehaviour
 
     public void TriggerHitEffect(Transform target)
     {
-        ParticleSystem hitEffect = character.transform.GetComponentInChildren<ParticleSystem>();
         if (hitEffect != null)
         {
             hitEffect.transform.position = target.position;
-            hitEffect.Emit(1);
+            hitEffect.Play(true);
         }
     }
 
     public void RenderAttackHitboxes(bool reRenderOnce = false)
     {
-        PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "AttackHitboxes", false, reRenderOnce);
+        var attackHitboxObj = PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "AttackHitboxes", false, reRenderOnce);
+        attackHitboxes = attackHitboxObj.GetComponent<AttackHitboxList>();
     }
 
     public void RenderHitEffect(bool reRenderOnce = false)
     {
-        PrefabRenderer.Instance.RenderPrefabInParent<ParticleSystem>(character.transform, character.data.hitEffectPrefab, "hitEffect", true, reRenderOnce);
+        var hitEffectObj = PrefabRenderer.Instance.RenderPrefabInParent<ParticleSystem>(character.transform, character.data.hitEffectPrefab, "hitEffect", true, reRenderOnce);
+        hitEffect = hitEffectObj.GetComponent<ParticleSystem>();
     }
 
     private Vector2 GetAttackPoint()

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth:
     BaseValue: 806
-    AdditionalValue: 2000
-    FinalValue: 200806
+    AdditionalValue: 2200
+    FinalValue: 806
   maxMana:
     BaseValue: 5
     AdditionalValue: 0
@@ -38,8 +38,8 @@ MonoBehaviour:
     FinalValue: 80
   criticalDamage:
     BaseValue: 150
-    AdditionalValue: 150
-    FinalValue: 300
+    AdditionalValue: 0
+    FinalValue: 150
   knockBackDamage:
     BaseValue: 181
     AdditionalValue: 0

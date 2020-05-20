@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class SkillController : MonoBehaviour
@@ -14,6 +15,12 @@ public class SkillController : MonoBehaviour
 
     public bool Trigger(Skill skill)
     {
+        // 技能為空
+        if (skill.prefab == null)
+        {
+            return false;
+        }
+
         // 技能冷卻中
         if (skill.cooling)
         {
@@ -41,7 +48,9 @@ public class SkillController : MonoBehaviour
 
         // 詠唱，結束後施放技能，持續N秒。
         float castTime = skill.castTime * (1 - character.data.reduceCastTime.Value / 100);
-        character.operationController.StartUseSkillAnim(delegate { StartUseSkill(skill); }, castTime, skill.duration);
+        Vector3 position = character.transform.position + character.transform.right * skill.range;
+        var skillObj = SkillPools.Instance.SpawnSkillFromPool(character, skill, position, character.transform.rotation);
+        character.operationController.StartUseSkillAnim(StartCastSkill(skill, skillObj), StartUseSkill(skillObj), castTime, skill.duration);
 
         // 技能施放後就直接計算冷卻
         StartCoroutine(GetIntoCoolDown(skill));
@@ -49,13 +58,19 @@ public class SkillController : MonoBehaviour
         return true;
     }
 
-    private void StartUseSkill(Skill skill)
+    private Action StartCastSkill(Skill skill, GameObject skillObj)
     {
-        if (skill.prefab == null)
-            return;
+        if (skill.castTime <= 0)
+            return null;
 
-        Vector3 position = character.transform.position + character.transform.right * skill.range;
-        SkillPools.Instance.SpawnSkillFromPool(character, skill, position, character.transform.rotation);
+        ISkillCaster skillCaster = skillObj.GetComponent<ISkillCaster>();
+        return delegate { skillCaster.CastSkill(); };
+    }
+
+    private Action StartUseSkill(GameObject skillObj)
+    {
+        ISkillUse skilluse = skillObj.GetComponent<ISkillUse>();
+        return delegate { skilluse.UseSkill(); };
     }
 
     protected IEnumerator GetIntoCoolDown(Skill skill)

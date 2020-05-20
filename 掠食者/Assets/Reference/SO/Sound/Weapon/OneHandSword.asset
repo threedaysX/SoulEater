@@ -25,7 +25,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 220e05600ae5f0443bb15eae7e7fd7ba, type: 3}
   castSound:
     soundType: 6
-    audioClip: []
+    audioClip:
+    - {fileID: 8300000, guid: c8a01c9fa8486e143b9cc0eadc28926a, type: 3}
   useSkillSound:
     soundType: 8
     audioClip: []

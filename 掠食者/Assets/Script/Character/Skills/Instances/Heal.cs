@@ -14,7 +14,7 @@ public class Heal : DisposableSkill
     {
         
     }
-    public override void OnTriggerEnter2D(Collider2D target)
+    public override void OnTriggerEnter2D(Collider2D targetCol)
     {
 
     }

@@ -4,6 +4,35 @@ using System.Collections;
 
 public class Flamethrower : LastingSkill
 {
+    public AudioClip renderingSound;
+    public GameObject hintBackground;
+    public GameObject hintLine;
+    public string hintLineRenderAnimName;
+
+    public override void OnTriggerStay2D(Collider2D target)
+    {
+        base.OnTriggerStay2D(target);
+
+        #region 傷害階段
+        if (canTriggerSelf)
+        {
+            DamageTarget();
+        }
+        else
+        {
+            if (!target.CompareTag(sourceCaster.tag))
+            {
+                if (Time.time >= nextDamageTime)
+                {
+                    DamageTarget();
+                    InvokeAffect(hitAffect);
+                    nextDamageTime = Time.time + currentSkill.timesOfPerDamage;
+                }
+            }
+        }
+        #endregion
+    }
+
     protected override void AddAffectEvent()
     {
         immediatelyAffect.AddListener(LockDirectionTillEnd);
@@ -68,4 +97,71 @@ public class Flamethrower : LastingSkill
             yield return null;
         }
     }
+
+    public override void CastSkill()
+    {
+        base.CastSkill();
+
+        RenderHint();
+    }
+
+    private void RenderHint()
+    {
+        SetHintActive(true);
+        sound.PlayOneShot(renderingSound);
+        AnimationBase.Instance.PlayAnimationLoop(hintLine.GetComponent<Animator>(), hintLineRenderAnimName, currentSkill.castTime, delegate { SetHintActive(false); });
+    }
+
+    private void SetHintActive(bool active)
+    {
+        hintBackground.SetActive(active);
+        hintLine.SetActive(active);
+    }
+
+    #region Render Line Hint Old
+    //public GameObject[] hintLines;
+
+    //private IEnumerator RenderHintLine()
+    //{
+    //    foreach (var line in hintLines)
+    //    {
+    //        line.SetActive(true);
+    //        line.transform.localScale = new Vector3(0, 0.01f, 0);
+    //    }
+
+    //    sound.PlayOneShot(renderingSound);
+    //    StartCoroutine(StretchHintLine(hintLines[0], new Vector3(10f, hintLines[0].transform.localScale.y), 0.1f));
+    //    yield return new WaitForSeconds(0.1f);
+
+    //    sound.PlayOneShot(renderingSound);
+    //    StartCoroutine(StretchHintLine(hintLines[1], new Vector3(10f, hintLines[1].transform.localScale.y), 0.1f));
+    //    yield return new WaitForSeconds(0.1f);
+
+    //    sound.PlayOneShot(renderingSound);
+    //    StartCoroutine(StretchHintLine(hintLines[2], new Vector3(10f, hintLines[2].transform.localScale.y), 0.1f));
+    //    yield return new WaitForSeconds(0.2f);
+
+    //    sound.PlayOneShot(renderingSound);
+    //    StartCoroutine(StretchHintLine(hintLines[3], new Vector3(10f, hintLines[3].transform.localScale.y), 0.1f));
+    //    yield return new WaitForSeconds(0.1f);
+
+    //    yield return new WaitForSeconds(currentSkill.castTime - 0.5f);
+    //    foreach (var line in hintLines)
+    //    {
+    //        line.SetActive(false);
+    //    }
+    //}
+
+    //private IEnumerator StretchHintLine(GameObject hintLine, Vector3 targetScale, float duration)
+    //{
+    //    Vector3 originScale = hintLine.transform.localScale;
+    //    var t = 0f;
+    //    while (t < 1)
+    //    {
+    //        t += Time.deltaTime / duration;
+    //        hintLine.transform.localScale = Vector3.Lerp(originScale, targetScale, t);
+    //        yield return null;
+    //    }
+    //}
+    #endregion
 }

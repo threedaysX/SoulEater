@@ -35,7 +35,7 @@ public abstract class AiAction : AiHaviourBase
     public int originalActionWeight;
     public float actionDelay;
     public int minusWeightAmountWhenNotSuccess = 2;
-    public int minusWeightAmountWhenDuplicate = 1;
+    public int minusWeightAmountAfterAction = 1;
     [SerializeField] private int _diffCount;
     public AiActionType actionType;
     public Animator actionAnimator;

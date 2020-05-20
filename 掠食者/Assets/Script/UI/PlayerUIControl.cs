@@ -42,7 +42,7 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
         }
 
         // 重置Mana當前水晶數量
-        if (currentMana > 0)
+        if (currentMana >= 0)
         {
             int maxlevel = (int)currentMana / manaLimit;
             int levelSetCount = (int)currentMana % manaLimit;

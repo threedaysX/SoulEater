@@ -17,6 +17,7 @@ public class AnimationKeyWordDictionary
     public const string evade = "IsEvading";
     public const string useSkill = "IsSkillUsing";
     public const string castSkill = "IsSkillCasting";
+    public const string knockStun = "IsKnockStun";
 }
 
 public class Operation
@@ -290,6 +291,7 @@ public class OperationController : MonoBehaviour
     public bool isAttacking = false;
     public bool isEvading = false;
     public bool isPreAttacking = false;
+    public bool isKnockStun = false;
 
     [Header("碰撞判定")]
     public bool isGrounding = false;
@@ -345,6 +347,7 @@ public class OperationController : MonoBehaviour
 
     private void Update()
     {
+        CheckStun();
         CheckGrounded();
         CheckResetAttack();
         StartOperation();
@@ -364,6 +367,8 @@ public class OperationController : MonoBehaviour
             anim.SetBool(AnimationKeyWordDictionary.preAttack, isPreAttacking);
             anim.SetBool(AnimationKeyWordDictionary.attack, isAttacking);
             anim.SetInteger(AnimationKeyWordDictionary.attackCount, AttackAnimNumber);
+
+            anim.SetBool(AnimationKeyWordDictionary.knockStun, isKnockStun);
         }
     }
 
@@ -401,14 +406,17 @@ public class OperationController : MonoBehaviour
     }
 
     /// <param name="skillUseDurtaion">技能施放持續的時間(與使用技能的動作動畫時間不同)</param>
-    public void StartUseSkillAnim(Action skillUseMethod, float castTime, float skillUseDurtaion, bool forceActToEnd = false)
+    public void StartUseSkillAnim(Action skillCastMethod, Action skillUseMethod, float castTime, float skillUseDurtaion, bool forceActToEnd = false)
     {
+        if (skillUseMethod == null)
+            return;
+
         string operationName = MethodBase.GetCurrentMethod().Name;
         // 檢查動作列狀態
         if (CheckOperation(operationName))
         {
             Operation skillUse = new Operation(operationName);
-            skillUse.SetAction(StartTrueSkillUse(skillUseMethod, castTime, skillUseDurtaion));
+            skillUse.SetAction(StartTrueSkillUse(skillCastMethod, skillUseMethod, castTime, skillUseDurtaion));
             AddOperation(skillUse, forceActToEnd);
         }
     }
@@ -431,6 +439,21 @@ public class OperationController : MonoBehaviour
     #endregion
 
     #region Check
+    private void CheckStun()
+    {
+        if (character.isKnockStun && !isKnockStun)
+        {
+            isKnockStun = true;
+            InterruptAnimOperation();
+            character.SetOperation(false);
+        }
+        if (!character.isKnockStun && isKnockStun)
+        {
+            isKnockStun = false;
+            character.SetOperation(true);
+        }
+    }
+
     private void CheckGrounded()
     {
         character.operationController.isGrounding = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
@@ -472,24 +495,22 @@ public class OperationController : MonoBehaviour
 
         while (true)
         {
-            if (rb.velocity.y == 0 && isGrounding)
+            if (rb.velocity.y > -1 && rb.velocity.y <= 0 && fallJump)
             {
-                endJump = true;
                 startJump = false;
                 fallJump = false;
+                endJump = true;
                 yield return new WaitForSeconds(GetFrameTimeOffset(2));
                 yield return new WaitForSeconds(AnimationBase.Instance.GetCurrentAnimationLength(anim) - GetFrameTimeOffset(2));
                 endJump = false;
                 break;
             }
-
             if (rb.velocity.y > 0 && !startJump)
             {
                 startJump = true;
                 fallJump = false;
             }
-
-            if (rb.velocity.y < 0 && !fallJump)
+            if (rb.velocity.y <= -1 && !fallJump)
             {
                 startJump = false;
                 fallJump = true;
@@ -601,15 +622,15 @@ public class OperationController : MonoBehaviour
         isAttacking = false;
     }
 
-    private IEnumerator StartTrueSkillUse(Action skillUseMethod, float castTime, float skillUseDurtaion)
+    private IEnumerator StartTrueSkillUse(Action skillCastMethod, Action skillUseMethod, float castTime, float skillUseDurtaion)
     {
         // 鎖定行動
         character.SetOperation(false);
 
-        if (castTime > 0)
+        if (skillCastMethod != null)
         {
             isSkillCasting = true;
-            character.operationSoundController.PlaySound(character.operationSoundController.castSound);
+            skillCastMethod.Invoke();
             yield return new WaitForSeconds(GetFrameTimeOffset(1));
 
             // 計時(詠唱中)
@@ -628,8 +649,7 @@ public class OperationController : MonoBehaviour
         skillUseMethod.Invoke();
 
         isSkillUsing = true;
-        character.operationSoundController.PlaySound(character.operationSoundController.useSkillSound);
-        yield return new WaitForSeconds(GetFrameTimeOffset(1));
+        yield return new WaitForSeconds(GetFrameTimeOffset(2));
         if (skillUseDurtaion > 0)
         {
             // 計時(持續施放中)

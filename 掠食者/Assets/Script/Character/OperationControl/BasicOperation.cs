@@ -3,7 +3,7 @@ public class BasicOperation
 {
     public bool canDo;
     public BasicOperationType operationType;
-    private int lockNumber;
+    [UnityEngine.SerializeField] private int lockNumber;
 
     public void Lock()
     {

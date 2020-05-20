@@ -40,7 +40,7 @@ public class SkillPools : Singleton<SkillPools>
         }
     }
 
-    public GameObject SpawnSkillFromPool(Character caster, Skill skill, Vector3 position, Quaternion rotation)
+    public GameObject SpawnSkillFromPool(Character character, Skill skill, Vector3 position, Quaternion rotation)
     {      
         string skillName = skill.prefab.name;
         if (!poolDictionary.ContainsKey(skillName))
@@ -48,14 +48,14 @@ public class SkillPools : Singleton<SkillPools>
 
         GameObject objectToSpawn = poolDictionary[skillName].Dequeue();
 
-        ISkillGenerator pooledObj = objectToSpawn.GetComponent<ISkillGenerator>();
-
-        if (pooledObj != null)
+        ISkillGenerator skillObj = objectToSpawn.GetComponent<ISkillGenerator>();
+        
+        if (skillObj != null)
         {
             objectToSpawn.SetActive(true);
             objectToSpawn.transform.position = position;
             objectToSpawn.transform.rotation = rotation;
-            pooledObj.GenerateSkill(caster, skill);
+            skillObj.GenerateSkill(character, skill);
         }
 
         poolDictionary[skillName].Enqueue(objectToSpawn);

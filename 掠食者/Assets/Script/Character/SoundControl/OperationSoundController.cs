@@ -34,6 +34,30 @@ public class OperationSoundController : MonoBehaviour
         if (soundSet.audioClip == null)
             return;
 
+        CalculateSoundDistance();
+
+        if (soundSet.audioClip.Length == 0)
+        {
+            return;
+        }
+        audio.clip = soundSet.audioClip[Random.Range(0, soundSet.audioClip.Length)];  // 隨機撥放
+        if (audio.clip == null)
+            return;
+        audio.PlayOneShot(audio.clip);
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        if (clip == null)
+            return;
+
+        CalculateSoundDistance();
+
+        audio.PlayOneShot(clip);
+    }
+
+    private void CalculateSoundDistance()
+    {
         float distanceX = Mathf.Abs(soundPoint.transform.position.x - audio.gameObject.transform.position.x);
         float distanceY = Mathf.Abs(soundPoint.transform.position.y - audio.gameObject.transform.position.y);
         float benchMarkX = 16;  // 左右16m內(3200px)，可以聽到聲音
@@ -48,17 +72,8 @@ public class OperationSoundController : MonoBehaviour
             float ratioBenchMark = Mathf.Sqrt(Mathf.Pow(benchMarkX, 2) + Mathf.Pow(benchMarkY, 2));
             audio.volume = ratioDistance / ratioBenchMark;
         }
-
-        if (soundSet.audioClip.Length == 0)
-        {
-            return;
-        }
-        audio.clip = soundSet.audioClip[Random.Range(0, soundSet.audioClip.Length)];  // 隨機撥放
-        if (audio.clip == null)
-            return;
-        audio.PlayOneShot(audio.clip);
     }
-
+   
     public void StopSound()
     {
         audio.Stop();

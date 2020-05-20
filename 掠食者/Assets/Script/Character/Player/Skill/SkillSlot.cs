@@ -69,6 +69,12 @@ public class SkillSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         Skill sourceSkill = sourceSlot.skill;
         sourceSlot.AddSkill(this.icon.sprite, this.skill);
         AddSkill(sourceIcon, sourceSkill);
+
+        // 若交換的技能欄位是快捷鍵，則更新戰鬥畫面上的UI技能欄
+        if (skillSlotBeginDrag.slotType == SlotType.MenuHotKey)
+        {
+            skillSlotBeginDrag.GetComponent<MenuSkillSlot>().linkSkillSlotOnCombatUi.AddSkill(sourceSlot.icon.sprite, sourceSlot.skill);
+        }
     }
 }
 

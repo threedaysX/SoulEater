@@ -17,15 +17,15 @@ public class TransitionPlayer : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(PlayTransition());
+            StartCoroutine(PlayTransition(transitionWaitTime));
         }
     }
 
-    IEnumerator PlayTransition()
+    public IEnumerator PlayTransition(float duration)
     {
         yield return new WaitForSeconds(0.1f);
         transitionController.SetTrigger("TransitionPlaying");
-        yield return new WaitForSeconds(transitionWaitTime);
+        yield return new WaitForSeconds(duration);
         transitionController.ResetTrigger("TransitionPlaying");
     }
 }

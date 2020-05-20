@@ -10,6 +10,6 @@
     ///</summary>
     private void Heal()
     {
-        sourceCaster.CurrentHealth += sourceCaster.data.maxHealth.Value * 0.1f + sourceCaster.data.status.dexterity.Value * 5 + sourceCaster.data.status.intelligence.Value * 10;
+        sourceCaster.CurrentHealth += (int)(sourceCaster.data.maxHealth.Value * 0.1f + sourceCaster.data.status.dexterity.Value * 5 + sourceCaster.data.status.intelligence.Value * 10);
     }
 }

@@ -179,20 +179,29 @@ public abstract class AI : Character
         if (actions.Count == 1)
         {
             action = actions[0];
-            overridedAactionDelay = action.actionDelay;
-            lastActionSuccess = action.StartActHaviour();
-            lastAction = action;
+            DoAction(action);
             return;
         }
 
         // 執行任一動作
         action = actions[Random.Range(0, actions.Count - 1)];
-        if (action == lastAction && action.actionType != AiActionType.Move)
+        DoAction(action);
+    }
+
+    /// <summary>
+    /// 動作執行
+    /// </summary>
+    /// <param name="action">要執行的動作</param>
+    /// <param name="exceptTypesToMinusWeight">除了做哪些類型的動作不會降低權重</param>
+    protected void DoAction(AiAction action)
+    {
+        int amount = action.minusWeightAmountAfterAction;
+        if (amount > 0)
         {
-            int amount = action.minusWeightAmountWhenDuplicate;
-            action.ActionWeight -= amount;    // 做重複的動作，導致權重下降N，降低這個對於動作的慾望
+            action.ActionWeight -= amount;    // 動作結束後，權重下降N點，降低這個對於動作的慾望
             action.AddDiffCount(amount);
         }
+
         overridedAactionDelay = action.actionDelay;
         lastActionSuccess = action.StartActHaviour();
         lastAction = action;

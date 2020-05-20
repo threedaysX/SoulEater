@@ -211,15 +211,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7624d0e51fb3d4d8ef0d8b5383fb83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoRenderCollider: 1
+  canTriggerSelf: 0
+  target: {fileID: 0}
   immediatelyAffect:
     m_PersistentCalls:
       m_Calls: []
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
-  anim: {fileID: 749580300563092578}
-  sound: {fileID: -5227441650070215100}
-  particle: {fileID: 0}
+  castSound: {fileID: 0}
+  inUsingSound: {fileID: 8300000, guid: d162c41c3279bc84eb345ffbb2707153, type: 3}
+  inUsingParticle: {fileID: 0}
   lockDirectionBuffName: "\u65B9\u5411\u9396\u5B9A"
   strBuffName: "STR\u4E0A\u5347"
   agiBuffName: "AGI\u4E0A\u5347"

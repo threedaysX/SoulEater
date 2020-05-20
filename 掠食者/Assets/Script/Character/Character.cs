@@ -71,30 +71,8 @@ public class Character : MonoBehaviour
     public BasicOperation freeDirection;  // 判斷是否被鎖定面對方向
     
     [Header("特殊狀態判定")]
+    public bool isKnockStun = false;   // 判斷是否被擊暈
     [SerializeField] private bool isImmune = false;  // 用來判斷角色是否無敵(不會被命中)
-    [SerializeField] private bool _isKnockStun = false;
-    /// <summary>
-    /// 判斷是否被擊暈
-    /// </summary>
-    public bool IsKnockStun 
-    {
-        get
-        {
-            return _isKnockStun;
-        }
-        set
-        {
-            _isKnockStun = value;
-            if (_isKnockStun)
-            {
-                SetOperation(false);
-            }
-            else
-            {
-                SetOperation(true);
-            }
-        }
-    }
     #endregion
 
     #region 角色資料
@@ -144,8 +122,14 @@ public class Character : MonoBehaviour
     /// <param name="damageImmediate">是否立即造成傷害</param>
     public virtual void TakeDamage(int damage, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
     {
-        if (damage < 0 || isImmune)
+        if (isImmune)
         {
+            return;
+        }
+        if (damage <= 0)
+        {
+            damage = 0;
+            DamagePopup(damage, damageDirectionX);
             return;
         }
 
@@ -153,8 +137,11 @@ public class Character : MonoBehaviour
         {
             CurrentHealth -= damage;
             cumulativeDamageTake += damage;
-            ObjectPools.Instance.DamagePopup("DamageText", DamageController.Instance.IsCritical, damage,
-                transform.position + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(2.2f, 2.6f), 0), damageDirectionX);
+            if (this != null)
+            {
+                StartCoroutine(TakeDamageColorChanged(0.1f));
+            }
+            DamagePopup(damage, damageDirectionX);
 
             // 自身受到超過KB值的傷害，會被擊退
             float knockbackDamage = data.knockBackDamage.Value;
@@ -191,10 +178,25 @@ public class Character : MonoBehaviour
         yield break;
     }
 
+    public void DamagePopup(int damage, float damageDirectionX = 0)
+    {
+        ObjectPools.Instance.DamagePopup("DamageText", DamageController.Instance.IsCritical, damage,
+                transform.position + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(2.2f, 2.6f), 0), damageDirectionX);
+    }
+
+    public IEnumerator TakeDamageColorChanged(float duration)
+    {
+        var sprite = GetComponent<SpriteRenderer>();
+        Color originColor = new Color32(255, 255, 255, 255);
+        sprite.color = new Color32(255, 100, 100, 230);
+        yield return new WaitForSeconds(duration);
+        sprite.color = originColor;
+    }
+
     public virtual void Die()
     {
         this.StopAllCoroutines();
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     public virtual bool UseSkill(Skill skill)
