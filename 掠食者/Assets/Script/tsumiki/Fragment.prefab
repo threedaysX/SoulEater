@@ -44,8 +44,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theFragment: {fileID: 0}
-  triggerCount: 0
-  touchStars: []
-  neighborStars: []
-  neighborRelative: []
-  ChipID: 0

@@ -160,6 +160,7 @@
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
     <Compile Include="Assets\Script\Game\HotKeyController.cs" />
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />
+    <Compile Include="Assets\Script\Game\SlowMotionController.cs" />
     <Compile Include="Assets\Script\Tools\CinemachineCameraControl.cs" />
     <Compile Include="Assets\Script\Tools\ObjectPools.cs" />
     <Compile Include="Assets\Script\Tools\PrefabRenderer.cs" />
@@ -177,11 +178,11 @@
     <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />
     <Compile Include="Assets\Script\tsumiki\AllFragment.cs" />
     <Compile Include="Assets\Script\tsumiki\AllStar.cs" />
+    <Compile Include="Assets\Script\tsumiki\Chip.cs" />
     <Compile Include="Assets\Script\tsumiki\CurrentData.cs" />
     <Compile Include="Assets\Script\tsumiki\ExtendedStandaloneInputModule.cs" />
     <Compile Include="Assets\Script\tsumiki\Fragment.cs" />
     <Compile Include="Assets\Script\tsumiki\RaycastMask.cs" />
-    <Compile Include="Assets\Script\tsumiki\chip.cs" />
     <Compile Include="Assets\Script\tsumiki\star.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
