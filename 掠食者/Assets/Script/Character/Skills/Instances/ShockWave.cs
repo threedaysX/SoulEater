@@ -27,8 +27,8 @@ public class ShockWave : DisposableSkill
     /// </summary>
     private void DebuffTired()
     {
-        void affect() { target.jump.Lock(); }
-        void remove() { target.jump.UnLock(); }
+        void affect() { target.jump.Lock(LockType.Lame); }
+        void remove() { target.jump.UnLock(LockType.Lame); }
         target.buffController.AddBuffEvent(tired, affect, remove, 0.6f);
     }
 

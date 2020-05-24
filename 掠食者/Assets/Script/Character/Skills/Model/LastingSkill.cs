@@ -14,7 +14,7 @@ public abstract class LastingSkill : SkillEventBase
     /// </summary>
     public virtual void OnTriggerStay2D(Collider2D target)
     {
-        if (target == null)
+        if (sourceCaster == null || target == null)
             return;
         this.target = target.GetComponent<Character>();
         if (this.target == null || this.target.GetImmuneState())

@@ -16,7 +16,8 @@ MonoBehaviour:
   skillType: 2
   elementType: 0
   skillName: "\u5F8C\u5074\u6B65"
-  description: 
+  description: "\u5FEB\u901F\u5411\u81EA\u8EAB\u7684\u5F8C\u65B9\u9000\u79FB4m\uFF0C\u4E26\u9032\u5165\u77ED\u66AB\u7684\u7121\u6575\u72C0\u614B\u3002 "
+  centerPositionOffset: 1
   range: 0
   cost: 0.5
   costType: 1

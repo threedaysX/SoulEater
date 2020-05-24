@@ -109,18 +109,6 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -128,12 +116,12 @@ TextureImporter:
       name: Ifrit stand_0
       rect:
         serializedVersion: 2
-        x: 86
+        x: 100
         y: 1300
         width: 464
         height: 569
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -149,12 +137,12 @@ TextureImporter:
       name: Ifrit stand_1
       rect:
         serializedVersion: 2
-        x: 736
+        x: 753
         y: 1300
         width: 464
         height: 557
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,12 +158,12 @@ TextureImporter:
       name: Ifrit stand_2
       rect:
         serializedVersion: 2
-        x: 1388
+        x: 1389
         y: 1300
         width: 473
         height: 535
       alignment: 9
-      pivot: {x: 0.48956543, y: 0.51857704}
+      pivot: {x: 0.51629883, y: 0.517292}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -191,12 +179,12 @@ TextureImporter:
       name: Ifrit stand_3
       rect:
         serializedVersion: 2
-        x: 93
-        y: 650
+        x: 78
+        y: 648
         width: 479
         height: 535
       alignment: 9
-      pivot: {x: 0.47, y: 0.5}
+      pivot: {x: 0.53009856, y: 0.5076554}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -212,12 +200,12 @@ TextureImporter:
       name: Ifrit stand_4
       rect:
         serializedVersion: 2
-        x: 748
+        x: 750
         y: 650
         width: 454
         height: 525
       alignment: 9
-      pivot: {x: 0.49, y: 0.505}
+      pivot: {x: 0.51452273, y: 0.5031397}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -233,12 +221,12 @@ TextureImporter:
       name: Ifrit stand_5
       rect:
         serializedVersion: 2
-        x: 1393
-        y: 648
+        x: 1411
+        y: 650
         width: 446
         height: 555
       alignment: 9
-      pivot: {x: 0.51, y: 0.487}
+      pivot: {x: 0.5000003, y: 0.4851501}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -254,12 +242,12 @@ TextureImporter:
       name: Ifrit stand_6
       rect:
         serializedVersion: 2
-        x: 88
+        x: 89
         y: 0
         width: 473
         height: 555
       alignment: 9
-      pivot: {x: 0.49474692, y: 0.4910461}
+      pivot: {x: 0.5106259, y: 0.4909439}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -275,12 +263,12 @@ TextureImporter:
       name: Ifrit stand_7
       rect:
         serializedVersion: 2
-        x: 736
+        x: 721
         y: 0
         width: 493
         height: 544
       alignment: 9
-      pivot: {x: 0.47983995, y: 0.5045676}
+      pivot: {x: 0.53058445, y: 0.5030798}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -301,7 +289,7 @@ TextureImporter:
         width: 478
         height: 551
       alignment: 9
-      pivot: {x: 0.48960358, y: 0.5045097}
+      pivot: {x: 0.5175248, y: 0.5030406}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

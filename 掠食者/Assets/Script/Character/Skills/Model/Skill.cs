@@ -13,6 +13,11 @@ public class Skill : ScriptableObject
     /// <summary>
     /// 技能施放距離(與自身相對距離)
     /// </summary>
+    public float centerPositionOffset = 1f;
+
+    /// <summary>
+    /// 技能效果距離範圍
+    /// </summary>
     public float range = 1f;
 
     /// <summary>

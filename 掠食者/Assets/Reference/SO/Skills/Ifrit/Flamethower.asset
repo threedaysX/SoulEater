@@ -17,11 +17,12 @@ MonoBehaviour:
   elementType: 1
   skillName: "\u70C8\u7130\u5674\u5C04"
   description: 
-  range: 1
+  centerPositionOffset: 1
+  range: 20
   cost: 3
   costType: 1
-  damageMagnification: 10
-  castTime: 1.5
+  damageMagnification: 30
+  castTime: 1
   coolDown: 8
   cooling: 1
   timesOfPerDamage: 0.1

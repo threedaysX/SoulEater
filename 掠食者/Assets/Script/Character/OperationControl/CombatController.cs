@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class CombatController : MonoBehaviour
 {
     private Character character;
+    public Transform attackCenterPoint;
     public ParticleSystem hitEffect;
     public AttackHitboxList attackHitboxes;
     public bool hasHit = false;  //AI用
@@ -94,6 +95,8 @@ public class CombatController : MonoBehaviour
 
     public void RenderAttackHitboxes(bool reRenderOnce = false)
     {
+        if (character.data.attackHitBoxPrefab == null)
+            return;
         var attackHitboxObj = PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "AttackHitboxes", false, reRenderOnce);
         attackHitboxes = attackHitboxObj.GetComponent<AttackHitboxList>();
     }
@@ -106,7 +109,8 @@ public class CombatController : MonoBehaviour
 
     private Vector2 GetAttackPoint()
     {
-        return character.transform.position + character.transform.right * attackPointBasicRange;
+        Vector3 attackPoint = attackCenterPoint.position != null ? attackCenterPoint.position : character.transform.position;
+        return attackPoint + character.transform.right * attackPointBasicRange;
     }
 
     private IEnumerator HasHit()
@@ -119,7 +123,7 @@ public class CombatController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (character == null)
+        if (character == null || attackHitboxes != null)
             return;
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(GetAttackPoint(), character.data.attackRange.Value);

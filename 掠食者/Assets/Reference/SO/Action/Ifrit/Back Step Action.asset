@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dc27a3d073d314492ba7abe5659312, type: 3}
   m_Name: Back Step Action
   m_EditorClassIdentifier: 
-  originalActionWeight: 5
+  originalActionWeight: 7
   actionDelay: 0.2
   minusWeightAmountWhenNotSuccess: 2
-  minusWeightAmountWhenDuplicate: 1
+  minusWeightAmountAfterAction: 1
   _diffCount: 0
   actionType: 6
-  actionAnimator: {fileID: 0}
   judjements:
   - {fileID: 11400000, guid: 50eb23f6e9b32324a9c5e963ed879da3, type: 2}
   - {fileID: 11400000, guid: aeb1e3793e5b32741b6a632920d7e34b, type: 2}

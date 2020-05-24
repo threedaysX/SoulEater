@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkillController : MonoBehaviour
 {
+    public Transform skillCenterPoint;  // 施放技能基準點
     public Character character;
     public Skill lastSkill;
 
@@ -48,9 +49,13 @@ public class SkillController : MonoBehaviour
 
         // 詠唱，結束後施放技能，持續N秒。
         float castTime = skill.castTime * (1 - character.data.reduceCastTime.Value / 100);
-        Vector3 position = character.transform.position + character.transform.right * skill.range;
+        Vector3 skillPoint = skillCenterPoint.position != null ? skillCenterPoint.position : character.transform.position;
+        Vector3 position = skillPoint + character.transform.right * skill.centerPositionOffset;
         var skillObj = SkillPools.Instance.SpawnSkillFromPool(character, skill, position, character.transform.rotation);
-        character.operationController.StartUseSkillAnim(StartCastSkill(skill, skillObj), StartUseSkill(skillObj), castTime, skill.duration);
+        if (skillObj != null)
+        {
+            character.operationController.StartUseSkillAnim(StartCastSkill(skill, skillObj), StartUseSkill(skillObj), castTime, skill.duration);
+        }
 
         // 技能施放後就直接計算冷卻
         StartCoroutine(GetIntoCoolDown(skill));

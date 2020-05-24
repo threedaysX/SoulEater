@@ -285,26 +285,26 @@ public class Character : MonoBehaviour
     /// 一次調整所有行動 (用在擊暈等重大影響的異常or特定動作，表示在此影響結束前，不得進行其他動作)
     /// </summary>
     /// <param name="canDo">若True，代表恢復正常行動，反之則鎖定所有行動</param>
-    public void SetOperation(bool canDo = true)
+    public void SetOperation(LockType lockType, bool canDo = true)
     {
         if (canDo)
         {
-            move.UnLock();
-            jump.UnLock();
-            evade.UnLock();
-            attack.UnLock();
-            useSkill.UnLock();
-            freeDirection.UnLock();
+            move.UnLock(lockType);
+            jump.UnLock(lockType);
+            evade.UnLock(lockType);
+            attack.UnLock(lockType);
+            useSkill.UnLock(lockType);
+            freeDirection.UnLock(lockType);
             isLockAction = false;
         }
         else
         {
-            move.Lock();
-            jump.Lock();
-            evade.Lock();
-            attack.Lock();
-            useSkill.Lock();
-            freeDirection.Lock();
+            move.Lock(lockType);
+            jump.Lock(lockType);
+            evade.Lock(lockType);
+            attack.Lock(lockType);
+            useSkill.Lock(lockType);
+            freeDirection.Lock(lockType);
             isLockAction = true;
         }
     }

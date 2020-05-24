@@ -1,22 +1,43 @@
-﻿[System.Serializable]
+﻿using System.Collections.Generic;
+
+[System.Serializable]
 public class BasicOperation
 {
     public bool canDo;
     public BasicOperationType operationType;
-    [UnityEngine.SerializeField] private int lockNumber;
+    public Dictionary<LockType, int> locks;
 
-    public void Lock()
+    public void Lock(LockType lockType)
     {
-        lockNumber++;
+        if (locks == null)
+            locks = new Dictionary<LockType, int>();
+
+        if (locks.ContainsKey(lockType))
+        {
+            locks[lockType]++;
+        }
+        else
+        {
+            locks.Add(lockType, 1);
+        }
         if (canDo)
             canDo = false;
     }
 
-    public void UnLock()
+    public void UnLock(LockType lockType)
     {
-        if (lockNumber > 0)
-            lockNumber--;
-        if (lockNumber == 0 && !canDo)
+        if (locks == null)
+            locks = new Dictionary<LockType, int>();
+
+        if (locks.ContainsKey(lockType))
+        {
+            locks[lockType]--;
+            if (locks[lockType] <= 0)
+            {
+                locks.Remove(lockType);
+            }
+        }
+        if (locks.Count == 0)
             canDo = true;
     }
 }
@@ -29,4 +50,15 @@ public enum BasicOperationType
     Attack,
     UseSkill,
     LockDirection
+}
+
+public enum LockType 
+{
+    OperationAction,
+    SkillAction,
+    Stun,
+    Freeze,
+    Silence,
+    Afraid,
+    Lame, // 無法移動
 }

@@ -44,9 +44,9 @@ public class PowerUp : DisposableSkill
     {
         int offset = 0;
         if (stats.Value < 20)
-            offset += 2;
+            offset += 5;
         else
-            offset++;
+            offset += 2;
 
         void affect()
         {

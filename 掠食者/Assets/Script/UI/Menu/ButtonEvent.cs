@@ -7,13 +7,7 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler
 {
     public GameObject pointer;
     public RectTransform targetPos;
-    public UnityEvent clickEvent;
-
-    private void Start()
-    {
-        Button btn = GetComponent<Button>();
-        btn.onClick.AddListener(OnClick);
-    }
+    public UnityEvent onSelectEvent;
 
     public void OnSelect(BaseEventData e)
     {
@@ -23,11 +17,7 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler
             return;
         }
         pointer.transform.position = targetPos.position;
-        ButtonEvents.selectedButton = GetComponent<Button>();
-    }
-
-    public void OnClick()
-    {
-        clickEvent.Invoke();
+        ButtonEvents.Instance.selectedButton = GetComponent<Button>();
+        onSelectEvent.Invoke();
     }
 }

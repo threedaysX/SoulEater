@@ -6,6 +6,7 @@ public class BackStep : DisposableSkill
 {
     protected override void AddAffectEvent()
     {
+        immediatelyAffect.AddListener(InterruptAction);
         immediatelyAffect.AddListener(MoveBack);
     }
 
@@ -19,7 +20,7 @@ public class BackStep : DisposableSkill
             , sourceCaster.transform.position + sourceCaster.transform.right * -4f
             , 0.1f));
     }
-    public IEnumerator MoveToPosition(Transform transform, Vector3 destination, float timeToMove)
+    private IEnumerator MoveToPosition(Transform transform, Vector3 destination, float timeToMove)
     {
         var currentPos = transform.position;
         var t = 0f;
@@ -29,5 +30,11 @@ public class BackStep : DisposableSkill
             transform.position = Vector3.Lerp(currentPos, destination, t);
             yield return null;
         }
+    }
+
+    private void InterruptAction()
+    {
+        sourceCaster.SetOperation(LockType.OperationAction, true);
+        sourceCaster.operationController.InterruptAnimOperation();
     }
 }

@@ -13,12 +13,12 @@ public abstract class AiAction : AiHaviourBase
     /// [8~9] 擅長而且喜歡選擇的動作
     /// [10] 超想這麼做
     /// </summary>
-    public int ActionWeight { get; set; }
+    public float ActionWeight { get; set; }
 
     /// <summary>
     /// 這個行動已經被降低過了N點權重
     /// </summary>
-    public int DiffCount 
+    public float DiffCount 
     {
         get
         {
@@ -32,13 +32,12 @@ public abstract class AiAction : AiHaviourBase
         }
     }
 
-    public int originalActionWeight;
+    public float originalActionWeight;
     public float actionDelay;
-    public int minusWeightAmountWhenNotSuccess = 2;
-    public int minusWeightAmountAfterAction = 1;
-    [SerializeField] private int _diffCount;
+    public float minusWeightAmountWhenNotSuccess = 2;
+    public float minusWeightAmountAfterAction = 1;
+    [SerializeField] private float _diffCount;
     public AiActionType actionType;
-    public Animator actionAnimator;
     public Judgement[] judjements;
 
     public bool CheckActionThatCanDo()
@@ -65,7 +64,7 @@ public abstract class AiAction : AiHaviourBase
         return false;
     }
 
-    public void AddDiffCount(int diff)
+    public void AddDiffCount(float diff)
     {
         DiffCount += diff;
     }
@@ -74,7 +73,7 @@ public abstract class AiAction : AiHaviourBase
     /// 重置權重與權重減值
     /// </summary>
     /// <param name="reduceDiffCount">可決定權重減值要恢復多少，而不是歸0</param>
-    public void ResetWeight(int reduceDiffCount = -999)
+    public void ResetWeight(float reduceDiffCount = -999)
     {
         ActionWeight = originalActionWeight;
         if (reduceDiffCount == -999)

@@ -1,4 +1,6 @@
-﻿public class SelfHeal : DisposableSkill
+﻿using UnityEngine;
+
+public class SelfHeal : DisposableSkill
 {
     protected override void AddAffectEvent()
     {
@@ -10,6 +12,8 @@
     ///</summary>
     private void Heal()
     {
+        StartCoroutine(FollowCaster(1f));
+        sourceCaster.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         sourceCaster.CurrentHealth += (int)(sourceCaster.data.maxHealth.Value * 0.1f + sourceCaster.data.status.dexterity.Value * 5 + sourceCaster.data.status.intelligence.Value * 10);
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicRetreat.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\DashAttackAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\EvadeAreaAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\NaraBurstAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\PowerSlamAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\SelfHealAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\ShockWaveAction.cs" />
@@ -128,15 +129,14 @@
     <Compile Include="Assets\Script\Character\OperationControl\OperationController.cs" />
     <Compile Include="Assets\Script\Character\Player\Operation\PlayerMovement.cs" />
     <Compile Include="Assets\Script\Character\Player\Player.cs" />
-    <Compile Include="Assets\Script\Character\Player\Skill\PlayerSkillSlotKeyControl.cs" />
-    <Compile Include="Assets\Script\Character\Player\Skill\SkillDatabase.cs" />
-    <Compile Include="Assets\Script\Character\Player\Skill\SkillSlot.cs" />
     <Compile Include="Assets\Script\Character\Skills\Controller\SkillController.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\BackStep.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\DashSlash.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\DoubleStrike.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Flamethrower.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Heal.cs" />
+    <Compile Include="Assets\Script\Character\Skills\Instances\NaraBurst.cs" />
+    <Compile Include="Assets\Script\Character\Skills\Instances\NaraCircleBurst.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\PowerSlam.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\PowerUp.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\SelfHeal.cs" />
@@ -155,13 +155,19 @@
     <Compile Include="Assets\Script\Character\Weapon\AttackHitbox.cs" />
     <Compile Include="Assets\Script\Character\Weapon\AttackHitboxList.cs" />
     <Compile Include="Assets\Script\Character\Weapon\WeaponController.cs" />
+    <Compile Include="Assets\Script\Effect\Debuff\DebuffControl.cs" />
     <Compile Include="Assets\Script\Effect\KnockStunSystem.cs" />
+    <Compile Include="Assets\Script\Endowment\Affix\Affix.cs" />
+    <Compile Include="Assets\Script\Endowment\Affix\Affixes.cs" />
+    <Compile Include="Assets\Script\Endowment\Affix\IAffixTrigger.cs" />
     <Compile Include="Assets\Script\Endowment\Fragment\Frag.cs" />
+    <Compile Include="Assets\Script\Game\Camera\CameraShake.cs" />
+    <Compile Include="Assets\Script\Game\Camera\CinemachineCameraControl.cs" />
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
+    <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />
     <Compile Include="Assets\Script\Game\HotKeyController.cs" />
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />
     <Compile Include="Assets\Script\Game\SlowMotionController.cs" />
-    <Compile Include="Assets\Script\Tools\CinemachineCameraControl.cs" />
     <Compile Include="Assets\Script\Tools\ObjectPools.cs" />
     <Compile Include="Assets\Script\Tools\PrefabRenderer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
@@ -170,19 +176,25 @@
     <Compile Include="Assets\Script\UI\Menu\ButtonEvent.cs" />
     <Compile Include="Assets\Script\UI\Menu\ButtonEvents.cs" />
     <Compile Include="Assets\Script\UI\Menu\MenuControl.cs" />
+    <Compile Include="Assets\Script\UI\Menu\MenuEvent.cs" />
     <Compile Include="Assets\Script\UI\Menu\MenuSkillSlot.cs" />
+    <Compile Include="Assets\Script\UI\Menu\PlayerSkillSlotKeyControl.cs" />
+    <Compile Include="Assets\Script\UI\Menu\SkillDatabase.cs" />
+    <Compile Include="Assets\Script\UI\Menu\SkillDescription.cs" />
+    <Compile Include="Assets\Script\UI\Menu\SkillSlot.cs" />
     <Compile Include="Assets\Script\UI\PlayerUIControl.cs" />
-    <Compile Include="Assets\Script\tsumiki\000F\Affix.cs" />
+    <Compile Include="Assets\Script\UI\Title\TitleControl.cs" />
+    <Compile Include="Assets\Script\UI\Volume\VolumeModifier.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Endowment.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Soul.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />
     <Compile Include="Assets\Script\tsumiki\AllFragment.cs" />
     <Compile Include="Assets\Script\tsumiki\AllStar.cs" />
-    <Compile Include="Assets\Script\tsumiki\Chip.cs" />
     <Compile Include="Assets\Script\tsumiki\CurrentData.cs" />
     <Compile Include="Assets\Script\tsumiki\ExtendedStandaloneInputModule.cs" />
     <Compile Include="Assets\Script\tsumiki\Fragment.cs" />
     <Compile Include="Assets\Script\tsumiki\RaycastMask.cs" />
+    <Compile Include="Assets\Script\tsumiki\chip.cs" />
     <Compile Include="Assets\Script\tsumiki\star.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -203,67 +215,67 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -443,13 +455,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

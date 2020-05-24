@@ -38,6 +38,7 @@ public class Flamethrower : LastingSkill
         immediatelyAffect.AddListener(LockDirectionTillEnd);
         immediatelyAffect.AddListener(KnockBackSelf);
         immediatelyAffect.AddListener(BuffFireResistance);
+        immediatelyAffect.AddListener(CameraShakeWhenTrigger);
         hitAffect.AddListener(KnockBackEnemy);
         hitAffect.AddListener(DebuffFireResistance);
     }
@@ -105,10 +106,15 @@ public class Flamethrower : LastingSkill
         RenderHint();
     }
 
+    private void CameraShakeWhenTrigger()
+    {
+        StartCoroutine(CameraShake.Instance.StartShakeCamera(0.8f, 1f, 1f, true));
+    }
+
     private void RenderHint()
     {
         SetHintActive(true);
-        sound.PlayOneShot(renderingSound);
+        soundControl.PlaySound(renderingSound);
         AnimationBase.Instance.PlayAnimationLoop(hintLine.GetComponent<Animator>(), hintLineRenderAnimName, currentSkill.castTime, delegate { SetHintActive(false); });
     }
 

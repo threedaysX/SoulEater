@@ -17,6 +17,7 @@ MonoBehaviour:
   elementType: 6
   skillName: "\u81EA\u6211\u6CBB\u7652"
   description: 
+  centerPositionOffset: 0
   range: 0
   cost: 1
   costType: 1

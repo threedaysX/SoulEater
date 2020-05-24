@@ -12,6 +12,7 @@ public class DashSlash : DisposableSkill
     {
         base.CastSkill();
 
+        sourceCaster.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         drawnSwordEffect.transform.position = sourceCaster.transform.position + sourceCaster.transform.right * 0.5f;
         drawnSwordEffect.Play(true);
     }
@@ -39,7 +40,7 @@ public class DashSlash : DisposableSkill
     // 實際造成傷害的方式
     private IEnumerator DamageTargetCoroutine(Character target)
     {
-        LockEnemyAction(target, true);
+        StartCoroutine(LockEnemyAction(target, 1.8f));
         yield return new WaitForSeconds(1f);
 
         // 第1段攻擊
@@ -68,7 +69,6 @@ public class DashSlash : DisposableSkill
 
         // 第7段攻擊
         DamageTarget(target);
-        LockEnemyAction(target, false);
         yield return new WaitForSeconds(0.2f);
     }
 
@@ -78,16 +78,19 @@ public class DashSlash : DisposableSkill
             return;
         slashHitEffect.transform.position = target.transform.position;
         slashHitEffect.Play(true);
-        sound.PlayOneShot(slashHitSound);
+        soundControl.PlaySound(slashHitSound);
         float damage = DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill);
         target.TakeDamage((int)damage, transform.right.x);
         sourceCaster.DamageDealtSteal(damage, false);
+        CameraShakeWhenHit();
     }
 
     // 使用技能後，立即鎖定敵人動作
-    private void LockEnemyAction(Character target, bool lockAction)
+    private IEnumerator LockEnemyAction(Character target, float duration)
     {
-        target.SetOperation(!lockAction);
+        target.SetOperation(LockType.SkillAction, false);
+        yield return new WaitForSeconds(duration);
+        target.SetOperation(LockType.SkillAction, true);
     }
 
     // 使用技能後，立即進入無敵狀態
@@ -150,5 +153,10 @@ public class DashSlash : DisposableSkill
         {
             SetActiveAfterSkillDone(false);
         }
+    }
+
+    private void CameraShakeWhenHit()
+    {
+        StartCoroutine(CameraShake.Instance.StartShakeCamera(1.6f, 0.4f, 0.1f, true));
     }
 }

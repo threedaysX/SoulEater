@@ -9,24 +9,35 @@ using UnityEngine.Events;
 public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse, ISkillCaster
 {
     private const string skillAnimTrigger = "Trigger";
+
+    [Header("碰撞設定")]
     public bool autoRenderCollider = true;
     public bool canTriggerSelf = false;
+
+    // 基本資訊
     protected Skill currentSkill;
     protected Character sourceCaster;
-    public Character target;
+    protected Character target;
 
-    // 立即效果
+    [Header("立即效果")]
     public UnityEvent immediatelyAffect;
-    // 命中效果
+    [Header("命中效果")]
     public UnityEvent hitAffect;
 
+    // 動畫
     protected Animator anim;
-    protected AudioSource sound;
-    public AudioClip castSound;
+
+    // 聲音
+    public bool isSoundAffectByDistance = false;    // 技能預設不被距離影響聲音大小
+    protected OperationSoundController soundControl;
+    public AudioClip inRenderSound;
+    public AudioClip inCastSound;
     public AudioClip inUsingSound;
+
+    // 特效
     public ParticleSystem inUsingParticle;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (autoRenderCollider)
         {
@@ -34,28 +45,34 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         }
 
         this.gameObject.layer = LayerMask.NameToLayer("Skill");
-
+        
         // 附加技能效果
         AddAffectEvent();
     }
 
-    public void GenerateSkill(Character caster, Skill skill)
+    public virtual void GenerateSkill(Character character, Skill skill)
     {
-        sourceCaster = caster;
+        this.gameObject.SetActive(true);
+        sourceCaster = character;
         currentSkill = skill;
 
         anim = GetComponent<Animator>();
-        sound = GetComponent<AudioSource>();
+        soundControl = sourceCaster.operationSoundController;
 
         // 禁用技能Hitbox與貼圖 (避免生成技能時直接播放動畫與觸發效果)
         SetSkillEnable(false);
+
+        if (soundControl != null && inRenderSound != null)
+        {
+            soundControl.PlaySound(inRenderSound, isSoundAffectByDistance);
+        }
     }
 
     /// <summary>
     /// 技能生成。
     /// </summary>
     /// <param name="caster">施放技能的人</param>
-    public void UseSkill()
+    public virtual void UseSkill()
     {
         // 啟用技能
         SetSkillEnable(true);
@@ -63,9 +80,9 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         // 觸發立即性效果
         InvokeAffect(immediatelyAffect);
 
-        if (sound != null)
+        if (soundControl != null && inUsingSound != null)
         {
-            sound.PlayOneShot(inUsingSound);
+            soundControl.PlaySound(inUsingSound, isSoundAffectByDistance);
         }
         if (anim != null)
         {
@@ -87,13 +104,13 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     /// </summary>
     public virtual void PlayCastSound()
     {
-        if (castSound == null)
+        if (inCastSound == null)
         {
-            sourceCaster.operationSoundController.PlaySound(sourceCaster.operationSoundController.castSound);
+            soundControl.PlaySound(soundControl.castSound);
         }
         else
         {
-            sourceCaster.operationSoundController.PlaySound(this.castSound);
+            soundControl.PlaySound(this.inCastSound, isSoundAffectByDistance);
         }
     }
 
@@ -135,11 +152,16 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         affectEvent.Invoke();
     }
 
-    protected virtual void DamageTarget(float damageDirectionX = 0)
+    public virtual void DamageTarget(float damageDirectionX = 0)
     {
-        float damage = DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill);
+        float damage = GetSkillDamage();
         target.TakeDamage((int)damage, damageDirectionX);
         sourceCaster.DamageDealtSteal(damage, false);
+    }
+
+    public virtual float GetSkillDamage()
+    {
+        return DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill);
     }
 
     protected abstract void AddAffectEvent();
@@ -148,9 +170,24 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     protected string lockDirectionBuffName = "方向鎖定";
     public virtual void LockDirectionTillEnd()
     {
-        void affect() { sourceCaster.freeDirection.Lock(); }
-        void remove() { sourceCaster.freeDirection.UnLock(); }
+        void affect() { sourceCaster.freeDirection.Lock(LockType.OperationAction); }
+        void remove() { sourceCaster.freeDirection.UnLock(LockType.OperationAction); }
         sourceCaster.buffController.AddBuffEvent(lockDirectionBuffName, affect, remove, currentSkill.duration);
+    }
+
+    /// <summary>
+    /// 讓技能跟隨施法者
+    /// </summary>
+    /// <returns></returns>
+    protected IEnumerator FollowCaster(float duration)
+    {
+        float timeleft = duration;
+        while (timeleft > 0)
+        {
+            this.transform.position = sourceCaster.transform.position;
+            timeleft -= Time.deltaTime;
+            yield return null;
+        }
     }
     #endregion
 }

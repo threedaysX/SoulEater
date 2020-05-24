@@ -22,8 +22,10 @@ public abstract class AI : Character
     public float overridedAactionDelay = 0f;  
     private float nextActTimes = 0f;
 
+    [Header("最大權重容許區間")]
+    public float weightOffset = 1;    // 將符合【最大權重】與【最大權重-Offset】挑出並執行。
     [Header("動作權重恢復")]
-    public int actionWeightRegen = 1;       // 每次恢復量
+    public float actionWeightRegen = 1;       // 每次恢復量
     public int actionWeightRegenCount = 10;  // 每做N個動作，就恢復權重一次
     private int cumulativeActionCount = 0;
 
@@ -40,6 +42,11 @@ public abstract class AI : Character
         distanceDetect = GetComponent<DistanceDetect>();
         CanDetect = true;
         CanAction = true;
+        if (chaseTarget == null)
+        {
+            outOfCombatTrigger = true;
+        }
+        ReturnDefaultAction(true);
     }
 
     public virtual void Update()
@@ -143,15 +150,14 @@ public abstract class AI : Character
             {
                 if (action == lastAction && !lastActionSuccess)
                 {
-                    int amount = action.minusWeightAmountWhenNotSuccess;
+                    float amount = action.minusWeightAmountWhenNotSuccess;
                     action.ActionWeight -= amount;
                     action.AddDiffCount(amount);
                 }
                 // 只留下【最大】與【最大-offset】之間權重的動作(相同權重也會留下)。
-                int offset = 1;
                 if (actionToDoList.Count != 0)
                 {
-                    if (action.ActionWeight < actionToDoList[0].ActionWeight - offset)
+                    if (action.ActionWeight < actionToDoList[0].ActionWeight - weightOffset)
                         continue;
                     if (action.ActionWeight > actionToDoList[0].ActionWeight)
                     {
@@ -195,7 +201,7 @@ public abstract class AI : Character
     /// <param name="exceptTypesToMinusWeight">除了做哪些類型的動作不會降低權重</param>
     protected void DoAction(AiAction action)
     {
-        int amount = action.minusWeightAmountAfterAction;
+        float amount = action.minusWeightAmountAfterAction;
         if (amount > 0)
         {
             action.ActionWeight -= amount;    // 動作結束後，權重下降N點，降低這個對於動作的慾望
@@ -207,7 +213,7 @@ public abstract class AI : Character
         lastAction = action;
     }
 
-    protected void ReturnDefaultAction()
+    protected void ReturnDefaultAction(bool setToLastAction = false)
     {
         if (lastAction == null || defaultAction == null)
             return;
@@ -216,6 +222,8 @@ public abstract class AI : Character
 
         defaultAction.GetCurrentAIHavior(this);
         defaultAction.StartActHaviour();
+        if (setToLastAction)
+            lastAction = defaultAction;
     }
 
     private void AlwaysFaceTarget()

@@ -18,10 +18,10 @@ public class ObjectPools : Singleton<ObjectPools>
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        GetPools();
+        GetPoolsOnStart();
     }
 
-    protected virtual void GetPools()
+    protected virtual void GetPoolsOnStart()
     {
         foreach (Pool pool in pools)
         {
@@ -39,6 +39,55 @@ public class ObjectPools : Singleton<ObjectPools>
 
             poolDictionary.Add(pool.name, objPool);
         }
+    }
+
+    /// <summary>
+    /// 【In RunTime】生成物件，於物件池
+    /// </summary>
+    /// <param name="obj">哪個物件</param>
+    /// <param name="size">欲生成的物件數量</param>
+    /// <param name="parent">指定父物件，若無則自動放入物件池中(this.transform)</param>
+    public void RenderObjectPoolsInParent(GameObject obj, float size, Transform parent = null)
+    {
+        // 已經生成過的不會再次生成
+        if (poolDictionary == null || poolDictionary.ContainsKey(obj.name))
+            return;
+
+        Queue<GameObject> objPool = new Queue<GameObject>();
+
+        for (int i = 0; i < size; i++)
+        {
+            GameObject cloneObj = Instantiate(obj);
+            cloneObj.name = obj.name;
+            if (parent == null)
+            {
+                cloneObj.transform.SetParent(this.transform);
+            }
+            else
+            {
+                cloneObj.transform.SetParent(parent);
+            }
+            cloneObj.transform.localPosition = Vector3.zero;
+            cloneObj.SetActive(false);
+            objPool.Enqueue(cloneObj);
+        }
+
+        poolDictionary.Add(obj.name, objPool);
+    }
+
+    public GameObject GetObjectInPools(string name, Vector3 position)
+    {
+        if (poolDictionary == null || !poolDictionary.ContainsKey(name))
+            return null;
+
+        GameObject objectToSpawn = poolDictionary[name].Dequeue();
+
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+
+        poolDictionary[name].Enqueue(objectToSpawn);
+
+        return objectToSpawn;
     }
 
     public GameObject DamagePopup(string name, bool isCritical, int damageAmount, Vector3 position, float damageDirectionX)

@@ -445,12 +445,12 @@ public class OperationController : MonoBehaviour
         {
             isKnockStun = true;
             InterruptAnimOperation();
-            character.SetOperation(false);
+            character.SetOperation(LockType.Stun, false);
         }
         if (!character.isKnockStun && isKnockStun)
         {
             isKnockStun = false;
-            character.SetOperation(true);
+            character.SetOperation(LockType.Stun, true);
         }
     }
 
@@ -528,9 +528,9 @@ public class OperationController : MonoBehaviour
         setDelay(evadeCoolDownDuration);
 
         // 鎖定攻擊、移動、方向
-        character.attack.Lock();
-        character.move.Lock();
-        character.freeDirection.Lock();
+        character.attack.Lock(LockType.OperationAction);
+        character.move.Lock(LockType.OperationAction);
+        character.freeDirection.Lock(LockType.OperationAction);
         character.GetIntoImmune(0.4f);
 
         isEvading = true;
@@ -542,7 +542,7 @@ public class OperationController : MonoBehaviour
         float evadeAnimDuration = AnimationBase.Instance.GetCurrentAnimationLength(anim);
         yield return new WaitForSeconds(evadeAnimDuration * 0.7f);    // 等待動畫播放至準備收尾
 
-        character.attack.UnLock(); // 收尾動作的時候才可以開始攻擊
+        character.attack.UnLock(LockType.OperationAction); // 收尾動作的時候才可以開始攻擊
 
         yield return new WaitForSeconds(evadeAnimDuration * 0.3f);    // 等待動畫播放結束
         isEvading = false;
@@ -554,8 +554,8 @@ public class OperationController : MonoBehaviour
         isPreAttacking = true;
 
         // 鎖定移動、方向
-        character.move.Lock();
-        character.freeDirection.Lock();
+        character.move.Lock(LockType.OperationAction);
+        character.freeDirection.Lock(LockType.OperationAction);
 
         // 重置攻擊時間間隔
         AttackAnimNumber++;
@@ -580,8 +580,8 @@ public class OperationController : MonoBehaviour
         isAttacking = true;
 
         // 鎖定跳躍與閃避
-        character.jump.Lock();
-        character.evade.Lock();
+        character.jump.Lock(LockType.OperationAction);
+        character.evade.Lock(LockType.OperationAction);
 
         if (!CheckIsFinalAttack())
         {
@@ -625,7 +625,7 @@ public class OperationController : MonoBehaviour
     private IEnumerator StartTrueSkillUse(Action skillCastMethod, Action skillUseMethod, float castTime, float skillUseDurtaion)
     {
         // 鎖定行動
-        character.SetOperation(false);
+        character.SetOperation(LockType.OperationAction, false);
 
         if (skillCastMethod != null)
         {
@@ -686,9 +686,9 @@ public class OperationController : MonoBehaviour
 
         if (operation.finished)
         {
-            operations.RemoveCurrentOperation();
-            character.SetOperation();    // 重置角色動作
+            character.SetOperation(LockType.OperationAction, true);    // 重置角色動作
             InterruptAnimOperation();    // 重置角色動畫
+            operations.RemoveCurrentOperation();
             return;
         }
     }

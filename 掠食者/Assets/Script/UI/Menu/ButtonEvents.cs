@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ButtonEvents : Singleton<ButtonEvents>
 {
-    public static Button selectedButton;
+    public Button selectedButton;
 
     public void Update()
     {
@@ -12,6 +12,11 @@ public class ButtonEvents : Singleton<ButtonEvents>
         {
             selectedButton.onClick.Invoke();
         }
+    }
+
+    public void SelectButton(Button button)
+    {
+        selectedButton = button;
     }
 
     public void LoadScene(string sceneName)

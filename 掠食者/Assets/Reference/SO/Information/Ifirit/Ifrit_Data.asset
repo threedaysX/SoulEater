@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth:
     BaseValue: 806
     AdditionalValue: 3500
-    FinalValue: 806
+    FinalValue: 4306
   maxMana:
     BaseValue: 5
     AdditionalValue: 0
@@ -67,9 +67,9 @@ MonoBehaviour:
     AdditionalValue: 0
     FinalValue: 0.25
   attackRange:
-    BaseValue: 2
+    BaseValue: 4
     AdditionalValue: 0
-    FinalValue: 2
+    FinalValue: 4
   reduceSkillCoolDown:
     BaseValue: 8
     AdditionalValue: 0
@@ -102,12 +102,11 @@ MonoBehaviour:
     BaseValue: 1700
     AdditionalValue: 0
     FinalValue: 1700
-  cycleAttackCount: 2
-  weaponKnockBackForce: 1.6
+  cycleAttackCount: 1
+  weaponKnockBackForce: 2.4
   hitEffectPrefab: {fileID: 200774275785904254, guid: 981e7e49479851a4ca1cfce2e6346d60,
     type: 3}
-  attackHitBoxPrefab: {fileID: 4048988255764940626, guid: 0777d1c00768a8c438f6759e66f4ff4f,
-    type: 3}
+  attackHitBoxPrefab: {fileID: 0}
   weaponSoundSet: {fileID: 11400000, guid: ce21ea33860098e40853f4effecc9064, type: 2}
-  weaponType: 1
+  weaponType: 0
   attackElement: 0

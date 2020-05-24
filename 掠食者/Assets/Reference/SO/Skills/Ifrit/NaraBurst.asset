@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c44ff9a5d9fd4baefebf89b9e4601, type: 3}
+  m_Name: NaraBurst
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: d03df6ddf0f19c546a36a0637d8a51ba, type: 3}
+  skillType: 1
+  elementType: 1
+  skillName: "\u7D05\u84EE\u7206\u88C2"
+  description: 
+  centerPositionOffset: 2
+  range: 16
+  cost: 4
+  costType: 1
+  damageMagnification: 0
+  castTime: 2
+  coolDown: 10
+  cooling: 0
+  timesOfPerDamage: 1
+  duration: 1
+  prefab: {fileID: 5156698267486100070, guid: 5dfac3d943e6bc4448c8a05a61071903, type: 3}
