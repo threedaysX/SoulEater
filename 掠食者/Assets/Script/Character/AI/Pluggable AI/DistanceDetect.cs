@@ -32,7 +32,7 @@ public class DistanceDetect : MonoBehaviour
         if (player == null)
             yield break;
 
-        if (lastSecDistance - (player.position - transform.position).sqrMagnitude >= customDistance * customDistance)
+        if (Mathf.Abs(lastSecDistance - (player.position - transform.position).sqrMagnitude) >= customDistance * customDistance)
         {
             hasGetClose = true;
         }

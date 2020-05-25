@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Action/BasicMove")]
-public class BasicMove : AiAction
+public class BasicMove : Action
 {
-    public float basicMoveSpeed = 2.5f;
     public override bool StartActHaviour()
     {
         return Move();
@@ -12,10 +11,7 @@ public class BasicMove : AiAction
     private bool Move()
     {
         Vector3 chaseDirection = Vector3.Normalize(ai.chaseTarget.position - ai.transform.position);
-        chaseDirection.y = 0f;
-        chaseDirection.z = 0f;
-        ai.transform.position += chaseDirection * basicMoveSpeed * ai.data.moveSpeed.Value * Time.deltaTime;
-        ai.operationController.StartMoveAnim(ai.transform.right.x);
+        ai.transform.position += chaseDirection * ai.data.moveSpeed.Value * Time.deltaTime;
         return true;
     }
 }

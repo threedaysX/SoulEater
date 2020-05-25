@@ -5,7 +5,7 @@
 /// (每個)判斷含有單一、複合式條件。
 /// </summary>
 [CreateAssetMenu(menuName = "Character/AI/Judgement")]
-public class Judgement : AiHaviourBase
+public class Judgement : AIHaviourBase
 {
     public int actionWeightAfterJudge;
     public int conditionTrueCount;

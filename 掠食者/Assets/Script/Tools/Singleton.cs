@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
@@ -42,10 +43,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                         singleton.name = "[Singleton] " + typeof(T).ToString();
 
                         DontDestroyOnLoad(singleton);
-
-                        Debug.Log("[Singleton] An instance of " + typeof(T) +
-                                  " is needed in the scene, so '" + singleton +
-                                  "' was created with DontDestroyOnLoad.");
                     }
                     else
                     {

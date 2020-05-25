@@ -14,10 +14,36 @@ public abstract class LastingSkill : SkillEventBase
     /// </summary>
     public virtual void OnTriggerStay2D(Collider2D target)
     {
+        this.target = target.GetComponent<Character>();
         if (target == null)
             return;
-        this.target = target.GetComponent<Character>();
-        if (this.target == null || this.target.GetImmuneState())
-            return;
+
+        #region 傷害階段
+        if (currentSkill.skillType != AttackType.Effect)
+        {
+            if (canDamageSelf)
+            {
+                DamageTarget();
+            }
+            else
+            {
+                if (!target.CompareTag(sourceCaster.tag))
+                {
+                    if (Time.time >= nextDamageTime)
+                    {
+                        DamageTarget();
+                        nextDamageTime = Time.time + currentSkill.timesOfPerDamage;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region 效果影響階段
+        if (!target.CompareTag(sourceCaster.tag))
+        {
+            InvokeAffect(hitAffect);
+        }
+        #endregion
     }
 }

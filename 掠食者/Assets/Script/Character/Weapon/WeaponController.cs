@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
         { WeaponType.TwoHandAx, 2 },
         { WeaponType.TwoHandSpear, 3 },
         { WeaponType.TwoHandMallet, 4 },
-        { WeaponType.TwoHandScythe, 2 },
+        { WeaponType.TwoHandSickle, 2 },
         { WeaponType.Dagger, 4 },
         { WeaponType.Rapier, 4 },
         { WeaponType.Katana, 3 },
@@ -52,10 +52,6 @@ public class WeaponController : MonoBehaviour
     public void ResetCharacterWeaponData(Character character)
     {
         character.data.cycleAttackCount = GetWeaponAttackCount(character.data.weaponType);
-        if (character.anim != null)
-        {
-            character.anim.SetInteger("WeaponType", (int)character.data.weaponType);
-        }
     }
 
 }
@@ -71,7 +67,7 @@ public enum WeaponType
     TwoHandAx,      // {6}
     TwoHandSpear,   // {6}
     TwoHandMallet,  // {6}
-    TwoHandScythe,  // {6}
+    TwoHandSickle,  // {6}
     Dagger,         // {3}
     Rapier,         // {4}、{6}
     Katana,         // {6}

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class Detect : AiHaviourBase
+public abstract class Detect : AIHaviourBase
 {
     public abstract bool StartDetectHaviour();
 }

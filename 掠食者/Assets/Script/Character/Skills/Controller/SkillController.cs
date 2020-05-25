@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class SkillController : MonoBehaviour
@@ -15,11 +14,7 @@ public class SkillController : MonoBehaviour
 
     public bool Trigger(Skill skill)
     {
-        // 技能為空
-        if (skill.prefab == null)
-        {
-            return false;
-        }
+        character.operationController.StartUseSkillAnim();
 
         // 技能冷卻中
         if (skill.cooling)
@@ -31,52 +26,66 @@ public class SkillController : MonoBehaviour
         switch (skill.costType)
         {
             case CostType.Health:
-                if (character.CurrentHealth < skill.cost)
+                if (character.currentHealth < skill.cost)
                 {
+                    Debug.Log("沒有生命啦！");
                     return false;
                 }
-                character.CurrentHealth -= skill.cost;
+                character.currentHealth -= skill.cost;
                 break;
             case CostType.Mana:
-                if (character.CurrentMana < skill.cost)
+                if (character.currentMana < skill.cost)
                 {
+                    Debug.Log("沒有魔力啦！");
                     return false;
                 }
-                character.CurrentMana -= skill.cost;
+                character.currentMana -= skill.cost;
                 break;
         }
 
-        // 詠唱，結束後施放技能，持續N秒。
-        float castTime = skill.castTime * (1 - character.data.reduceCastTime.Value / 100);
-        Vector3 position = character.transform.position + character.transform.right * skill.range;
-        var skillObj = SkillPools.Instance.SpawnSkillFromPool(character, skill, position, character.transform.rotation);
-        character.operationController.StartUseSkillAnim(StartCastSkill(skill, skillObj), StartUseSkill(skillObj), castTime, skill.duration);
+        // 詠唱
+        if (skill.castTime > 0)
+        {
+            character.operationController.StartCastSkillAnim(skill.castTime);
+            Casting(character, skill.castTime, false);
+        }
+        
+        if (skill.prefab != null)
+        {
+            var skillEvent = skill.prefab.GetComponent<SkillEventBase>();
+            skillEvent.InstantiateSkill(character, skill);
+        }
 
-        // 技能施放後就直接計算冷卻
         StartCoroutine(GetIntoCoolDown(skill));
         this.lastSkill = skill;
+        character.operationController.StopUseSkillAnim();
         return true;
     }
 
-    private Action StartCastSkill(Skill skill, GameObject skillObj)
+    /// <summary>
+    /// 施放技能，是否可操作的控制切換。
+    /// </summary>
+    protected void Casting(Character character, float castTime, bool canDo)
     {
-        if (skill.castTime <= 0)
-            return null;
+        character.canSkill = canDo;
+        character.canMove = canDo;
+        character.canJump = canDo;
+        character.canEvade = canDo;
+        character.canAttack = canDo;
 
-        ISkillCaster skillCaster = skillObj.GetComponent<ISkillCaster>();
-        return delegate { skillCaster.CastSkill(); };
-    }
+        float timer = 0;
+        while (timer < castTime)
+        {
+            timer += Time.deltaTime;
 
-    private Action StartUseSkill(GameObject skillObj)
-    {
-        ISkillUse skilluse = skillObj.GetComponent<ISkillUse>();
-        return delegate { skilluse.UseSkill(); };
+            // Render Casting GUI
+        }
     }
 
     protected IEnumerator GetIntoCoolDown(Skill skill)
     {
         skill.cooling = true;
-        float timer = skill.coolDown * (1 - character.data.reduceSkillCoolDown.Value / 100);
+        float timer = skill.coolDown;
         while (timer > 0)
         {
             var frameTime = Time.deltaTime;

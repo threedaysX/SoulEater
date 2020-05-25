@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Character/AI/JudgeCondition/CheckLastActionType")]
 public class CheckLastActionType : JudgeCondition
 {
-    public AiAction lastActionToCheckType;
+    public Action lastActionToCheckType;
     [Header("非上一個動作")]
     public bool isFalse;
     public override bool CheckActConditionHaviour()

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Action/TypeExample")]
-public class TypeExample : AiAction
+public class TypeExample : Action
 {
     public override bool StartActHaviour()
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AiHaviourBase : ScriptableObject
+public class AIHaviourBase : ScriptableObject
 {
     protected AI ai;
     public void GetCurrentAIHavior(AI currentAi)

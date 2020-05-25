@@ -47,6 +47,6 @@ public class Skill : ScriptableObject
     /// </summary>
     public float duration = 1f;
 
-    public GameObject prefab;
+    public Transform prefab;
 }
 

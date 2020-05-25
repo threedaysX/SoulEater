@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e40d2be3fe9fb041ac19e4968314064, type: 3}
+  m_Name: SelfHealAction
+  m_EditorClassIdentifier: 
+  originalActionWeight: 6
+  actionDelay: 0
+  diffCount: 0
+  actionType: 5
+  actionAnimator: {fileID: 0}
+  judjements:
+  - {fileID: 11400000, guid: 8d3bde7ea3a65de44a7f5111478fb11b, type: 2}
+  - {fileID: 11400000, guid: 8fc6ec652e59bf643b78154acf179352, type: 2}
+  - {fileID: 11400000, guid: d40e08932b730c34cb7e25fb1b959fe7, type: 2}
+  - {fileID: 11400000, guid: f1747ef96f7846e4ea81f9f7ab5c3c6a, type: 2}
+  selfHealObject: {fileID: 11400000, guid: 559c5a09bc75a9845b94601840548c79, type: 2}

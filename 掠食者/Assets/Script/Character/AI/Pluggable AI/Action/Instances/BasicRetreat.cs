@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Action/BasicRetreat")]
-public class BasicRetreat : AiAction
+public class BasicRetreat : Action
 {
     public override bool StartActHaviour()
     {
