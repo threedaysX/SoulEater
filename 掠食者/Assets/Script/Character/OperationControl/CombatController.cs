@@ -42,8 +42,8 @@ public class CombatController : MonoBehaviour
                     {
                         // 取得傷害來源方向(KB擊退用途)
                         float damageDirectionX = character.transform.position.x - target.transform.position.x;
-                        float damage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType);
-                        enemyDetails.TakeDamage((int)damage, damageDirectionX, character.data.weaponKnockBackForce);
+                        float damage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType, out bool isCritical);
+                        enemyDetails.TakeDamage((int)damage, isCritical, damageDirectionX, character.data.weaponKnockBackForce);
                         character.DamageDealtSteal(damage, true);
                         TriggerHitEffect(target.transform);
                         attackSuccess = true;

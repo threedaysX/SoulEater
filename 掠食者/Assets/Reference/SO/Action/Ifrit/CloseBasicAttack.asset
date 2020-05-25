@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalActionWeight: 7
   actionDelay: 0
+  minusWeightAmountWhenNotSuccess: 2
+  minusWeightAmountAfterAction: 2
+  _diffCount: 0
   actionType: 4
-  actionAnimator: {fileID: 0}
   judjements:
   - {fileID: 11400000, guid: aea18cc184cbe4742b8b8ed7924b3a59, type: 2}
   - {fileID: 11400000, guid: 6db2017f9118c6649b8a61ce34c1ef6a, type: 2}

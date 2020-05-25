@@ -14275,6 +14275,49 @@ MonoBehaviour:
   skill: {fileID: 0}
   slotType: 1
   linkSkillSlotOnCombatUi: {fileID: 0}
+--- !u!1 &1012294384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012294385}
+  - component: {fileID: 1012294386}
+  m_Layer: 0
+  m_Name: DebuffControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012294385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012294384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2073799516}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1012294386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012294384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b706d3b4f22ca47897ed35454cf4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1013436811
 GameObject:
   m_ObjectHideFlags: 0
@@ -28711,6 +28754,7 @@ Transform:
   - {fileID: 52913539}
   - {fileID: 3740462}
   - {fileID: 2098386085}
+  - {fileID: 1012294385}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -72494,11 +72538,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 508672196, guid: d91e9670d832786499cb959c949b4191, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.94
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: 2082458772, guid: d91e9670d832786499cb959c949b4191, type: 3}
       propertyPath: bottomOffset.y
-      value: -1.8
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 2082458772, guid: d91e9670d832786499cb959c949b4191, type: 3}
       propertyPath: collisionRadius
@@ -72516,7 +72560,7 @@ PrefabInstance:
     - target: {fileID: 8172391987346870625, guid: d91e9670d832786499cb959c949b4191,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6
+      value: -15.52
       objectReference: {fileID: 0}
     - target: {fileID: 8172391987346870625, guid: d91e9670d832786499cb959c949b4191,
         type: 3}
@@ -72567,6 +72611,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172391987346870625, guid: d91e9670d832786499cb959c949b4191,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8172391987346870625, guid: d91e9670d832786499cb959c949b4191,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8172391987346870631, guid: d91e9670d832786499cb959c949b4191,
         type: 3}

@@ -120,7 +120,7 @@ public class Character : MonoBehaviour
     /// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
     /// <param name="duration">持續時間</param>
     /// <param name="damageImmediate">是否立即造成傷害</param>
-    public virtual void TakeDamage(int damage, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    public virtual void TakeDamage(int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
     {
         if (isImmune)
         {
@@ -129,7 +129,7 @@ public class Character : MonoBehaviour
         if (damage <= 0)
         {
             damage = 0;
-            DamagePopup(damage, damageDirectionX);
+            DamagePopup(damage, isCritical, damageDirectionX);
             return;
         }
 
@@ -141,20 +141,13 @@ public class Character : MonoBehaviour
             {
                 StartCoroutine(TakeDamageColorChanged(0.1f));
             }
-            DamagePopup(damage, damageDirectionX);
-
-            // 自身受到超過KB值的傷害，會被擊退
-            float knockbackDamage = data.knockBackDamage.Value;
-            if (cumulativeDamageTake >= knockbackDamage && damageDirectionX != 0)
-            {
-                knockBackSystem.KnockStun(this, damageDirectionX, weaponKnockBackForce);
-                cumulativeDamageTake -= knockbackDamage;
-            }
+            DamagePopup(damage, isCritical, damageDirectionX);
+            KnockBackCheck(damageDirectionX, weaponKnockBackForce);
         }
         else
         {
             // 流血...等持續性傷害
-            StartCoroutine(TakeDamagePerSecondInTimes(damage, timesOfPerDamage, duration, damageImmediate));
+            StartCoroutine(TakeDamagePerSecondInDuration(damage, timesOfPerDamage, duration, damageImmediate));
         }
 
         if (CurrentHealth <= 0)
@@ -163,13 +156,27 @@ public class Character : MonoBehaviour
         }
     }
 
-    private IEnumerator TakeDamagePerSecondInTimes(float damage, float timesOfPerDamage, float duration, bool damageImmediate)
+    /// <summary>
+    /// 自身受到超過KB值的傷害，會被擊退
+    /// </summary>
+    private void KnockBackCheck(float damageDirectionX, float knockBackForce)
+    {
+        float knockbackDamage = data.knockBackDamage.Value;
+        if (cumulativeDamageTake >= knockbackDamage && damageDirectionX != 0)
+        {
+            knockBackSystem.KnockStun(this, damageDirectionX, knockBackForce);
+            cumulativeDamageTake -= knockbackDamage;
+        }
+    }
+
+    private IEnumerator TakeDamagePerSecondInDuration(float damage, float timesOfPerDamage, float duration, bool damageImmediate)
     {
         while(duration >= 0)
         {
             if (damageImmediate)
             {
-                TakeDamage((int)damage);
+                // Would not trigger critical. (Ex: Blood, Ignite, Poison...)
+                TakeDamage((int)damage, false);
             }
             yield return new WaitForSeconds(timesOfPerDamage);
             duration -= timesOfPerDamage;
@@ -178,9 +185,9 @@ public class Character : MonoBehaviour
         yield break;
     }
 
-    public void DamagePopup(int damage, float damageDirectionX = 0)
+    public void DamagePopup(int damage, bool isCritical, float damageDirectionX = 0)
     {
-        ObjectPools.Instance.DamagePopup("DamageText", DamageController.Instance.IsCritical, damage,
+        ObjectPools.Instance.DamagePopup("DamageText", isCritical, damage,
                 transform.position + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(2.2f, 2.6f), 0), damageDirectionX);
     }
 

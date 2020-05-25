@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Affixes : List<Affix>
+public class Affixes : List<Affix>, IAffixTrigger
 {
-    // Start is called before the first frame update
-    void Start()
+    /// <summary>
+    /// 碎片彼此接觸時觸發
+    /// </summary>
+    public void TriggerAffixOnTouch()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RemoveAffixOnLeave()
     {
-        
+
     }
 }

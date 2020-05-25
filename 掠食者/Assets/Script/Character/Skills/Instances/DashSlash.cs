@@ -79,9 +79,7 @@ public class DashSlash : DisposableSkill
         slashHitEffect.transform.position = target.transform.position;
         slashHitEffect.Play(true);
         soundControl.PlaySound(slashHitSound);
-        float damage = DamageController.Instance.GetSkillDamage(sourceCaster, target, currentSkill);
-        target.TakeDamage((int)damage, transform.right.x);
-        sourceCaster.DamageDealtSteal(damage, false);
+        base.DamageTarget(transform.right.x);
         CameraShakeWhenHit();
     }
 
@@ -103,7 +101,7 @@ public class DashSlash : DisposableSkill
     private void GetInDarkScreen()
     {
         StartCoroutine(GetInDarkScreen(0.3f));
-        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3f, duration = 0.2f, afterDelay = 0.8f };
+        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3.2f, duration = 0.2f, afterDelay = 0.8f };
         ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.5f, afterDelay = 0f };
         CinemachineCameraControl.Instance.ZoomInCameraActions(zoomInSetting, resetCameraSetting);
     }

@@ -17,6 +17,7 @@ public class NaraCircleBurst : DisposableSkill
         if (!targetCol.CompareTag(sourceCaster.tag))
         {
             DamageTarget();
+            hitAffect.Invoke();
             this.gameObject.SetActive(false);
         }
     }

@@ -15,7 +15,7 @@ MonoBehaviour:
   originalActionWeight: 7
   actionDelay: 0
   minusWeightAmountWhenNotSuccess: 2
-  minusWeightAmountAfterAction: 0.01
+  minusWeightAmountAfterAction: 0.002
   _diffCount: 0
   actionType: 2
   judjements:

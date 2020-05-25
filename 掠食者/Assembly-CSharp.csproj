@@ -158,6 +158,7 @@
     <Compile Include="Assets\Script\Effect\Debuff\DebuffControl.cs" />
     <Compile Include="Assets\Script\Effect\KnockStunSystem.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\Affix.cs" />
+    <Compile Include="Assets\Script\Endowment\Affix\AffixData.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\Affixes.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\IAffixTrigger.cs" />
     <Compile Include="Assets\Script\Endowment\Fragment\Frag.cs" />

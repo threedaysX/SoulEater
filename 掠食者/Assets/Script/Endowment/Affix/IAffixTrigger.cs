@@ -1,4 +1,6 @@
 ﻿public interface IAffixTrigger
 {
-    void TriggerAffixOnTouch();  
+    void TriggerAffixOnTouch();
+
+    void RemoveAffixOnLeave();
 }

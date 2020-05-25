@@ -15,5 +15,5 @@ MonoBehaviour:
   actionWeightAfterJudge: 9
   conditionTrueCount: 0
   conditions:
-  - {fileID: 11400000, guid: a2916315b115efe47b837941d560a81e, type: 2}
+  - {fileID: 11400000, guid: 7528d1cadae732642be363446f426662, type: 2}
   - {fileID: 11400000, guid: 4c438329aa0aa4141ae12dcb7867639d, type: 2}

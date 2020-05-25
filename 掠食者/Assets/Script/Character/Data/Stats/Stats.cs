@@ -15,6 +15,10 @@ namespace StatsModel
         {
             get
             {
+                if (toForceChangeValue)
+                {
+                    return ForceValue;
+                }
                 if (isDirty || BaseValue != lastBaseValue || AdditionalValue != lastAdditionalValue)
                 {
                     lastBaseValue = BaseValue;
@@ -25,7 +29,9 @@ namespace StatsModel
             }
         }
 
-        [SerializeField] protected float FinalValue;
+        [SerializeField] private float FinalValue;
+        [SerializeField] private float ForceValue;    // Force to change value to this value (this would ignore BaseValue, Addition, Modifiers....)
+        [SerializeField] protected bool toForceChangeValue = false;
         protected float lastBaseValue = float.MinValue;
         protected float lastAdditionalValue = float.MinValue;
         protected bool isDirty = true;
@@ -112,6 +118,17 @@ namespace StatsModel
                 }
             }
             return false;
+        }
+
+        public void ForceToChangeValue(float value)
+        {
+            toForceChangeValue = true;
+            ForceValue = value;
+        }
+
+        public void CancelForceValue()
+        {
+            toForceChangeValue = false;
         }
 
         private void ResetDirtyFinalValue()

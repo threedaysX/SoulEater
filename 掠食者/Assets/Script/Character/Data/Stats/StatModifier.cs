@@ -1,5 +1,6 @@
 ﻿namespace StatsModifierModel
 {
+    [System.Serializable]
     public class StatModifier
     {
         public readonly float Value;
