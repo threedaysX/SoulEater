@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: SelfHeal_J1
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 9
-  conditionTrueCount: 1
+  actionWeightAfterJudge: 5
+  conditionTrueCount: 0
   conditions:
   - {fileID: 11400000, guid: cf6cdb7734265e0448daa4aab1fd8517, type: 2}

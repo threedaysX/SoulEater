@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f59930d7a07f54a84890fd14db9466, type: 3}
+  m_Name: Teleport Action
+  m_EditorClassIdentifier: 
+  originalActionWeight: 5
+  actionDelay: 0.1
+  minusWeightAmountWhenNotSuccess: 1
+  minusWeightAmountAfterAction: 2
+  _diffCount: 2
+  actionType: 6
+  judjements:
+  - {fileID: 11400000, guid: c78377fe85815fe4fae50cc5ce99dbfd, type: 2}
+  - {fileID: 11400000, guid: 593dc4374afed154e8042d6ef04b4d72, type: 2}
+  skillActionObject: {fileID: 11400000, guid: 0affe81029eaff645adb52b132e369da, type: 2}

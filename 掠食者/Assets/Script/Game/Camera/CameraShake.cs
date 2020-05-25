@@ -9,6 +9,11 @@ public class CameraShake : Singleton<CameraShake>
     // Cinemachine Shake
     private CinemachineBasicMultiChannelPerlin virtualCameraNoise;
 
+    public void ShakeCamera(float shakeAmplitude, float shakeFrequency, float duration, bool overrideShake)
+    {
+        StartCoroutine(StartShakeCamera(shakeAmplitude, shakeFrequency, duration, overrideShake));
+    }
+
     public IEnumerator StartShakeCamera(float shakeAmplitude, float shakeFrequency, float duration, bool overrideShake)
     {
         // Get current Vcam's noise setting.

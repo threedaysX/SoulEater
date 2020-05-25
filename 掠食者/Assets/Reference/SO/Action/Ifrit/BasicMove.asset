@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd75a1391bedfda418d878f01c8d2acd, type: 3}
   m_Name: BasicMove
   m_EditorClassIdentifier: 
-  originalActionWeight: 7
+  originalActionWeight: 9
   actionDelay: 0
-  minusWeightAmountWhenNotSuccess: 2
-  minusWeightAmountAfterAction: 0.002
+  minusWeightAmountWhenNotSuccess: 1
+  minusWeightAmountAfterAction: 0.005
   _diffCount: 0
   actionType: 2
   judjements:

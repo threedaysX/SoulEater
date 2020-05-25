@@ -36,6 +36,7 @@ namespace StatsModel
         protected float lastAdditionalValue = float.MinValue;
         protected bool isDirty = true;
         public List<StatModifier> modifiers = new List<StatModifier>();
+        private bool isCleanModifiers = false;
 
         public Stats()
         {
@@ -110,7 +111,11 @@ namespace StatsModel
         {
             if (mod.Value != 0)
             {
-                var getTrueModInList = modifiers.FirstOrDefault(item => item.SourceName.Equals(mod.SourceName) && item.Type.Equals(mod.Type) && item.Value.Equals(mod.Value));
+                ClearNullDirtyModifier();
+                var getTrueModInList = modifiers.FirstOrDefault(
+                    item => item.SourceName != null 
+                    && item.SourceName.Equals(mod.SourceName) 
+                    && item.Type.Equals(mod.Type) && item.Value.Equals(mod.Value));
                 if (modifiers.Remove(getTrueModInList))
                 {
                     ResetDirtyFinalValue();
@@ -118,6 +123,13 @@ namespace StatsModel
                 }
             }
             return false;
+        }
+
+        public void ClearNullDirtyModifier()
+        {
+            if (isCleanModifiers)
+                return;
+            modifiers.RemoveAll(item => item.SourceName == null);
         }
 
         public void ForceToChangeValue(float value)

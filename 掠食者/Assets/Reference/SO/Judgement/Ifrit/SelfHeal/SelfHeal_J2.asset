@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: SelfHeal_J2
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 7
-  conditionTrueCount: 0
+  actionWeightAfterJudge: 6
+  conditionTrueCount: 1
   conditions:
   - {fileID: 11400000, guid: 99c6da398197b5241972189fd2b7f102, type: 2}
   - {fileID: 11400000, guid: 806d8b34038b73c4396a7ab1a7e4c55d, type: 2}

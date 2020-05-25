@@ -36,7 +36,7 @@ public class NaraCircleBurst : DisposableSkill
 
     private void CameraShakeWhenBurst()
     {
-        StartCoroutine(CameraShake.Instance.StartShakeCamera(1f, 0.5f, 0.1f, true));
+        CameraShake.Instance.ShakeCamera(1f, 0.5f, 0.1f, true);
     }
 }
 

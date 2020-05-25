@@ -84,6 +84,7 @@
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\SelfHealAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\ShockWaveAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\StepBackAction.cs" />
+    <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\TeleportAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\TypeExample.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Model\AiAction.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Model\SkillAiAction.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Assets\Script\Character\Skills\Instances\SelfHeal.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\ShockWave.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Slow.cs" />
+    <Compile Include="Assets\Script\Character\Skills\Instances\Teleport.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\DisposableSkill.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\ISkillCaster.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\ISkillGenerator.cs" />

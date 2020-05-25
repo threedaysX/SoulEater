@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508672195}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.75, z: 0}
+  m_LocalPosition: {x: 0, y: -1.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8172391987346870625}
@@ -4850,7 +4850,7 @@ Transform:
   m_GameObject: {fileID: 8172391987346870631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.92999935, y: -5.99, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2108520257}
   - {fileID: 508672196}
@@ -4957,6 +4957,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
   - {fileID: 11400000, guid: bcc7275804eb4e4409b42ed844f35cd0, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
+  - {fileID: 11400000, guid: 0affe81029eaff645adb52b132e369da, type: 2}
   operationSoundController: {fileID: 0}
   weaponController: {fileID: 0}
   operationController: {fileID: 0}
@@ -4975,10 +4976,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d67d0f814085d6e4882cd907092ffb17, type: 2}
   - {fileID: 11400000, guid: 4c1ef8ea4f48d7a4d9acb509b3a064f9, type: 2}
   - {fileID: 11400000, guid: 1455573aa9f91964cb39d3e6c1983fec, type: 2}
+  - {fileID: 11400000, guid: f66650c44d366124ba51ae036dfc2544, type: 2}
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
+  weightOffset: 1
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -5077,8 +5080,8 @@ MonoBehaviour:
   isKnockStun: 0
   isGrounding: 0
   groundTouch: 0
-  collisionRadius: 0.3
-  bottomOffset: {x: 0, y: -1}
+  collisionRadius: 1
+  bottomOffset: {x: -0.3, y: -2.4}
   cycleAttackCount: 2
   attackComboCount: 0
   attackResetDuration: 1
@@ -5137,6 +5140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612de6d0e9224d04191b80ffba18bbe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttackTarget: {fileID: 0}
   attackCenterPoint: {fileID: 1722292038}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}

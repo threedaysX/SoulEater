@@ -36,7 +36,7 @@ public class SkillController : MonoBehaviour
                 {
                     return false;
                 }
-                character.CurrentHealth -= skill.cost;
+                character.CurrentHealth -= (int)skill.cost;
                 break;
             case CostType.Mana:
                 if (character.CurrentMana < skill.cost)

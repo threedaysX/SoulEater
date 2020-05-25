@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a74d3ee2742de8419b79618835c7def, type: 3}
   m_Name: FlamethrowerAction
   m_EditorClassIdentifier: 
-  originalActionWeight: 7
+  originalActionWeight: 6
   actionDelay: 0.4
   minusWeightAmountWhenNotSuccess: 2
   minusWeightAmountAfterAction: 2
   _diffCount: 0
   actionType: 5
-  actionAnimator: {fileID: 0}
   judjements:
   - {fileID: 11400000, guid: 18a0505d2e481654dad8c844f6485a50, type: 2}
   - {fileID: 11400000, guid: daf9b1aa5a6696f4389373f61591302e, type: 2}
-  - {fileID: 11400000, guid: daf9b1aa5a6696f4389373f61591302e, type: 2}
+  - {fileID: 11400000, guid: ca392c34e14de2b47985842d170bff6c, type: 2}
   skillActionObject: {fileID: 11400000, guid: 4a6746252b787b446a98a7062845f160, type: 2}

@@ -155,6 +155,6 @@ public class DashSlash : DisposableSkill
 
     private void CameraShakeWhenHit()
     {
-        StartCoroutine(CameraShake.Instance.StartShakeCamera(1.6f, 0.4f, 0.1f, true));
+        CameraShake.Instance.ShakeCamera(1.6f, 0.4f, 0.1f, true);
     }
 }

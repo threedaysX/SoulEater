@@ -89,19 +89,18 @@ public class BuffController : MonoBehaviour
     /// <param name="duration">持續時間，當持續時間設為-1時，代表永久效果</param>
     public void AddBuffEvent(string affectName, UnityAction affect, UnityAction removeAffect, float duration)
     {
-        string name = affectName;
         if (!CheckIsBuffInList(affectName))
         {
             if (affect != null)
             {
                 affect.Invoke();
             }
-            SetBuffMemory(name, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(removeAffect), duration));
+            SetBuffMemory(affectName, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(removeAffect), duration));
         }
         else
         {
             // 重置時間
-            GetBuffMemory(name).ResetTick();
+            GetBuffMemory(affectName).ResetTick();
         }
     }
 
