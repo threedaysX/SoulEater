@@ -8,8 +8,7 @@ public class ExtendedStandaloneInputModule : StandaloneInputModule
 {
     public static PointerEventData GetPointerEventData(int pointerId = -1)
     {
-        PointerEventData eventData;
-        _instance.GetPointerData(pointerId, out eventData, true);
+        _instance.GetPointerData(pointerId, out PointerEventData eventData, true);
         return eventData;
     }
 

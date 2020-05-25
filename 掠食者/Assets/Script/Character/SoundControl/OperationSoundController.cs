@@ -41,21 +41,27 @@ public class OperationSoundController : MonoBehaviour
         effectSoundAudio.PlayOneShot(effectSoundAudio.clip);
     }
 
-    public void PlaySound(AudioClip clip, bool adjustSoundByRange = true)
+    public void PlaySound(AudioClip clip)
     {
         if (clip == null)
             return;
 
-        if (adjustSoundByRange)
-            CalculateSoundDistance();
-
         effectSoundAudio.PlayOneShot(clip);
     }
 
-    private void CalculateSoundDistance()
+    public void PlaySound(AudioClip clip, Vector3 soundPos)
     {
-        float distanceX = Mathf.Abs(soundPoint.transform.position.x - effectSoundAudio.gameObject.transform.position.x);
-        float distanceY = Mathf.Abs(soundPoint.transform.position.y - effectSoundAudio.gameObject.transform.position.y);
+        if (clip == null)
+            return;
+
+        CalculateSoundDistance(soundPos);
+        effectSoundAudio.PlayOneShot(clip);
+    }
+
+    private void CalculateSoundDistance(Vector3 soundPos)
+    {
+        float distanceX = Mathf.Abs(soundPoint.transform.position.x - soundPos.x);
+        float distanceY = Mathf.Abs(soundPoint.transform.position.y - soundPos.y);
         float benchMarkX = 16;  // 左右16m內(3200px)，可以聽到聲音
         float benchMarkY = 12;  // 上下12m內(2400px)，可以聽到聲音
         if (distanceX >= benchMarkX || distanceY >= benchMarkY)

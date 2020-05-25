@@ -16,11 +16,11 @@ public class CameraShake : Singleton<CameraShake>
 
     public IEnumerator StartShakeCamera(float shakeAmplitude, float shakeFrequency, float duration, bool overrideShake)
     {
-        // Get current Vcam's noise setting.
+        // Get current Vcam's noise setting. (Check 6D Shake is added)
         virtualCameraNoise = CinemachineCameraControl.Instance.GetCurrentActiveCamera().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         // If null or in shaking, return.
         if (virtualCameraNoise == null || (shaking && !overrideShake))
-            yield break;
+            yield break;    
 
         shaking = true;
         float timeleft = duration;

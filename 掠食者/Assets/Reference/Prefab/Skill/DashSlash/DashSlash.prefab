@@ -4919,7 +4919,6 @@ MonoBehaviour:
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
-  isSoundAffectByDistance: 0
   inRenderSound: {fileID: 0}
   inCastSound: {fileID: 8300000, guid: da499f26e2dc2194cb549a76a98355a9, type: 3}
   inUsingSound: {fileID: 8300000, guid: a993b49188d909740a82af50b188f0dd, type: 3}
@@ -4940,7 +4939,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.8, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

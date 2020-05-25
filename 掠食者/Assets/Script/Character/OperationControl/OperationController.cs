@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class AnimationKeyWordDictionary
 {
+    public const string idle = "Idle";
     public const string moveSpeed = "Speed";
     public const string jump = "IsJumping";
     public const string startJump = "StartJump";
@@ -281,6 +282,7 @@ public class OperationController : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("操作狀態判定")]
+    public bool isIdle = false;
     public bool isMoving = false;
     public bool isSkillUsing = false;
     public bool isSkillCasting = false;
@@ -348,6 +350,7 @@ public class OperationController : MonoBehaviour
     private void Update()
     {
         CheckStun();
+        CheckIdle();
         CheckGrounded();
         CheckResetAttack();
         StartOperation();
@@ -439,6 +442,11 @@ public class OperationController : MonoBehaviour
     #endregion
 
     #region Check
+    private void CheckIdle()
+    {
+        isIdle = anim.GetCurrentAnimatorStateInfo(0).IsName(AnimationKeyWordDictionary.idle);
+    }
+
     private void CheckStun()
     {
         if (character.isKnockStun && !isKnockStun)

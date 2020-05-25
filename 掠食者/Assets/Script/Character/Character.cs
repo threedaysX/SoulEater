@@ -77,7 +77,7 @@ public class Character : MonoBehaviour
 
     #region 角色資料
     [Header("詳細參數")]
-    public Data data;
+    public CharacterData data;
     [Header("技能欄")]
     public List<Skill> skillFields;
     #endregion

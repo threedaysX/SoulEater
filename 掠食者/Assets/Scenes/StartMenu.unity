@@ -918,7 +918,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 513801725}
   targetPos: {fileID: 306589571}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &227299537
@@ -1168,75 +1168,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 1629733159}
   targetPos: {fileID: 1037494092}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1232723055}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 743232657}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1933677696}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 274411251}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 932661588}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1954686731}
-        m_MethodName: Select
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &274411251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,7 +2409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 1151623935}
   targetPos: {fileID: 23008165}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &666539639
@@ -2717,7 +2651,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: EnemyTestArena
+          m_StringArgument: Game
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &700371451
@@ -2770,7 +2704,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 1629733159}
   targetPos: {fileID: 697175484}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &715453340
@@ -2865,7 +2799,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: EnemyTestArena
+          m_StringArgument: Game
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &715453343
@@ -2918,7 +2852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 1629733159}
   targetPos: {fileID: 394371567}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &743232657
@@ -3495,7 +3429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 513801725}
   targetPos: {fileID: 618852898}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &890381613
@@ -3990,7 +3924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 15518979}
   targetPos: {fileID: 1063614247}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1028255648
@@ -4534,7 +4468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 513801725}
   targetPos: {fileID: 1732772986}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1100361136
@@ -5414,7 +5348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 186543298}
   targetPos: {fileID: 1100361137}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1491636313
@@ -6086,7 +6020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 1629733159}
   targetPos: {fileID: 1918483336}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1785589551
@@ -6782,7 +6716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointer: {fileID: 513801725}
   targetPos: {fileID: 693819482}
-  clickEvent:
+  onSelectEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1964406933

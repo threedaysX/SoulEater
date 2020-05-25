@@ -100,21 +100,10 @@ public class DashSlash : DisposableSkill
     // 使用技能後，立即進入短暫黑畫面與畫面特寫
     private void GetInDarkScreen()
     {
-        StartCoroutine(GetInDarkScreen(0.3f));
-        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3.2f, duration = 0.2f, afterDelay = 0.8f };
+        StartCoroutine(FadeScreen.Instance.Fade(1.2f, 1.2f));
+        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3f, duration = 0.2f, afterDelay = 0.8f };
         ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.5f, afterDelay = 0f };
         CinemachineCameraControl.Instance.ZoomInCameraActions(zoomInSetting, resetCameraSetting);
-    }
-
-    private IEnumerator GetInDarkScreen(float duration)
-    {
-        Animator anim = GameObject.FindGameObjectWithTag("Transition").GetComponent<Animator>();
-        if (anim == null)
-            yield break;
-
-        anim.SetTrigger("TransitionPlaying");
-        yield return new WaitForSeconds(duration);
-        anim.ResetTrigger("TransitionPlaying");
     }
 
     /// <summary>

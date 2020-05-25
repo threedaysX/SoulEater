@@ -28,7 +28,6 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     protected Animator anim;
 
     // 聲音
-    public bool isSoundAffectByDistance = false;    // 技能預設不被距離影響聲音大小
     protected OperationSoundController soundControl;
     public AudioClip inRenderSound;
     public AudioClip inCastSound;
@@ -64,7 +63,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
 
         if (soundControl != null && inRenderSound != null)
         {
-            soundControl.PlaySound(inRenderSound, isSoundAffectByDistance);
+            soundControl.PlaySound(inRenderSound);
         }
     }
 
@@ -82,7 +81,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
 
         if (soundControl != null && inUsingSound != null)
         {
-            soundControl.PlaySound(inUsingSound, isSoundAffectByDistance);
+            soundControl.PlaySound(inUsingSound);
         }
         if (anim != null)
         {
@@ -110,7 +109,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         }
         else
         {
-            soundControl.PlaySound(this.inCastSound, isSoundAffectByDistance);
+            soundControl.PlaySound(this.inCastSound);
         }
     }
 
