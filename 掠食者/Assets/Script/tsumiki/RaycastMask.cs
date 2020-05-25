@@ -154,7 +154,6 @@ public class RaycastMask : MonoBehaviour, ICanvasRaycastFilter
                 }
                 break;
             case Image.Type.Simple:
-                break;
             default:
                 {
                     isValid = true;

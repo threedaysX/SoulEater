@@ -13,6 +13,7 @@ public class star : MonoBehaviour
 
     void Awake()
     {
+        fragID = -1;
         string[] sp = name.Split('_');
         pos.x = int.Parse(sp[0]);
         pos.y = int.Parse(sp[1]);

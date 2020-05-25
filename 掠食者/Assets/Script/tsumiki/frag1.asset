@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: frag1
   m_EditorClassIdentifier: 
   m_Data:
-    touchStars_v2:
+    touchPos_v2:
     - {x: 0, y: 0}
     - {x: 1, y: 0}
     - {x: 2, y: 0}
@@ -22,5 +22,4 @@ MonoBehaviour:
     fragmentID: 4
     triggerCount: 0
     touchStarsID: 160100001c0000003b0100009c00000003000000
-    neighborStars: []
-    neighborRelative: []
+    neighbors: []

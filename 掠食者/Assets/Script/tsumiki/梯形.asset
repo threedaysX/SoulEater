@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: "\u68AF\u5F62"
   m_EditorClassIdentifier: 
   m_Data:
-    touchStars_v2:
+    touchPos_v2:
     - {x: 0, y: 0}
-    - {x: 0, y: -1}
     - {x: 1, y: 0}
+    - {x: 0, y: -1}
     fragmentID: 0
     triggerCount: 0
     touchStarsID: 980000001900000038000000
-    neighborStars: []
-    neighborRelative: []
+    neighbors: []
