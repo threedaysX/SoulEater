@@ -154,7 +154,6 @@ public class RaycastMask : MonoBehaviour, ICanvasRaycastFilter
                 }
                 break;
             case Image.Type.Simple:
-                break;
             default:
                 {
                     isValid = true;
@@ -168,7 +167,7 @@ public class RaycastMask : MonoBehaviour, ICanvasRaycastFilter
             isValid &= m_Sprite.texture.GetPixel(pixelPosition.x, pixelPosition.y).a > 0;
             return isValid;
         }
-        catch (UnityException)
+        catch (UnityException e)
         {
             Debug.LogError("Mask texture not readable, set your sprite to Texture Type 'Advanced' and check 'Read/Write Enabled'");
             return false;

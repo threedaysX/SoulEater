@@ -33,49 +33,34 @@ using UnityEngine.UI;
 //所有碎片繼承此物件
 public class Chip : Singleton<Chip>
 {
-    public Fragment theFragment;
-
-    public void PutOn(Fragment theF)
+    public void PutOn(Fragment theF, List<int> _coverStarsID)       //放進碎片
     {
+        theF.m_Data.touchStarsID.Clear();
+        for (int i = 0; i < _coverStarsID.Count; i++)
+            theF.m_Data.touchStarsID.Add(_coverStarsID[i]);
+
         LockStar(theF);
 
+        FreshNeighborStars(theF);       //鄰居綁訂星星位置
+        ThisReDetectEdge(theF);
+        NeighborReDetectEdge(theF);
+
     }
 
-    public void PullUp(Fragment theF)
+    public void PullUp(Fragment theF)                       //拿出碎片
     {
         UnlockStar(theF);
+        theF.m_Data.touchStarsID.Clear();
+
+        NeighborReDetectEdge(theF);
+        FreshNeighborStars(theF);
+        ThisReDetectEdge(theF);
 
     }
-
-    /*有待替換，此方法有bug*/
-    /*void OnTriggerEnter2D(Collider2D col)                           //當此碎片進入star重疊時
-    {
-        //將此star的位置存到touchStars
-        touchStars.Add(col.GetComponent<star>());
-
-        LockStar();
-        FreshNeighborStars();   //只有在新增加(進入)star時，才需重新計算(因為 離開star時 也只需用到舊有的鄰居資訊)
-        ThisReDetectEdge();
-        NeighborReDetectEdge();
-    }*/
-
-    /*有待替換，此方法有bug*/
-    /*void OnTriggerExit2D(Collider2D col)                            //當此碎片離開star重疊時
-    {
-        //將此star拿出touchStars    不改好像也沒關係
-        int id = touchStars.FindIndex(x => x == col.GetComponent<star>());
-        if (id != -1)
-            touchStars.RemoveAt(id);
-
-        UnlockStar(col);
-        NeighborReDetectEdge();
-        FreshNeighborStars();
-        ThisReDetectEdge();
-    }*/
 
     public void LockStar(Fragment theF)////////////////////////////////////////////////////////////OK
     {
-        for(int i=0;i< theF.m_Data.touchStarsID.Count; i++)
+        for (int i = 0; i < theF.m_Data.touchStarsID.Count; i++)
         {
             //star變黑色
             AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].gameObject.GetComponent<Image>().color = Color.black;
@@ -100,17 +85,17 @@ public class Chip : Singleton<Chip>
     }
 
     //重新計算此碎片的觸發邊
-    public void ThisReDetectEdge( Fragment theF)/////////////////////////////////////////////////////////////////OK
+    public void ThisReDetectEdge(Fragment theF)/////////////////////////////////////////////////////////////////OK
     {
         theF.m_Data.triggerCount = 0;               //中多少條邊就triggerCount++
 
         //先觀察有哪些鄰居存在
-        for (int i = 0; i < theF.m_Data.neighborRelative.Count; i++)
+        for (int i = 0; i < theF.m_Data.neighborRelative_id.Count; i++)         //幾個邊
         {
             bool AllOK = true;
-            for (int j = 0; j < theF.m_Data.neighborRelative[i].listNei.Count; j++)
+            for (int j = 0; j < theF.m_Data.neighborRelative_id[i].Count; j++)  //幾個點組成一個邊
             {
-                if (theF.m_Data.neighborRelative[i].listNei[j]._Star.fragID == -1)
+                if (AllStar.Instance.stars[theF.m_Data.neighbors[theF.m_Data.neighborRelative_id[i][j]].starID].fragID == -1)
                 {
                     AllOK = false;
                     break;
@@ -123,152 +108,16 @@ public class Chip : Singleton<Chip>
         }
     }
 
-    //用鄰居觀察邊的關係，完成 neighborRelative
-    public void NeighborRelative(Fragment theF)////////////////////////////////////////////////////////////////OK
-    {
-        List<Neighbor> nei_D_U = new List<Neighbor>();//存放 下三角形的鄰居中，以 上邊 觸發的三角形
-        List<Neighbor> nei_D_R = new List<Neighbor>();//                          右邊
-        List<Neighbor> nei_D_L = new List<Neighbor>();//                          左邊
-        List<Neighbor> nei_U_L = new List<Neighbor>();//     上三角               左邊
-        List<Neighbor> nei_U_R = new List<Neighbor>();//                          右邊
-        List<Neighbor> nei_U_D = new List<Neighbor>();//                          下邊
 
-        for (int i = 0; i < theF.m_Data.neighborStars.Count; i++)
-        {
-            if (theF.m_Data.neighborStars[i].tri == 0)
-            {
-                switch (theF.m_Data.neighborStars[i].toggleEdge)
-                {
-                    case 1:
-                        nei_D_U.Add(theF.m_Data.neighborStars[i]);
-                        break;
-                    case 2:
-                        nei_D_R.Add(theF.m_Data.neighborStars[i]);
-                        break;
-                    case 3:
-                        nei_D_L.Add(theF.m_Data.neighborStars[i]);
-                        break;
-                }
-            }
-            else
-            {
-                switch (theF.m_Data.neighborStars[i].toggleEdge)
-                {
-                    case 3:
-                        nei_U_L.Add(theF.m_Data.neighborStars[i]);
-                        break;
-                    case 2:
-                        nei_U_R.Add(theF.m_Data.neighborStars[i]);
-                        break;
-                    case 0:
-                        nei_U_D.Add(theF.m_Data.neighborStars[i]);
-                        break;
-                }
-            }
-        }
-        bubbleSort(nei_D_U);    //排序 nei_D_U >>以x座標大小排序，由小到大
-        bubbleSort(nei_U_D);
-        bubbleSort(nei_D_R);
-        bubbleSort(nei_D_L);
-        bubbleSort(nei_U_L);
-        bubbleSort(nei_U_R);
-        theF.m_Data.neighborRelative.Clear();
-        CutEdge(theF,nei_D_U, "nei_D_U");    //只要中間斷掉 即得到一個邊
-        CutEdge(theF, nei_U_D, "nei_U_D");
-        CutEdge(theF, nei_D_R, "nei_D_R");
-        CutEdge(theF, nei_D_L, "nei_D_L");
-        CutEdge(theF, nei_U_L, "nei_U_L");
-        CutEdge(theF, nei_U_R, "nei_U_R");
-
-    }
-
-    void CutEdge(Fragment theF,List<Neighbor> list, string debug_name)//////////////////////////////////////////////OK
-    {
-        if (list.Count == 0) return;
-        neighborList temp = new neighborList();
-        temp.listNei.Add(list[0]);
-
-        if (list.Count == 1)
-        {
-            theF.m_Data.neighborRelative.Add(temp);
-            return;
-        }
-        Neighbor lastNei = list[0];
-        for (int i = 1; i < list.Count; i++)
-        {
-            bool juge = false;
-            //nei_D_U   >>判斷連續方式  >>x+2
-            //nei_U_D   >>判斷連續方式  >>x+2
-            //nei_D_R   >>判斷連續方式  >>x+1，y+1
-            //nei_D_L   >>判斷連續方式  >>x+1，y-1
-            //nei_U_L   >>判斷連續方式  >>x+1，y+1
-            //nei_U_R   >>判斷連續方式  >>x+1，y-1
-
-            switch (debug_name)
-            {
-                case "nei_D_U":
-                    juge = (list[i]._Star.pos.x == lastNei._Star.pos.x + 2);
-                    break;
-                case "nei_U_D":
-                    juge = (list[i]._Star.pos.x == lastNei._Star.pos.x + 2);
-                    break;
-                case "nei_D_R":
-                    juge = (list[i]._Star.pos.x == lastNei._Star.pos.x + 1) && (list[i]._Star.pos.y == lastNei._Star.pos.y + 1);
-                    break;
-                case "nei_U_L":
-                    juge = (list[i]._Star.pos.x == lastNei._Star.pos.x + 1) && (list[i]._Star.pos.y == lastNei._Star.pos.y + 1);
-                    break;
-                case "nei_D_L":
-                    juge = (list[i]._Star.pos.x == lastNei._Star.pos.x + 1) && (list[i]._Star.pos.y == lastNei._Star.pos.y - 1);
-                    break;
-                case "nei_U_R":
-                    juge = (list[i]._Star.pos.x == lastNei._Star.pos.x + 1) && (list[i]._Star.pos.y == lastNei._Star.pos.y - 1);
-                    break;
-                default:
-                    Debug.LogError("error");
-                    break;
-            }
-            if (juge)
-            {
-                temp.listNei.Add(list[i]);
-                lastNei = list[i];
-
-                if (i == list.Count - 1)
-                    theF.m_Data.neighborRelative.Add(temp);
-            }else
-            {
-                theF.m_Data.neighborRelative.Add(temp);
-                temp.listNei.Clear();
-                temp.listNei.Add(list[i]);
-                lastNei = list[i];
-            }
-        }
-    }
-
-    void bubbleSort(List<Neighbor> list)///////////////////////////////////////////////////////////OK
-    {
-        if (list.Count <= 1) return;
-        for (int i = 0; i < list.Count; i++)
-            for (int j = i + 1; j < list.Count; j++)
-            {
-                if (list[i]._Star.pos.x > list[j]._Star.pos.x)
-                {
-                    //swap
-                    Neighbor temp = list[i];
-                    list[i] = list[j];
-                    list[j] = temp;
-                }
-            }
-    }
 
     //鄰居碎片們重新計算邊的觸發
     public void NeighborReDetectEdge(Fragment theF)//////////////////////////////////////////////////////////OK
     {
-        if (theF.m_Data.neighborStars.Count == 0) return;
+        //if (theF.m_Data.neighborStars.Count == 0) return;
         //呼叫鄰居的ThisReDetectEdge
-        for (int i = 0; i < theF.m_Data.neighborStars.Count; i++)
+        for (int i = 0; i < theF.m_Data.neighbors.Count; i++)
         {
-            int id = theF.m_Data.neighborStars[i]._Star.fragID;
+            int id = AllStar.Instance.stars[theF.m_Data.neighbors[i].starID].fragID;
             if (id != -1)
                 ThisReDetectEdge(AllFragment.Instance.fragments[id]);
         }
@@ -276,59 +125,17 @@ public class Chip : Singleton<Chip>
 
     public void FreshNeighborStars(Fragment theF)/////////////////////////////////////////////////////////// OK
     {
-        theF.m_Data.neighborStars.Clear();
-        for (int i = 0; i < theF.m_Data.touchStarsID.Count; i++)
+        for (int i = 0; i < theF.m_Data.neighbors.Count; i++)
         {
-            if ((AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x + AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y) % 2 == 0)       //x+y是偶數 >> touchStars是 倒三角 >> 鄰居在左右上
+            Vector2 temp = new Vector2(theF.m_Data.neighbors[i].pos.x + CurrentData.Instance.currentPos.x, theF.m_Data.neighbors[i].pos.y + CurrentData.Instance.currentPos.y);
+            //找到該點
+            int id = AllStar.Instance.stars.FindIndex(x => x.pos == temp);
+            if (id != -1)
             {
-                NeighborFunc(theF,new Vector2(AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x - 1, AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y), 1, 2);  //左邊的star pos 是正三角 觸發的邊是正三角的右邊
-                NeighborFunc(theF, new Vector2(AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x + 1, AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y), 1, 3);  //右邊的star pos 是正三角 觸發的邊是正三角的左邊
-                NeighborFunc(theF,new Vector2(AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x, AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y + 1), 1, 0);  //上邊的star pos 是正三角 觸發的邊是正三角的下邊  
-            }
-            else                                                   //x+y是奇數 >> touchStars是 正三角 >> 鄰居在左右下
-            {
-                NeighborFunc(theF, new Vector2(AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x - 1, AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y), 0, 2);  //左邊的star pos 是倒三角 觸發的邊是倒三角的右邊
-                NeighborFunc(theF, new Vector2(AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x + 1, AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y), 0, 3);  //右邊的star pos 是倒三角 觸發的邊是倒三角的左邊
-                NeighborFunc(theF, new Vector2(AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.x, AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].pos.y - 1), 0, 1);  //下邊的star pos 是倒三角 觸發的邊是倒三角的上邊
+                theF.m_Data.neighbors[i].starID = id;
             }
         }
-        NeighborRelative(theF);             //之後可考慮用相對位置，這樣只有在旋轉的時候才需要重新計算
-    }
-
-    private void NeighborFunc(Fragment theF,Vector2 Star_pos, int _tri, int _to)///////////////////////////////// OK
-    {
-        int id = theF.m_Data.touchStarsID.FindIndex(x => AllStar.Instance.stars[x].pos == Star_pos);  //檢查是否屬於此碎片的一部分
-        if (id != -1)       //此碎片有此點
-            return;       //跳過
-
-        //找到該點
-        id = AllStar.Instance.stars.FindIndex(x => x.pos == Star_pos);
-        if (id != -1)
-        {
-            Neighbor temp = new Neighbor(AllStar.Instance.stars[id], _tri, _to);
-            //放入neighborStars
-            theF.m_Data.neighborStars.Add(temp);
-        }
     }
 
 
-}
-
-[System.Serializable]
-public class Neighbor//////////////////////////////////////////////////////////////////////////// OK
-{
-    public star _Star;
-    public int tri;            //UpTriangle=1  //DownTriangle=0
-    public int toggleEdge;     //Up    1       //Down   0          //Left   3          //Right  2
-    public Neighbor(star _S, int _tri, int _to)
-    {
-        _Star = _S;
-        tri = _tri;
-        toggleEdge = _to;
-    }
-}
-[System.Serializable]
-public class neighborList//////////////////////////////////////////////////////////////////////////// OK
-{
-    public List<Neighbor> listNei = new List<Neighbor>();
 }
