@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a74bf9dbba1db8499fac0a67d142f3d, type: 3}
-  m_Name: "\u68AF\u5F62"
+  m_Name: IfritFrag
   m_EditorClassIdentifier: 
   m_Data:
     touchPos_v2:
     - {x: 0, y: 0}
+    - {x: -1, y: 0}
     - {x: 1, y: 0}
+    - {x: 2, y: 0}
     - {x: 0, y: -1}
-    fragmentID: 0
+    - {x: -1, y: -1}
+    - {x: 1, y: -1}
+    fragmentID: 4
     triggerCount: 0
-    touchStarsID: 980000001900000038000000
+    touchStarsID: 160100001c0000003b0100009c00000003000000
     neighbors: []

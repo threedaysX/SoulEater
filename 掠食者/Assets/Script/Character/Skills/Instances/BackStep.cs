@@ -11,14 +11,14 @@ public class BackStep : DisposableSkill
     }
 
     /// <summary>
-    /// 0.1秒內退移到後方4m處。	
+    /// 0.05秒內退移到後方6m處。	
     /// </summary>
     private void MoveBack()
     {
         sourceCaster.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         StartCoroutine(MoveToPosition(sourceCaster.transform
-            , sourceCaster.transform.position + sourceCaster.transform.right * -4f
-            , 0.1f));
+            , sourceCaster.transform.position + sourceCaster.transform.right * -6f
+            , 0.05f));
     }
     private IEnumerator MoveToPosition(Transform transform, Vector3 destination, float timeToMove)
     {

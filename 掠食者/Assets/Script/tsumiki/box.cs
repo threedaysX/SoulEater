@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class box : MonoBehaviour
+public class Box : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Fragment PutFrag;
     public string fName;
@@ -20,5 +19,20 @@ public class box : MonoBehaviour
         AllFragment.Instance.fragments[id].m_Data = new F_Data();
         CurrentData.Instance.currentFragmentID = id;
         AllFragment.Instance.fragments[id].m_Data.init(fName,PutFrag.m_Data.touchPos_v2,id);
+    }
+
+    public void OnDrag(PointerEventData e)
+    {
+        transform.position = Input.mousePosition;
+    }
+
+    public void OnEndDrag(PointerEventData e)
+    {
+        
+    }
+
+    public void OnDrop(PointerEventData e)
+    {
+
     }
 }
