@@ -103,11 +103,10 @@ MonoBehaviour:
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
-  isSoundAffectByDistance: 0
   inRenderSound: {fileID: 0}
   inCastSound: {fileID: 0}
   inUsingSound: {fileID: 0}
-  inUsingParticle: {fileID: 0}
+  inUsingParticle: {fileID: 8760472359852031968}
   naraCircleBurstData: {fileID: 11400000, guid: f97a2073fa528e9439a62c3ec9763369,
     type: 2}
   igniteDuration: 4
@@ -193,6 +192,12 @@ GameObject:
 --- !u!4 &5156698267672921401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6403688941944544951, guid: e378f2ea128a365478d1075357902036,
+    type: 3}
+  m_PrefabInstance: {fileID: 2255807442673195918}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8760472359852031968 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7412168353397892206, guid: e378f2ea128a365478d1075357902036,
     type: 3}
   m_PrefabInstance: {fileID: 2255807442673195918}
   m_PrefabAsset: {fileID: 0}
