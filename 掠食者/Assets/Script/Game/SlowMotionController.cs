@@ -6,11 +6,20 @@ public class SlowMotionController : Singleton<SlowMotionController>
 {
     public float slowdownFactor = 0.05f;
     public float slowdownLength = 2f;
+    public bool isOpenUI;
+
+    private void Start()
+    {
+        isOpenUI = false;
+    }
 
     private void Update()
     {
-        Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
-        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        if (!isOpenUI)
+        {
+            Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+        }
     }
 
     public void DoSlowMotion(float slowdownFactor, float slowdownLength)

@@ -60,6 +60,9 @@ public class DieController : MonoBehaviour
         // Finally, ReSet Layer as same as character.
         soul.gameObject.layer = character.gameObject.layer;
         // ResetCamera.
-        CinemachineCameraControl.Instance.GetCurrentActiveCamera().Follow = soul;
+        if (soul.gameObject.CompareTag("Player"))
+        {
+            CinemachineCameraControl.Instance.GetCurrentActiveCamera().Follow = soul;
+        }
     }
 }

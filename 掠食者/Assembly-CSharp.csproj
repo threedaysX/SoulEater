@@ -171,6 +171,7 @@
     <Compile Include="Assets\Script\Game\Camera\FadeScreen.cs" />
     <Compile Include="Assets\Script\Game\Camera\TransitionPlayer.cs" />
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
+    <Compile Include="Assets\Script\Game\Door.cs" />
     <Compile Include="Assets\Script\Game\EndGameManager.cs" />
     <Compile Include="Assets\Script\Game\FormulaControl\DamageController.cs" />
     <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />
@@ -204,11 +205,11 @@
     <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />
     <Compile Include="Assets\Script\tsumiki\AllFragment.cs" />
     <Compile Include="Assets\Script\tsumiki\AllStar.cs" />
-    <Compile Include="Assets\Script\tsumiki\Box.cs" />
     <Compile Include="Assets\Script\tsumiki\CurrentData.cs" />
     <Compile Include="Assets\Script\tsumiki\ExtendedStandaloneInputModule.cs" />
     <Compile Include="Assets\Script\tsumiki\Fragment.cs" />
     <Compile Include="Assets\Script\tsumiki\RaycastMask.cs" />
+    <Compile Include="Assets\Script\tsumiki\box.cs" />
     <Compile Include="Assets\Script\tsumiki\chip.cs" />
     <Compile Include="Assets\Script\tsumiki\star.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

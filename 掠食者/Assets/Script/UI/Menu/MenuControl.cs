@@ -23,6 +23,10 @@ public class MenuControl : Singleton<MenuControl>
             if (menu.activeSelf)
             {
                 menuEscStack.Pop().escButton.onClick.Invoke();
+                if (menuEscStack.Count == 0)
+                {
+                    SlowMotionController.Instance.isOpenUI = false;
+                }
             }
             else
             {
@@ -61,5 +65,6 @@ public class MenuControl : Singleton<MenuControl>
             return;
         }
         defaultSelectedButton.Select();
+        SlowMotionController.Instance.isOpenUI = true;
     }
 }
