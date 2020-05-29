@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 40
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -337,7 +337,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4786,13 +4786,13 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -656424413
-  m_SortingLayer: 5
+  m_SortingLayerID: 924926267
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

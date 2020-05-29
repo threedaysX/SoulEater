@@ -1521,7 +1521,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -1530,6 +1530,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &83831571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1573,6 +1575,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -2059,7 +2062,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -2068,6 +2071,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &99914654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2111,6 +2116,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -4049,7 +4055,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -4058,6 +4064,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &311335490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4101,6 +4109,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -4428,7 +4437,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -4437,6 +4446,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &325267407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4480,6 +4491,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -4973,7 +4985,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -4982,6 +4994,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &380351945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5025,6 +5039,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -5427,7 +5442,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -5436,6 +5451,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &390744265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5479,6 +5496,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -6157,7 +6175,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -6166,6 +6184,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &422026490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6209,6 +6229,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -8465,7 +8486,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -8474,6 +8495,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &679363417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8517,6 +8540,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -8918,7 +8942,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -8927,6 +8951,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &693382590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8970,6 +8996,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -10264,7 +10291,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -10273,6 +10300,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &798529140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10316,6 +10345,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -10921,7 +10951,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -10930,6 +10960,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &842709574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10973,6 +11005,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -11602,7 +11635,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -11611,6 +11644,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &883760172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11654,6 +11689,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -12325,7 +12361,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -12334,6 +12370,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &904019988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12377,6 +12415,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -12704,7 +12743,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -12713,6 +12752,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &904150359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12756,6 +12797,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -14049,7 +14091,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -14058,6 +14100,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &995504514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14101,6 +14145,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -14621,7 +14666,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -14630,6 +14675,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1013436813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14673,6 +14720,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -17341,7 +17389,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -17350,6 +17398,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1193448763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17393,6 +17443,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -17717,7 +17768,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -17726,6 +17777,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1194194333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17769,6 +17822,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -18557,6 +18611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menu: {fileID: 32540077}
+  defaultButtonEvents: {fileID: 773580211}
   defaultOpenMenuContent: {fileID: 413138295}
   defaultSelectedButton: {fileID: 90250749}
 --- !u!1 &1271100532
@@ -19679,7 +19734,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -19688,6 +19743,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1385836750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19731,6 +19788,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -20512,7 +20570,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -20521,6 +20579,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1417333692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20564,6 +20624,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -20964,7 +21025,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -20973,6 +21034,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1423627094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21016,6 +21079,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -22217,6 +22281,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -22815,7 +22880,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -22824,6 +22889,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1524816348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22867,6 +22934,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -25299,7 +25367,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -25308,6 +25376,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1762335689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25351,6 +25421,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -26735,8 +26806,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterSoundAudio: {fileID: 52913540}
-  backgroundSoundAudio: {fileID: 3740463}
-  backgroundSoundSlider: {fileID: 1198062150}
+  masterSoundSlider: {fileID: 0}
+  musicSoundAudio: {fileID: 0}
+  musicSoundSlider: {fileID: 0}
   effectSoundAudio: {fileID: 2098386086}
   effectSoundSlider: {fileID: 1170461663}
 --- !u!114 &1892817118
@@ -27403,7 +27475,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -27412,6 +27484,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &1946234762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27455,6 +27529,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -29230,7 +29305,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -29239,6 +29314,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &2083906969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29282,6 +29359,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0
@@ -30195,7 +30273,7 @@ MonoBehaviour:
   lastAction: {fileID: 0}
   detectDistance: 30
   overridedAactionDelay: 0
-  weightOffset: 1
+  maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
   chaseTarget: {fileID: 0}
@@ -30204,6 +30282,8 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
+  preAttackSound: {fileID: 0}
+  preAttackHint: {fileID: 0}
 --- !u!114 &2130815150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30247,6 +30327,7 @@ MonoBehaviour:
   attackCenterPoint: {fileID: 0}
   hitEffect: {fileID: 0}
   attackHitboxes: {fileID: 0}
+  basicShakeCameraForce: 0
   hasHit: 0
   hasHitInTime: 0
   takeHowMuchDamage: 0

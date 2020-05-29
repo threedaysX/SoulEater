@@ -20,6 +20,8 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
 
     public void SetHealthUI(float maxHealth, float currentHealth)
     {
+        if (maxHpText == null || currentHpText == null)
+            return;
         maxHpText.text = maxHealth.ToString();
         currentHpText.text = currentHealth.ToString();
         HealthManaControl.Instance.SetHealthBar(healthBar, maxHealth, currentHealth);
@@ -27,6 +29,9 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
 
     public void SetManaUI(float maxMana, float currentMana)
     {
+        if (manas == null || maxManaText == null || currentManaText == null)
+            return;
+
         int manaLimit = manas.Length;
         maxManaText.text = maxMana.ToString();
         currentManaText.text = currentMana.ToString();

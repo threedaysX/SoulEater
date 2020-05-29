@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdd9154f6146e848a060cb9de2c36ec, type: 3}
   m_Name: Nara Burst Action
   m_EditorClassIdentifier: 
+  ActionWeight: 5
   originalActionWeight: 6
-  actionDelay: 0.4
+  commonActionDelay: 0.4
+  clips:
+  - {fileID: 7400000, guid: 495a093930ba4e745b4a615b560c9ff6, type: 2}
   minusWeightAmountWhenNotSuccess: 1
   minusWeightAmountAfterAction: 3
-  _diffCount: 0
+  _diffCount: 3
   actionType: 5
   judjements:
   - {fileID: 11400000, guid: cfaae396b8725e849bf6306bbce15876, type: 2}

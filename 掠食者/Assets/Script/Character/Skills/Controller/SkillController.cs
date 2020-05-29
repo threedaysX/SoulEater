@@ -14,7 +14,7 @@ public class SkillController : MonoBehaviour
         ResetAllSkillCoolDown();
     }
 
-    public bool Trigger(Skill skill)
+    public bool Trigger(Skill skill, bool ignoreCoolDown)
     {
         // 技能為空
         if (skill.prefab == null)
@@ -23,7 +23,7 @@ public class SkillController : MonoBehaviour
         }
 
         // 技能冷卻中
-        if (skill.cooling)
+        if (skill.cooling && !ignoreCoolDown)
         {
             return false;
         }
@@ -32,29 +32,29 @@ public class SkillController : MonoBehaviour
         switch (skill.costType)
         {
             case CostType.Health:
-                if (character.CurrentHealth < skill.cost)
+                if (character.CurrentHealth < skill.cost.Value)
                 {
                     return false;
                 }
-                character.CurrentHealth -= (int)skill.cost;
+                character.CurrentHealth -= (int)skill.cost.Value;
                 break;
             case CostType.Mana:
-                if (character.CurrentMana < skill.cost)
+                if (character.CurrentMana < skill.cost.Value)
                 {
                     return false;
                 }
-                character.CurrentMana -= skill.cost;
+                character.CurrentMana -= skill.cost.Value;
                 break;
         }
 
-        // 詠唱，結束後施放技能，持續N秒。
-        float castTime = skill.castTime * (1 - character.data.reduceCastTime.Value / 100);
-        Vector3 skillPoint = skillCenterPoint.position != null ? skillCenterPoint.position : character.transform.position;
-        Vector3 position = skillPoint + character.transform.right * skill.centerPositionOffset;
-        var skillObj = SkillPools.Instance.SpawnSkillFromPool(character, skill, position, character.transform.rotation);
+        // 詠唱，固定詠唱時間+ 結束後施放技能，持續N秒。
+        float totalCastTime = GetCastTime(skill);
+        Vector3 skillCenterPos = skillCenterPoint.position != null ? skillCenterPoint.position : character.transform.position;
+        Vector3 skillPos = skillCenterPos + character.transform.right * skill.centerPositionOffset;
+        GameObject skillObj = SkillPools.Instance.SpawnSkillFromPool(character, skill, skillPos, character.transform.rotation);
         if (skillObj != null)
         {
-            character.operationController.StartUseSkillAnim(StartCastSkill(skill, skillObj), StartUseSkill(skillObj), castTime, skill.duration);
+            character.operationController.StartUseSkillAnim(StartCastSkill(skill, totalCastTime, skillObj), StartUseSkill(skillObj), totalCastTime, skill.duration);
         }
 
         // 技能施放後就直接計算冷卻
@@ -63,9 +63,9 @@ public class SkillController : MonoBehaviour
         return true;
     }
 
-    private Action StartCastSkill(Skill skill, GameObject skillObj)
+    private Action StartCastSkill(Skill skill, float castTime, GameObject skillObj)
     {
-        if (skill.castTime <= 0)
+        if (castTime <= 0)
             return null;
 
         ISkillCaster skillCaster = skillObj.GetComponent<ISkillCaster>();
@@ -78,10 +78,15 @@ public class SkillController : MonoBehaviour
         return delegate { skilluse.UseSkill(); };
     }
 
+    protected float GetCastTime(Skill skill)
+    {
+        return skill.fixedCastTime.Value + skill.castTime.Value * (1 - character.data.reduceCastTime.Value / 100);
+    }
+
     protected IEnumerator GetIntoCoolDown(Skill skill)
     {
         skill.cooling = true;
-        float timer = skill.coolDown * (1 - character.data.reduceSkillCoolDown.Value / 100);
+        float timer = skill.coolDown.Value * (1 - character.data.reduceSkillCoolDown.Value / 100);
         while (timer > 0)
         {
             var frameTime = Time.deltaTime;
@@ -92,7 +97,7 @@ public class SkillController : MonoBehaviour
         skill.cooling = false;
     }
 
-    private void ResetAllSkillCoolDown()
+    public void ResetAllSkillCoolDown()
     {
         if (character.skillFields == null)
             return;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Teleport : DisposableSkill
 {
@@ -13,15 +11,21 @@ public class Teleport : DisposableSkill
     }
 
     /// <summary>
-    /// Teleport to last attack target back.
+    /// Teleport to last attack target back. If target is null, teleport foward.
     /// </summary>
     private void TeleportToTargetBack()
     {
         lastAttackTarget = sourceCaster.combatController.lastAttackTarget;
+        // Still can teleport.
         if (lastAttackTarget == null)
+        {
+            sourceCaster.transform.position = new Vector3(sourceCaster.transform.position.x + sourceCaster.transform.right.x * currentSkill.range.Value, sourceCaster.transform.position.y);
+            soundControl.PlaySound(teleportSound);
             return;
+        }
+
         // Need in skill range.
-        if (Vector3.Distance(lastAttackTarget.transform.position, sourceCaster.transform.position) > currentSkill.range)
+        if (Vector3.Distance(lastAttackTarget.transform.position, sourceCaster.transform.position) > currentSkill.range.Value)
             return;
 
         float x = (lastAttackTarget.transform.position + lastAttackTarget.transform.right * -1.2f).x;

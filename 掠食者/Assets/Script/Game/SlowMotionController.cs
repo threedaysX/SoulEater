@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class SlowMotionController : Singleton<SlowMotionController>
 {
-    // Start is called before the first frame update
-    void Start()
+    public float slowdownFactor = 0.05f;
+    public float slowdownLength = 2f;
+
+    private void Update()
     {
-        
+        Time.timeScale += (1f / slowdownLength) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DoSlowMotion(float slowdownFactor, float slowdownLength)
     {
-        
+        this.slowdownLength = slowdownLength;
+        Time.timeScale = slowdownFactor;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
     // 調整整體動畫速度
@@ -21,6 +25,13 @@ public class SlowMotionController : Singleton<SlowMotionController>
     {
         anim.speed = newSpeed;
     }
+}
+
+public enum SlowMotionTargetType
+{
+    Player,
+    Enemy,
+    Global
 }
 
 public class TimeScale
@@ -35,4 +46,5 @@ public class TimeScaleData
 {
     public float originTimeScale = 1;
     public float currentTimeScale = 1;
+    public float slowDownDuration = 1;
 }

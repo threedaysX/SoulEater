@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a74d3ee2742de8419b79618835c7def, type: 3}
   m_Name: FlamethrowerAction
   m_EditorClassIdentifier: 
+  ActionWeight: 6
   originalActionWeight: 6
-  actionDelay: 0.4
+  commonActionDelay: 0.4
+  clips:
+  - {fileID: 7400000, guid: 495a093930ba4e745b4a615b560c9ff6, type: 2}
   minusWeightAmountWhenNotSuccess: 2
   minusWeightAmountAfterAction: 2
   _diffCount: 0

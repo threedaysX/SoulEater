@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: CloseAttack_J1
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 4
+  actionWeightAfterJudge: 10
   conditionTrueCount: 1
   conditions:
   - {fileID: 11400000, guid: 819e1468151e5b94f8c70c5fb00e82e9, type: 2}

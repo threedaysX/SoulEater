@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: ShockWave_J1
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 6
-  conditionTrueCount: 1
+  actionWeightAfterJudge: 9
+  conditionTrueCount: 2
   conditions:
-  - {fileID: 11400000, guid: b34cf2400dd3c534ebd6eca1d50ff413, type: 2}
-  - {fileID: 11400000, guid: fc2e2fa21bcb7714991a7ab919d3442e, type: 2}
+  - {fileID: 11400000, guid: 819e1468151e5b94f8c70c5fb00e82e9, type: 2}
+  - {fileID: 11400000, guid: 6a7e0346b0ddcc0419c7605e9cdd086b, type: 2}
+  - {fileID: 11400000, guid: bb18838961d3c0845b4338c9ba3ed6d4, type: 2}

@@ -17,12 +17,50 @@ MonoBehaviour:
   elementType: 0
   skillName: "\u7DE9\u901F"
   description: 
-  range: 2
-  cost: 1
+  centerPositionOffset: 2
+  range:
+    BaseValue: 4
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   costType: 1
-  damageMagnification: 0
-  castTime: 0
-  coolDown: 8
+  damageMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  castTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   cooling: 0
   timesOfPerDamage: 0
   duration: 0

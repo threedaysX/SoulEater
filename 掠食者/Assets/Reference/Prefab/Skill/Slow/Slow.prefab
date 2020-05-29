@@ -53,7 +53,6 @@ MonoBehaviour:
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
-  isSoundAffectByDistance: 0
   inRenderSound: {fileID: 0}
   inCastSound: {fileID: 0}
   inUsingSound: {fileID: 8300000, guid: 7a9ff9d589277eb45b49f7c69510cdb1, type: 3}
@@ -114,8 +113,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -656424413
-  m_SortingLayer: 5
+  m_SortingLayerID: 924926267
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c93f5684a8621bc49878c95a00a68ea8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

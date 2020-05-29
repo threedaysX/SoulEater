@@ -17,12 +17,50 @@ MonoBehaviour:
   elementType: 6
   skillName: "\u6CBB\u7652"
   description: 
-  range: 2
-  cost: 2
+  centerPositionOffset: 0
+  range:
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   costType: 1
-  damageMagnification: 100
-  castTime: 0
-  coolDown: 8
+  damageMagnification:
+    BaseValue: 100
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  castTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 8
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   cooling: 0
   timesOfPerDamage: 1
   duration: 0

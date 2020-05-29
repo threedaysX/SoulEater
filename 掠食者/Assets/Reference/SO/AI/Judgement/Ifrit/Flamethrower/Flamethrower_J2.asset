@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: Flamethrower_J2
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 7
-  conditionTrueCount: 2
+  actionWeightAfterJudge: 6
+  conditionTrueCount: 1
   conditions:
-  - {fileID: 11400000, guid: 97ac49680b3fb2341a3fe94cd83284a6, type: 2}
+  - {fileID: 11400000, guid: 99c6da398197b5241972189fd2b7f102, type: 2}
   - {fileID: 11400000, guid: 031c217add8bcc84f99a8fc60e26d39e, type: 2}

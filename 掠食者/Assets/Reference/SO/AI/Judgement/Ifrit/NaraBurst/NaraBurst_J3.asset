@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: NaraBurst_J3
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 9
-  conditionTrueCount: 0
+  actionWeightAfterJudge: 8
+  conditionTrueCount: 1
   conditions:
-  - {fileID: 11400000, guid: 7528d1cadae732642be363446f426662, type: 2}
+  - {fileID: 11400000, guid: 7eb3b37277d37de469b837a216a8f9df, type: 2}
   - {fileID: 11400000, guid: 4c438329aa0aa4141ae12dcb7867639d, type: 2}

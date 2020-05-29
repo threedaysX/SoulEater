@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0b4ed057c20594db495312fd36ca70, type: 3}
   m_Name: CloseBasicAttack
   m_EditorClassIdentifier: 
+  ActionWeight: 7
   originalActionWeight: 7
-  actionDelay: 0
+  commonActionDelay: 0
+  clips:
+  - {fileID: 7400000, guid: 670e634f9d9884e489ba7620038d7b11, type: 2}
+  - {fileID: 7400000, guid: 824e0f5df29572645aac1566c43f6ad3, type: 2}
   minusWeightAmountWhenNotSuccess: 2
-  minusWeightAmountAfterAction: 2
+  minusWeightAmountAfterAction: 1
   _diffCount: 0
   actionType: 4
   judjements:

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e40d2be3fe9fb041ac19e4968314064, type: 3}
   m_Name: SelfHealAction
   m_EditorClassIdentifier: 
+  ActionWeight: 5
   originalActionWeight: 5
-  actionDelay: 0
+  commonActionDelay: 0.2
+  clips: []
   minusWeightAmountWhenNotSuccess: 2
   minusWeightAmountAfterAction: 1
   _diffCount: 0

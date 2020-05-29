@@ -80,6 +80,7 @@ public class Character : MonoBehaviour
     public CharacterData data;
     [Header("技能欄")]
     public List<Skill> skillFields;
+    private Dictionary<string, int> skillDictionary;    
     #endregion
 
     #region 控制器
@@ -90,12 +91,12 @@ public class Character : MonoBehaviour
     [HideInInspector] public BuffController buffController; // 狀態控制
     [HideInInspector] public CombatController combatController; // 戰鬥控制
     [HideInInspector] public KnockStunSystem knockBackSystem; // 擊退控制
+    [HideInInspector] public DieController dieController; // 擊退控制
     [HideInInspector] public Animator anim;
     #endregion
 
     private void Awake()
     {
-        this.gameObject.AddComponent<KnockStunSystem>();
         operationSoundController = GetComponent<OperationSoundController>();
         weaponController = GetComponent<WeaponController>();
         operationController = GetComponent<OperationController>();
@@ -103,15 +104,18 @@ public class Character : MonoBehaviour
         buffController = GetComponent<BuffController>();
         combatController = GetComponent<CombatController>();
         knockBackSystem = GetComponent<KnockStunSystem>();
+        dieController = GetComponent<DieController>();
         anim = GetComponent<Animator>();
 
-        ResetBaseData();
-        InitBasicOperation();
-
-        CurrentHealth = data.maxHealth.Value;
-        CurrentMana = data.maxMana.Value;
+        ReBorn();
     }
 
+    public virtual void LateUpdate()
+    {
+        CheckOperationAvoidLockAllDays();
+    }
+
+    #region Damage & TakeDamage & Knock & Die
     /// <summary>
     /// 受到傷害
     /// </summary>
@@ -120,28 +124,32 @@ public class Character : MonoBehaviour
     /// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
     /// <param name="duration">持續時間</param>
     /// <param name="damageImmediate">是否立即造成傷害</param>
-    public virtual void TakeDamage(int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    public virtual bool TakeDamage(int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
     {
         if (isImmune)
         {
-            return;
+            return false;
         }
         if (damage <= 0)
         {
             damage = 0;
-            DamagePopup(damage, isCritical, damageDirectionX);
-            return;
+            DamagePopup(damage, isCritical);
+            return true;
         }
 
         if (timesOfPerDamage <= 0 || duration <= 0)
         {
             CurrentHealth -= damage;
             cumulativeDamageTake += damage;
+            if (CurrentHealth <= 0)
+            {
+                Die();
+            }
             if (this != null)
             {
                 StartCoroutine(TakeDamageColorChanged(0.1f));
             }
-            DamagePopup(damage, isCritical, damageDirectionX);
+            DamagePopup(damage, isCritical);
             KnockBackCheck(damageDirectionX, weaponKnockBackForce);
         }
         else
@@ -149,11 +157,7 @@ public class Character : MonoBehaviour
             // 流血...等持續性傷害
             StartCoroutine(TakeDamagePerSecondInDuration(damage, timesOfPerDamage, duration, damageImmediate));
         }
-
-        if (CurrentHealth <= 0)
-        {
-            Die();
-        }
+        return true;
     }
 
     /// <summary>
@@ -185,53 +189,6 @@ public class Character : MonoBehaviour
         yield break;
     }
 
-    public void DamagePopup(int damage, bool isCritical, float damageDirectionX = 0)
-    {
-        ObjectPools.Instance.DamagePopup("DamageText", isCritical, damage,
-                transform.position + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(2.2f, 2.6f), 0), damageDirectionX);
-    }
-
-    public IEnumerator TakeDamageColorChanged(float duration)
-    {
-        var sprite = GetComponent<SpriteRenderer>();
-        Color originColor = new Color32(255, 255, 255, 255);
-        sprite.color = new Color32(255, 100, 100, 230);
-        yield return new WaitForSeconds(duration);
-        sprite.color = originColor;
-    }
-
-    public virtual void Die()
-    {
-        this.StopAllCoroutines();
-        Destroy(this.gameObject);
-    }
-
-    public virtual bool UseSkill(Skill skill)
-    {
-        if (skill == null || !useSkill.canDo)
-            return false;
-        return skillController.Trigger(skill);
-    }
-
-    public virtual void LearnSkill(Skill skill)
-    {
-        skillFields.Add(skill);
-    }
-
-    public virtual bool StartAttack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
-    {
-        bool attackSuccess = false;
-        if (attack.canDo)
-        {
-            attackSuccess = operationController.StartAttackAnim(delegate 
-            { 
-                return combatController.Attack(attackType, elementType); 
-            });
-        }
-
-        return attackSuccess;
-    }
-
     /// <summary>
     /// 傷害吸血、吸魔
     /// </summary>
@@ -252,7 +209,7 @@ public class Character : MonoBehaviour
         if (damage <= 0)
             return;
 
-        switch (isAttack) 
+        switch (isAttack)
         {
             case true:
                 float attackLifeSteal = data.attackLifeSteal.Value / 100;
@@ -288,13 +245,80 @@ public class Character : MonoBehaviour
         }
     }
 
+    public void DamagePopup(int damage, bool isCritical)
+    {
+        ObjectPools.Instance.DamagePopup("DamageText", isCritical, damage,
+                transform.position + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(2.2f, 2.6f), 0));
+    }
+
+    public IEnumerator TakeDamageColorChanged(float duration)
+    {
+        var sprite = GetComponent<SpriteRenderer>();
+        Color originColor = new Color32(255, 255, 255, 255);
+        sprite.color = new Color32(255, 100, 100, 230);
+        yield return new WaitForSeconds(duration);
+        sprite.color = originColor;
+    }
+
+    public virtual void Die()
+    {
+        dieController.StartDie();
+    }
+    #endregion
+
+    #region Skill
+    public virtual bool UseSkill(Skill skill, bool ignoreCoolDown = false, bool ignoreCanDo = false)
+    {
+        if (skill == null || (!useSkill.canDo && !ignoreCanDo))
+            return false;
+        return skillController.Trigger(skill, ignoreCoolDown);
+    }
+
+    public virtual void LearnSkill(Skill skill)
+    {
+        skillFields.Add(skill);
+    }
+
+    public Skill GetSkillByName(string skillName)
+    {
+        return skillFields[skillDictionary[skillName]];
+    }
+    #endregion
+    
+    #region Attack
+    public virtual bool StartAttack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
+    {
+        bool attackSuccess = false;
+        if (attack.canDo)
+        {
+            attackSuccess = operationController.StartAttackAnim(delegate 
+            { 
+                return combatController.Attack(attackType, elementType); 
+            });
+        }
+
+        return attackSuccess;
+    }
+    #endregion
+
+    #region Operation
     /// <summary>
     /// 一次調整所有行動 (用在擊暈等重大影響的異常or特定動作，表示在此影響結束前，不得進行其他動作)
     /// </summary>
-    /// <param name="canDo">若True，代表恢復正常行動，反之則鎖定所有行動</param>
-    public void SetOperation(LockType lockType, bool canDo = true)
+    /// <param name="islock">若True，代表鎖定所有行動，反之則恢復正常行動</param>
+    public void LockOperation(LockType lockType, bool islock, float nextUnLockTime = 0)
     {
-        if (canDo)
+        if (islock)
+        {
+            move.Lock(lockType, nextUnLockTime);
+            jump.Lock(lockType, nextUnLockTime);
+            evade.Lock(lockType, nextUnLockTime);
+            attack.Lock(lockType, nextUnLockTime);
+            useSkill.Lock(lockType, nextUnLockTime);
+            freeDirection.Lock(lockType, nextUnLockTime);
+            isLockAction = true;
+        }
+        else
         {
             move.UnLock(lockType);
             jump.UnLock(lockType);
@@ -304,18 +328,15 @@ public class Character : MonoBehaviour
             freeDirection.UnLock(lockType);
             isLockAction = false;
         }
-        else
-        {
-            move.Lock(lockType);
-            jump.Lock(lockType);
-            evade.Lock(lockType);
-            attack.Lock(lockType);
-            useSkill.Lock(lockType);
-            freeDirection.Lock(lockType);
-            isLockAction = true;
-        }
     }
 
+    protected void CheckOperationAvoidLockAllDays()
+    {
+        
+    }
+    #endregion
+
+    #region Immune
     /// <summary>
     /// 進入無敵狀態
     /// </summary>
@@ -348,28 +369,109 @@ public class Character : MonoBehaviour
         }
         isImmune = false;
     }
+    #endregion
 
     #region DataInitialize
+    public virtual void ReBorn()
+    {
+        ResetBaseData();
+        ResetStatsDirtyData();
+        ResetSkillDictionaryIndex();
+        InitBasicOperation();
+    }
+
     public void ResetBaseData()
     {
         DataInitializer dataInitializer = new DataInitializer(data.status);
-        this.data.maxHealth.BaseValue = dataInitializer.GetMaxHealth();
-        this.data.maxMana.BaseValue = dataInitializer.GetMaxMana();
-        this.data.attack.BaseValue = dataInitializer.GetAttack();
-        this.data.magicAttack.BaseValue = dataInitializer.GetMagicAttack();
-        this.data.defense.BaseValue = dataInitializer.GetDefense();
-        this.data.critical.BaseValue = dataInitializer.GetCritical();
-        this.data.criticalDamage.BaseValue = dataInitializer.GetCriticalDamage();
-        this.data.knockBackDamage.BaseValue = dataInitializer.GetKnockbackDamage();
-        this.data.manaStealOfPoint.BaseValue = dataInitializer.GetManaStealOfPoint();
-        this.data.manaStealOfDamage.BaseValue = dataInitializer.GetManaStealOfDamage();
-        this.data.jumpForce.BaseValue = dataInitializer.GetJumpForce();
-        this.data.moveSpeed.BaseValue = dataInitializer.GetMoveSpeed();
-        this.data.attackDelay.BaseValue = dataInitializer.GetAttackDelay();
-        this.data.reduceSkillCoolDown.BaseValue = dataInitializer.GetSkillCoolDownReduce();
-        this.data.reduceCastTime.BaseValue = dataInitializer.GetCastTimeReduce();
-        this.data.evadeCoolDown.BaseValue = dataInitializer.GetEvadeCoolDownDuration();
-        this.data.recoverFromKnockStunTime.BaseValue = dataInitializer.GetRecoverFromKnockStunTime();
+        data.maxHealth.BaseValue = dataInitializer.GetMaxHealth();
+        data.maxMana.BaseValue = dataInitializer.GetMaxMana();
+        data.attack.BaseValue = dataInitializer.GetAttack();
+        data.magicAttack.BaseValue = dataInitializer.GetMagicAttack();
+        data.defense.BaseValue = dataInitializer.GetDefense();
+        data.critical.BaseValue = dataInitializer.GetCritical();
+        data.criticalDamage.BaseValue = dataInitializer.GetCriticalDamage();
+        data.knockBackDamage.BaseValue = dataInitializer.GetKnockbackDamage();
+        data.manaStealOfPoint.BaseValue = dataInitializer.GetManaStealOfPoint();
+        data.manaStealOfDamage.BaseValue = dataInitializer.GetManaStealOfDamage();
+        data.jumpForce.BaseValue = dataInitializer.GetJumpForce();
+        data.moveSpeed.BaseValue = dataInitializer.GetMoveSpeed();
+        data.attackDelay.BaseValue = dataInitializer.GetAttackDelay();
+        data.reduceSkillCoolDown.BaseValue = dataInitializer.GetSkillCoolDownReduce();
+        data.reduceCastTime.BaseValue = dataInitializer.GetCastTimeReduce();
+        data.evadeCoolDown.BaseValue = dataInitializer.GetEvadeCoolDownDuration();
+        data.recoverFromKnockStunTime.BaseValue = dataInitializer.GetRecoverFromKnockStunTime();
+
+        CurrentHealth = data.maxHealth.Value;
+        CurrentMana = data.maxMana.Value;
+    }
+
+    public void ResetStatsDirtyData()
+    {
+        #region NormalData
+        data.maxHealth.ResetDirtyStats();
+        data.maxMana.ResetDirtyStats();
+        data.attack.ResetDirtyStats();
+        data.attackDelay.ResetDirtyStats();
+        data.attackLifeSteal.ResetDirtyStats();
+        data.attackRange.ResetDirtyStats();
+        data.critical.ResetDirtyStats();
+        data.criticalDamage.ResetDirtyStats();
+        data.defense.ResetDirtyStats();
+        data.evadeCoolDown.ResetDirtyStats();
+        data.jumpForce.ResetDirtyStats();
+        data.knockBackDamage.ResetDirtyStats();
+        data.magicAttack.ResetDirtyStats();
+        data.manaStealOfDamage.ResetDirtyStats();
+        data.manaStealOfPoint.ResetDirtyStats();
+        data.maxHealth.ResetDirtyStats();
+        data.maxMana.ResetDirtyStats();
+        data.moveSpeed.ResetDirtyStats();
+        data.penetrationMagnification.ResetDirtyStats();
+        data.penetrationValue.ResetDirtyStats();
+        data.recoverFromKnockStunTime.ResetDirtyStats();
+        data.reduceCastTime.ResetDirtyStats();
+        data.reduceSkillCoolDown.ResetDirtyStats();
+        #endregion
+        #region Resistance
+        data.resistance.air.ResetDirtyStats();
+        data.resistance.dark.ResetDirtyStats();
+        data.resistance.earth.ResetDirtyStats();
+        data.resistance.fire.ResetDirtyStats();
+        data.resistance.light.ResetDirtyStats();
+        data.resistance.thunder.ResetDirtyStats();
+        data.resistance.thunder.ResetDirtyStats();
+        data.resistance.water.ResetDirtyStats();
+        #endregion
+        #region Status
+        data.skillLifeSteal.ResetDirtyStats();
+        data.status.agility.ResetDirtyStats();
+        data.status.dexterity.ResetDirtyStats();
+        data.status.intelligence.ResetDirtyStats();
+        data.status.lucky.ResetDirtyStats();
+        data.status.strength.ResetDirtyStats();
+        data.status.vitality.ResetDirtyStats();
+        #endregion
+        #region Skill
+        foreach (Skill skill in skillFields)
+        {
+            skill.castTime.ResetDirtyStats();
+            skill.coolDown.ResetDirtyStats();
+            skill.cost.ResetDirtyStats();
+            skill.damageMagnification.ResetDirtyStats();
+            skill.fixedCastTime.ResetDirtyStats();
+            skill.range.ResetDirtyStats();
+        }
+        #endregion
+    }
+
+    public void ResetSkillDictionaryIndex()
+    {
+        skillDictionary = new Dictionary<string, int>();
+        int index = 0;
+        foreach (Skill skillField in skillFields)
+        {
+            skillDictionary.Add(skillField.skillName, index++);
+        }
     }
 
     private void InitBasicOperation()

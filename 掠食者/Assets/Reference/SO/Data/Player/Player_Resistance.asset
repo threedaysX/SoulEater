@@ -15,32 +15,56 @@ MonoBehaviour:
   none:
     BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 100
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   fire:
     BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 0
+    FinalValue: 100
+    ForceValue: 50
+    toForceChangeValue: 1
+    modifiers: []
   water:
     BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   earth:
     BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   air:
     BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   thunder:
     BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   light:
     BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   dark:
     BaseValue: 100
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []

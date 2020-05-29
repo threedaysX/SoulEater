@@ -35,10 +35,13 @@ public class NaraBurst : DisposableSkill
     {
         base.CastSkill();
 
+        float rangeDelay = currentSkill.fixedCastTime.Value / burstLimitCount;
+        float upperRangeDelay = rangeDelay * 0.6f;
+        float lowerRangeDelay = rangeDelay * 0.4f;
         float currentDelay = 0;
         for (int i = 0; i < burstLimitCount; i++)
         {
-            currentDelay += Random.Range(0.1f, 0.2f);
+            currentDelay += Random.Range(lowerRangeDelay, upperRangeDelay);
             StartCoroutine(RenderBurstHint(GetRandomPos(), currentDelay));
         }
     }
@@ -50,8 +53,8 @@ public class NaraBurst : DisposableSkill
         float currentCount = 1;
         foreach (var burst in bursts)
         {
-            StartCoroutine(StartBurst(burst.transform, burst.delay, currentCount, burstLimitCount));
             currentCount++;
+            StartCoroutine(StartBurst(burst.transform, burst.delay, currentCount, burstLimitCount));
         }
     }
 
@@ -73,16 +76,16 @@ public class NaraBurst : DisposableSkill
         burst.GetComponent<NaraCircleBurst>().UseSkill();
         if (currentCount == finalCount)
         {
-            StartCoroutine(SetActiveAfterSkillDone(0.4f));
+            StartCoroutine(SetActiveAfterSkillDone(0.3f));
         }
     }
 
     private Vector3 GetRandomPos()
     {
         // 將在這塊方形的範圍內生成爆炸(點)
-        float x = Random.Range(this.transform.position.x - currentSkill.range / 2, this.transform.position.x + currentSkill.range / 2);
+        float x = Random.Range(this.transform.position.x - this.transform.right.x * currentSkill.range.Value * 0.4f, this.transform.position.x + this.transform.right.x * currentSkill.range.Value * 0.6f);
         // 技能範圍窄化
-        float y = Random.Range(this.transform.position.y - currentSkill.range / 8, this.transform.position.y + currentSkill.range / 8);
+        float y = Random.Range(this.transform.position.y, this.transform.position.y + currentSkill.range.Value * 0.15f);
 
         return new Vector3(x, y, 0);
     }

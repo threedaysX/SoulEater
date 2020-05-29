@@ -13,95 +13,161 @@ MonoBehaviour:
   m_Name: Player_Data
   m_EditorClassIdentifier: 
   maxHealth:
-    BaseValue: 1882
-    AdditionalValue: 400
-    FinalValue: 2282
+    BaseValue: 2195
+    AdditionalValue: -2000
+    FinalValue: 195
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   maxMana:
     BaseValue: 5
     AdditionalValue: 8
     FinalValue: 13
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   attack:
-    BaseValue: 100
+    BaseValue: 134
     AdditionalValue: 0
-    FinalValue: 100
+    FinalValue: 134
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   magicAttack:
     BaseValue: 82
     AdditionalValue: 0
     FinalValue: 7
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   defense:
     BaseValue: 8.8
     AdditionalValue: 0
-    FinalValue: 34.4
+    FinalValue: 8.8
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   critical:
     BaseValue: 20
     AdditionalValue: 0
     FinalValue: 20
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   criticalDamage:
     BaseValue: 150
     AdditionalValue: 0
     FinalValue: 150
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   knockBackDamage:
-    BaseValue: 706
+    BaseValue: 823
     AdditionalValue: 0
-    FinalValue: 706
+    FinalValue: 823
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   penetrationValue:
     BaseValue: 0
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   penetrationMagnification:
     BaseValue: 0
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   resistance: {fileID: 11400000, guid: a4ac07dda096bc7469d2fbe5a7c908da, type: 2}
   status: {fileID: 11400000, guid: 1ab81751b173d454496b33a3ac4ed2b2, type: 2}
   jumpForce:
+    BaseValue: 1.2
+    AdditionalValue: 0
+    FinalValue: 1.2
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  moveSpeed:
     BaseValue: 1
     AdditionalValue: 0
     FinalValue: 1
-  moveSpeed:
-    BaseValue: 1
-    AdditionalValue: 1
-    FinalValue: 1.99
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   attackDelay:
-    BaseValue: 0.322
+    BaseValue: 0.4
     AdditionalValue: 0
-    FinalValue: 0.322
+    FinalValue: 0.4
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   attackRange:
     BaseValue: 2
     AdditionalValue: 0
     FinalValue: 2
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   reduceSkillCoolDown:
-    BaseValue: 9.6
+    BaseValue: 8
     AdditionalValue: 0
-    FinalValue: 9.6
+    FinalValue: 8
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   reduceCastTime:
-    BaseValue: 27
+    BaseValue: 25
     AdditionalValue: 0
-    FinalValue: 27
+    FinalValue: 25
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   evadeCoolDown:
-    BaseValue: 0.73616004
+    BaseValue: 0.75488
     AdditionalValue: 0
-    FinalValue: 0.7362
+    FinalValue: 0.7549
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   recoverFromKnockStunTime:
     BaseValue: 0.1
     AdditionalValue: 0
     FinalValue: 0.1
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   attackLifeSteal:
     BaseValue: 0
     AdditionalValue: 3
     FinalValue: 3
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   skillLifeSteal:
     BaseValue: 0
     AdditionalValue: 0
     FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   manaStealOfPoint:
     BaseValue: 1
     AdditionalValue: 0
     FinalValue: 1
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   manaStealOfDamage:
     BaseValue: 1700
     AdditionalValue: 0
     FinalValue: 1700
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   cycleAttackCount: 2
   weaponKnockBackForce: 1
   hitEffectPrefab: {fileID: 200774275785904254, guid: 981e7e49479851a4ca1cfce2e6346d60,

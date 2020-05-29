@@ -33,6 +33,7 @@ public class DashSlash : DisposableSkill
         {
             isHit = true;
             Character target = targetCol.GetComponent<Character>();
+            StartCoroutine(LockEnemyAction(target, 1.8f));
             StartCoroutine(DamageTargetCoroutine(target));
         }
     }
@@ -40,7 +41,7 @@ public class DashSlash : DisposableSkill
     // 實際造成傷害的方式
     private IEnumerator DamageTargetCoroutine(Character target)
     {
-        StartCoroutine(LockEnemyAction(target, 1.8f));
+        SetSkillEnable(false);  // 避免觸發二次傷害，內心也會受傷
         yield return new WaitForSeconds(1f);
 
         // 第1段攻擊
@@ -86,9 +87,9 @@ public class DashSlash : DisposableSkill
     // 使用技能後，立即鎖定敵人動作
     private IEnumerator LockEnemyAction(Character target, float duration)
     {
-        target.SetOperation(LockType.SkillAction, false);
+        target.LockOperation(LockType.SkillAction, true, duration);
         yield return new WaitForSeconds(duration);
-        target.SetOperation(LockType.SkillAction, true);
+        target.LockOperation(LockType.SkillAction, false);
     }
 
     // 使用技能後，立即進入無敵狀態
@@ -100,8 +101,8 @@ public class DashSlash : DisposableSkill
     // 使用技能後，立即進入短暫黑畫面與畫面特寫
     private void GetInDarkScreen()
     {
-        StartCoroutine(FadeScreen.Instance.Fade(1.2f, 1.2f));
-        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3f, duration = 0.2f, afterDelay = 0.8f };
+        StartCoroutine(FadeScreen.Instance.Fade(1.6f, 1.6f));
+        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3.4f, duration = 0.2f, afterDelay = 0.8f };
         ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.5f, afterDelay = 0f };
         CinemachineCameraControl.Instance.ZoomInCameraActions(zoomInSetting, resetCameraSetting);
     }
@@ -112,7 +113,7 @@ public class DashSlash : DisposableSkill
     private void MoveFoward()
     {
         StartCoroutine(MoveToPosition(sourceCaster.transform
-            , sourceCaster.transform.position + sourceCaster.transform.right * 6f
+            , sourceCaster.transform.position + sourceCaster.transform.right * currentSkill.range.Value
             , 0.1f));
     }
     public IEnumerator MoveToPosition(Transform transform, Vector3 destination, float timeToMove)
@@ -131,7 +132,7 @@ public class DashSlash : DisposableSkill
 
     private IEnumerator HitDetect()
     {
-        yield return new WaitForSeconds(currentSkill.castTime + 0.2f);
+        yield return new WaitForSeconds(currentSkill.castTime.Value + 0.1f);
         if (isHit)
         {
             StartCoroutine(SetActiveAfterSkillDone(1.9f));
@@ -144,6 +145,6 @@ public class DashSlash : DisposableSkill
 
     private void CameraShakeWhenHit()
     {
-        CameraShake.Instance.ShakeCamera(1.6f, 0.4f, 0.1f, true);
+        CameraShake.Instance.ShakeCamera(1f, 8f, 0.1f, true);
     }
 }

@@ -15,14 +15,52 @@ MonoBehaviour:
   icon: {fileID: 0}
   skillType: 2
   elementType: 0
-  skillName: "\u5F8C\u5074\u6B65"
+  skillName: "\u80CC\u5411\u77AC\u79FB"
   description: 
-  range: 0
-  cost: 0.5
+  centerPositionOffset: 1
+  range:
+    BaseValue: 6
+    AdditionalValue: 0
+    FinalValue: 7
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   costType: 1
-  damageMagnification: 0
-  castTime: 0
-  coolDown: 3
+  damageMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  castTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 3
+    AdditionalValue: 0
+    FinalValue: 3
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   cooling: 0
   timesOfPerDamage: 0
   duration: 0

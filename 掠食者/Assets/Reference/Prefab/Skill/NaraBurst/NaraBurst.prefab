@@ -69,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 924926267
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -110,8 +110,8 @@ MonoBehaviour:
   naraCircleBurstData: {fileID: 11400000, guid: f97a2073fa528e9439a62c3ec9763369,
     type: 2}
   igniteDuration: 4
-  burstRadius: 2.5
-  burstLimitCount: 15
+  burstRadius: 3.2
+  burstLimitCount: 12
   renderSound: {fileID: 0}
   burstHint: {fileID: 5156698267672921402}
 --- !u!1001 &2255807442673195918
@@ -125,6 +125,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NaraCircleBurst
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403688941944544950, guid: e378f2ea128a365478d1075357902036,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 924926267
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403688941944544950, guid: e378f2ea128a365478d1075357902036,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6403688941944544951, guid: e378f2ea128a365478d1075357902036,
         type: 3}

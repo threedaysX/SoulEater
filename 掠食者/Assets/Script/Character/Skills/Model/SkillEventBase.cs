@@ -73,12 +73,6 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     /// <param name="caster">施放技能的人</param>
     public virtual void UseSkill()
     {
-        // 啟用技能
-        SetSkillEnable(true);
-
-        // 觸發立即性效果
-        InvokeAffect(immediatelyAffect);
-
         if (soundControl != null && inUsingSound != null)
         {
             soundControl.PlaySound(inUsingSound);
@@ -91,6 +85,12 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         {
             inUsingParticle.Play(true);
         }
+
+        // 啟用技能
+        SetSkillEnable(true);
+
+        // 觸發立即性效果
+        InvokeAffect(immediatelyAffect);
     }
 
     public virtual void CastSkill()
@@ -116,7 +116,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     /// <summary>
     /// 技能開始施放，可將Enabled為True
     /// </summary>
-    private void SetSkillEnable(bool enable)
+    protected void SetSkillEnable(bool enable)
     {
         // 技能貼圖
         SpriteRenderer sprite = GetComponent<SpriteRenderer>();
@@ -183,6 +183,9 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         float timeleft = duration;
         while (timeleft > 0)
         {
+            if (sourceCaster == null)
+                yield break;
+
             this.transform.position = sourceCaster.transform.position;
             timeleft -= Time.deltaTime;
             yield return null;

@@ -3,21 +3,31 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonEvent : MonoBehaviour, ISelectHandler
+public class ButtonEvent : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+    public bool canPressAnyKey;
     public GameObject pointer;
     public RectTransform targetPos;
     public UnityEvent onSelectEvent;
 
     public void OnSelect(BaseEventData e)
     {
-        if (!pointer.activeSelf)
+        if (pointer != null && !pointer.activeSelf)
         {
             pointer.SetActive(true);
             return;
         }
-        pointer.transform.position = targetPos.position;
+        if (targetPos != null)
+        {
+            pointer.transform.position = targetPos.position;
+        }
         ButtonEvents.Instance.selectedButton = GetComponent<Button>();
+        AudioControl.Instance.PlaySound(ButtonEvents.Instance.selectButtonSound);
         onSelectEvent.Invoke();
+    }
+
+    public void OnDeselect(BaseEventData e)
+    {
+        ButtonEvents.Instance.DeselectButton();
     }
 }

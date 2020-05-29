@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3481d461ca94ca240b2092c729b9f91b, type: 3}
   m_Name: Shock Wave Action
   m_EditorClassIdentifier: 
+  ActionWeight: 6
   originalActionWeight: 6
-  actionDelay: 0.4
+  actionDelay: 0
   minusWeightAmountWhenNotSuccess: 2
-  minusWeightAmountWhenDuplicate: 1
+  minusWeightAmountAfterAction: 1
   _diffCount: 0
   actionType: 4
-  actionAnimator: {fileID: 0}
   judjements:
   - {fileID: 11400000, guid: 9e629523b7aaf7248926e73f9216b8b9, type: 2}
   - {fileID: 11400000, guid: 5f10c91b3e0614b4d892e129c1788183, type: 2}

@@ -14,25 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength:
     BaseValue: 5
-    AdditionalValue: 0
+    AdditionalValue: 12
     FinalValue: 5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   agility:
     BaseValue: 5
     AdditionalValue: 0
     FinalValue: 5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   vitality:
     BaseValue: 12
     AdditionalValue: 10
     FinalValue: 22
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   dexterity:
     BaseValue: 10
     AdditionalValue: 0
     FinalValue: 10
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   intelligence:
     BaseValue: 10
     AdditionalValue: 0
     FinalValue: 10
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   lucky:
     BaseValue: 10
     AdditionalValue: 0
     FinalValue: 10
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []

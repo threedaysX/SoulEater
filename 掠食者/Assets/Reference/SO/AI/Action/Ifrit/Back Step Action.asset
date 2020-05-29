@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dc27a3d073d314492ba7abe5659312, type: 3}
   m_Name: Back Step Action
   m_EditorClassIdentifier: 
+  ActionWeight: 7
   originalActionWeight: 7
-  actionDelay: 0.2
+  commonActionDelay: 0
+  clips: []
   minusWeightAmountWhenNotSuccess: 2
   minusWeightAmountAfterAction: 1
   _diffCount: 0

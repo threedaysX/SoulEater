@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using StatsModel;
+using UnityEngine;
 
 [System.Serializable]
 [CreateAssetMenu(menuName = "Character/Skill")]
@@ -18,28 +19,32 @@ public class Skill : ScriptableObject
     /// <summary>
     /// 技能效果距離範圍
     /// </summary>
-    public float range = 1f;
+    public Stats range;
 
     /// <summary>
     /// 技能消耗
     /// </summary>
-    public float cost = 1f;
+    public Stats cost;
     public CostType costType = CostType.Mana;
 
     /// <summary>
     /// 技能倍率(基於人物攻擊值)(%)
     /// </summary>
-    public float damageMagnification = 100f;
+    public Stats damageMagnification;
 
     /// <summary>
     /// 技能詠唱時間
     /// </summary>
-    public float castTime;
+    public Stats castTime;
+    /// <summary>
+    /// 技能固定詠唱時間
+    /// </summary>
+    public Stats fixedCastTime;
 
     /// <summary>
     /// 技能冷卻
     /// </summary>
-    public float coolDown = 1f;
+    public Stats coolDown;
     public bool cooling = false;
 
     /// <summary>

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3177603151267928068}
   - component: {fileID: 814953272431409046}
   m_Layer: 8
-  m_Name: FlashTrails (1)
+  m_Name: HitSplash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4786,8 +4786,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 924926267
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_RenderMode: 5
   m_SortMode: 0

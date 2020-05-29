@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationBase : Singleton<AnimationBase>
 {
-    public float GetCurrentAnimationLength(Animator anim, string animationName)
+    public float GetAnimationLengthByName(Animator anim, string animationName)
     {
         if (anim == null || anim.runtimeAnimatorController == null)
             return 0;
@@ -20,6 +20,27 @@ public class AnimationBase : Singleton<AnimationBase>
         return 0;
     }
 
+    public float GetAnimationLengthByNames(Animator anim, params string[] animationNameList)
+    {
+        float resultLength = 0;
+        if (anim == null || anim.runtimeAnimatorController == null)
+            return resultLength;
+
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        foreach (string animName in animationNameList)
+        {
+            foreach (AnimationClip clip in clips)
+            {
+                if (clip.name == animName)
+                {
+                    resultLength += clip.length;
+                    break;
+                }
+            }
+        }
+        return resultLength;
+    }
+
     public float GetCurrentAnimationLength(Animator anim)
     {
         if (anim == null)
@@ -33,20 +54,20 @@ public class AnimationBase : Singleton<AnimationBase>
     /// <param name="getResultLength">取得時間的方法(用來接收結果)</param>
     /// <param name="delayGetDuration">延遲多久才取得動畫時間</param>
     /// <returns></returns>
-    public IEnumerator GetCurrentAnimationLength(Animator anim, Func<float, float> getResultLength, float delayGetDuration = 0.05f)
+    public IEnumerator GetCurrentAnimationLength(Animator anim, Func<float, float> getResultLength)
     {
-        yield return new WaitForSeconds(delayGetDuration);
+        yield return new WaitForEndOfFrame();
         getResultLength.Invoke(anim.GetCurrentAnimatorStateInfo(0).length);
     }
 
     public void PlayAnimationLoop(Animator anim, string animationName, float duration, bool destroyAfterAnimStop, bool setActiveAfterAnimStop)
     {
-        StartCoroutine(PlayAnimInterval(anim, animationName, GetCurrentAnimationLength(anim, animationName), duration, destroyAfterAnimStop, setActiveAfterAnimStop));
+        StartCoroutine(PlayAnimInterval(anim, animationName, GetAnimationLengthByName(anim, animationName), duration, destroyAfterAnimStop, setActiveAfterAnimStop));
     }
 
     public void PlayAnimationLoop(Animator anim, string animationName, float duration, Action callBack)
     {
-        StartCoroutine(PlayAnimInterval(anim, animationName, GetCurrentAnimationLength(anim, animationName), duration, callBack));
+        StartCoroutine(PlayAnimInterval(anim, animationName, GetAnimationLengthByName(anim, animationName), duration, callBack));
     }
 
     /// <summary>
@@ -100,6 +121,8 @@ public class AnimationBase : Singleton<AnimationBase>
         {
             while (duration > 0)
             {
+                if (anim == null)
+                    yield break;
                 anim.Play(animationName, -1, 0f);
                 yield return new WaitForSeconds(animInterval);
                 duration -= animInterval;
