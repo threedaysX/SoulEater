@@ -1,38 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Threading;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Box : MonoBehaviour, IDragHandler, IEndDragHandler, IDropHandler
+public class Box : MonoBehaviour, IPointerDownHandler
 {
     public Fragment PutFrag;
     public string fName;
+    public int fId;
 
     private void Start()
     {
-        this.GetComponent<Button>().onClick.AddListener(BtnDown);
+        fId = -1;
+        //this.GetComponent<Button>().onClick.AddListener(BtnDown);
     }
-
-    public void BtnDown()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        AllFragment.Instance.fragments.Add(new Fragment());
+        AllFragment.Instance.fragments.Add(ScriptableObject.CreateInstance("Fragment") as Fragment);
         int id = AllFragment.Instance.fragments.Count - 1;
+        fId = id;
         AllFragment.Instance.fragments[id].m_Data = new F_Data();
         CurrentData.Instance.currentFragmentID = id;
-        AllFragment.Instance.fragments[id].m_Data.init(fName,PutFrag.m_Data.touchPos_v2,id);
-    }
+        AllFragment.Instance.fragments[id].m_Data.init(fName, PutFrag.m_Data.touchPos_v2, id);
 
-    public void OnDrag(PointerEventData e)
-    {
-        transform.position = Input.mousePosition;
-    }
-
-    public void OnEndDrag(PointerEventData e)
-    {
-        
-    }
-
-    public void OnDrop(PointerEventData e)
-    {
-
+        this.GetComponent<Image>().color = new Color(1, 1, 1, 0.6f);
+        CurrentData.Instance.followObj = this.gameObject;
+        CurrentData.Instance.followObj.AddComponent<PolygonCollider2D>();
+        CurrentData.Instance.followObj.GetComponent<Image>().raycastTarget = false;
+        ///
+        CurrentData.Instance.tempOriginPos= transform.position;
     }
 }
