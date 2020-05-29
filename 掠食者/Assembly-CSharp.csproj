@@ -170,6 +170,7 @@
     <Compile Include="Assets\Script\Game\Camera\FadeScreen.cs" />
     <Compile Include="Assets\Script\Game\Camera\TransitionPlayer.cs" />
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
+    <Compile Include="Assets\Script\Game\Door.cs" />
     <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />
     <Compile Include="Assets\Script\Game\HotKeyController.cs" />
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />

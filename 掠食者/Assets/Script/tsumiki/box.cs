@@ -27,5 +27,7 @@ public class Box : MonoBehaviour, IPointerDownHandler
         CurrentData.Instance.followObj = this.gameObject;
         CurrentData.Instance.followObj.AddComponent<PolygonCollider2D>();
         CurrentData.Instance.followObj.GetComponent<Image>().raycastTarget = false;
+        ///
+        CurrentData.Instance.tempOriginPos= transform.position;
     }
 }

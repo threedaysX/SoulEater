@@ -11,7 +11,9 @@ public class CurrentData : Singleton<CurrentData>
     public Vector2 currentPos;           //存放當前點(三角形)在AllStar的ID<<中心點
     public int lastStarID;
     public List<int> coverStarsID = new List<int>();           //存放 此碎片會覆蓋到的點(三角形)們
+    ///
     public GameObject followObj;
+    public Vector2 tempOriginPos;
     ///
     public Text appearTriggerCount;
     public Image textImage;
@@ -75,8 +77,14 @@ public class CurrentData : Singleton<CurrentData>
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////確認好位置要放下了
             if (Input.GetMouseButtonDown(0) && !positionError)  //放下
             {
-                followObj.SetActive(false);
-                //Destroy(followObj);
+                if (followObj != null)
+                {
+                    followObj.transform.position = tempOriginPos;
+                    followObj.GetComponent<Image>().raycastTarget = true;
+                    followObj.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                    followObj = null;
+                    //Destroy(followObj);
+                }
 
                 Chip.Instance.PutOn(AllFragment.Instance.fragments[currentFragmentID], coverStarsID);
 
