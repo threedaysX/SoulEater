@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MenuControl : Singleton<MenuControl>
 {
     public GameObject menu;
+    public GameObject defaultButtonEvents;
     public GameObject defaultOpenMenuContent;
     public Button defaultSelectedButton;
     public Stack<MenuEvent> menuEscStack;
@@ -22,6 +23,10 @@ public class MenuControl : Singleton<MenuControl>
             if (menu.activeSelf)
             {
                 menuEscStack.Pop().escButton.onClick.Invoke();
+                if (menuEscStack.Count == 0)
+                {
+                    SlowMotionController.Instance.isOpenUI = false;
+                }
             }
             else
             {
@@ -49,9 +54,17 @@ public class MenuControl : Singleton<MenuControl>
     public void OpenMainMenu()
     {
         menu.SetActive(true);
+        defaultButtonEvents.SetActive(true);
         defaultOpenMenuContent.SetActive(true);
         PushOpenMenuToStack(defaultOpenMenuContent.GetComponent<MenuEvent>());
         Time.timeScale = 0;
+
+        if (ButtonEvents.Instance.selectedButton != null)
+        {
+            ButtonEvents.Instance.selectedButton.Select();
+            return;
+        }
         defaultSelectedButton.Select();
+        SlowMotionController.Instance.isOpenUI = true;
     }
 }

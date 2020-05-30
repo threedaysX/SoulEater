@@ -9,6 +9,11 @@ public class CombatController : MonoBehaviour
     public Transform attackCenterPoint;
     public ParticleSystem hitEffect;
     public AttackHitboxList attackHitboxes;
+
+    [Header("擊退系統")]
+    public float basicShakeCameraForce;
+
+    [Header("命中檢查")]
     public bool hasHit = false;  //AI用
     public float hasHitInTime;  //AI用
     public float takeHowMuchDamage;  //AI用
@@ -44,7 +49,7 @@ public class CombatController : MonoBehaviour
                         float damageDirectionX = character.transform.position.x - target.transform.position.x;
                         float damage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType, out bool isCritical);
                         enemyDetails.TakeDamage((int)damage, isCritical, damageDirectionX, character.data.weaponKnockBackForce);
-                        CameraShake.Instance.ShakeCamera(0.8f * character.data.weaponKnockBackForce, 0.02f, 0.1f, true);
+                        CameraShake.Instance.ShakeCamera(basicShakeCameraForce * character.data.weaponKnockBackForce, 0.02f, 0.1f, true);
                         character.DamageDealtSteal(damage, true);
                         TriggerHitEffect(target.transform);
                         attackSuccess = true;

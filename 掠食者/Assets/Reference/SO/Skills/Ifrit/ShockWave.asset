@@ -17,12 +17,50 @@ MonoBehaviour:
   elementType: 3
   skillName: "\u5EE3\u57DF\u885D\u64CA\u6CE2"
   description: 
-  range: 0
-  cost: 3
+  centerPositionOffset: 0
+  range:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   costType: 1
-  damageMagnification: 120
-  castTime: 0
-  coolDown: 8
+  damageMagnification:
+    BaseValue: 50
+    AdditionalValue: 0
+    FinalValue: 100
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  castTime:
+    BaseValue: 0.4
+    AdditionalValue: 0
+    FinalValue: 0.4
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 6
+    AdditionalValue: 0
+    FinalValue: 6
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   cooling: 0
   timesOfPerDamage: 1
   duration: 0

@@ -12,6 +12,10 @@ TagManager:
   - SkillSlot
   - slot
   - BossRoom
+  - MasterAudio
+  - MusicAudio
+  - EffectSoundAudio
+  - Soul
   layers:
   - Default
   - TransparentFX
@@ -28,8 +32,8 @@ TagManager:
   - AttackHitBox
   - Skill
   - Stage
-  - 
-  - 
+  - Wall
+  - Soul
   - 
   - 
   - 
@@ -55,11 +59,23 @@ TagManager:
   - name: BackGround
     uniqueID: 2860364485
     locked: 0
+  - name: BehindObject
+    uniqueID: 2954446289
+    locked: 0
   - name: ActiveObject
     uniqueID: 2068822577
     locked: 0
-  - name: Object
+  - name: BackEffect
+    uniqueID: 3496975689
+    locked: 0
+  - name: PlayerLayerObject
     uniqueID: 3745107527
+    locked: 0
+  - name: Effect
+    uniqueID: 924926267
+    locked: 0
+  - name: FrontLightObject
+    uniqueID: 37619453
     locked: 0
   - name: FrontObject
     uniqueID: 3638542883

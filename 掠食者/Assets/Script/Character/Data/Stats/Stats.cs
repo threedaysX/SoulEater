@@ -36,7 +36,6 @@ namespace StatsModel
         protected float lastAdditionalValue = float.MinValue;
         protected bool isDirty = true;
         public List<StatModifier> modifiers = new List<StatModifier>();
-        private bool isCleanModifiers = false;
 
         public Stats()
         {
@@ -111,7 +110,6 @@ namespace StatsModel
         {
             if (mod.Value != 0)
             {
-                ClearNullDirtyModifier();
                 var getTrueModInList = modifiers.FirstOrDefault(
                     item => item.SourceName != null 
                     && item.SourceName.Equals(mod.SourceName) 
@@ -125,12 +123,6 @@ namespace StatsModel
             return false;
         }
 
-        public void ClearNullDirtyModifier()
-        {
-            if (isCleanModifiers)
-                return;
-            modifiers.RemoveAll(item => item.SourceName == null);
-        }
 
         public void ForceToChangeValue(float value)
         {
@@ -141,6 +133,16 @@ namespace StatsModel
         public void CancelForceValue()
         {
             toForceChangeValue = false;
+        }
+
+        /// <summary>
+        /// Notice: Always use this to clean stats on Awake, and then if you had some item changed this cleaned stats, plz set the item data again.
+        /// </summary>
+        public void ResetDirtyStats()
+        {
+            toForceChangeValue = false;
+            modifiers.Clear();
+            isDirty = true;
         }
 
         private void ResetDirtyFinalValue()

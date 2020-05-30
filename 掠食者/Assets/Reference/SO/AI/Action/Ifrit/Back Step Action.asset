@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19dc27a3d073d314492ba7abe5659312, type: 3}
+  m_Name: Back Step Action
+  m_EditorClassIdentifier: 
+  ActionWeight: 7
+  originalActionWeight: 7
+  commonActionDelay: 0
+  clips: []
+  minusWeightAmountWhenNotSuccess: 2
+  minusWeightAmountAfterAction: 1
+  _diffCount: 0
+  actionType: 6
+  judjements:
+  - {fileID: 11400000, guid: 50eb23f6e9b32324a9c5e963ed879da3, type: 2}
+  - {fileID: 11400000, guid: aeb1e3793e5b32741b6a632920d7e34b, type: 2}
+  skillActionObject: {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}

@@ -14,6 +14,9 @@ public class EnemyUIControl : Singleton<EnemyUIControl>
 
     public void SetHealthUI(string enemyName, float maxHealth, float currentHealth)
     {
+        if (this.enemyName == null || enemyNameShadow == null)
+            return;
+
         this.enemyName.text = enemyName;
         this.enemyNameShadow.text = enemyName;
         float remainPercent = HealthManaControl.Instance.SetHealthBar(health, maxHealth, currentHealth);

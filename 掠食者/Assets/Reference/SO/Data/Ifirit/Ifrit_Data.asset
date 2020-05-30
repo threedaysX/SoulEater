@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c621d20715d767746a38d75db32de46a, type: 3}
+  m_Name: Ifrit_Data
+  m_EditorClassIdentifier: 
+  maxHealth:
+    BaseValue: 3595
+    AdditionalValue: 3000
+    FinalValue: 595
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  maxMana:
+    BaseValue: 13
+    AdditionalValue: 0
+    FinalValue: 13
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attack:
+    BaseValue: 226
+    AdditionalValue: 0
+    FinalValue: 226
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  magicAttack:
+    BaseValue: 275
+    AdditionalValue: 0
+    FinalValue: 275
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  defense:
+    BaseValue: 10.4
+    AdditionalValue: 0
+    FinalValue: 10.4
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  critical:
+    BaseValue: 20
+    AdditionalValue: 60
+    FinalValue: 80
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  criticalDamage:
+    BaseValue: 150
+    AdditionalValue: 0
+    FinalValue: 150
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  knockBackDamage:
+    BaseValue: 1528
+    AdditionalValue: 1000
+    FinalValue: 2528
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  penetrationValue:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  penetrationMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  resistance: {fileID: 11400000, guid: 0b55856e7c417104fbb1917fae8eda81, type: 2}
+  status: {fileID: 11400000, guid: b11631bd49701d14ba2e8a4af3a0f3f8, type: 2}
+  jumpForce:
+    BaseValue: 1.3
+    AdditionalValue: 0
+    FinalValue: 0.9
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  moveSpeed:
+    BaseValue: 1.1
+    AdditionalValue: 0
+    FinalValue: 1.1
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attackDelay:
+    BaseValue: 0.25
+    AdditionalValue: 0
+    FinalValue: 0.5
+    ForceValue: 0.5
+    toForceChangeValue: 1
+    modifiers: []
+  attackRange:
+    BaseValue: 3.5
+    AdditionalValue: 0
+    FinalValue: 3.5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  reduceSkillCoolDown:
+    BaseValue: 8
+    AdditionalValue: 0
+    FinalValue: 8
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  reduceCastTime:
+    BaseValue: 35
+    AdditionalValue: 0
+    FinalValue: 35
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  evadeCoolDown:
+    BaseValue: 0.70696
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  recoverFromKnockStunTime:
+    BaseValue: 0.1
+    AdditionalValue: 0
+    FinalValue: 0.1
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attackLifeSteal:
+    BaseValue: 0
+    AdditionalValue: 20
+    FinalValue: 20
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  skillLifeSteal:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  manaStealOfPoint:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 1
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  manaStealOfDamage:
+    BaseValue: 1100
+    AdditionalValue: 0
+    FinalValue: 1100
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cycleAttackCount: 1
+  weaponKnockBackForce: 2.4
+  hitEffectPrefab: {fileID: 5829782128382539966, guid: 33c322dce6d445847b439a7f066f1d1d,
+    type: 3}
+  attackHitBoxPrefab: {fileID: 6518123136576233158, guid: ece203efb2cdbf64bb93a6d0488e980b,
+    type: 3}
+  weaponSoundSet: {fileID: 11400000, guid: cad249b930418c84086c3be39b5cc747, type: 2}
+  weaponType: 0
+  attackElement: 0

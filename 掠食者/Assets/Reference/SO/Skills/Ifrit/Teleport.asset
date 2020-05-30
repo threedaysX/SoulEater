@@ -18,13 +18,50 @@ MonoBehaviour:
   skillName: "\u76F8\u4F4D\u77AC\u79FB"
   description: "\u77AC\u79FB\u81F3\u4E0A\u4E00\u653B\u64CA\u76EE\u6A19\u7684\u5F8C\u65B9\u3002"
   centerPositionOffset: 0
-  range: 12
-  cost: 0.5
+  range:
+    BaseValue: 12
+    AdditionalValue: 0
+    FinalValue: 12
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0.5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   costType: 1
-  damageMagnification: 0
-  castTime: 0
-  coolDown: 7
-  cooling: 0
+  damageMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  castTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 5
+    AdditionalValue: 0
+    FinalValue: 5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cooling: 1
   timesOfPerDamage: 0
   duration: 0
   prefab: {fileID: 4112537811802141493, guid: 4dffa554663863444a5051b38b55e5ed, type: 3}

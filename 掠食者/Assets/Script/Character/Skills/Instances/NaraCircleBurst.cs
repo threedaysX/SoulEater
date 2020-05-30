@@ -4,6 +4,7 @@ using UnityEngine;
 public class NaraCircleBurst : DisposableSkill
 {
     public NaraCircleBurstData data;
+    private bool isBursted;
 
     protected override void AddAffectEvent()
     {
@@ -14,7 +15,7 @@ public class NaraCircleBurst : DisposableSkill
     {
         base.OnTriggerEnter2D(targetCol);
 
-        if (!targetCol.CompareTag(sourceCaster.tag))
+        if (sourceCaster != null && !targetCol.CompareTag(sourceCaster.tag))
         {
             DamageTarget();
             hitAffect.Invoke();
@@ -22,8 +23,15 @@ public class NaraCircleBurst : DisposableSkill
         }
     }
 
+    public override void GenerateSkill(Character character, Skill skill)
+    {
+        base.GenerateSkill(character, skill);
+        StartCoroutine(CheckExistState());
+    }
+
     public override void UseSkill()
     {
+        isBursted = true;
         CameraShakeWhenBurst();
         StartCoroutine(SetActiveAfterSkillDone(0.3f));
         base.UseSkill();
@@ -37,6 +45,18 @@ public class NaraCircleBurst : DisposableSkill
     private void CameraShakeWhenBurst()
     {
         CameraShake.Instance.ShakeCamera(1f, 0.5f, 0.1f, true);
+    }
+
+    /// <summary>
+    /// Check object need to set active false or not (Exists too long but not burst).
+    /// </summary>
+    private IEnumerator CheckExistState()
+    {
+        yield return new WaitForSeconds(data.delay + 6);
+        if (!isBursted)
+        {
+            SetActiveAfterSkillDone(false);
+        }
     }
 }
 

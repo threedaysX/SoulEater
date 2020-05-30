@@ -18,12 +18,13 @@ public abstract class AI : Character
 
     [Header("偵測距離")]
     public float detectDistance;
-    [Header("行為共通延遲時間(秒)")]
-    public float overridedAactionDelay = 0f;  
+    [Header("行為延遲時間(秒)")]
+    public float commonActionDelay = 0f;  
+    public float animationActionDelay = 0.1f;
     private float nextActTimes = 0f;
 
     [Header("最大權重容許區間")]
-    public float weightOffset = 1;    // 將符合【最大權重】與【最大權重-Offset】挑出並執行。
+    public float maxWeightOffset = 2;    // 將符合【最大權重】與【最大權重-Offset】挑出並執行。
     [Header("動作權重恢復")]
     public float actionWeightRegen = 1;       // 每次恢復量
     public int actionWeightRegenCount = 10;  // 每做N個動作，就恢復權重一次
@@ -113,10 +114,7 @@ public abstract class AI : Character
         // 進入戰鬥狀態
         if (inCombatStateTrigger && chaseTarget != null)
         {
-            if (!CanAction)
-                return;
-
-            if (Time.time >= nextActTimes)
+            if (CanAction && Time.time >= nextActTimes)
             {
                 // 每次開始執行動作之前，回到Idle狀態
                 ReturnDefaultAction();
@@ -126,7 +124,7 @@ public abstract class AI : Character
                 // 只有移動不需要等待延遲，且算是實際的行動數
                 if (lastAction.actionType != AiActionType.Move)
                 {
-                    nextActTimes = Time.time + overridedAactionDelay + GetAnimationLength(anim);
+                    nextActTimes = Time.time + commonActionDelay + animationActionDelay;
                     cumulativeActionCount++;
                 }
             }
@@ -157,7 +155,7 @@ public abstract class AI : Character
                 // 只留下【最大】與【最大-offset】之間權重的動作(相同權重也會留下)。
                 if (actionToDoList.Count != 0)
                 {
-                    if (action.ActionWeight < actionToDoList[0].ActionWeight - weightOffset)
+                    if (action.ActionWeight < actionToDoList[0].ActionWeight - maxWeightOffset)
                         continue;
                     if (action.ActionWeight > actionToDoList[0].ActionWeight)
                     {
@@ -208,7 +206,16 @@ public abstract class AI : Character
             action.AddDiffCount(amount);
         }
 
-        overridedAactionDelay = action.actionDelay;
+        float animDelay = 0f;
+        if (action.clips != null)
+        {
+            foreach (var clip in action.clips)
+            {
+                animDelay += clip.length;
+            }
+        }
+        animationActionDelay = animDelay;
+        commonActionDelay = action.commonActionDelay;
         lastActionSuccess = action.StartActHaviour();
         lastAction = action;
     }
@@ -240,13 +247,6 @@ public abstract class AI : Character
         {
             gameObject.transform.eulerAngles = new Vector3(0, 180, 0);
         }
-    }
-    
-    protected float GetAnimationLength(Animator anim)
-    {
-        if (anim == null)
-            return 0;
-        return AnimationBase.Instance.GetCurrentAnimationLength(anim);
     }
 
     private void OnDrawGizmosSelected()

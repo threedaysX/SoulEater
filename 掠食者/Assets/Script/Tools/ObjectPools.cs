@@ -90,7 +90,7 @@ public class ObjectPools : Singleton<ObjectPools>
         return objectToSpawn;
     }
 
-    public GameObject DamagePopup(string name, bool isCritical, int damageAmount, Vector3 position, float damageDirectionX)
+    public GameObject DamagePopup(string name, bool isCritical, int damageAmount, Vector3 position)
     {
         if (poolDictionary == null || !poolDictionary.ContainsKey(name))
             return null;

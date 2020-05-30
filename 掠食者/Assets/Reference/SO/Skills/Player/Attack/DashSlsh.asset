@@ -18,13 +18,51 @@ MonoBehaviour:
   skillName: "\u77AC\u9583"
   description: "\u5411\u524D\u65B96m\u8655\u885D\u523A\uFF0C\u4E26\u5C0D\u9014\u4E2D\u7D93\u904E\u7684\u6575\u4EBA\uFF0C\u4F7F\u51FA\u5FEB\u901F\u76847\u9023\u9583\u64CA\u3002
     \u4F7F\u7528\u6280\u80FD\u6642\uFF0C\u6703\u9032\u5165\u77ED\u66AB\u7684\u7121\u6575\u72C0\u614B\u3002"
-  range: 0
-  cost: 2
+  centerPositionOffset: 0
+  range:
+    BaseValue: 6
+    AdditionalValue: 0
+    FinalValue: 6
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: 2
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   costType: 1
-  damageMagnification: 60
-  castTime: 0.4
-  coolDown: 6
+  damageMagnification:
+    BaseValue: 70
+    AdditionalValue: 0
+    FinalValue: 70
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  castTime:
+    BaseValue: 0.4
+    AdditionalValue: 0
+    FinalValue: 0.4
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 6
+    AdditionalValue: 0
+    FinalValue: 6
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
   cooling: 1
   timesOfPerDamage: 1
-  duration: 1
+  duration: 0.8
   prefab: {fileID: 4264536277670069577, guid: a42cd9ada3057dc489e69140f3653445, type: 3}

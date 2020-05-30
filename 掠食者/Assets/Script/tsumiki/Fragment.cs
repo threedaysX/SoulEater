@@ -209,8 +209,8 @@ public class F_Data
             }
     }
 
-    public string PrintTriggerCount() { 
-        return  "此碎片"+ fName+"觸發了" + triggerCount+"條邊";
+    public void PrintTriggerCount() { 
+        Debug.Log(fName + "_triggerCount:" + triggerCount);
     }
 }
 

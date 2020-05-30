@@ -12,7 +12,7 @@ public abstract class DisposableSkill : SkillEventBase
     /// </summary>
     public virtual void OnTriggerEnter2D(Collider2D targetCol)
     {
-        if (targetCol == null)
+        if (sourceCaster == null || targetCol == null)
             return;
         // 如果目標是自己，除非技能可以對自己造成效果，否則略過
         if (!canTriggerSelf && targetCol.CompareTag(sourceCaster.tag))

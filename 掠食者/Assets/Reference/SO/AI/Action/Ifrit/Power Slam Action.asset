@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e597f6514248c945ad0ff5ad283fc7d, type: 3}
+  m_Name: Power Slam Action
+  m_EditorClassIdentifier: 
+  originalActionWeight: 6
+  actionDelay: 0.3
+  minusWeightAmountWhenNotSuccess: 2
+  minusWeightAmountWhenDuplicate: 1
+  _diffCount: 5
+  actionType: 4
+  actionAnimator: {fileID: 0}
+  judjements:
+  - {fileID: 11400000, guid: 271790211844e724492ee0aa72f5e252, type: 2}
+  - {fileID: 11400000, guid: 4dcb1f20b2f7ee6439900a07524c417d, type: 2}
+  - {fileID: 11400000, guid: 21f8e111c3349b64280ef54198d57d22, type: 2}
+  skillActionObject: {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}

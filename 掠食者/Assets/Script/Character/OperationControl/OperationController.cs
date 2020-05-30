@@ -80,7 +80,6 @@ public class Operation
     {
         stop = true;
         running = false;
-        finished = true;
         if (delayOffset != -999)
         {
             delay = delayOffset;
@@ -340,6 +339,7 @@ public class OperationController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         character = GetComponent<Character>();
+        cycleAttackCount = GetComponent<Character>().data.cycleAttackCount;
         operations = new Operations();
         delayOperationDict = new OperationDelayDictionary();
         nextAttackResetTime = 0;
@@ -349,10 +349,6 @@ public class OperationController : MonoBehaviour
 
     private void Update()
     {
-        CheckStun();
-        CheckIdle();
-        CheckGrounded();
-        CheckResetAttack();
         StartOperation();
 
         if (anim != null)
@@ -373,6 +369,14 @@ public class OperationController : MonoBehaviour
 
             anim.SetBool(AnimationKeyWordDictionary.knockStun, isKnockStun);
         }
+    }
+
+    private void LateUpdate()
+    {
+        CheckStun();
+        CheckIdle();
+        CheckGrounded();
+        CheckResetAttack();
     }
 
     #region StartAnim
@@ -453,12 +457,12 @@ public class OperationController : MonoBehaviour
         {
             isKnockStun = true;
             InterruptAnimOperation();
-            character.SetOperation(LockType.Stun, false);
+            character.LockOperation(LockType.Stun, true);
         }
         if (!character.isKnockStun && isKnockStun)
         {
             isKnockStun = false;
-            character.SetOperation(LockType.Stun, true);
+            character.LockOperation(LockType.Stun, false);
         }
     }
 
@@ -599,7 +603,7 @@ public class OperationController : MonoBehaviour
         {
             setOperationState(OperationStateType.None);
         }
-        yield return new WaitForSeconds(GetFrameTimeOffset(1));
+        yield return new WaitForSeconds(GetFrameTimeOffset(2));
 
         // 累積攻擊次數+1
         attackComboCount++;
@@ -620,12 +624,13 @@ public class OperationController : MonoBehaviour
         attackFinishedTime = Time.time + attackAnimDuration;
         nextAttackResetTime = attackFinishedTime + attackResetDuration;
 
-        yield return new WaitForSeconds(attackAnimDuration / 2);
+        float comboDuration = GetFrameTimeOffset(8);
+        yield return new WaitForSeconds(attackAnimDuration - comboDuration);
 
         // 攻擊收尾，可連段
         setOperationState(OperationStateType.Combo);           
 
-        yield return new WaitForSeconds(attackAnimDuration / 2);
+        yield return new WaitForSeconds(comboDuration);
 
         isAttacking = false;
     }
@@ -633,7 +638,7 @@ public class OperationController : MonoBehaviour
     private IEnumerator StartTrueSkillUse(Action skillCastMethod, Action skillUseMethod, float castTime, float skillUseDurtaion)
     {
         // 鎖定行動
-        character.SetOperation(LockType.OperationAction, false);
+        character.LockOperation(LockType.OperationAction, true);
 
         if (skillCastMethod != null)
         {
@@ -694,7 +699,7 @@ public class OperationController : MonoBehaviour
 
         if (operation.finished)
         {
-            character.SetOperation(LockType.OperationAction, true);    // 重置角色動作
+            character.LockOperation(LockType.OperationAction, false);    // 重置角色動作
             InterruptAnimOperation();    // 重置角色動畫
             operations.RemoveCurrentOperation();
             return;

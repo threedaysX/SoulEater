@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd75a1391bedfda418d878f01c8d2acd, type: 3}
+  m_Name: BasicMove
+  m_EditorClassIdentifier: 
+  ActionWeight: 9
+  originalActionWeight: 9
+  actionDelay: 0
+  minusWeightAmountWhenNotSuccess: 0
+  minusWeightAmountAfterAction: 0.005
+  _diffCount: 0
+  actionType: 2
+  judjements:
+  - {fileID: 11400000, guid: c4ce9c1b5c2c43f4fbdac3ce09e23fe7, type: 2}
+  - {fileID: 11400000, guid: 834ff9a2cb60441439516abc1905cabf, type: 2}
+  - {fileID: 11400000, guid: 152a7db87a45b374d8ffc0abacc787aa, type: 2}
+  basicMoveSpeed: 2.5

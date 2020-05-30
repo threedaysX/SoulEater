@@ -63,13 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Affect\Debuff\DebuffControl.cs" />
+    <Compile Include="Assets\Script\Affect\KnockStunSystem.cs" />
     <Compile Include="Assets\Script\Animation\AnimationBase.cs" />
     <Compile Include="Assets\Script\Character\AI\AI.cs" />
     <Compile Include="Assets\Script\Character\AI\AIHaviourBase.cs" />
     <Compile Include="Assets\Script\Character\AI\AiActionStateController.cs" />
     <Compile Include="Assets\Script\Character\AI\Enemy\Instances\Ifrit.cs" />
-    <Compile Include="Assets\Script\Character\AI\Enemy\Model\Enemy.cs" />
-    <Compile Include="Assets\Script\Character\AI\Enemy\Model\LandEnemy.cs" />
+    <Compile Include="Assets\Script\Character\AI\Enemy\Model\EnemyModel.cs" />
     <Compile Include="Assets\Script\Character\AI\NPC\NPC.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicAttack.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Action\Instances\BasicFlamethrowerAction.cs" />
@@ -106,7 +107,7 @@
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\PlayerGetCloser.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Model\JudgeCondition.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\Model\Judgement.cs" />
-    <Compile Include="Assets\Script\Character\AbilityControl\BuffController.cs" />
+    <Compile Include="Assets\Script\Character\Buff\BuffController.cs" />
     <Compile Include="Assets\Script\Character\Character.cs" />
     <Compile Include="Assets\Script\Character\CharacterEnumList.cs" />
     <Compile Include="Assets\Script\Character\Data\CharacterData.cs" />
@@ -122,13 +123,14 @@
     <Compile Include="Assets\Script\Character\Data\Stats\StatModifier.cs" />
     <Compile Include="Assets\Script\Character\Data\Stats\Stats.cs" />
     <Compile Include="Assets\Script\Character\Data\Status.cs" />
-    <Compile Include="Assets\Script\Character\FormulaControl\DamageController.cs" />
-    <Compile Include="Assets\Script\Character\FormulaControl\DataInitializer.cs" />
+    <Compile Include="Assets\Script\Character\DataInitializer.cs" />
+    <Compile Include="Assets\Script\Character\Die\DieController.cs" />
+    <Compile Include="Assets\Script\Character\Die\SoulCharacter.cs" />
     <Compile Include="Assets\Script\Character\OperationControl\BasicOperation.cs" />
     <Compile Include="Assets\Script\Character\OperationControl\CombatController.cs" />
     <Compile Include="Assets\Script\Character\OperationControl\OperationController.cs" />
-    <Compile Include="Assets\Script\Character\Player\Operation\PlayerMovement.cs" />
     <Compile Include="Assets\Script\Character\Player\Player.cs" />
+    <Compile Include="Assets\Script\Character\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Script\Character\Skills\Controller\SkillController.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\BackStep.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\DashSlash.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Assets\Script\Character\Skills\Instances\PowerUp.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\SelfHeal.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\ShockWave.cs" />
+    <Compile Include="Assets\Script\Character\Skills\Instances\SkillNameDictionary.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Slow.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Teleport.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\DisposableSkill.cs" />
@@ -151,13 +154,11 @@
     <Compile Include="Assets\Script\Character\Skills\Model\Skill.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\SkillEventBase.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\SkillPools.cs" />
-    <Compile Include="Assets\Script\Character\SoundControl\OperationSoundController.cs" />
-    <Compile Include="Assets\Script\Character\SoundControl\WeaponSoundSet.cs" />
+    <Compile Include="Assets\Script\Character\Sound\OperationSoundController.cs" />
+    <Compile Include="Assets\Script\Character\Sound\WeaponSoundSet.cs" />
     <Compile Include="Assets\Script\Character\Weapon\AttackHitbox.cs" />
     <Compile Include="Assets\Script\Character\Weapon\AttackHitboxList.cs" />
     <Compile Include="Assets\Script\Character\Weapon\WeaponController.cs" />
-    <Compile Include="Assets\Script\Effect\Debuff\DebuffControl.cs" />
-    <Compile Include="Assets\Script\Effect\KnockStunSystem.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\Affix.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\AffixData.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\Affixes.cs" />
@@ -171,13 +172,21 @@
     <Compile Include="Assets\Script\Game\Camera\TransitionPlayer.cs" />
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
     <Compile Include="Assets\Script\Game\Door.cs" />
+    <Compile Include="Assets\Script\Game\EndGameManager.cs" />
+    <Compile Include="Assets\Script\Game\FormulaControl\DamageController.cs" />
     <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />
     <Compile Include="Assets\Script\Game\HotKeyController.cs" />
+    <Compile Include="Assets\Script\Game\Music&amp;Sound\AudioControl.cs" />
+    <Compile Include="Assets\Script\Game\Music&amp;Sound\MusicTransition.cs" />
+    <Compile Include="Assets\Script\Game\Music&amp;Sound\SoundStringData.cs" />
+    <Compile Include="Assets\Script\Game\Music&amp;Sound\VolumeModifier.cs" />
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />
     <Compile Include="Assets\Script\Game\SlowMotionController.cs" />
+    <Compile Include="Assets\Script\Tools\AdjustObject.cs" />
     <Compile Include="Assets\Script\Tools\ObjectPools.cs" />
     <Compile Include="Assets\Script\Tools\PrefabRenderer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
+    <Compile Include="Assets\Script\UI\Effect\UIShake.cs" />
     <Compile Include="Assets\Script\UI\EnemyUIControl.cs" />
     <Compile Include="Assets\Script\UI\HealthManaControl.cs" />
     <Compile Include="Assets\Script\UI\Menu\ButtonEvent.cs" />
@@ -191,17 +200,16 @@
     <Compile Include="Assets\Script\UI\Menu\SkillSlot.cs" />
     <Compile Include="Assets\Script\UI\PlayerUIControl.cs" />
     <Compile Include="Assets\Script\UI\Title\TitleControl.cs" />
-    <Compile Include="Assets\Script\UI\Volume\VolumeModifier.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Endowment.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Soul.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />
     <Compile Include="Assets\Script\tsumiki\AllFragment.cs" />
     <Compile Include="Assets\Script\tsumiki\AllStar.cs" />
-    <Compile Include="Assets\Script\tsumiki\Box.cs" />
     <Compile Include="Assets\Script\tsumiki\CurrentData.cs" />
     <Compile Include="Assets\Script\tsumiki\ExtendedStandaloneInputModule.cs" />
     <Compile Include="Assets\Script\tsumiki\Fragment.cs" />
     <Compile Include="Assets\Script\tsumiki\RaycastMask.cs" />
+    <Compile Include="Assets\Script\tsumiki\box.cs" />
     <Compile Include="Assets\Script\tsumiki\chip.cs" />
     <Compile Include="Assets\Script\tsumiki\star.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
@@ -223,100 +231,100 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Cinemachine">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -496,13 +504,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/GitHub/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>D:/Users/user/Desktop/SideProject/掠食者/SoulEater/掠食者/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.5f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

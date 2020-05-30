@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c621d20715d767746a38d75db32de46a, type: 3}
+  m_Name: SoulData
+  m_EditorClassIdentifier: 
+  maxHealth:
+    BaseValue: 413
+    AdditionalValue: 0
+    FinalValue: 413
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  maxMana:
+    BaseValue: 3
+    AdditionalValue: 0
+    FinalValue: 3
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attack:
+    BaseValue: 45
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  magicAttack:
+    BaseValue: 7
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  defense:
+    BaseValue: 0.4
+    AdditionalValue: 0
+    FinalValue: 0.4
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  critical:
+    BaseValue: 2
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  criticalDamage:
+    BaseValue: 150
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  knockBackDamage:
+    BaseValue: 46
+    AdditionalValue: 100000
+    FinalValue: 46
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  penetrationValue:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  penetrationMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  resistance: {fileID: 11400000, guid: 6d2f3c35088bf624787d8fe91f33bbde, type: 2}
+  status: {fileID: 11400000, guid: d6836ab1b3284eb45b07674e3596c2bc, type: 2}
+  jumpForce:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  moveSpeed:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attackDelay:
+    BaseValue: 0.769
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attackRange:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  reduceSkillCoolDown:
+    BaseValue: 0.8
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  reduceCastTime:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  evadeCoolDown:
+    BaseValue: 0.7912
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  recoverFromKnockStunTime:
+    BaseValue: 0.1
+    AdditionalValue: 0
+    FinalValue: 0.1
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  attackLifeSteal:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  skillLifeSteal:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  manaStealOfPoint:
+    BaseValue: 1
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  manaStealOfDamage:
+    BaseValue: 1970
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cycleAttackCount: 0
+  weaponKnockBackForce: 0
+  hitEffectPrefab: {fileID: 0}
+  attackHitBoxPrefab: {fileID: 0}
+  weaponSoundSet: {fileID: 0}
+  weaponType: 0
+  attackElement: 0

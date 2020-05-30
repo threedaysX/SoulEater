@@ -26,7 +26,7 @@ public class DamagePopup : MonoBehaviour, IDamageGenerator
     {
         textMesh = GetComponent<TextMeshPro>();
         criticalColor = new Color32(255, 51, 0, 255);
-        normalColor = new Color32(114, 237, 255, 255);
+        normalColor = new Color32(186, 236, 255, 255);
     }
 
     private void Update()
@@ -59,12 +59,12 @@ public class DamagePopup : MonoBehaviour, IDamageGenerator
 
         if (isCritical)
         {
-            textMesh.fontSize = 6;
+            textMesh.fontSize = 12;
             textMesh.faceColor = criticalColor;
         }
         else
         {
-            textMesh.fontSize = 4;
+            textMesh.fontSize = 8;
             textMesh.faceColor = normalColor;
         }
 

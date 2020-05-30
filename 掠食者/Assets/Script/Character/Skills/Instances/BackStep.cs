@@ -4,21 +4,24 @@ using System.Collections;
 
 public class BackStep : DisposableSkill
 {
+    public float stepDuration;
+
     protected override void AddAffectEvent()
     {
+        immediatelyAffect.AddListener(GetIntoImmune);
         immediatelyAffect.AddListener(InterruptAction);
         immediatelyAffect.AddListener(MoveBack);
     }
 
     /// <summary>
-    /// 0.05秒內退移到後方6m處。	
+    /// 0.05秒內退移到後方Nm處。	
     /// </summary>
     private void MoveBack()
     {
         sourceCaster.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
         StartCoroutine(MoveToPosition(sourceCaster.transform
-            , sourceCaster.transform.position + sourceCaster.transform.right * -6f
-            , 0.05f));
+            , sourceCaster.transform.position + sourceCaster.transform.right * -currentSkill.range.Value
+            , stepDuration));
     }
     private IEnumerator MoveToPosition(Transform transform, Vector3 destination, float timeToMove)
     {
@@ -34,7 +37,12 @@ public class BackStep : DisposableSkill
 
     private void InterruptAction()
     {
-        sourceCaster.SetOperation(LockType.OperationAction, true);
+        sourceCaster.LockOperation(LockType.OperationAction, false);
         sourceCaster.operationController.InterruptAnimOperation();
+    }
+
+    private void GetIntoImmune()
+    {
+        sourceCaster.GetComponent<Character>().GetIntoImmune(stepDuration);
     }
 }

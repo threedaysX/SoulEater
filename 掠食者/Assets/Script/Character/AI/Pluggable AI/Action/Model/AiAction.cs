@@ -13,12 +13,12 @@ public abstract class AiAction : AiHaviourBase
     /// [8~9] 擅長而且喜歡選擇的動作
     /// [10] 超想這麼做
     /// </summary>
-    public float ActionWeight { get; set; }
+    public float ActionWeight;
 
     /// <summary>
     /// 這個行動已經被降低過了N點權重
     /// </summary>
-    public float DiffCount 
+    public float DiffCount
     {
         get
         {
@@ -33,10 +33,17 @@ public abstract class AiAction : AiHaviourBase
     }
 
     public float originalActionWeight;
-    public float actionDelay;
+
+    [Header("行為延遲")]
+    public float commonActionDelay;
+    public AnimationClip[] clips;
+
+    [Header("權重減值")]
     public float minusWeightAmountWhenNotSuccess = 2;
     public float minusWeightAmountAfterAction = 1;
     [SerializeField] private float _diffCount;
+
+    [Header("行為")]
     public AiActionType actionType;
     public Judgement[] judjements;
 
@@ -92,6 +99,7 @@ public enum AiActionType
     Move,
     Retreat,
     Attack,
+    SkillAttack,
     Magic,
     Effect,
 }

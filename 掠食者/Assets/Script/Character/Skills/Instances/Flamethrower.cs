@@ -115,7 +115,7 @@ public class Flamethrower : LastingSkill
     {
         SetHintActive(true);
         soundControl.PlaySound(renderingSound);
-        AnimationBase.Instance.PlayAnimationLoop(hintLine.GetComponent<Animator>(), hintLineRenderAnimName, currentSkill.castTime, delegate { SetHintActive(false); });
+        AnimationBase.Instance.PlayAnimationLoop(hintLine.GetComponent<Animator>(), hintLineRenderAnimName, currentSkill.castTime.Value, delegate { SetHintActive(false); });
     }
 
     private void SetHintActive(bool active)

@@ -10,7 +10,7 @@ public abstract class SkillAiAction : AiAction
         return TriggerSkill();
     }
 
-    private bool TriggerSkill()
+    protected virtual bool TriggerSkill()
     {
         return ai.UseSkill(skillActionObject);
     }
