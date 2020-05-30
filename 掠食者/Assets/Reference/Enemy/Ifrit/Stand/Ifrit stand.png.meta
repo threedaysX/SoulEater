@@ -1,0 +1,319 @@
+fileFormatVersion: 2
+guid: 21ae8f1cc1ef2c443a46b81bb5484bda
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6061534953241129430
+    second: Ifrit stand_0
+  - first:
+      213: -5622220469904334933
+    second: Ifrit stand_1
+  - first:
+      213: -2589956136619644567
+    second: Ifrit stand_2
+  - first:
+      213: 9141876207049307751
+    second: Ifrit stand_3
+  - first:
+      213: -2050824719356258930
+    second: Ifrit stand_4
+  - first:
+      213: -7442626486080288828
+    second: Ifrit stand_5
+  - first:
+      213: -4839583162880646547
+    second: Ifrit stand_6
+  - first:
+      213: 4313383259322586710
+    second: Ifrit stand_7
+  - first:
+      213: -3728633371335242474
+    second: Ifrit stand_8
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Ifrit stand_0
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1300
+        width: 464
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d13d81bce5ee1450800000000000000
+      internalID: 6061534953241129430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_1
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 1300
+        width: 464
+        height: 557
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baf1c6a354cd9f1b0800000000000000
+      internalID: -5622220469904334933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_2
+      rect:
+        serializedVersion: 2
+        x: 1389
+        y: 1300
+        width: 473
+        height: 535
+      alignment: 9
+      pivot: {x: 0.51629883, y: 0.517292}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96961fcad90ae0cd0800000000000000
+      internalID: -2589956136619644567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_3
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 648
+        width: 479
+        height: 535
+      alignment: 9
+      pivot: {x: 0.53009856, y: 0.5076554}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766f4cd79f77ede70800000000000000
+      internalID: 9141876207049307751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_4
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 650
+        width: 454
+        height: 525
+      alignment: 9
+      pivot: {x: 0.51452273, y: 0.5031397}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e851e2298c10a83e0800000000000000
+      internalID: -2050824719356258930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_5
+      rect:
+        serializedVersion: 2
+        x: 1411
+        y: 650
+        width: 446
+        height: 555
+      alignment: 9
+      pivot: {x: 0.5000003, y: 0.4851501}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c74545c4aa76b890800000000000000
+      internalID: -7442626486080288828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_6
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 0
+        width: 473
+        height: 555
+      alignment: 9
+      pivot: {x: 0.5106259, y: 0.4909439}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d62a98b21c856dcb0800000000000000
+      internalID: -4839583162880646547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_7
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 0
+        width: 493
+        height: 544
+      alignment: 9
+      pivot: {x: 0.53058445, y: 0.5030798}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6561a0898373cdb30800000000000000
+      internalID: 4313383259322586710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ifrit stand_8
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 478
+        height: 551
+      alignment: 9
+      pivot: {x: 0.5175248, y: 0.5030406}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61d45e334bb314cc0800000000000000
+      internalID: -3728633371335242474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,222 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &396844522624644980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3354075043800240963}
+  m_Layer: 0
+  m_Name: AttackHitArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3354075043800240963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396844522624644980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 896131526077897528}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &896131526077897521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 896131526077897528}
+  - component: {fileID: 896131526077897529}
+  - component: {fileID: 896131526077897526}
+  - component: {fileID: 896131526077897527}
+  - component: {fileID: 896131526077897524}
+  - component: {fileID: 896131526077897525}
+  - component: {fileID: 896131526077897522}
+  - component: {fileID: 896131526077897523}
+  m_Layer: 0
+  m_Name: CharacterModel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &896131526077897528
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.180747, y: -3.4924383, z: -37.78038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3354075043800240963}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &896131526077897529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4859415473b0c834694fafd07f374fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: 
+  currentHealth: 0
+  currentMana: 0
+  canMove: 1
+  canJump: 1
+  canEvade: 1
+  canAttack: 1
+  canSkill: 1
+  data: {fileID: 11400000, guid: caa50c13ae9bbc9429293fb33b20d52a, type: 2}
+  skillFields: []
+  operationSoundController: {fileID: 0}
+  weaponController: {fileID: 0}
+  operationController: {fileID: 0}
+  skillController: {fileID: 0}
+  buffController: {fileID: 0}
+  combatController: {fileID: 0}
+  animator: {fileID: 0}
+--- !u!114 &896131526077897526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af0bf9f62e37354dae04e4202b316f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSkillUsing: 0
+  isSkillCasting: 0
+  isJumping: 0
+  isAttacking: 0
+  isEvading: 0
+  isPreAttacking: 0
+  isGrounding: 0
+  groundTouch: 0
+  collisionRadius: 0.3
+  bottomOffset: {x: 0, y: -1}
+  cycleAttackCount: 2
+  attackComboCount: 0
+  attackResetDuration: 1
+  attackDelayDuration: 1
+--- !u!114 &896131526077897527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad7793384519c454bbee7313a2390c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleSound:
+    soundType: 0
+    audioClip: []
+  moveSound:
+    soundType: 1
+    audioClip: []
+  jumpSound:
+    soundType: 2
+    audioClip: []
+  groundTouchSound:
+    soundType: 3
+    audioClip: []
+  evadeSound:
+    soundType: 4
+    audioClip: []
+  collectionSound:
+    soundType: 5
+    audioClip: []
+  castSound:
+    soundType: 6
+    audioClip: []
+  hitSound:
+    soundType: 9
+    audioClip: []
+  attackSound:
+    soundType: 7
+    audioClip: []
+  useSkillSound:
+    soundType: 8
+    audioClip: []
+--- !u!114 &896131526077897524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f0a189a6158a94aa87b703cbdff496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDirtyWeaponData: 0
+--- !u!114 &896131526077897525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1266bdb834f8d24eb028f9f2a8377f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  lastSkill: {fileID: 0}
+--- !u!114 &896131526077897522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f8bf39a9c480d4c8db1c4e6bb97076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &896131526077897523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 896131526077897521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612de6d0e9224d04191b80ffba18bbe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasHit: 0
+  hasHitInTime: 0
+  takeHowMuchDamage: 0
+  attackPointBasicRange: 1

@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Transition
+  - AttackHitBox
+  - AttackHitArea
+  - PlayerUI
+  - SkillSlot
+  - slot
+  - BossRoom
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - Ground
+  - Enemy
+  - Room Boundry
+  - AttackHitBox
+  - Skill
+  - Stage
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: FarBackGround
+    uniqueID: 515337585
+    locked: 0
+  - name: BackGround
+    uniqueID: 2860364485
+    locked: 0
+  - name: ActiveObject
+    uniqueID: 2068822577
+    locked: 0
+  - name: Object
+    uniqueID: 3745107527
+    locked: 0
+  - name: FrontObject
+    uniqueID: 3638542883
+    locked: 0
+  - name: InFront
+    uniqueID: 2077110459
+    locked: 0

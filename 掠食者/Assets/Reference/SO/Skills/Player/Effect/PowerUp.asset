@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c44ff9a5d9fd4baefebf89b9e4601, type: 3}
+  m_Name: PowerUp
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: ad1303bfa960b4140899d1bc56a369ab, type: 3}
+  skillType: 2
+  elementType: 0
+  skillName: "\u7FFB\u9A30"
+  description: 
+  range: 0
+  cost: 1
+  costType: 1
+  damageMagnification: 0
+  castTime: 0
+  coolDown: 10
+  cooling: 0
+  timesOfPerDamage: 0
+  duration: 0
+  prefab: {fileID: 4587757317276013141, guid: 5ad0693a78b76114eaebce96db59f1ae, type: 3}
