@@ -23,5 +23,6 @@ MonoBehaviour:
     - {x: 1, y: -1}
     fragmentID: 4
     triggerCount: 0
+    fragColor: {r: 1, g: 0.3726415, b: 0.42089346, a: 1}
     touchStarsID: 160100001c0000003b0100009c00000003000000
     neighbors: []

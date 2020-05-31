@@ -15,9 +15,10 @@ MonoBehaviour:
   m_Data:
     touchPos_v2:
     - {x: 0, y: 0}
-    - {x: 1, y: 0}
+    - {x: -1, y: 0}
     - {x: 0, y: -1}
     fragmentID: 0
     triggerCount: 0
+    fragColor: {r: 0.60948366, g: 0.43867922, b: 1, a: 1}
     touchStarsID: 980000001900000038000000
     neighbors: []

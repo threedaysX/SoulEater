@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 30639839}
   m_Layer: 5
   m_Name: IfritFrag
-  m_TagString: Untagged
+  m_TagString: putFrag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PutFrag: {fileID: 11400000, guid: 2ed20e51ef5de8142ab95093b721ce66, type: 2}
   fName: IfritFrag
+  fId: 0
 --- !u!222 &30639842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -864,6 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 214646773}
   targetPos: {fileID: 1995942305}
   onSelectEvent:
@@ -1493,7 +1495,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -1503,6 +1505,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -1520,7 +1523,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -1530,8 +1534,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &83831571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,7 +1784,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -1956,6 +1966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 695765898}
   targetPos: {fileID: 1541597347}
   onSelectEvent:
@@ -2034,7 +2045,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -2044,6 +2055,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -2061,7 +2073,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -2071,8 +2084,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &99914654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2315,7 +2334,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -2654,6 +2673,10 @@ MonoBehaviour:
   currentPos: {x: 0, y: 0}
   lastStarID: 0
   coverStarsID: 
+  followObj: {fileID: 0}
+  tempOriginPos: {x: 0, y: 0}
+  appearTriggerCount: {fileID: 1727275928}
+  textImage: {fileID: 259073819}
 --- !u!4 &135444881
 Transform:
   m_ObjectHideFlags: 0
@@ -2664,7 +2687,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.0999966, y: -5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1041122938}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2740,6 +2764,139 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151442100}
+  m_CullTransparentMesh: 0
+--- !u!1 &152503926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 152503927}
+  - component: {fileID: 152503931}
+  - component: {fileID: 152503930}
+  - component: {fileID: 152503929}
+  - component: {fileID: 152503928}
+  m_Layer: 5
+  m_Name: trapezoidFrag
+  m_TagString: putFrag
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &152503927
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152503926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 667479554}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -97, y: -80}
+  m_SizeDelta: {x: 88.83, y: 72.61}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &152503928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152503926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 152503929}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &152503929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152503926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 73b9708762c171e4e93601717955e5b1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &152503930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152503926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8465b5ccaac6aec4b947e116587ec826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PutFrag: {fileID: 11400000, guid: 92314b2596b09a84fad2eff4659c533e, type: 2}
+  fName: trapezoidFrag
+  fId: 0
+--- !u!222 &152503931
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152503926}
   m_CullTransparentMesh: 0
 --- !u!1 &165565765
 GameObject:
@@ -3476,6 +3633,79 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &259073818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 259073821}
+  - component: {fileID: 259073820}
+  - component: {fileID: 259073819}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &259073819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259073818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &259073820
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259073818}
+  m_CullTransparentMesh: 0
+--- !u!224 &259073821
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259073818}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1041122938}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 260, y: 42}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &259435907
 GameObject:
   m_ObjectHideFlags: 0
@@ -4027,7 +4257,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -4037,6 +4267,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -4054,7 +4285,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -4064,8 +4296,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &311335490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4308,7 +4546,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -4409,7 +4647,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -4419,6 +4657,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -4436,7 +4675,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -4446,8 +4686,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &325267407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4690,7 +4936,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -4963,7 +5209,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   - {fileID: 11400000, guid: bcc7275804eb4e4409b42ed844f35cd0, type: 2}
@@ -4974,6 +5220,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -4984,7 +5231,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -4994,8 +5242,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &380351945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5238,7 +5492,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -5414,7 +5668,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -5424,6 +5678,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -5441,7 +5696,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -5451,8 +5707,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &390744265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5695,7 +5957,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -5723,6 +5985,139 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &406441256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406441257}
+  - component: {fileID: 406441261}
+  - component: {fileID: 406441260}
+  - component: {fileID: 406441259}
+  - component: {fileID: 406441258}
+  m_Layer: 5
+  m_Name: triangleFrag
+  m_TagString: putFrag
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &406441257
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406441256}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 667479554}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 280.7, y: -90}
+  m_SizeDelta: {x: 88.83, y: 72.61}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &406441258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406441256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 406441259}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &406441259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406441256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 0fa4efa00d0b28e479f1c098a75b461e, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &406441260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406441256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8465b5ccaac6aec4b947e116587ec826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PutFrag: {fileID: 11400000, guid: c12edb3be95c7404ebe18a9f792b60a5, type: 2}
+  fName: triangleFrag
+  fId: 0
+--- !u!222 &406441261
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406441256}
+  m_CullTransparentMesh: 0
 --- !u!1 &413138295
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,7 +6542,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -6157,6 +6552,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -6174,7 +6570,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -6184,8 +6581,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &422026490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6428,7 +6831,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -7775,6 +8178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 1420246004}
   targetPos: {fileID: 1321904318}
   onSelectEvent:
@@ -8304,6 +8708,8 @@ RectTransform:
   m_Children:
   - {fileID: 1783165632}
   - {fileID: 30639838}
+  - {fileID: 406441257}
+  - {fileID: 152503927}
   m_Father: {fileID: 914446500}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8458,7 +8864,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -8468,6 +8874,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -8485,7 +8892,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -8495,8 +8903,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &679363417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8739,7 +9153,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -8914,7 +9328,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -8924,6 +9338,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -8941,7 +9356,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -8951,8 +9367,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &693382590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9195,7 +9617,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -9374,7 +9796,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702368281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.111111, y: -4.9999995, z: -10}
+  m_LocalPosition: {x: 9.225, y: -4.9999995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9838,6 +10260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 695765898}
   targetPos: {fileID: 2127679701}
   onSelectEvent:
@@ -10063,6 +10486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedButton: {fileID: 0}
+  selectButtonSound: {fileID: 0}
 --- !u!4 &773580213
 Transform:
   m_ObjectHideFlags: 0
@@ -10263,7 +10687,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -10273,6 +10697,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -10290,7 +10715,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -10300,8 +10726,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &798529140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10544,7 +10976,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -10923,7 +11355,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -10933,6 +11365,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -10950,7 +11383,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -10960,8 +11394,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &842709574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11204,7 +11644,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -11607,7 +12047,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -11617,6 +12057,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -11634,7 +12075,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -11644,8 +12086,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &883760172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11888,7 +12336,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -12333,7 +12781,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -12343,6 +12791,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -12360,7 +12809,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -12370,8 +12820,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &904019988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12614,7 +13070,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -12715,7 +13171,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -12725,6 +13181,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -12742,7 +13199,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -12752,8 +13210,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &904150359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12996,7 +13460,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -13502,6 +13966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 1527636134}
   targetPos: {fileID: 243117520}
   onSelectEvent:
@@ -14063,7 +14528,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -14073,6 +14538,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -14090,7 +14556,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -14100,8 +14567,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &995504514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14344,7 +14817,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -14638,7 +15111,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -14648,6 +15121,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -14665,7 +15139,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -14675,8 +15150,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1013436813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14919,7 +15400,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -15089,6 +15570,106 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73dc303cf3084f04bbbf05915bfe1ff5, type: 3}
+--- !u!1 &1041122937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1041122938}
+  - component: {fileID: 1041122941}
+  - component: {fileID: 1041122940}
+  - component: {fileID: 1041122939}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1041122938
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041122937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 259073821}
+  - {fileID: 1727275926}
+  m_Father: {fileID: 135444881}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1041122939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041122937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1041122940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041122937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &1041122941
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041122937}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
 --- !u!1 &1041845127
 GameObject:
   m_ObjectHideFlags: 0
@@ -15301,6 +15882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 1732953187}
   targetPos: {fileID: 243621598}
   onSelectEvent:
@@ -16551,6 +17133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 695765898}
   targetPos: {fileID: 2134226391}
   onSelectEvent:
@@ -17361,7 +17944,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -17371,6 +17954,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -17388,7 +17972,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -17398,8 +17983,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1193448763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17642,7 +18233,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -17752,6 +18343,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -17767,7 +18359,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -17777,8 +18370,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1194194333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18021,7 +18620,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -19020,6 +19619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 214646773}
   targetPos: {fileID: 1084638296}
   onSelectEvent:
@@ -19706,7 +20306,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -19716,6 +20316,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -19733,7 +20334,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -19743,8 +20345,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1385836750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19987,7 +20595,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -20307,6 +20915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 214646773}
   targetPos: {fileID: 1271100533}
   onSelectEvent:
@@ -20542,7 +21151,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -20552,6 +21161,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -20569,7 +21179,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -20579,8 +21190,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1417333692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20823,7 +21440,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -20997,7 +21614,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -21007,6 +21624,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -21024,7 +21642,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -21034,8 +21653,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1423627094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21278,7 +21903,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -21620,6 +22245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 695765898}
   targetPos: {fileID: 453072181}
   onSelectEvent:
@@ -22026,7 +22652,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -22154,7 +22780,10 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
+  dieParticle: {fileID: 0}
+  healthUI: {fileID: 0}
 --- !u!114 &1471013458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22852,7 +23481,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -22862,6 +23491,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -22879,7 +23509,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -22889,8 +23520,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1524816348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23133,7 +23770,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -23781,6 +24418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 695765898}
   targetPos: {fileID: 1655097517}
   onSelectEvent:
@@ -24872,6 +25510,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711741923}
   m_CullTransparentMesh: 0
+--- !u!1 &1727275925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727275926}
+  - component: {fileID: 1727275927}
+  - component: {fileID: 1727275928}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1727275926
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727275925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1041122938}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 42}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1727275927
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727275925}
+  m_CullTransparentMesh: 0
+--- !u!114 &1727275928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727275925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 28
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!114 &1729554567 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4749611012356764341, guid: dacb0298b1c73754fae4decceeef70ae,
@@ -25261,6 +25976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 695765898}
   targetPos: {fileID: 2088272956}
   onSelectEvent:
@@ -25339,7 +26055,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -25349,6 +26065,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -25366,7 +26083,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -25376,8 +26094,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1762335689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25620,7 +26344,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -25882,7 +26606,7 @@ GameObject:
   - component: {fileID: 1783165633}
   m_Layer: 5
   m_Name: LizardHeroFrag
-  m_TagString: Untagged
+  m_TagString: putFrag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25991,6 +26715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PutFrag: {fileID: 11400000, guid: 3439bb8d745bc4f49825dffd504aca81, type: 2}
   fName: LizardHeroFrag
+  fId: 0
 --- !u!222 &1783165636
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26729,6 +27454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canPressAnyKey: 0
   pointer: {fileID: 214646773}
   targetPos: {fileID: 1937412203}
   onSelectEvent:
@@ -27447,7 +28173,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -27457,6 +28183,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -27474,7 +28201,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -27484,8 +28212,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &1946234762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27728,7 +28462,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -29277,7 +30011,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -29287,6 +30021,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -29304,7 +30039,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -29314,8 +30050,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &2083906969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29558,7 +30300,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}
@@ -30245,7 +30987,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e245430a4ff153840b88d153fe9dbbd3, type: 2}
   - {fileID: 11400000, guid: 8bdece50f9c3baa458819444dc7522e9, type: 2}
   - {fileID: 11400000, guid: b6d7c32251fc66747a400fb2dea9e1e1, type: 2}
-  - {fileID: 11400000, guid: d2437f12a9b64824ab321c4c6693306c, type: 2}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 3c729da956d461443aeceddcea16b54a, type: 2}
   - {fileID: 11400000, guid: ee1b0a00b98a5034f8ff9a7003fb59d8, type: 2}
   operationSoundController: {fileID: 0}
@@ -30255,6 +30997,7 @@ MonoBehaviour:
   buffController: {fileID: 0}
   combatController: {fileID: 0}
   knockBackSystem: {fileID: 0}
+  dieController: {fileID: 0}
   anim: {fileID: 0}
   detects:
   - {fileID: 11400000, guid: a4a6fb41c5faf8d438940c8b82aca28a, type: 2}
@@ -30272,7 +31015,8 @@ MonoBehaviour:
   defaultAction: {fileID: 11400000, guid: c3a44652899bca642852f1ad66677f7f, type: 2}
   lastAction: {fileID: 0}
   detectDistance: 30
-  overridedAactionDelay: 0
+  commonActionDelay: 0
+  animationActionDelay: 0.1
   maxWeightOffset: 2
   actionWeightRegen: 1
   actionWeightRegenCount: 5
@@ -30282,8 +31026,14 @@ MonoBehaviour:
     m_Bits: 0
   distanceDetect: {fileID: 0}
   enemyLevel: 0
-  preAttackSound: {fileID: 0}
-  preAttackHint: {fileID: 0}
+  preActSound: {fileID: 0}
+  preActHint: {fileID: 0}
+  healthUI: {fileID: 0}
+  forceAttackDelay: 0
+  typeChangingSound: {fileID: 0}
+  typeChangedBurstSound: {fileID: 0}
+  typeChangingEffect: {fileID: 0}
+  typeChangeDuration: 0
 --- !u!114 &2130815150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30526,7 +31276,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -549859769
-  m_SortingLayer: 4
+  m_SortingLayer: 6
   m_SortingOrder: 9
   m_Sprite: {fileID: -2278832619295022531, guid: df10d2f7b5acd1940bcea6e3c74336b9,
     type: 3}

@@ -63,7 +63,7 @@ public class Chip : Singleton<Chip>
         for (int i = 0; i < theF.m_Data.touchStarsID.Count; i++)
         {
             //star變黑色
-            AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].gameObject.GetComponent<Image>().color = Color.black;
+            AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].gameObject.GetComponent<Image>().color = theF.m_Data.fragColor;
             //更改Star狀態
             AllStar.Instance.stars[theF.m_Data.touchStarsID[i]].isLocked = true;
             //Star綁定chip_script

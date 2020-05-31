@@ -16,6 +16,7 @@ TagManager:
   - MusicAudio
   - EffectSoundAudio
   - Soul
+  - putFrag
   layers:
   - Default
   - TransparentFX

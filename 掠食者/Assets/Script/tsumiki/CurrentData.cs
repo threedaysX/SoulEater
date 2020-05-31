@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CurrentData : Singleton<CurrentData>
 {
@@ -10,29 +11,76 @@ public class CurrentData : Singleton<CurrentData>
     public Vector2 currentPos;           //存放當前點(三角形)在AllStar的ID<<中心點
     public int lastStarID;
     public List<int> coverStarsID = new List<int>();           //存放 此碎片會覆蓋到的點(三角形)們
+    ///
+    public GameObject followObj;
+    public Vector2 tempOriginPos;
+    ///
+    public Text appearTriggerCount;
+    public Image textImage;
+    bool windowsAppear = false;         //顯示碎片的玩意
 
     bool positionError = false;         //碎片位置卡到
 
     private void Start()
     {
+        followObj = null;
         currentFragmentID = -1;
     }
     void Update()
     {
+        if (followObj != null)
+        {
+            followObj.transform.position = Input.mousePosition;
+        }
+
         if (!EventSystem.current.IsPointerOverGameObject())
             return;
+
+        if (Input.GetMouseButtonDown(0) )
+        {
+            if (followObj != null && ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.tag != "putFrag" && ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.tag != "slot")
+            {
+                currentFragmentID = -1;
+                followObj.transform.position = tempOriginPos;
+                followObj.GetComponent<Image>().raycastTarget = true;
+                followObj.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                followObj = null;
+                for (int i = 0; i < coverStarsID.Count; i++)
+                {
+                    AllStar.Instance.stars[coverStarsID[i]].ExitColor();
+                }
+            }
+            else if (windowsAppear)
+            {
+                windowsAppear = false;
+                appearTriggerCount.text = "";
+                textImage.color = new Color(0, 0, 0, 0);
+                return;
+            }
+        }
+
         if (ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.tag != "slot")
             return;
 
-        if (Input.GetMouseButtonDown(1))//查看觸發多少條邊
-        {
-            star getTemp = ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.GetComponent<star>();
-            AllFragment.Instance.fragments[getTemp.fragID].m_Data.PrintTriggerCount();
-
-        }
-
         if (currentFragmentID == -1)            //手中沒有碎片
         {
+            if (Input.GetMouseButtonDown(1))    //查看觸發多少條邊
+            {
+                if (AllFragment.Instance.fragments.Count == 0)
+                    return;
+                star getTemp = ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.GetComponent<star>();
+                //Debug.Log(AllFragment.Instance.fragments[getTemp.fragID].m_Data.PrintTriggerCount());
+
+                appearTriggerCount.text = AllFragment.Instance.fragments[getTemp.fragID].m_Data.PrintTriggerCount();
+                ///
+                appearTriggerCount.transform.position = Input.mousePosition;
+                textImage.transform.position = Input.mousePosition;
+                ///
+                textImage.color = new Color(1, 1, 0, 0.7f);
+                appearTriggerCount.color = new Color(0, 0, 0, 1);
+                windowsAppear = true;
+                return;
+            }
             if (Input.GetMouseButtonDown(0))    //拿起來
             {
                 star getTemp = ExtendedStandaloneInputModule.GetPointerEventData().pointerCurrentRaycast.gameObject.GetComponent<star>();
@@ -43,6 +91,7 @@ public class CurrentData : Singleton<CurrentData>
                     //Debug.Log("拿起來fragmentID:" + getTemp.fragID);
                     Chip.Instance.PullUp(AllFragment.Instance.fragments[getTemp.fragID]);
                 }
+                return;
             }
 
         }
@@ -51,6 +100,15 @@ public class CurrentData : Singleton<CurrentData>
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////確認好位置要放下了
             if (Input.GetMouseButtonDown(0) && !positionError)  //放下
             {
+                if (followObj != null)
+                {
+                    followObj.transform.position = tempOriginPos;
+                    followObj.GetComponent<Image>().raycastTarget = true;
+                    followObj.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                    followObj = null;
+                    //Destroy(followObj);
+                }
+
                 Chip.Instance.PutOn(AllFragment.Instance.fragments[currentFragmentID], coverStarsID);
 
                 //Debug.Log("放下currentFragmentID:" + currentFragmentID);
@@ -84,12 +142,13 @@ public class CurrentData : Singleton<CurrentData>
                 currentPos.x -= 1;
             }
 
+
             positionError = false;
             for (int i = 0; i < temp_FragStars.Count; i++)
             {
                 Vector2 tempVec = new Vector2(temp_FragStars[i].x + currentPos.x, temp_FragStars[i].y + currentPos.y);
                 int id = AllStar.Instance.stars.FindIndex(x => x.pos == tempVec);
-                if (id != -1)
+                if (id != -1)//有此位置
                 {
                     if (AllStar.Instance.stars[id].isLocked)
                     {
@@ -97,6 +156,11 @@ public class CurrentData : Singleton<CurrentData>
                         continue;
                     }
                     coverStarsID.Add(id);
+                }
+                else            //無此位置>>碎片超出天賦盤範圍
+                {
+                    positionError = true;
+                    break;
                 }
             }
             //將新的上色

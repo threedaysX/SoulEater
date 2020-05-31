@@ -17,6 +17,9 @@ public class F_Data
     public int fragmentID;
     public int triggerCount;
 
+    public Color fragColor;
+
+
     //*****star(絕對位置)*****
     [SerializeField]
     public List<int> touchStarsID = new List<int>();                          //用來記錄此碎片和哪個star交疊
@@ -209,8 +212,9 @@ public class F_Data
             }
     }
 
-    public void PrintTriggerCount() { 
-        Debug.Log(fName + "_triggerCount:" + triggerCount);
+    public string PrintTriggerCount() { 
+        //return  "此碎片"+ fName+"觸發了" + triggerCount+"條邊";
+        return  "此碎片觸發了" + triggerCount+"條邊";
     }
 }
 
