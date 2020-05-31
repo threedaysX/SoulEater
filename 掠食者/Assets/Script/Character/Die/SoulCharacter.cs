@@ -7,7 +7,7 @@ public class SoulCharacter : Character
     public override void Die()
     {
         // Give Frag.
-        SlowMotionController.Instance.DoSlowMotion(0.05f, 1f);
+        SlowMotionController.Instance.DoSlowMotion(0.05f, 2f);
         Destroy(this.gameObject);
         EndGameManager.Instance.EndGame();
     }
