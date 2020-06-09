@@ -93,7 +93,7 @@ public abstract class AI : Character
             return;
 
         // 偵測
-        foreach (var detect in detects)
+        foreach (Detect detect in detects)
         {
             detect.GetCurrentAIHavior(this);
             if (detect.StartDetectHaviour())
@@ -121,12 +121,6 @@ public abstract class AI : Character
                 // 在執行Action時，會持續面對目標
                 AlwaysFaceTarget();
                 DoActions();
-                // 只有移動不需要等待延遲，且算是實際的行動數
-                if (lastAction.actionType != AiActionType.Move)
-                {
-                    nextActTimes = Time.time + commonActionDelay + animationActionDelay;
-                    cumulativeActionCount++;
-                }
             }
         }
         else
@@ -141,7 +135,7 @@ public abstract class AI : Character
         
         // 判斷哪些動作符合條件，代表可以做
         // 若上一個相同的動作執行失敗，則權重降低N一次
-        foreach (var action in actions)
+        foreach (AiAction action in actions)
         {
             action.GetCurrentAIHavior(this);
             if (action.CheckActionThatCanDo())
@@ -218,6 +212,13 @@ public abstract class AI : Character
         commonActionDelay = action.commonActionDelay;
         lastActionSuccess = action.StartActHaviour();
         lastAction = action;
+
+        // 只有移動不需要等待延遲，且算是實際的行動數
+        if (lastActionSuccess && lastAction.actionType != AiActionType.Move)
+        {
+            nextActTimes = Time.time + commonActionDelay + animationActionDelay;
+            cumulativeActionCount++;
+        }
     }
 
     protected void ReturnDefaultAction(bool setToLastAction = false)

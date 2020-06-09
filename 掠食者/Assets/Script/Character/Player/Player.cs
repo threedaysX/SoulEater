@@ -83,7 +83,7 @@ public class Player : Character
     public override void Die()
     {
         ResetBarUI();
-        SlowMotionController.Instance.DoSlowMotion(0.05f, dieController.dieDuration);
+        TimeScaleController.Instance.DoSlowMotion(0.05f, dieController.dieDuration);
         StartCoroutine(FadeScreen.Instance.Fade(8f, 8f));
         base.Die();
     }

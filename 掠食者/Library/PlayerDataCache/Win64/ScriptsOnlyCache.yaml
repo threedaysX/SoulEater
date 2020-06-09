@@ -76,12 +76,12 @@ ScriptsOnlyBuild:
     - SkillPools
     - SkillSlot
     - Slow
-    - SlowMotionController
     - SoulCharacter
     - Status
     - StepBackAction
     - Teleport
     - TeleportAction
+    - TimeScaleController
     - TitleControl
     - TypeExample
     - UIShake
@@ -100,17 +100,10 @@ ScriptsOnlyBuild:
     - Cinemachine.CinemachinePipeline
     - Cinemachine.CinemachineVirtualCamera
     - Cinemachine.NoiseSettings
-    Unity.2D.Sprite.Editor.dll:
-    - UnityEditor.U2D.Sprites.SpriteEditorWindow
     Unity.2D.Tilemap.Editor.dll:
-    - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridBrushEditor
-    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
-    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
     - UnityEditor.Tilemaps.GridPalettes
-    - UnityEditor.Tilemaps.PaintableSceneViewGrid
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.RenderPipelines.Core.Runtime.dll:
@@ -243,8 +236,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11530}
     - Class: 114
       Script: {instanceID: 11590}
-    - Class: 114
-      Script: {instanceID: 11596}
     - Class: 114
       Script: {instanceID: 11598}
     - Class: 114
@@ -449,6 +440,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 16162}
     - Class: 114
       Script: {instanceID: 16250}
+    - Class: 114
+      Script: {instanceID: 376420}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -731,12 +724,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PowerUp
-  - hash:
-      serializedVersion: 2
-      Hash: 5d200c5251035b94068699f6312331bc
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SlowMotionController
   - hash:
       serializedVersion: 2
       Hash: 1b34cfdad2563e4cdbf5c64a09180cef
@@ -1033,7 +1020,7 @@ ScriptsOnlyBuild:
     className: PostProcessProfile
   - hash:
       serializedVersion: 2
-      Hash: cf8563bf015b709a0cdee09dd059462f
+      Hash: aea3f20a3d3d9bf4e96460fd25eb4526
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CurrentData
@@ -2311,7 +2298,7 @@ ScriptsOnlyBuild:
     className: HealthManaControl
   - hash:
       serializedVersion: 2
-      Hash: cdeb184e7b7a2e5759ae82feee254d5a
+      Hash: c6e7239b35954c82925c260831a6faa9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Fragment
@@ -2669,6 +2656,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Skill
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TimeScaleController
   platform: 19
   scenePathNames:
   - Assets/Scenes/StartMenu.unity

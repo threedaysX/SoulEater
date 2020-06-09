@@ -68,11 +68,11 @@ public class PlayerMovement : MonoBehaviour
             // 若不能移動，則會隨慣性移動至停止
             if (rb.velocity.x > 0)
             {
-                rb.velocity = new Vector2(0.6f, rb.velocity.y);
+                rb.velocity = new Vector2(1.2f * transform.right.x, rb.velocity.y);
             }
-            else if (rb.velocity.x < 0)
+            else
             {
-                rb.velocity = new Vector2(-0.6f, rb.velocity.y);
+                rb.velocity = new Vector2(0.5f * transform.right.x, rb.velocity.y);
             }
         }
     }
@@ -95,6 +95,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void BetterJump()
     {
+        if (character.operationController.isPreAttacking || character.operationController.isAttacking)
+            return;
+
         if (rb.velocity.y > 0 && !Input.GetKey(HotKeyController.jumpKey))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;

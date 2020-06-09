@@ -15,7 +15,7 @@ MonoBehaviour:
   maxHealth:
     BaseValue: 2195
     AdditionalValue: 1500
-    FinalValue: 195
+    FinalValue: 3695
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
@@ -94,7 +94,7 @@ MonoBehaviour:
   moveSpeed:
     BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 0.9851
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []

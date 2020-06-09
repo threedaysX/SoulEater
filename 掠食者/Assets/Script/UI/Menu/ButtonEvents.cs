@@ -56,6 +56,11 @@ public class ButtonEvents : Singleton<ButtonEvents>
         SceneManager.LoadScene(sceneName);
     }
 
+    public void QuitGameImmediately()
+    {
+        Application.Quit();
+    }
+
     public void QuitGame()
     {
         StartCoroutine(DelayQuitGame(1f));

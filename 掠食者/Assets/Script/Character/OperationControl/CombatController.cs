@@ -24,7 +24,7 @@ public class CombatController : MonoBehaviour
     {
         character = GetComponent<Character>();
         RenderAttackHitboxes(true);
-        RenderHitEffect(true);
+        RenderHitEffect();
     }
 
     public bool Attack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
@@ -104,13 +104,13 @@ public class CombatController : MonoBehaviour
     {
         if (character.data.attackHitBoxPrefab == null)
             return;
-        var attackHitboxObj = PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "AttackHitboxes", false, reRenderOnce);
+        var attackHitboxObj = PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "_AttackHitboxes", false, reRenderOnce);
         attackHitboxes = attackHitboxObj.GetComponent<AttackHitboxList>();
     }
 
-    public void RenderHitEffect(bool reRenderOnce = false)
+    public void RenderHitEffect()
     {
-        var hitEffectObj = PrefabRenderer.Instance.RenderPrefabInParent<ParticleSystem>(character.transform, character.data.hitEffectPrefab, "hitEffect", true, reRenderOnce);
+        var hitEffectObj = PrefabRenderer.Instance.RenderPrefab<ParticleSystem>(character.data.hitEffectPrefab, character.characterName + "_HitEffect", true);
         hitEffect = hitEffectObj.GetComponent<ParticleSystem>();
     }
 

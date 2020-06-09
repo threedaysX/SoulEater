@@ -45,8 +45,8 @@ public abstract class EnemyModel : AI
 
     public override void Die()
     {
-        ResetBarUI();
         base.Die();
+        ResetBarUI();
     }
 
     public void SetEnemyLevel(EnemyLevel level)

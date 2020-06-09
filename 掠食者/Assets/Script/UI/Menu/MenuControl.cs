@@ -23,10 +23,6 @@ public class MenuControl : Singleton<MenuControl>
             if (menu.activeSelf)
             {
                 menuEscStack.Pop().escButton.onClick.Invoke();
-                if (menuEscStack.Count == 0)
-                {
-                    SlowMotionController.Instance.isOpenUI = false;
-                }
             }
             else
             {
@@ -48,7 +44,7 @@ public class MenuControl : Singleton<MenuControl>
         }
         menu.SetActive(false);
         // Reset timeScale when close menu.
-        Time.timeScale = 1f;
+        TimeScaleController.Instance.OpenUI(false);
     }
 
     public void OpenMainMenu()
@@ -57,7 +53,7 @@ public class MenuControl : Singleton<MenuControl>
         defaultButtonEvents.SetActive(true);
         defaultOpenMenuContent.SetActive(true);
         PushOpenMenuToStack(defaultOpenMenuContent.GetComponent<MenuEvent>());
-        Time.timeScale = 0;
+        TimeScaleController.Instance.OpenUI(true);
 
         if (ButtonEvents.Instance.selectedButton != null)
         {
@@ -65,6 +61,5 @@ public class MenuControl : Singleton<MenuControl>
             return;
         }
         defaultSelectedButton.Select();
-        SlowMotionController.Instance.isOpenUI = true;
     }
 }

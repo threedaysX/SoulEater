@@ -15,12 +15,12 @@ public class DashSlash : DisposableSkill
         sourceCaster.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         drawnSwordEffect.transform.position = sourceCaster.transform.position + sourceCaster.transform.right * 0.5f;
         drawnSwordEffect.Play(true);
+        GetImmune();
     }
 
     protected override void AddAffectEvent()
     {
         immediatelyAffect.AddListener(GetInDarkScreen);
-        immediatelyAffect.AddListener(GetImmune);
         immediatelyAffect.AddListener(MoveFoward);
         immediatelyAffect.AddListener(delegate { StartCoroutine(HitDetect()); });
     }
@@ -92,7 +92,7 @@ public class DashSlash : DisposableSkill
         target.LockOperation(LockType.SkillAction, false);
     }
 
-    // 使用技能後，立即進入無敵狀態
+    // 詠唱技能時，就立即進入無敵狀態
     private void GetImmune()
     {
         sourceCaster.GetIntoImmune(1f);

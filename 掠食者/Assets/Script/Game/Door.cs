@@ -5,9 +5,9 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private Collider2D door;
-    [SerializeField] private Vector2 pointToTeleport;
+    public Vector2 pointToTeleport;
     [Header("把boss打開(SetActive)")]
-    [SerializeField] private GameObject boss;
+    public GameObject boss;
     private void Start()
     {
         door = GetComponent<Collider2D>();

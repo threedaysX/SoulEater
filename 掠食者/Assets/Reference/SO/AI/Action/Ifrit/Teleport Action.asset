@@ -15,8 +15,7 @@ MonoBehaviour:
   ActionWeight: 5
   originalActionWeight: 5
   commonActionDelay: 0
-  clips:
-  - {fileID: 7400000, guid: 495a093930ba4e745b4a615b560c9ff6, type: 2}
+  clips: []
   minusWeightAmountWhenNotSuccess: 1
   minusWeightAmountAfterAction: 2
   _diffCount: 0
