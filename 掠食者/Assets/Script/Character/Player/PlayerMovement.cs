@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y < 0)
+        else if (rb.velocity.y < 0 && !Input.GetKey(HotKeyController.jumpKey))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
