@@ -9,6 +9,7 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler, IDeselectHandler
     public GameObject pointer;
     public RectTransform targetPos;
     public UnityEvent onSelectEvent;
+    public UnityEvent onDeselectEvent;
 
     public void OnSelect(BaseEventData e)
     {
@@ -28,6 +29,7 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnDeselect(BaseEventData e)
     {
+        onDeselectEvent.Invoke();
         ButtonEvents.Instance.DeselectButton();
     }
 }

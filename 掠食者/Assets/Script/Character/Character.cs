@@ -3,6 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(OperationSoundController))]
+[RequireComponent(typeof(WeaponController))]
+[RequireComponent(typeof(OperationController))]
+[RequireComponent(typeof(SkillController))]
+[RequireComponent(typeof(BuffController))]
+[RequireComponent(typeof(CombatController))]
+[RequireComponent(typeof(KnockStunSystem))]
+[RequireComponent(typeof(DieController))]
 public class Character : MonoBehaviour
 {
     #region 基礎參數
@@ -91,7 +99,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public BuffController buffController; // 狀態控制
     [HideInInspector] public CombatController combatController; // 戰鬥控制
     [HideInInspector] public KnockStunSystem knockBackSystem; // 擊退控制
-    [HideInInspector] public DieController dieController; // 擊退控制
+    [HideInInspector] public DieController dieController; // 死亡控制
     [HideInInspector] public Animator anim;
     #endregion
 

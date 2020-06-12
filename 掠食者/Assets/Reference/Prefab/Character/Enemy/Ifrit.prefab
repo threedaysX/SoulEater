@@ -29013,7 +29013,7 @@ MonoBehaviour:
   preActSound: {fileID: 8300000, guid: 51725dde0a95f4049aae736ac906bae3, type: 3}
   preActHint: {fileID: 801679221}
   healthUI: {fileID: 0}
-  forceAttackDelay: 0.5
+  forceAttackDelay: 0.7
   typeChangingSound: {fileID: 8300000, guid: 54a1b4f765a54eb4796793eea869def4, type: 3}
   typeChangedBurstSound: {fileID: 8300000, guid: 6370de40894ab8b4a9eb9a4223a08325,
     type: 3}

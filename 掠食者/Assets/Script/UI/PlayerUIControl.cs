@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerUIControl : Singleton<PlayerUIControl>
@@ -9,14 +11,32 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
     public Text currentHpText;
 
     [Header("Mana")]
-    [SerializeField] public ManaCrystal[] manas;
+    public ManaCrystal[] manas;
     public Text maxManaText;
     public Text currentManaText;
     public Sprite emptyMana;
     public Sprite fullManaLevel1;
     public Sprite fullManaLevel2;
     public Sprite fullManaLevel3;
-    private int notDisplayMpSlotsCount = 0;
+    private int notDisplayMpSlotsCount = 0; // 未顯示的魔力水晶(小於上限時)
+
+    [Header("SkillSlots")]
+    public MenuSkillSlot[] skillUISlots;
+    private Dictionary<KeyCode, MenuSkillSlot> skillSlotsDict;
+
+    private void Start()
+    {
+        skillSlotsDict = new Dictionary<KeyCode, MenuSkillSlot>();
+        foreach (var skillSlot in skillUISlots)
+        {
+            skillSlotsDict.Add(skillSlot.keyCode, skillSlot);
+        }
+    }
+
+    private void Update()
+    {
+        StartSkillCoolDownHint();
+    }
 
     public void SetHealthUI(float maxHealth, float currentHealth)
     {
@@ -91,6 +111,27 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
                     break;
                 default:
                     break;
+            }
+        }
+    }
+
+    public void StartSkillCoolDownHint()
+    {
+        foreach (var skillSlot in skillUISlots)
+        {
+            // 當季能進入冷卻，開啟冷卻提示
+            if (skillSlot.skill != null && skillSlot.skill.cooling)
+            {
+                skillSlot.background.fillAmount = (skillSlot.skill.trueCoolDown - skillSlot.skill.coolDownTimer) / skillSlot.skill.trueCoolDown;
+            }
+            // 當冷卻提示不為預設值(預設為1)，且當技能不在冷卻中，或是該欄位沒有技能，則重置冷卻提示
+            else if (skillSlot.background.fillAmount != 1)
+            {
+                if (skillSlot.skill == null ||
+                   (skillSlot.skill != null && !skillSlot.skill.cooling))
+                {
+                    skillSlot.background.fillAmount = 1;
+                }
             }
         }
     }

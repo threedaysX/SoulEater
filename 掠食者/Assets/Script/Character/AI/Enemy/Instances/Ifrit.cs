@@ -1,6 +1,7 @@
 ﻿using StatsModifierModel;
 using System.Collections;
 using UnityEngine;
+
 /// <summary>
 /// 伊夫利特
 /// </summary>
@@ -10,6 +11,7 @@ public class Ifrit : EnemyModel
     public UIShake healthUI;
 
     [Header("攻擊速度(延遲)")]
+    [Range(0f, 1f)]
     public float forceAttackDelay;
 
     [Header("型態改變")]

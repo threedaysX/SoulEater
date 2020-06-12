@@ -21,8 +21,8 @@ public class ButtonEvents : Singleton<ButtonEvents>
             selectedButton.onClick.Invoke();
         }
 
-        // If lost select, then click up or down arrow to re-select last button.
-        if (deselectButtonTrigger && (Input.GetKeyDown(HotKeyController.moveUp) || Input.GetKeyDown(HotKeyController.moveDown)))
+        // If lost select, then click any key to re-select last button (except mouse click).
+        if (deselectButtonTrigger && Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2))
         {
             selectedButton.Select();
             deselectButtonTrigger = false;

@@ -86,14 +86,16 @@ public class SkillController : MonoBehaviour
     protected IEnumerator GetIntoCoolDown(Skill skill)
     {
         skill.cooling = true;
-        float timer = skill.coolDown.Value * (1 - character.data.reduceSkillCoolDown.Value / 100);
-        while (timer > 0)
+        skill.trueCoolDown = skill.coolDown.Value * (1 - character.data.reduceSkillCoolDown.Value / 100);
+        skill.coolDownTimer = skill.trueCoolDown;
+        while (skill.coolDownTimer > 0)
         {
             var frameTime = Time.deltaTime;
-            timer -= frameTime;
+            skill.coolDownTimer -= frameTime;
             yield return new WaitForSeconds(frameTime);
         }
 
+        skill.coolDownTimer = 0;
         skill.cooling = false;
     }
 
@@ -101,9 +103,10 @@ public class SkillController : MonoBehaviour
     {
         if (character.skillFields == null)
             return;
-        foreach (var field in character.skillFields)
+        foreach (var skill in character.skillFields)
         {
-            field.cooling = false;
+            skill.cooling = false;
+            skill.coolDownTimer = 0;
         }
     }
 }

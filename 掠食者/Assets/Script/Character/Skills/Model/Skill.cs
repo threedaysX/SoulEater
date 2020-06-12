@@ -45,6 +45,8 @@ public class Skill : ScriptableObject
     /// 技能冷卻
     /// </summary>
     public Stats coolDown;
+    public float trueCoolDown;
+    public float coolDownTimer;
     public bool cooling = false;
 
     /// <summary>

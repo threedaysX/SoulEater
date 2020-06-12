@@ -20,7 +20,7 @@ public class DashSlash : DisposableSkill
 
     protected override void AddAffectEvent()
     {
-        immediatelyAffect.AddListener(GetInDarkScreen);
+        immediatelyAffect.AddListener(GetInDarkScreenAndZoomIn);
         immediatelyAffect.AddListener(MoveFoward);
         immediatelyAffect.AddListener(delegate { StartCoroutine(HitDetect()); });
     }
@@ -99,11 +99,11 @@ public class DashSlash : DisposableSkill
     }
 
     // 使用技能後，立即進入短暫黑畫面與畫面特寫
-    private void GetInDarkScreen()
+    private void GetInDarkScreenAndZoomIn()
     {
-        StartCoroutine(FadeScreen.Instance.Fade(1.6f, 1.6f));
-        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3.4f, duration = 0.2f, afterDelay = 0.8f };
-        ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.5f, afterDelay = 0f };
+        StartCoroutine(FadeScreen.Instance.Fade(1f, 1f));
+        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.1f, afterDelay = 0.6f };
+        ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 6f, duration = 0.5f, afterDelay = 0f };
         CinemachineCameraControl.Instance.ZoomInCameraActions(zoomInSetting, resetCameraSetting);
     }
 

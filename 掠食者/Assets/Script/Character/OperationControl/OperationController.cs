@@ -629,7 +629,7 @@ public class OperationController : MonoBehaviour
         yield return new WaitForSeconds(attackAnimDuration - comboDuration);
 
         // 攻擊收尾，可連段
-        setOperationState(OperationStateType.Combo);           
+        setOperationState(OperationStateType.Combo);
 
         yield return new WaitForSeconds(comboDuration);
 
