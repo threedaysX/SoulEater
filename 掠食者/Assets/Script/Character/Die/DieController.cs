@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class DieController : MonoBehaviour
@@ -9,30 +10,72 @@ public class DieController : MonoBehaviour
     public AudioClip dieSound;
     public string soulName;
     public float dieDuration;
+    public float dieDissolveDuration;
 
     private void Start()
     {
         character = GetComponent<Character>();
+        if (dieDissolveDuration > dieDuration)
+        {
+            dieDissolveDuration = dieDuration;
+        }
     }
 
     public void StartDie()
     {
+        character.StopAllCoroutines();
         character.GetIntoImmune(true);
         character.LockOperation(LockType.Die, true);
-        character.StopAllCoroutines();
         character.operationController.InterruptAnimOperation();
         character.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         character.CurrentHealth = 0;
         character.operationSoundController.PlaySound(dieSound);
-        dieParticle.Play(true);
+        TriggerDieParticle();
+        StartCoroutine(DieDissolve(dieDissolveDuration));
+        StartCoroutine(DieCoroutine(dieDuration));
         GenerateSoul();
-        StartCoroutine(DelayDie());
     }
 
-    private IEnumerator DelayDie()
+    /// <summary>
+    /// Destory object
+    /// </summary>
+    private IEnumerator DieCoroutine(float delay)
     {
-        yield return new WaitForSeconds(dieDuration);
+        yield return new WaitForSeconds(delay);
+
         Destroy(this.gameObject);
+    }
+
+    public IEnumerator DieDissolve(float duration, params Action[] callBacks)
+    {
+        // Dissolve Shader Graph Effect
+        Material material = GetComponent<SpriteRenderer>().material;
+        float fade = 1f;
+        while (fade > 0)
+        {
+            fade -= (Time.deltaTime / duration);
+            material.SetFloat("_Fade", fade);
+            yield return null;
+        }
+
+        foreach (var callBack in callBacks)
+        {
+            callBack.Invoke();
+        }
+    }
+
+    public void TriggerDieParticle()
+    {
+        string layerName = character.GetComponent<SpriteRenderer>().sortingLayerName;
+        int layerOrder = character.GetComponent<SpriteRenderer>().sortingOrder + 1;
+        dieParticle.Play(true);
+        dieParticle.GetComponent<Renderer>().sortingLayerName = layerName;
+        dieParticle.GetComponent<Renderer>().sortingOrder = layerOrder;
+        foreach (Transform item in dieParticle.transform)
+        {
+            item.GetComponent<ParticleSystemRenderer>().sortingLayerName = layerName;
+            item.GetComponent<ParticleSystemRenderer>().sortingOrder = layerOrder;
+        }
     }
 
     public void GenerateSoul()
@@ -40,21 +83,23 @@ public class DieController : MonoBehaviour
         Transform soul = Instantiate(soulPrefab, transform.position, transform.rotation);
         soul.GetComponent<Character>().GetIntoImmune(dieDuration + 0.1f);
         soul.GetComponent<Character>().characterName = soulName;
+        soul.GetComponent<SpriteRenderer>().sortingLayerName = character.GetComponent<SpriteRenderer>().sortingLayerName;
+        soul.GetComponent<SpriteRenderer>().sortingOrder = character.GetComponent<SpriteRenderer>().sortingOrder;
         soul.tag = character.tag;
         soul.gameObject.layer = character.gameObject.layer;
         soul.name = soulName;
-        StartCoroutine(FollowMaster(soul));
+        StartCoroutine(FollowMaster(transform, soul, dieDuration));
     }
 
-    public virtual IEnumerator FollowMaster(Transform soul)
+    public virtual IEnumerator FollowMaster(Transform master, Transform follower, float duration)
     {
-        float timeleft = dieDuration;
+        float timeleft = duration;
         while (timeleft > 0)
         {
-            if (transform == null)
+            if (master == null)
                 yield break;
 
-            soul.position = transform.position;
+            follower.position = master.position;
             timeleft -= Time.deltaTime;
             yield return null;
         }

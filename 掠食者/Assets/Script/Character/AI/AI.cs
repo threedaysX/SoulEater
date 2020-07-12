@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AI : Character 
+public abstract class AI : Character
 {
     public bool CanDetect { get; set; }
     public bool CanAction { get; set; }
@@ -19,7 +19,7 @@ public abstract class AI : Character
     [Header("偵測距離")]
     public float detectDistance;
     [Header("行為延遲時間(秒)")]
-    public float commonActionDelay = 0f;  
+    public float commonActionDelay = 0f;
     public float animationActionDelay = 0.1f;
     private float nextActTimes = 0f;
 
@@ -68,7 +68,7 @@ public abstract class AI : Character
         }
 
         // 脫離戰鬥後，重置所有行動權重
-        if (!inCombatStateTrigger && outOfCombatTrigger) 
+        if (!inCombatStateTrigger && outOfCombatTrigger)
         {
             outOfCombatTrigger = false;
             foreach (var action in actions)
@@ -119,7 +119,7 @@ public abstract class AI : Character
                 // 每次開始執行動作之前，回到Idle狀態
                 ReturnDefaultAction();
                 // 在執行Action時，會持續面對目標
-                AlwaysFaceTarget();
+                FaceTarget();
                 DoActions();
             }
         }
@@ -132,7 +132,7 @@ public abstract class AI : Character
     public void DoActions()
     {
         List<AiAction> actionToDoList = new List<AiAction>();
-        
+
         // 判斷哪些動作符合條件，代表可以做
         // 若上一個相同的動作執行失敗，則權重降低N一次
         foreach (AiAction action in actions)
@@ -234,9 +234,9 @@ public abstract class AI : Character
             lastAction = defaultAction;
     }
 
-    private void AlwaysFaceTarget()
+    public void FaceTarget(bool force = false)
     {
-        if (chaseTarget == null || !freeDirection.canDo)
+        if ((chaseTarget == null || !freeDirection.canDo) && !force)
             return;
 
         float faceDirX = gameObject.transform.position.x - chaseTarget.transform.position.x;

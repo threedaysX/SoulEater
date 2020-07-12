@@ -47,7 +47,6 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -100,9 +99,13 @@ MonoBehaviour:
   immediatelyAffect:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   hitAffect:
     m_PersistentCalls:
       m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   inRenderSound: {fileID: 0}
   inCastSound: {fileID: 0}
   inUsingSound: {fileID: 0}
@@ -125,16 +128,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NaraCircleBurst
-      objectReference: {fileID: 0}
-    - target: {fileID: 6403688941944544950, guid: e378f2ea128a365478d1075357902036,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 924926267
-      objectReference: {fileID: 0}
-    - target: {fileID: 6403688941944544950, guid: e378f2ea128a365478d1075357902036,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6403688941944544951, guid: e378f2ea128a365478d1075357902036,
         type: 3}
@@ -190,6 +183,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403688941944544950, guid: e378f2ea128a365478d1075357902036,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 924926267
+      objectReference: {fileID: 0}
+    - target: {fileID: 6403688941944544950, guid: e378f2ea128a365478d1075357902036,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e378f2ea128a365478d1075357902036, type: 3}

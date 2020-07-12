@@ -48,8 +48,8 @@ public class CombatController : MonoBehaviour
                         // 取得傷害來源方向(KB擊退用途)
                         float damageDirectionX = character.transform.position.x - target.transform.position.x;
                         float damage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType, out bool isCritical);
-                        enemyDetails.TakeDamage((int)damage, isCritical, damageDirectionX, character.data.weaponKnockBackForce);
-                        CameraShake.Instance.ShakeCamera(basicShakeCameraForce * character.data.weaponKnockBackForce, 0.02f, 0.1f, true);
+                        enemyDetails.TakeDamage(character.gameObject, (int)damage, isCritical, damageDirectionX, character.data.weaponKnockBackForce);
+                        CameraShake.Instance.ShakeCamera(basicShakeCameraForce * character.data.weaponKnockBackForce, 0.02f, 0.1f, 0f, true);
                         character.DamageDealtSteal(damage, true);
                         TriggerHitEffect(target.transform);
                         attackSuccess = true;

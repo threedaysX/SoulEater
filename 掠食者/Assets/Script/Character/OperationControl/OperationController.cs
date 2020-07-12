@@ -282,7 +282,6 @@ public class OperationController : MonoBehaviour
 
     [Header("操作狀態判定")]
     public bool isIdle = false;
-    public bool isMoving = false;
     public bool isSkillUsing = false;
     public bool isSkillCasting = false;
     public bool isJumping = false;

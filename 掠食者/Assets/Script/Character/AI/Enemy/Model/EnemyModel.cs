@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class EnemyModel : AI
 {
@@ -13,8 +14,8 @@ public abstract class EnemyModel : AI
     {
         base.Start();
 
-        this.tag = "Enemy";
-        this.gameObject.layer = LayerMask.NameToLayer("Enemy");
+        tag = "Enemy";
+        gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
     public override void LateUpdate()
@@ -58,7 +59,7 @@ public abstract class EnemyModel : AI
     {
         if (overridedPreActHintEffect != null)
         {
-            preActHint.Play(true);
+            overridedPreActHintEffect.Play(true);
         }
         else if (preActHint != null)
         {

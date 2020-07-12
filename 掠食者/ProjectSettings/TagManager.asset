@@ -84,3 +84,9 @@ TagManager:
   - name: InFront
     uniqueID: 2077110459
     locked: 0
+  - name: InFrontEffect
+    uniqueID: 1507853709
+    locked: 0
+  - name: UI
+    uniqueID: 4285868917
+    locked: 0

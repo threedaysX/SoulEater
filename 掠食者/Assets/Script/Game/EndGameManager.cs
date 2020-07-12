@@ -20,14 +20,15 @@ public class EndGameManager : Singleton<EndGameManager>
     {
         if (inEndGame)
         {
-            if (Input.GetKeyDown(HotKeyController.attackKey1) ||
-                Input.GetKeyDown(HotKeyController.attackKey2) ||
+            if (Input.GetKeyDown(HotKeyController.GetHotKey(HotKeyType.AttackKey1)) ||
+                Input.GetKeyDown(HotKeyController.GetHotKey(HotKeyType.AttackKey2)) ||
                 Input.GetMouseButtonDown(0))
             {
                 if (endGameTextIndex >= endGameUITextList.Length)
                 {
                     inEndGame = false;
                     endGameUI.SetActive(false);
+                    endGameTextIndex = 0;
                     return;
                 }
                 endGameUIText.text = endGameUITextList[endGameTextIndex++];

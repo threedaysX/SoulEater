@@ -1,137 +1,109 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-public class SkillSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerClickHandler
+public class SkillSlot : ButtonSlotBase
 {
-    public Image background;
-    public Image icon;
+    [Header("Skill Related")]
+    public bool isIconColorResetTrigger = false;
     public Skill skill;
-    public SlotType slotType;
 
-    protected static SkillSlot skillSlotBeginDrag;
-    private static bool isClickDrag;
-    private static Vector3 lastMousePos;
     private const string skillSlotTag = "SkillSlot";
-    private int originSortOrder;
-    private Canvas slotCanvasSetting;
-    private Color originalBackgroundColor;
-    private Color selectedBackgroundColor;
 
-    private void Awake()
+    protected override void Start()
     {
-        background = GetComponent<Image>();
-        slotCanvasSetting = icon.GetComponent<Canvas>();
-    }
-
-    protected virtual void Start()
-    {
+        base.Start();
         tag = skillSlotTag;
-        originSortOrder = slotCanvasSetting.sortingOrder;
-        originalBackgroundColor = new Color32(255, 235, 213, 255);
-        selectedBackgroundColor = new Color32(255, 134, 0, 255);
-        isClickDrag = false;
+        isIconColorResetTrigger = true;
     }
 
-    public virtual void Update()
+    protected override void Update()
     {
-        if (isClickDrag)
+        base.Update();
+
+        // Reset Skill Icon Image Alpha.
+        if (isIconColorResetTrigger && skill != null)
         {
-            // 滑鼠移動時，單點擊拖曳位置變換為滑鼠游標位置
-            if (lastMousePos != Input.mousePosition)
-            {
-                lastMousePos = Input.mousePosition;
-                skillSlotBeginDrag.icon.transform.position = lastMousePos;
-            }
+            var newIconColor = icon.color;
+            newIconColor.a = 1f;    // Set Skill Icon Opaque 1.
+            icon.color = newIconColor;
+            isIconColorResetTrigger = false;
+        }
+        else if (isIconColorResetTrigger && skill == null)
+        {
+            var newIconColor = icon.color;
+            newIconColor.a = 0f;    // Set Skill Icon Opaque 0.
+            icon.color = newIconColor;
+            isIconColorResetTrigger = false;
         }
     }
 
-    public void OnSelect()
+    public override void OnSelect(BaseEventData e)
     {
-        background.color = selectedBackgroundColor;
+        base.OnSelect(e);
+
         SkillDescription.Instance.ResetSkillDescription(skill);
-
-        // 當啟用單點擊拖曳時，若此Slot被選擇到，則移動拖曳的技能位置至此Slot旁
-        if (isClickDrag)
-        {
-            skillSlotBeginDrag.icon.transform.position = this.transform.position + new Vector3(40f, 40f);
-        }
     }
 
-    public void OnDeselect()
-    {
-        background.color = originalBackgroundColor;
-    }
-
-    /// <summary>
-    /// 單點擊拖曳功能 (滑鼠單點或是鍵盤點擊)
-    /// </summary>
-    public virtual void OnSlotClick()
-    {
-        if (isClickDrag && skillSlotBeginDrag != null)
-        {
-            ChangeSkillSlot(skillSlotBeginDrag);
-            skillSlotBeginDrag.icon.transform.localPosition = Vector3.zero;
-            skillSlotBeginDrag.slotCanvasSetting.overrideSorting = false;
-            skillSlotBeginDrag.slotCanvasSetting.sortingOrder = originSortOrder;
-            isClickDrag = false;
-            return;
-        }
-        if (skill == null)
-            return;
-
-        skillSlotBeginDrag = this;
-        skillSlotBeginDrag.slotCanvasSetting.overrideSorting = true;
-        skillSlotBeginDrag.slotCanvasSetting.sortingOrder = 10;
-        isClickDrag = true;
-        lastMousePos = Input.mousePosition;
-    }
-
-    public void OnBeginDrag(PointerEventData e)
+    public override void OnBeginDrag(PointerEventData e)
     {
         // 沒有技能則無法拖曳
         if (skill == null)
             return;
-
-        GetComponent<CanvasGroup>().blocksRaycasts = false;
-        skillSlotBeginDrag = this;
-
-        slotCanvasSetting.overrideSorting = true;
-        slotCanvasSetting.sortingOrder = 10;
+        base.OnBeginDrag(e);
     }
 
-    public void OnDrag(PointerEventData e)
+    public override void OnDrag(PointerEventData e)
     {
         // 沒有技能則無法拖曳
         if (skill == null)
             return;
-        icon.transform.position = Input.mousePosition;
+        base.OnDrag(e);
     }
 
-    public void OnEndDrag(PointerEventData e)
-    {
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
-        icon.transform.localPosition = Vector3.zero;
-        slotCanvasSetting.overrideSorting = false;
-        slotCanvasSetting.sortingOrder = originSortOrder;
-    }
-
-    public virtual void OnDrop(PointerEventData e)
+    public override void OnDrop(PointerEventData e)
     {
         SkillSlot slot = this.GetComponent<SkillSlot>();
         if (slot != null)
         {
-            ChangeSkillSlot(skillSlotBeginDrag);
-            this.GetComponent<Button>().Select();
+            ChangeSlot(slotBeginDrag);
         }
+        base.OnDrop(e);
     }
 
-    public virtual void OnPointerClick(PointerEventData e) 
+    public override void OnPointerClick(PointerEventData e)
     {
+        base.OnPointerClick(e);
+        SkillDescription.Instance.ResetSkillDescription(skill);
+    }
+
+    protected override void OnSlotClickPickUp()
+    {
+        // if slot doesn't have skill, return.
         if (skill == null)
             return;
 
-        SkillDescription.Instance.ResetSkillDescription(skill);
+        base.OnSlotClickPickUp();
+    }
+
+    public override void ChangeSlot(ButtonSlotBase sourceSlot)
+    {
+        SkillSlot sourceSkillSlot = sourceSlot.GetComponent<SkillSlot>();
+        // Reset Icon Color.
+        sourceSkillSlot.isIconColorResetTrigger = true;
+        isIconColorResetTrigger = true;
+
+        Sprite sourceIcon = sourceSkillSlot.icon.sprite;
+        Skill sourceSkill = sourceSkillSlot.skill;
+        sourceSkillSlot.AddSkill(this.icon.sprite, this.skill);
+        AddSkill(sourceIcon, sourceSkill);
+
+        // 若起始選取的技能欄位是快捷鍵，則同步更新戰鬥畫面上的UI技能欄
+        if (slotBeginDrag.slotType == SlotType.MenuHotKey)
+        {
+            MenuSkillSlot menuSkillSlot = slotBeginDrag.GetComponent<MenuSkillSlot>();
+            menuSkillSlot.linkSkillSlotOnCombatUI.AddSkill(sourceSlot.icon.sprite, sourceSkillSlot.skill);
+            menuSkillSlot.linkSkillSlotOnCombatUI.isIconColorResetTrigger = true;
+        }
     }
 
     public void AddSkill(Sprite icon, Skill skill)
@@ -140,29 +112,9 @@ public class SkillSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         this.skill = skill;
     }
 
-    public void RemoveSkill()
+    public override void RemoveSlot()
     {
         this.icon.sprite = null;
         this.skill = null;
     }
-
-    public void ChangeSkillSlot(SkillSlot sourceSlot)
-    {
-        Sprite sourceIcon = sourceSlot.icon.sprite;
-        Skill sourceSkill = sourceSlot.skill;
-        sourceSlot.AddSkill(this.icon.sprite, this.skill);
-        AddSkill(sourceIcon, sourceSkill);
-
-        // 若交換的技能欄位是快捷鍵，則更新戰鬥畫面上的UI技能欄
-        if (skillSlotBeginDrag.slotType == SlotType.MenuHotKey)
-        {
-            skillSlotBeginDrag.GetComponent<MenuSkillSlot>().linkSkillSlotOnCombatUI.AddSkill(sourceSlot.icon.sprite, sourceSlot.skill);
-        }
-    }
-}
-
-public enum SlotType
-{
-    Inventory,
-    MenuHotKey
 }

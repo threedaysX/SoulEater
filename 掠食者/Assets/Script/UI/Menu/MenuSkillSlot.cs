@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class MenuSkillSlot : SkillSlot
 {
-    public KeyCode keyCode;
+    [Header("Sync Slot(Linked Slot)")]
     public SkillSlot linkSkillSlotOnCombatUI;
 
     public override void OnSlotClick()
@@ -24,10 +24,14 @@ public class MenuSkillSlot : SkillSlot
         if (linkSkillSlotOnCombatUI == null)
             return;
         linkSkillSlotOnCombatUI.AddSkill(this.icon.sprite, this.skill);
-        if (skillSlotBeginDrag.slotType == SlotType.MenuHotKey)
+        linkSkillSlotOnCombatUI.isIconColorResetTrigger = true;
+
+        if (slotBeginDrag != null && slotBeginDrag.slotType == SlotType.MenuHotKey)
         {
-            var targetLinkSlot = skillSlotBeginDrag.GetComponent<MenuSkillSlot>().linkSkillSlotOnCombatUI;
-            targetLinkSlot.AddSkill(skillSlotBeginDrag.icon.sprite, skillSlotBeginDrag.skill);
+            MenuSkillSlot menuSkillSlot = slotBeginDrag.GetComponent<MenuSkillSlot>();
+            var linkedSlot = menuSkillSlot.linkSkillSlotOnCombatUI;
+            linkedSlot.AddSkill(menuSkillSlot.icon.sprite, menuSkillSlot.skill);
+            linkedSlot.isIconColorResetTrigger = true;
         }
     }
 }

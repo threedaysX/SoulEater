@@ -98,13 +98,17 @@ public class DashSlash : DisposableSkill
         sourceCaster.GetIntoImmune(1f);
     }
 
-    // 使用技能後，立即進入短暫黑畫面與畫面特寫
+    // 使用技能後，立即進入模糊畫面與畫面特寫
     private void GetInDarkScreenAndZoomIn()
     {
-        StartCoroutine(FadeScreen.Instance.Fade(1f, 1f));
-        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.1f, afterDelay = 0.6f };
-        ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 6f, duration = 0.5f, afterDelay = 0f };
-        CinemachineCameraControl.Instance.ZoomInCameraActions(zoomInSetting, resetCameraSetting);
+        //StartCoroutine(FadeScreen.Instance.Fade(1f, 1f));
+        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 5.5f, duration = 0.1f, startDelay = 0f };
+        ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 6f, duration = 0.5f, startDelay = 0.6f };
+        CinemachineCameraControl.Instance.ZoomInCamera(zoomInSetting, resetCameraSetting);
+        ImageEffectController.Instance.StartRadialBlur(DG.Tweening.Ease.Linear,
+                new[] {
+                    new RadialBlurSetting { strength = 2f, dist = 1f, duration = 0.3f },
+                    new RadialBlurSetting { strength = 0f, dist = 1f, duration = 0.2f }  });
     }
 
     /// <summary>
@@ -145,6 +149,6 @@ public class DashSlash : DisposableSkill
 
     private void CameraShakeWhenHit()
     {
-        CameraShake.Instance.ShakeCamera(1f, 8f, 0.1f, true);
+        CameraShake.Instance.ShakeCamera(1f, 8f, 0.1f, 0f, true);
     }
 }

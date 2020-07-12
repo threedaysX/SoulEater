@@ -154,7 +154,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     public virtual void DamageTarget(float damageDirectionX = 0)
     {
         float damage = GetSkillDamage(out bool isCritical);
-        target.TakeDamage((int)damage, isCritical, damageDirectionX);
+        target.TakeDamage(sourceCaster.gameObject, (int)damage, isCritical, damageDirectionX);
         sourceCaster.DamageDealtSteal(damage, false);
     }
 

@@ -19,7 +19,7 @@ public class EnemyUIControl : Singleton<EnemyUIControl>
 
         this.enemyName.text = enemyName;
         this.enemyNameShadow.text = enemyName;
-        float remainPercent = HealthManaControl.Instance.SetHealthBar(health, maxHealth, currentHealth);
+        float remainPercent = UIImageControll.Instance.SetImageFillAmount(health, maxHealth, currentHealth);
 
         if (remainPercent <= 0)
         {
