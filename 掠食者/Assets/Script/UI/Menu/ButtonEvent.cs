@@ -19,9 +19,12 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoi
     public UnityEvent onSelectEvent;
     public UnityEvent onDeselectEvent;
 
+    private Button _this;
+
     private void Start()
     {
-        originInteractableState = GetComponent<Button>().interactable;
+        _this = GetComponent<Button>();
+        originInteractableState = _this.interactable;
     }
 
     /// <summary>
@@ -44,7 +47,7 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoi
         {
             pointer.transform.position = targetPos.position;
         }
-        ButtonEvents.Instance.selectedButton = GetComponent<Button>();
+        ButtonEvents.Instance.selectedButton = _this;
         AudioControl.Instance.PlaySound(ButtonEvents.Instance.selectButtonSound);
         onSelectEvent.Invoke();
     }
@@ -62,14 +65,17 @@ public class ButtonEvent : MonoBehaviour, ISelectHandler, IDeselectHandler, IPoi
     {
         if (interactableWhenMouseOver)
         {
-            originInteractableState = GetComponent<Button>().interactable;
-            GetComponent<Button>().interactable = true;
+            originInteractableState = _this.interactable;
+            _this.interactable = true;
         }
     }
 
     public void OnPointerExit(PointerEventData e)
     {
-        GetComponent<Button>().interactable = originInteractableState;
+        if (interactableWhenMouseOver)
+        {
+            _this.interactable = originInteractableState;
+        }
     }
 }
 

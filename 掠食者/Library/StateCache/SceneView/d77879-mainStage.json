@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":false,"showMaterialUpdate":false,"showSkybox":false,"showFlares":false,"showImageEffects":false,"showParticleSystems":false},"in2DMode":true,"pivot":{"x":82.40381622314453,"y":1.896618127822876,"z":-26.315048217773439},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"size":4.290600299835205,"orthographic":true}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":false,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":true,"pivot":{"x":117.50037384033203,"y":101.95683288574219,"z":-881.0125122070313},"rotation":{"x":0.0,"y":0.0,"z":0.0,"w":1.0},"size":370.2696533203125,"orthographic":true}
+>>>>>>> origin/AI
