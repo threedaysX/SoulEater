@@ -6,11 +6,13 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
 {
     [Header("Hp")]
     public Image healthBar;
+    public Image healthBarWhite;
     public Text maxHpText;
     public Text currentHpText;
 
     [Header("Mana")]
     public Image manaBar;
+    public Image manaBarWhite;
     public Text maxManaText;
     public Text currentManaText;
 
@@ -42,7 +44,7 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
 
         maxHpText.text = maxHealth.ToString();
         currentHpText.text = currentHealth.ToString();
-        UIImageControll.Instance.SetImageFillAmount(healthBar, maxHealth, currentHealth);
+        UIImageControll.Instance.SetImageFillAmount(healthBar, healthBarWhite, maxHealth, currentHealth);
     }
 
     public void SetManaUI(float maxMana, float currentMana)
@@ -52,7 +54,7 @@ public class PlayerUIControl : Singleton<PlayerUIControl>
 
         maxManaText.text = maxMana.ToString();
         currentManaText.text = currentMana.ToString();
-        UIImageControll.Instance.SetImageFillAmount(manaBar, maxMana, currentMana);
+        UIImageControll.Instance.SetImageFillAmount(manaBar, manaBarWhite, maxMana, currentMana);
     }
 
     public void StartSkillCoolDownHint()

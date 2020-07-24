@@ -225,6 +225,7 @@
     <Compile Include="Assets\Script\UI\Menu\SkillSlot.cs" />
     <Compile Include="Assets\Script\UI\Menu\SliderEvent.cs" />
     <Compile Include="Assets\Script\UI\Menu\TabsControl.cs" />
+    <Compile Include="Assets\Script\UI\Player\PlayerBlooding.cs" />
     <Compile Include="Assets\Script\UI\PlayerUIControl.cs" />
     <Compile Include="Assets\Script\UI\Title\TitleControl.cs" />
     <Compile Include="Assets\Script\UI\UIImageControll.cs" />

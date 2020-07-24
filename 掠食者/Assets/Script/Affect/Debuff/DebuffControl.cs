@@ -13,7 +13,7 @@ public class DebuffControl : Singleton<DebuffControl>
 
     private void ApplyDebuff(Character target, string affectName, UnityAction applyAffect, UnityAction removeAffect, float duration)
     {
-        target.buffController.AddBuffEvent(affectName, applyAffect, removeAffect, duration);
+        target.buffController.AddBuff(affectName, applyAffect, removeAffect, duration);
     }
 
     #region Ignite

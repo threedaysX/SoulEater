@@ -17,7 +17,7 @@ public class PowerSlam : DisposableSkill
         var armorstat = target.data.defense;
         void affect() { armorstat.AddModifier(new StatModifier(-10, StatModType.MagnificationAdd, armorBreak)); }
         void remove() { armorstat.RemoveModifier(new StatModifier(10, StatModType.MagnificationAdd, armorBreak)); }
-        target.buffController.AddBuffEvent(armorBreak, affect, remove, 4f);
+        target.buffController.AddBuff(armorBreak, affect, remove, 4f);
     }
 
     public override void OnTriggerEnter2D(Collider2D targetCol)

@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Concurrent;
+using System;
 
 public class BuffContent
 {
     // 若未來要加上[流血]、[沉默]...的異常狀態，則要注意這裡(UnityEvent)
     public bool isStartCountDown;
+    public Func<bool> condition;
     public UnityEvent affect;
     public UnityEvent removeEvent;
     public float duration;
@@ -28,6 +30,14 @@ public class BuffContent
         endTime = 0;
         isStartCountDown = false;
     }
+
+    public void TriggerBuffAffect()
+    {
+        if (condition != null && condition.Invoke())
+        {
+            affect.Invoke();
+        }
+    }
 }
 
 public class BuffController : MonoBehaviour
@@ -47,6 +57,10 @@ public class BuffController : MonoBehaviour
                     buff.Value.StopTick();
                     RemoveMemory(buff.Key);
                 }
+            }
+            else
+            {
+                buff.Value.TriggerBuffAffect();
             }
         }
     }
@@ -85,9 +99,9 @@ public class BuffController : MonoBehaviour
     /// 附加針對人物的正面、異常效果
     /// </summary>
     /// <param name="affect">持續時間內的影響效果</param>
-    /// <param name="removeAffect">當持續時間結束後，觸發的效果</param>
+    /// <param name="endAffect">當持續時間結束後，觸發的效果</param>
     /// <param name="duration">持續時間，當持續時間設為-1時，代表永久效果</param>
-    public void AddBuffEvent(string affectName, UnityAction affect, UnityAction removeAffect, float duration)
+    public void AddBuff(string affectName, UnityAction affect, UnityAction endAffect, float duration)
     {
         if (!CheckIsBuffInList(affectName))
         {
@@ -95,12 +109,20 @@ public class BuffController : MonoBehaviour
             {
                 affect.Invoke();
             }
-            SetBuffMemory(affectName, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(removeAffect), duration));
+            SetBuffMemory(affectName, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(endAffect), duration));
         }
         else
         {
             // 重置時間
             GetBuffMemory(affectName).ResetTick();
+        }
+    }
+
+    public void RemoveBuff(string affectName)
+    {
+        if (CheckIsBuffInList(affectName))
+        {
+            RemoveMemory(affectName);
         }
     }
 
