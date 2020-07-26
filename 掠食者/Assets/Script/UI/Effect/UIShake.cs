@@ -1,57 +1,53 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UIShake : MonoBehaviour
 {
+	public Vector3 originPosition;
+	public Quaternion originRotation;
 	public float shakeDecay = 0.002f;
 	public float shakeIntensity = 0.3f;
 
 	private float tempShakeIntensity = 0;
-	private bool shaking;
-
-	private Vector3 originPosition;
-	private Quaternion originRotation;
+	private bool endShakedTrigger;
 
 	public void Start()
 	{
-		originRotation = transform.localRotation;
-		shaking = false;
+		originPosition = transform.position;
+		originRotation = transform.rotation;
+		endShakedTrigger = false;
 	}
 
 	public void Update()
 	{
-		if (shaking)
+		if (tempShakeIntensity > 0)
 		{
-			transform.localPosition = originPosition + Random.insideUnitSphere * tempShakeIntensity;
-			transform.localRotation = new Quaternion(
+			transform.position = originPosition + Random.insideUnitSphere * tempShakeIntensity;
+			transform.rotation = new Quaternion(
 				originRotation.x + Random.Range(-tempShakeIntensity, tempShakeIntensity) * 0.2f,
 				originRotation.y + Random.Range(-tempShakeIntensity, tempShakeIntensity) * 0.2f,
 				originRotation.z + Random.Range(-tempShakeIntensity, tempShakeIntensity) * 0.2f,
 				originRotation.w + Random.Range(-tempShakeIntensity, tempShakeIntensity) * 0.2f);
 			tempShakeIntensity -= shakeDecay;
 		}
-		// Shake Finished
-		if (tempShakeIntensity < 0)
+		else if (!endShakedTrigger && tempShakeIntensity <= 0)
 		{
-			shaking = false;
+			endShakedTrigger = true;
 			tempShakeIntensity = 0;
-			transform.localPosition = originPosition;
-			transform.localRotation = originRotation;
+			transform.position = originPosition;
+			transform.rotation = originRotation;
 		}
 	}
 
 	public void Shake()
 	{
-		originPosition = transform.localPosition;
 		tempShakeIntensity = shakeIntensity;
-		shaking = true;
+		endShakedTrigger = false;
 	}
 
 	public void Shake(float shakeIntensity, float shakeDecay = 0.002f)
 	{
-		originPosition = transform.localPosition;
 		tempShakeIntensity = shakeIntensity;
 		this.shakeDecay = shakeDecay;
-		shaking = true;
+		endShakedTrigger = false;
 	}
 }

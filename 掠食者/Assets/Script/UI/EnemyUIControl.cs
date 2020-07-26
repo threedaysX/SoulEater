@@ -7,7 +7,6 @@ public class EnemyUIControl : Singleton<EnemyUIControl>
 
     [Header("Hp")]
     public Image health;
-    public Image healthWhite;
 
     [Header("Name")]
     public Text enemyName;
@@ -20,7 +19,7 @@ public class EnemyUIControl : Singleton<EnemyUIControl>
 
         this.enemyName.text = enemyName;
         this.enemyNameShadow.text = enemyName;
-        float remainPercent = UIImageControll.Instance.SetImageFillAmount(health, healthWhite, maxHealth, currentHealth);
+        float remainPercent = HealthManaControl.Instance.SetHealthBar(health, maxHealth, currentHealth);
 
         if (remainPercent <= 0)
         {

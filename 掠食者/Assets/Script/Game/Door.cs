@@ -1,23 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    private Collider2D door;
-    public Vector2 pointToTeleport;
+    [SerializeField] private Transform pointToTeleport = null;
     [Header("把boss打開(SetActive)")]
-    public GameObject boss;
-    private void Start()
-    {
-        door = GetComponent<Collider2D>();
-    }
+    [SerializeField] private GameObject boss = null;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.transform.position = pointToTeleport;
+            other.gameObject.transform.position = pointToTeleport.transform.position;
             if(!boss.activeInHierarchy)
                 boss.SetActive(true);
         }

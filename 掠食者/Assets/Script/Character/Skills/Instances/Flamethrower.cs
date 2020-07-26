@@ -52,7 +52,7 @@ public class Flamethrower : LastingSkill
         var fireStat = sourceCaster.data.resistance.fire;
         void affect() { fireStat.AddModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
         void remove() { fireStat.RemoveModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
-        sourceCaster.buffController.AddBuff(buffName, affect, remove, 5f);
+        sourceCaster.buffController.AddBuffEvent(buffName, affect, remove, 5f);
     }
 
     public string debuffName = "烈焰崩毀";
@@ -64,7 +64,7 @@ public class Flamethrower : LastingSkill
         var fireStat = target.data.resistance.fire;
         void affect() { fireStat.AddModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
         void remove() { fireStat.RemoveModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
-        target.buffController.AddBuff(debuffName, affect, remove, 5f);
+        target.buffController.AddBuffEvent(debuffName, affect, remove, 5f);
     }
 
     /// <summary>
@@ -108,7 +108,7 @@ public class Flamethrower : LastingSkill
 
     private void CameraShakeWhenTrigger()
     {
-        CameraShake.Instance.ShakeCamera(0.8f, 1f, 3f, 0f, true);
+        CameraShake.Instance.ShakeCamera(0.8f, 1f, 3f, true);
     }
 
     private void RenderHint()

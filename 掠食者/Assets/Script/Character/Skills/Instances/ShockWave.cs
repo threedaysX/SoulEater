@@ -40,7 +40,7 @@ public class ShockWave : DisposableSkill
         var speedstat = target.data.moveSpeed;
         void affect() { speedstat.AddModifier(new StatModifier(-0.5f, StatModType.Magnification, slow)); }
         void remove() { speedstat.RemoveModifier(new StatModifier(0.5f, StatModType.Magnification, slow)); }
-        target.buffController.AddBuff(slow, affect, remove, 1f);
+        target.buffController.AddBuffEvent(slow, affect, remove, 1f);
     }
 
     public string tired = "疲累";
@@ -51,7 +51,7 @@ public class ShockWave : DisposableSkill
     {
         void affect() { target.jump.Lock(LockType.Lame); }
         void remove() { target.jump.UnLock(LockType.Lame); }
-        target.buffController.AddBuff(tired, affect, remove, 0.6f);
+        target.buffController.AddBuffEvent(tired, affect, remove, 0.6f);
     }
 
     private void KnockBackHitTarget()

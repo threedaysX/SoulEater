@@ -15,12 +15,12 @@ public class DashSlash : DisposableSkill
         sourceCaster.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         drawnSwordEffect.transform.position = sourceCaster.transform.position + sourceCaster.transform.right * 0.5f;
         drawnSwordEffect.Play(true);
-        GetImmune();
     }
 
     protected override void AddAffectEvent()
     {
-        immediatelyAffect.AddListener(GetInDarkScreenAndZoomIn);
+        immediatelyAffect.AddListener(GetInDarkScreen);
+        immediatelyAffect.AddListener(GetImmune);
         immediatelyAffect.AddListener(MoveFoward);
         immediatelyAffect.AddListener(delegate { StartCoroutine(HitDetect()); });
     }
@@ -92,23 +92,19 @@ public class DashSlash : DisposableSkill
         target.LockOperation(LockType.SkillAction, false);
     }
 
-    // 詠唱技能時，就立即進入無敵狀態
+    // 使用技能後，立即進入無敵狀態
     private void GetImmune()
     {
         sourceCaster.GetIntoImmune(1f);
     }
 
-    // 使用技能後，立即進入模糊畫面與畫面特寫
-    private void GetInDarkScreenAndZoomIn()
+    // 使用技能後，立即進入短暫黑畫面與畫面特寫
+    private void GetInDarkScreen()
     {
-        //StartCoroutine(FadeScreen.Instance.Fade(1f, 1f));
-        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 5.5f, duration = 0.1f, startDelay = 0f };
-        ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 6f, duration = 0.5f, startDelay = 0.6f };
-        CinemachineCameraControl.Instance.ZoomInCamera(zoomInSetting, resetCameraSetting);
-        ImageEffectController.Instance.StartRadialBlur(DG.Tweening.Ease.Linear,
-                new[] {
-                    new RadialBlurSetting { strength = 2f, dist = 1f, duration = 0.3f },
-                    new RadialBlurSetting { strength = 0f, dist = 1f, duration = 0.2f }  });
+        StartCoroutine(FadeScreen.Instance.Fade(1.6f, 1.6f));
+        ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 3.4f, duration = 0.2f, afterDelay = 0.8f };
+        ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 5f, duration = 0.5f, afterDelay = 0f };
+        CinemachineCameraControl.Instance.ZoomInCameraActions(zoomInSetting, resetCameraSetting);
     }
 
     /// <summary>
@@ -149,6 +145,6 @@ public class DashSlash : DisposableSkill
 
     private void CameraShakeWhenHit()
     {
-        CameraShake.Instance.ShakeCamera(1f, 8f, 0.1f, 0f, true);
+        CameraShake.Instance.ShakeCamera(1f, 8f, 0.1f, true);
     }
 }

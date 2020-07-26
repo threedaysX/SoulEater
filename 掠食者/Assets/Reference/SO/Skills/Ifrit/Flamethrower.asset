@@ -41,9 +41,9 @@ MonoBehaviour:
     toForceChangeValue: 0
     modifiers: []
   castTime:
-    BaseValue: 1.2
+    BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 0.5
+    FinalValue: 1.2
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
@@ -61,9 +61,7 @@ MonoBehaviour:
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
-  trueCoolDown: 7.36
-  coolDownTimer: 0
-  cooling: 0
+  cooling: 1
   timesOfPerDamage: 0.1
-  duration: 1
+  duration: 1.2
   prefab: {fileID: 7390867264986258557, guid: 9a443091373ab4543a1f19b81e549b9d, type: 3}

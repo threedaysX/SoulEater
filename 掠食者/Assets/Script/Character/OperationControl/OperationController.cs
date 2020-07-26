@@ -282,6 +282,7 @@ public class OperationController : MonoBehaviour
 
     [Header("操作狀態判定")]
     public bool isIdle = false;
+    public bool isMoving = false;
     public bool isSkillUsing = false;
     public bool isSkillCasting = false;
     public bool isJumping = false;
@@ -534,9 +535,6 @@ public class OperationController : MonoBehaviour
 
     private IEnumerator StartTrueEvade(Action<OperationStateType> setOperationState, Action<float> setDelay, Action evadeMethod)
     {
-        isEvading = true;
-        character.GetIntoImmune(0.4f);
-
         // 重置閃避時間
         ResetEvadeCoolDownDuration();
         setDelay(evadeCoolDownDuration);
@@ -545,7 +543,9 @@ public class OperationController : MonoBehaviour
         character.attack.Lock(LockType.OperationAction);
         character.move.Lock(LockType.OperationAction);
         character.freeDirection.Lock(LockType.OperationAction);
+        character.GetIntoImmune(0.4f);
 
+        isEvading = true;
         setOperationState(OperationStateType.Interrupt);
         yield return new WaitForSeconds(GetFrameTimeOffset(1));   // 等待一幀，使動畫開始撥放，否則會取到上一個動畫的狀態。
 
@@ -565,8 +565,9 @@ public class OperationController : MonoBehaviour
         /// 攻擊前搖
         isPreAttacking = true;
 
-        // 鎖定移動
+        // 鎖定移動、方向
         character.move.Lock(LockType.OperationAction);
+        character.freeDirection.Lock(LockType.OperationAction);
 
         // 重置攻擊時間間隔
         AttackAnimNumber++;
@@ -590,10 +591,9 @@ public class OperationController : MonoBehaviour
         isPreAttacking = false;
         isAttacking = true;
 
-        // 鎖定跳躍與閃避、方向
+        // 鎖定跳躍與閃避
         character.jump.Lock(LockType.OperationAction);
         character.evade.Lock(LockType.OperationAction);
-        character.freeDirection.Lock(LockType.OperationAction);
 
         if (!CheckIsFinalAttack())
         {
@@ -628,7 +628,7 @@ public class OperationController : MonoBehaviour
         yield return new WaitForSeconds(attackAnimDuration - comboDuration);
 
         // 攻擊收尾，可連段
-        setOperationState(OperationStateType.Combo);
+        setOperationState(OperationStateType.Combo);           
 
         yield return new WaitForSeconds(comboDuration);
 
@@ -662,7 +662,7 @@ public class OperationController : MonoBehaviour
         skillUseMethod.Invoke();
 
         isSkillUsing = true;
-        yield return new WaitForSeconds(GetFrameTimeOffset(1));
+        yield return new WaitForSeconds(GetFrameTimeOffset(2));
         if (skillUseDurtaion > 0)
         {
             // 計時(持續施放中)
@@ -673,6 +673,11 @@ public class OperationController : MonoBehaviour
                 // Render Casting GUI
                 yield return new WaitForSeconds(GetFrameTimeOffset(1));
             }
+
+        }
+        else
+        {
+            yield return new WaitForSeconds(AnimationBase.Instance.GetCurrentAnimationLength(anim));
         }
         isSkillUsing = false;
     }

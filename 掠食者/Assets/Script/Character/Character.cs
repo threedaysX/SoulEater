@@ -3,14 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(OperationSoundController))]
-[RequireComponent(typeof(WeaponController))]
-[RequireComponent(typeof(OperationController))]
-[RequireComponent(typeof(SkillController))]
-[RequireComponent(typeof(BuffController))]
-[RequireComponent(typeof(CombatController))]
-[RequireComponent(typeof(KnockStunSystem))]
-[RequireComponent(typeof(DieController))]
 public class Character : MonoBehaviour
 {
     #region 基礎參數
@@ -68,7 +60,7 @@ public class Character : MonoBehaviour
     }
     #endregion
 
-    #region 狀態判定
+    #region 操作狀態判定
     [Header("操作狀態判定")]
     public bool isLockAction = false;   // 用來判斷是否完全無法行動
     public BasicOperation move;
@@ -77,9 +69,8 @@ public class Character : MonoBehaviour
     public BasicOperation attack;
     public BasicOperation useSkill;
     public BasicOperation freeDirection;  // 判斷是否被鎖定面對方向
-
+    
     [Header("特殊狀態判定")]
-    public GameObject lastAttackMeTarget;   // 上一個攻擊我的目標是?
     public bool isKnockStun = false;   // 判斷是否被擊暈
     [SerializeField] private bool isImmune = false;  // 用來判斷角色是否無敵(不會被命中)
     #endregion
@@ -100,7 +91,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public BuffController buffController; // 狀態控制
     [HideInInspector] public CombatController combatController; // 戰鬥控制
     [HideInInspector] public KnockStunSystem knockBackSystem; // 擊退控制
-    [HideInInspector] public DieController dieController; // 死亡控制
+    [HideInInspector] public DieController dieController; // 擊退控制
     [HideInInspector] public Animator anim;
     #endregion
 
@@ -128,16 +119,13 @@ public class Character : MonoBehaviour
     /// <summary>
     /// 受到傷害
     /// </summary>
-    /// <param name="damageSource">傷害來源</param>
-    /// <param name="damage">單次傷害</param>
-    /// <param name="isCritical">是否爆擊</param>
     /// <param name="damageDirectionX">傷害來源方向</param>
+    /// <param name="damage">單次傷害</param>
     /// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
     /// <param name="duration">持續時間</param>
     /// <param name="damageImmediate">是否立即造成傷害</param>
-    public virtual bool TakeDamage(GameObject damageSource, int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    public virtual bool TakeDamage(int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
     {
-        lastAttackMeTarget = damageSource;
         if (isImmune)
         {
             return false;
@@ -167,7 +155,7 @@ public class Character : MonoBehaviour
         else
         {
             // 流血...等持續性傷害
-            StartCoroutine(TakeDamagePerSecondInDuration(damageSource, damage, timesOfPerDamage, duration, damageImmediate));
+            StartCoroutine(TakeDamagePerSecondInDuration(damage, timesOfPerDamage, duration, damageImmediate));
         }
         return true;
     }
@@ -185,14 +173,14 @@ public class Character : MonoBehaviour
         }
     }
 
-    private IEnumerator TakeDamagePerSecondInDuration(GameObject damageSource, float damage, float timesOfPerDamage, float duration, bool damageImmediate)
+    private IEnumerator TakeDamagePerSecondInDuration(float damage, float timesOfPerDamage, float duration, bool damageImmediate)
     {
         while(duration >= 0)
         {
             if (damageImmediate)
             {
                 // Would not trigger critical. (Ex: Blood, Ignite, Poison...)
-                TakeDamage(damageSource, (int)damage, false);
+                TakeDamage((int)damage, false);
             }
             yield return new WaitForSeconds(timesOfPerDamage);
             duration -= timesOfPerDamage;

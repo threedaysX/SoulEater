@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Check Custom Damage In Time(3s, 5%)
   m_EditorClassIdentifier: 
   custumDamage: 5
-  damageInTime: 3
+  customTime: 3

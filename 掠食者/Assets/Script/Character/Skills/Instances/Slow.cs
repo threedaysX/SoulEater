@@ -17,7 +17,7 @@ public class Slow : DisposableSkill
         var speedstat = target.data.moveSpeed;
         void affect() { speedstat.AddModifier(new StatModifier(-0.5f, StatModType.Magnification, debuff)); }
         void remove() { speedstat.RemoveModifier(new StatModifier(0.5f, StatModType.Magnification, debuff)); }
-        target.buffController.AddBuff(debuff, affect, remove, 4f);
+        target.buffController.AddBuffEvent(debuff, affect, remove, 4f);
     }
 
     public override void OnTriggerEnter2D(Collider2D targetCol)

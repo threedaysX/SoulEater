@@ -9,57 +9,23 @@ public class ButtonEvents : Singleton<ButtonEvents>
     public AudioClip selectButtonSound;
     private bool deselectButtonTrigger;
 
-    [Header("Pressing Button (Key Held Down)")]
-    public float UpperPressTimeRange = 1f;
-    public float pressingTime = 0f;
-
     public void Update()
     {
-        // If lost select and not in control with slider, 
-        // then click any key to re-select last button (except mouse click).
-        if (deselectButtonTrigger && GetAnyKeyDown(false))
+        if (selectedButton != null && selectedButton.GetComponent<ButtonEvent>().canPressAnyKey
+            && Input.anyKeyDown)
+        {
+            selectedButton.onClick.Invoke();
+        }
+        else if (Input.GetKeyDown(HotKeyController.attackKey1))
+        {
+            selectedButton.onClick.Invoke();
+        }
+
+        // If lost select, then click up or down arrow to re-select last button.
+        if (deselectButtonTrigger && (Input.GetKeyDown(HotKeyController.moveUp) || Input.GetKeyDown(HotKeyController.moveDown)))
         {
             selectedButton.Select();
             deselectButtonTrigger = false;
-        }
-
-        if (selectedButton != null)
-        {
-            var btnEvent = selectedButton.GetComponent<ButtonEvent>();
-            if (btnEvent == null)
-                return;
-
-            if (btnEvent.canPressAnyKey && GetAnyKeyDown(true))
-            {
-                selectedButton.onClick.Invoke();
-            }
-            else if (btnEvent.otherClickEvents.Length == 0 && Input.GetKeyDown(btnEvent.clickKey))
-            {
-                btnEvent.Click();
-            }
-            else if (btnEvent.otherClickEvents.Length > 0)
-            {
-                foreach (var item in btnEvent.otherClickEvents)
-                {
-                    if ((!item.allowKeyHeldToTriggerEvent && Input.GetKeyDown(item.clickKey))
-                        || (item.allowKeyHeldToTriggerEvent && Input.GetKey(item.clickKey)))
-                    {
-                        item.triggerEvent.Invoke();
-                    }
-                }
-            }
-        }
-    }
-
-    private bool GetAnyKeyDown(bool containsMouseClick)
-    {
-        if (containsMouseClick)
-        {
-            return Input.anyKeyDown;
-        }
-        else
-        {
-            return Input.anyKeyDown && !Input.GetMouseButtonDown(0) && !Input.GetMouseButtonDown(1) && !Input.GetMouseButtonDown(2);
         }
     }
 
@@ -88,11 +54,6 @@ public class ButtonEvents : Singleton<ButtonEvents>
     {
         yield return new WaitForSeconds(duration);
         SceneManager.LoadScene(sceneName);
-    }
-
-    public void QuitGameImmediately()
-    {
-        Application.Quit();
     }
 
     public void QuitGame()

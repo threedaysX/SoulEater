@@ -6,15 +6,11 @@ using UnityEngine;
 public class CinemachineCameraControl : Singleton<CinemachineCameraControl>
 {
     private List<ZoomInSetting> zoomInSettings;
-    private int currentIndex = 0;
     private float nextZoomInStartTime = 0;
-    private bool resetZoomTrigger = true;
 
     private void Start()
     {
         zoomInSettings = new List<ZoomInSetting>();
-        resetZoomTrigger = true;
-        currentIndex = 0;
     }
 
     private void Update()
@@ -34,41 +30,35 @@ public class CinemachineCameraControl : Singleton<CinemachineCameraControl>
         return null;
     }
 
+    public void SetOnlyCurrentCamreaActive()
+    {
+        CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
+        CinemachineClearShot currentVcamParent = brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineClearShot>();
+        if (!currentVcamParent.IsLiveChild(GetCurrentActiveCamera())) Debug.Log("ch");//GetCurrentActiveCamera().gameObject.SetActive(false);
+        else Debug.Log("e");// GetCurrentActiveCamera().gameObject.SetActive(true);
+    }
+
     #region Zoom Camera
     private void CheckToZoomCamera()
     {
         if (zoomInSettings.Count > 0)
         {
-            // Reset First Time Zoom Delay.
-            if (resetZoomTrigger)
+            if (!zoomInSettings[0].isTrigger && Time.time >= nextZoomInStartTime)
             {
-                nextZoomInStartTime = Time.time + zoomInSettings[currentIndex].startDelay;
-                resetZoomTrigger = false;
-            }
-            else if (!resetZoomTrigger && !zoomInSettings[currentIndex].isTrigger && Time.time >= nextZoomInStartTime)
-            {
-                zoomInSettings[currentIndex].isTrigger = true;
-                StartCoroutine(ZoomInCamera(zoomInSettings[currentIndex].finalZoomSize, zoomInSettings[currentIndex].duration));
-                nextZoomInStartTime = Time.time + zoomInSettings[currentIndex].duration + GetZoomSettingNextStartDelay();
-                currentIndex++;
-            }
-
-            // When finished, Clear zoomInSettings and reset state.
-            if (currentIndex > zoomInSettings.Count - 1)
-            {
-                resetZoomTrigger = true;
-                currentIndex = 0;
-                zoomInSettings.Clear();
+                zoomInSettings[0].isTrigger = true;
+                StartCoroutine(ZoomInCamera(zoomInSettings[0].finalZoomSize, zoomInSettings[0].duration));
+                nextZoomInStartTime = Time.time + zoomInSettings[0].duration + zoomInSettings[0].afterDelay;
+                zoomInSettings.Remove(zoomInSettings[0]);
             }
         }
     }
 
-    public void ZoomInCamera(params ZoomInSetting[] zoomInSettings)
+    public void ZoomInCameraActions(params ZoomInSetting[] zoomInSettings)
     {
         this.zoomInSettings.AddRange(zoomInSettings);
     }
 
-    private IEnumerator ZoomInCamera(float finalZoomSize, float duration)
+    public IEnumerator ZoomInCamera(float finalZoomSize, float duration)
     {
         CinemachineBrain brain = Camera.main.GetComponent<CinemachineBrain>();
         CinemachineClearShot currentVcamParent = brain.ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineClearShot>();
@@ -92,14 +82,6 @@ public class CinemachineCameraControl : Singleton<CinemachineCameraControl>
             }
         }
     }
-
-    private float GetZoomSettingNextStartDelay()
-    {
-        if (currentIndex + 1 >= zoomInSettings.Count)
-            return 0f;
-
-        return zoomInSettings[currentIndex + 1].startDelay;
-    }
     #endregion
 }
 
@@ -107,6 +89,6 @@ public class ZoomInSetting
 {
     public float finalZoomSize;
     public float duration;
-    public float startDelay;
+    public float afterDelay;
     public bool isTrigger;
 }

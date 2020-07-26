@@ -50,7 +50,7 @@ MonoBehaviour:
   fixedCastTime:
     BaseValue: 2.4
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 2
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
@@ -61,8 +61,6 @@ MonoBehaviour:
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
-  trueCoolDown: 9.2
-  coolDownTimer: 6.56702
   cooling: 1
   timesOfPerDamage: 1
   duration: 0

@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using System.Linq;
 
 public class SkillDatabase : MonoBehaviour
 {
     public Character player;
     public Transform skillInventory;
     public SkillSlot[] skillSlots;
-    public AttackType dbSkillType;
 
     private void Start()
     {
@@ -16,7 +14,7 @@ public class SkillDatabase : MonoBehaviour
 
     public void ResetSkillInventory()
     {
-        Skill[] skills = player.skillFields.Where(x => x.skillType == this.dbSkillType).ToArray();
+        Skill[] skills = player.skillFields.ToArray();
         int slotIndex = 0;
         foreach (var skill in skills)
         {

@@ -15,21 +15,17 @@ public class PlayerMovement : MonoBehaviour
     public float basicJumpForce = 6f;
     public float lowJumpMultiplier = 4f;
     public float fallMultiplier = 2f;
-    public float skyWalkLimitDuration = 1f;
-    private float nextSkyWalkFallenTimes;
-    private bool startSkyWalk;
 
     [Header("閃避")]
     public float basicEvadeSpeed = 6f; 
 
-    private void Start()
+    void Start()
     {
         character = GetComponent<Character>();
         rb = GetComponent<Rigidbody2D>();
-        startSkyWalk = false;
     }
 
-    private void Update()
+    void Update()
     {
         x = Input.GetAxis("Horizontal");
         y = Input.GetAxis("Vertical");
@@ -40,10 +36,9 @@ public class PlayerMovement : MonoBehaviour
         Jump();
         BetterJump();
         Evade();
-        ResetSkyWalk();
     }
 
-    private void SideChange()
+    void SideChange()
     {
         if (!character.freeDirection.canDo)
             return;
@@ -73,18 +68,18 @@ public class PlayerMovement : MonoBehaviour
             // 若不能移動，則會隨慣性移動至停止
             if (rb.velocity.x > 0)
             {
-                rb.velocity = new Vector2(1.2f * transform.right.x, rb.velocity.y);
+                rb.velocity = new Vector2(0.6f, rb.velocity.y);
             }
-            else
+            else if (rb.velocity.x < 0)
             {
-                rb.velocity = new Vector2(0.5f * transform.right.x, rb.velocity.y);
+                rb.velocity = new Vector2(-0.6f, rb.velocity.y);
             }
         }
     }
 
     private void Jump()
     {
-        if (Input.GetKeyDown(HotKeyController.GetHotKey(HotKeyType.JumpKey)) 
+        if (Input.GetKeyDown(HotKeyController.jumpKey) 
             && character.jump.canDo 
             && character.operationController.isGrounding)   // 或有多段跳躍
         {
@@ -100,50 +95,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void BetterJump()
     {
-        if (character.operationController.isPreAttacking || character.operationController.isAttacking)
-        {
-            SkyWalk();
-            return;
-        }
-
-        if (rb.velocity.y > 0 && !Input.GetKey(HotKeyController.GetHotKey(HotKeyType.JumpKey)))
+        if (rb.velocity.y > 0 && !Input.GetKey(HotKeyController.jumpKey))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y < 0)
+        else if (rb.velocity.y < 0 && !Input.GetKey(HotKeyController.jumpKey))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
-    private void SkyWalk()
-    {
-        if (!startSkyWalk && !character.operationController.isGrounding)
-        {
-            startSkyWalk = true;
-            nextSkyWalkFallenTimes = Time.time + skyWalkLimitDuration;
-        }
-        if (startSkyWalk)
-        {
-            // 滯空時間限制
-            if (Time.time < nextSkyWalkFallenTimes)
-            {
-                rb.velocity = new Vector2(transform.right.x * 0.01f, transform.up.y * -0.05f);
-            }
-        }
-    }
-
-    private void ResetSkyWalk()
-    {
-        if (startSkyWalk && character.operationController.isGrounding)
-        {
-            startSkyWalk = false;
-        }
-    }
-
     private void Evade()
     {
-        if (Input.GetKeyDown(HotKeyController.GetHotKey(HotKeyType.EvadeKey))
+        if (Input.GetKeyDown(HotKeyController.evadeKey)
             && character.evade.canDo)
         {
             character.operationController.StartEvadeAnim(delegate { EvadeAction(); });

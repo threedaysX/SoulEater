@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AI : Character
+public abstract class AI : Character 
 {
     public bool CanDetect { get; set; }
     public bool CanAction { get; set; }
@@ -19,7 +19,7 @@ public abstract class AI : Character
     [Header("偵測距離")]
     public float detectDistance;
     [Header("行為延遲時間(秒)")]
-    public float commonActionDelay = 0f;
+    public float commonActionDelay = 0f;  
     public float animationActionDelay = 0.1f;
     private float nextActTimes = 0f;
 
@@ -33,17 +33,16 @@ public abstract class AI : Character
     private bool inCombatStateTrigger = false; // 是否進入戰鬥狀態
     private bool outOfCombatTrigger = false;
 
-    [HideInInspector] public Transform chaseTarget;
+    
     [HideInInspector] public LayerMask playerLayer;
     [HideInInspector] public DistanceDetect distanceDetect;
 
     public virtual void Start()
     {
-        this.gameObject.AddComponent(typeof(DistanceDetect));
         distanceDetect = GetComponent<DistanceDetect>();
         CanDetect = true;
         CanAction = true;
-        if (chaseTarget == null)
+        if (distanceDetect.chaseTarget == null)
         {
             outOfCombatTrigger = true;
         }
@@ -61,14 +60,14 @@ public abstract class AI : Character
 
     private void CheckOutOfCombatState()
     {
-        if (inCombatStateTrigger && chaseTarget == null)
+        if (inCombatStateTrigger && distanceDetect.chaseTarget == null)
         {
             inCombatStateTrigger = false;
             outOfCombatTrigger = true;
         }
 
         // 脫離戰鬥後，重置所有行動權重
-        if (!inCombatStateTrigger && outOfCombatTrigger)
+        if (!inCombatStateTrigger && outOfCombatTrigger) 
         {
             outOfCombatTrigger = false;
             foreach (var action in actions)
@@ -93,7 +92,7 @@ public abstract class AI : Character
             return;
 
         // 偵測
-        foreach (Detect detect in detects)
+        foreach (var detect in detects)
         {
             detect.GetCurrentAIHavior(this);
             if (detect.StartDetectHaviour())
@@ -103,8 +102,8 @@ public abstract class AI : Character
             }
             else
             {
-                if (chaseTarget != null)
-                    chaseTarget = null;
+                if (distanceDetect.chaseTarget != null)
+                    distanceDetect.chaseTarget = null;
             }
         }
     }
@@ -112,15 +111,21 @@ public abstract class AI : Character
     public void Combat()
     {
         // 進入戰鬥狀態
-        if (inCombatStateTrigger && chaseTarget != null)
+        if (inCombatStateTrigger && distanceDetect.chaseTarget != null)
         {
             if (CanAction && Time.time >= nextActTimes)
             {
                 // 每次開始執行動作之前，回到Idle狀態
                 ReturnDefaultAction();
                 // 在執行Action時，會持續面對目標
-                FaceTarget();
+                AlwaysFaceTarget();
                 DoActions();
+                // 只有移動不需要等待延遲，且算是實際的行動數
+                if (lastAction.actionType != AiActionType.Move)
+                {
+                    nextActTimes = Time.time + commonActionDelay + animationActionDelay;
+                    cumulativeActionCount++;
+                }
             }
         }
         else
@@ -129,13 +134,13 @@ public abstract class AI : Character
         }
     }
 
-    public void DoActions()
+    public virtual void DoActions()
     {
         List<AiAction> actionToDoList = new List<AiAction>();
-
+        
         // 判斷哪些動作符合條件，代表可以做
         // 若上一個相同的動作執行失敗，則權重降低N一次
-        foreach (AiAction action in actions)
+        foreach (var action in actions)
         {
             action.GetCurrentAIHavior(this);
             if (action.CheckActionThatCanDo())
@@ -170,6 +175,7 @@ public abstract class AI : Character
         // 決定最後的動作
         DoHightestWeightAction(actionToDoList);
     }
+
 
     protected void DoHightestWeightAction(List<AiAction> actions)
     {
@@ -212,13 +218,6 @@ public abstract class AI : Character
         commonActionDelay = action.commonActionDelay;
         lastActionSuccess = action.StartActHaviour();
         lastAction = action;
-
-        // 只有移動不需要等待延遲，且算是實際的行動數
-        if (lastActionSuccess && lastAction.actionType != AiActionType.Move)
-        {
-            nextActTimes = Time.time + commonActionDelay + animationActionDelay;
-            cumulativeActionCount++;
-        }
     }
 
     protected void ReturnDefaultAction(bool setToLastAction = false)
@@ -234,12 +233,12 @@ public abstract class AI : Character
             lastAction = defaultAction;
     }
 
-    public void FaceTarget(bool force = false)
+    private void AlwaysFaceTarget()
     {
-        if ((chaseTarget == null || !freeDirection.canDo) && !force)
+        if (distanceDetect.chaseTarget == null || !freeDirection.canDo)
             return;
 
-        float faceDirX = gameObject.transform.position.x - chaseTarget.transform.position.x;
+        float faceDirX = gameObject.transform.position.x - distanceDetect.chaseTarget.transform.position.x;
         if (faceDirX < 0)
         {
             gameObject.transform.eulerAngles = new Vector3(0, 0, 0);

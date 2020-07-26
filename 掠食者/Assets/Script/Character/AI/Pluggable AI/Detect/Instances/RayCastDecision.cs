@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/AI/Detect/RayCastDecision")]
 public class RayCastDecision : Detect
@@ -24,7 +22,7 @@ public class RayCastDecision : Detect
         }
         else if (hit.collider.CompareTag("Player"))
         {
-            ai.chaseTarget = hit.transform;
+            ai.distanceDetect.chaseTarget = hit.transform;
             return true;
         }
         return false;

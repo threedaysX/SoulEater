@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 6131620853575434614}
   - component: {fileID: 6131620853575434613}
   - component: {fileID: 6131620853575434617}
-  - component: {fileID: 5654559941067428839}
   m_Layer: 5
   m_Name: Slot
   m_TagString: Untagged
@@ -163,14 +162,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a5987110aa34c1b4686a9198c6eff4d3, type: 3}
-  m_Type: 3
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 2
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6131620853575434614
@@ -185,10 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4552a7463e0fd8f44b081ef42235c052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 0}
   icon: {fileID: 6131620853487958809}
   skill: {fileID: 0}
-  slotType: 0
 --- !u!114 &6131620853575434613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: -1
+    m_Mode: 3
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -231,18 +228,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6131620853575434615}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6131620853575434614}
-        m_MethodName: OnSlotClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!225 &6131620853575434617
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -255,46 +241,3 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &5654559941067428839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6131620853575434611}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba2e6184c25cbd34ea86d60a4e6c6f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canPressAnyKey: 0
-  pointer: {fileID: 0}
-  targetPos: {fileID: 0}
-  onSelectEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6131620853575434614}
-        m_MethodName: OnSelect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDeselectEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6131620853575434614}
-        m_MethodName: OnDeselect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

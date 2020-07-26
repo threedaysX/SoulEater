@@ -56,7 +56,7 @@ public class PowerUp : DisposableSkill
         {
             stats.RemoveModifier(new StatModifier(-offset, StatModType.FlatAdd, buffName));
         }
-        sourceCaster.buffController.AddBuff(buffName, affect, remove, duration);
+        sourceCaster.buffController.AddBuffEvent(buffName, affect, remove, duration);
     }
 }
 

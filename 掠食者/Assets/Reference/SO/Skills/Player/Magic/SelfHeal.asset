@@ -28,7 +28,7 @@ MonoBehaviour:
   cost:
     BaseValue: 1
     AdditionalValue: 0
-    FinalValue: 1
+    FinalValue: 0
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
@@ -57,11 +57,11 @@ MonoBehaviour:
   coolDown:
     BaseValue: 10
     AdditionalValue: 0
-    FinalValue: 10
+    FinalValue: 0
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
-  cooling: 1
+  cooling: 0
   timesOfPerDamage: 1
-  duration: 0
+  duration: 0.4
   prefab: {fileID: 1386311480140111295, guid: 31516b4de09fb524980c63337c1f2643, type: 3}

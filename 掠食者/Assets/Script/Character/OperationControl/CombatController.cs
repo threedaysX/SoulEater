@@ -13,18 +13,13 @@ public class CombatController : MonoBehaviour
     [Header("擊退系統")]
     public float basicShakeCameraForce;
 
-    [Header("命中檢查")]
-    public bool hasHit = false;  //AI用
-    public float hasHitInTime;  //AI用
-    public float takeHowMuchDamage;  //AI用
-
     [SerializeField] private float attackPointBasicRange = 1f;
 
     private void Start()
     {
         character = GetComponent<Character>();
         RenderAttackHitboxes(true);
-        RenderHitEffect();
+        RenderHitEffect(true);
     }
 
     public bool Attack(AttackType attackType = AttackType.Attack, ElementType elementType = ElementType.None)
@@ -48,12 +43,11 @@ public class CombatController : MonoBehaviour
                         // 取得傷害來源方向(KB擊退用途)
                         float damageDirectionX = character.transform.position.x - target.transform.position.x;
                         float damage = DamageController.Instance.GetAttackDamage(character, enemyDetails, attackType, elementType, out bool isCritical);
-                        enemyDetails.TakeDamage(character.gameObject, (int)damage, isCritical, damageDirectionX, character.data.weaponKnockBackForce);
-                        CameraShake.Instance.ShakeCamera(basicShakeCameraForce * character.data.weaponKnockBackForce, 0.02f, 0.1f, 0f, true);
+                        enemyDetails.TakeDamage((int)damage, isCritical, damageDirectionX, character.data.weaponKnockBackForce);
+                        CameraShake.Instance.ShakeCamera(basicShakeCameraForce * character.data.weaponKnockBackForce, 0.02f, 0.1f, true);
                         character.DamageDealtSteal(damage, true);
                         TriggerHitEffect(target.transform);
                         attackSuccess = true;
-                        StartCoroutine(HasHit());
                         lastAttackTarget = target.transform;
                     }
                 }
@@ -104,13 +98,13 @@ public class CombatController : MonoBehaviour
     {
         if (character.data.attackHitBoxPrefab == null)
             return;
-        var attackHitboxObj = PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "_AttackHitboxes", false, reRenderOnce);
+        var attackHitboxObj = PrefabRenderer.Instance.RenderPrefabInParent<AttackHitboxList>(character.transform, character.data.attackHitBoxPrefab, "AttackHitboxes", false, reRenderOnce);
         attackHitboxes = attackHitboxObj.GetComponent<AttackHitboxList>();
     }
 
-    public void RenderHitEffect()
+    public void RenderHitEffect(bool reRenderOnce = false)
     {
-        var hitEffectObj = PrefabRenderer.Instance.RenderPrefab<ParticleSystem>(character.data.hitEffectPrefab, character.characterName + "_HitEffect", true);
+        var hitEffectObj = PrefabRenderer.Instance.RenderPrefabInParent<ParticleSystem>(character.transform, character.data.hitEffectPrefab, "hitEffect", true, reRenderOnce);
         hitEffect = hitEffectObj.GetComponent<ParticleSystem>();
     }
 
@@ -118,14 +112,6 @@ public class CombatController : MonoBehaviour
     {
         Vector3 attackPoint = attackCenterPoint.position != null ? attackCenterPoint.position : character.transform.position;
         return attackPoint + character.transform.right * attackPointBasicRange;
-    }
-
-    private IEnumerator HasHit()
-    {
-        hasHit = true;
-        yield return new WaitForSeconds(hasHitInTime);
-        hasHit = false;
-        yield break;
     }
 
     private void OnDrawGizmos()

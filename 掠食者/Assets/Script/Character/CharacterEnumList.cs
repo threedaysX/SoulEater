@@ -3,8 +3,7 @@ public enum AttackType
 {
     Attack,
     Magic,
-    Effect,
-    Passive
+    Effect
 }
 
 public enum CostType

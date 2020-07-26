@@ -154,7 +154,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     public virtual void DamageTarget(float damageDirectionX = 0)
     {
         float damage = GetSkillDamage(out bool isCritical);
-        target.TakeDamage(sourceCaster.gameObject, (int)damage, isCritical, damageDirectionX);
+        target.TakeDamage((int)damage, isCritical, damageDirectionX);
         sourceCaster.DamageDealtSteal(damage, false);
     }
 
@@ -171,7 +171,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     {
         void affect() { sourceCaster.freeDirection.Lock(LockType.OperationAction); }
         void remove() { sourceCaster.freeDirection.UnLock(LockType.OperationAction); }
-        sourceCaster.buffController.AddBuff(lockDirectionBuffName, affect, remove, currentSkill.duration);
+        sourceCaster.buffController.AddBuffEvent(lockDirectionBuffName, affect, remove, currentSkill.duration);
     }
 
     /// <summary>

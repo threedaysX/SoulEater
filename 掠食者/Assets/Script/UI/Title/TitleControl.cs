@@ -19,11 +19,11 @@ public class TitleControl : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(HotKeyController.GetHotKey(HotKeyType.EscMenuKey)))
+        if (Input.GetKeyDown(HotKeyController.menuKey))
         {
             if (options.activeSelf)
             {
-                menuEscStack.Pop().menuEscEvent.Invoke();
+                menuEscStack.Pop().escButton.onClick.Invoke();
             }
         }
     }

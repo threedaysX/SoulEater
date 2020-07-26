@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class EnemyModel : AI
 {
@@ -14,8 +13,8 @@ public abstract class EnemyModel : AI
     {
         base.Start();
 
-        tag = "Enemy";
-        gameObject.layer = LayerMask.NameToLayer("Enemy");
+        this.tag = "Enemy";
+        this.gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
     public override void LateUpdate()
@@ -46,8 +45,8 @@ public abstract class EnemyModel : AI
 
     public override void Die()
     {
-        base.Die();
         ResetBarUI();
+        base.Die();
     }
 
     public void SetEnemyLevel(EnemyLevel level)
@@ -59,7 +58,7 @@ public abstract class EnemyModel : AI
     {
         if (overridedPreActHintEffect != null)
         {
-            overridedPreActHintEffect.Play(true);
+            preActHint.Play(true);
         }
         else if (preActHint != null)
         {
@@ -73,6 +72,12 @@ public abstract class EnemyModel : AI
         {
             operationSoundController.PlaySound(preActSound);
         }
+    }
+
+    public override void DoActions()
+    {
+        distanceDetect.CheckDistance();
+        base.DoActions();
     }
 }
 

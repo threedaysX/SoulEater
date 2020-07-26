@@ -11,10 +11,10 @@ public class OutOfCustomRange : JudgeCondition
 
     private bool CheckCustomFarDistance()
     {
-        if (ai.chaseTarget != null)
+        if (ai.distanceDetect.chaseTarget != null)
         {
             // 若在自定距離外(含)
-            if ((ai.chaseTarget.transform.position - ai.transform.position).sqrMagnitude >= customRange * customRange)
+            if (ai.distanceDetect.AIToTargetDistance >= customRange)
             {
                 return true;
             }

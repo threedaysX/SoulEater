@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Teleport_J3
   m_EditorClassIdentifier: 
   actionWeightAfterJudge: 7
-  conditionTrueCount: 1
+  conditionTrueCount: 0
   conditions:
-  - {fileID: 11400000, guid: a29e6d212c4ad1040a4ca9346fd7bbba, type: 2}
+  - {fileID: 11400000, guid: 819e1468151e5b94f8c70c5fb00e82e9, type: 2}
   - {fileID: 11400000, guid: add1730fb3edb9c4ead5e32daf5b505e, type: 2}

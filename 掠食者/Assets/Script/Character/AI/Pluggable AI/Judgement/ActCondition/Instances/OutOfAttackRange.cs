@@ -10,10 +10,10 @@ public class OutOfAttackRange : JudgeCondition
 
     private bool CheckFarDistance()
     {
-        if (ai.chaseTarget != null)
+        if (ai.distanceDetect.chaseTarget != null)
         {
             // 若在攻擊距離外
-            if ((ai.chaseTarget.position - ai.transform.position).sqrMagnitude >= ai.data.attackRange.Value * ai.data.attackRange.Value)
+            if (ai.distanceDetect.AIToTargetDistance >= ai.data.attackRange.Value)
             {
                 return true;
             }

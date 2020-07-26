@@ -29,19 +29,4 @@ public class PrefabRenderer : Singleton<PrefabRenderer>
 
         return null;
     }
-
-    public GameObject RenderPrefab<T>(Transform prefab, string newObjectName, bool setActive)
-    {
-        if (prefab != null)
-        {
-            Transform newObject = Instantiate(prefab);
-            newObject.localPosition = prefab.localPosition;
-            newObject.name = newObjectName;
-            newObject.gameObject.SetActive(setActive);
-
-            return newObject.gameObject;
-        }
-
-        return null;
-    }
 }
