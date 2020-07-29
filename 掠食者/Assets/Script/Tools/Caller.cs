@@ -1,1 +1,0 @@
-﻿public class Caller : Singleton<Caller> { }

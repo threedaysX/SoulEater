@@ -17,7 +17,7 @@ public class CheckCustomDamageInTime : JudgeCondition
         {
             if(Input.GetKeyDown(HotKeyController.attackKey1) || Input.GetKeyDown(HotKeyController.attackKey2))
             {
-                Caller.Instance.StartCoroutine(HasDamaged());
+                MonobehaviorCallerForSO.Instance.StartCoroutine(HasDamaged());
             }
         }
 

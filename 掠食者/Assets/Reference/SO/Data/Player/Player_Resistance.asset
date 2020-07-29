@@ -15,16 +15,16 @@ MonoBehaviour:
   none:
     BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 100
+    FinalValue: 0
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
   fire:
     BaseValue: 100
     AdditionalValue: 0
-    FinalValue: 100
-    ForceValue: 50
-    toForceChangeValue: 1
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
     modifiers: []
   water:
     BaseValue: 100

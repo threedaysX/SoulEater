@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Teleporter : MonoBehaviour
 {
     [SerializeField] private Transform pointToTeleport = null;
     [Header("把boss打開(SetActive)")]

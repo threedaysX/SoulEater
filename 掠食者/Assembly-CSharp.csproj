@@ -159,7 +159,8 @@
     <Compile Include="Assets\Script\Character\Weapon\AttackHitbox.cs" />
     <Compile Include="Assets\Script\Character\Weapon\AttackHitboxList.cs" />
     <Compile Include="Assets\Script\Character\Weapon\Projectile.cs" />
-    <Compile Include="Assets\Script\Character\Weapon\ProjectileController.cs" />
+    <Compile Include="Assets\Script\Character\Weapon\ProjectileDataInitializer.cs" />
+    <Compile Include="Assets\Script\Character\Weapon\ProjectileSpawner.cs" />
     <Compile Include="Assets\Script\Character\Weapon\WeaponController.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\Affix.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\AffixData.cs" />
@@ -172,8 +173,9 @@
     <Compile Include="Assets\Script\Game\Camera\FadeEvent.cs" />
     <Compile Include="Assets\Script\Game\Camera\FadeScreen.cs" />
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
-    <Compile Include="Assets\Script\Game\Door.cs" />
     <Compile Include="Assets\Script\Game\EndGameManager.cs" />
+    <Compile Include="Assets\Script\Game\EnvirnomentStuff\Teleporter.cs" />
+    <Compile Include="Assets\Script\Game\EnvirnomentStuff\Tutorial\TutorialTrapTrigger.cs" />
     <Compile Include="Assets\Script\Game\FormulaControl\DamageController.cs" />
     <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />
     <Compile Include="Assets\Script\Game\HotKeyController.cs" />
@@ -185,11 +187,10 @@
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />
     <Compile Include="Assets\Script\Game\SlowMotionController.cs" />
     <Compile Include="Assets\Script\Tools\AdjustObject.cs" />
-    <Compile Include="Assets\Script\Tools\Caller.cs" />
+    <Compile Include="Assets\Script\Tools\MonobehaviorCallerForSO.cs" />
     <Compile Include="Assets\Script\Tools\ObjectPools.cs" />
     <Compile Include="Assets\Script\Tools\PrefabRenderer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
-    <Compile Include="Assets\Script\Tools\VectorTranslator.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Endowment.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Soul.cs" />
     <Compile Include="Assets\Script\tsumiki\000F\Weapon.cs" />

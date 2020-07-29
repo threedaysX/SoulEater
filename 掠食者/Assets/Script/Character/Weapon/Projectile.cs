@@ -3,28 +3,29 @@
 public class Projectile : MonoBehaviour
 {
     private float moveSpeed;
-    private float duration;
+    private int duration;
     private float initialAngle;
-    private float radShootAngleIncrement;
+    private float shootAngleIncrement;
     private Transform target;
     private float freeFlyDuration;
 
     private float timer;
     private Vector2 finalDirection;
 
-    public void ProjectileSetup(float moveSpeed, float duration,float initialAngle, float radShootAngleIncrement, Transform target, float freeFlyDuration)
+    public void ProjectileSetup(ProjectileDirectSetting projectileDirectSetting)
     {
-        this.moveSpeed = moveSpeed;
-        this.duration = duration;
-        this.initialAngle = initialAngle;  //Rad
-        this.radShootAngleIncrement = radShootAngleIncrement;
-        this.target = target;
-        this.freeFlyDuration = freeFlyDuration;
+        this.moveSpeed = projectileDirectSetting.moveSpeed;
+        this.duration = projectileDirectSetting.duration;
+        this.initialAngle = projectileDirectSetting.initialAngle;  //rad
+        this.shootAngleIncrement = projectileDirectSetting.angleIncrement;   //deg
+        this.target = projectileDirectSetting.target;
+        this.freeFlyDuration = projectileDirectSetting.freeFlyDuration;
     }
 
     private void Update()
     {
-        timer += Time.deltaTime;
+        if(gameObject.activeInHierarchy)
+            timer += Time.deltaTime;
         ProjectilePattern();
     }
 
@@ -32,7 +33,7 @@ public class Projectile : MonoBehaviour
     {
         transform.eulerAngles = new Vector3(0 , 0, initialAngle);
 
-        initialAngle += radShootAngleIncrement;  //Rad
+        initialAngle += (shootAngleIncrement * Mathf.Deg2Rad * Time.deltaTime);
         finalDirection = new Vector2(Mathf.Cos(initialAngle), Mathf.Sin(initialAngle));
 
         if (target != null)
@@ -46,7 +47,11 @@ public class Projectile : MonoBehaviour
         else
             transform.position += (Vector3)finalDirection * moveSpeed * Time.deltaTime;
 
-        Destroy(gameObject, duration);
+        if(timer > duration)
+        {
+            gameObject.SetActive(false);
+            timer = 0;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,7 +59,7 @@ public class Projectile : MonoBehaviour
         if (collision.GetComponent<Character>() != null)
         {
             //return true to skill
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

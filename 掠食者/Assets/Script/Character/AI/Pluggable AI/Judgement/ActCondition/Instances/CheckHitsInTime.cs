@@ -15,7 +15,7 @@ public class CheckHitsInTime : JudgeCondition
         {
             if(Input.GetKeyDown(HotKeyController.attackKey1) || Input.GetKeyDown(HotKeyController.attackKey2))        //if input attack
             {
-                Caller.Instance.StartCoroutine(HasHit());
+                MonobehaviorCallerForSO.Instance.StartCoroutine(HasHit());
             }
         }
 
