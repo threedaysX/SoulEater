@@ -28,10 +28,31 @@ public class Operation
     public IEnumerator action;              // 當前用來執行此動作的方法
     public float delay;     // 當前動作結束後的時間間隔延遲 (延遲多久進行下一個行動)
     public float nextOperationTime;     // 下一個行動的時間點
-    public bool finished;
+    public bool finished;               // 代表動作完成了
     public bool paused;
     public bool running;
     public bool stop;
+
+    /// <summary>
+    /// 代表動作剛完成
+    /// </summary>
+    public bool FinishedTrigger
+    {
+        set
+        {
+            _finishedTrigger = value;
+        }
+        get
+        {
+            if (_finishedTrigger)
+            {
+                _finishedTrigger = false;
+                return true;
+            }
+            return false;
+        }
+    }
+    private bool _finishedTrigger;
     private bool forceActToEnd;  // 當前動作一定會做完，不會被其他動作中斷(依舊會被外力影響中斷)
 
     public Operation(string name, IEnumerator action = null, float delay = 0)
@@ -67,6 +88,7 @@ public class Operation
             }
         }
         finished = true;
+        FinishedTrigger = true;
     }
 
     private void Start()
@@ -184,46 +206,54 @@ public class Operation
     }
 }
 
-public class Operations : Dictionary<int, Operation>
+public class Operations
 {
+    public Operation[] operations;
     public byte currentIndex;   // 當前執行的動作Index
     public byte lastIndex;      // 最後的動作Index
+    private byte size;
 
-    public Operations()
+    public Operations(byte size)
     {
+        this.size = size;
+        operations = new Operation[size];
         currentIndex = 0;
         lastIndex = 0;
     }
 
     public Operation GetCurrentOperation()
     {
-        if (currentIndex == byte.MaxValue)
-            currentIndex = byte.MinValue;
-        return this[currentIndex];
+        return operations[currentIndex];
     }
 
     public Operation GetLastOperation()
     {
-        return this[lastIndex - 1];
+        if (lastIndex < 1)
+            return operations[size - 1];
+        return operations[lastIndex - 1];
     }
 
     public void AddOperation(Operation operation)
     {
-        if (lastIndex == byte.MaxValue)
+        if (lastIndex >= size || lastIndex == byte.MaxValue)
             lastIndex = byte.MinValue;
 
-        this.Add(lastIndex++, operation);
+        operations[lastIndex++] = operation;
     }
 
-    public void RemoveCurrentOperation()
+    public void MoveToNextOperation()
     {
-        Remove(currentIndex);
+        if (currentIndex == size - 1)
+        {
+            currentIndex = byte.MinValue;
+            return;
+        }
+
         currentIndex++;
     }
 
-    public void RemoveLastOperation()
+    public void ReverseLastOperation()
     {
-        Remove(lastIndex - 1);
         lastIndex--;
     }
 }
@@ -339,7 +369,7 @@ public class OperationController : MonoBehaviour
         anim = GetComponent<Animator>();
         character = GetComponent<Character>();
         cycleAttackCount = GetComponent<Character>().data.cycleAttackCount;
-        operations = new Operations();
+        operations = new Operations(10);
         delayOperationDict = new OperationDelayDictionary();
         nextAttackResetTime = 0;
         attackComboCount = 0;
@@ -681,22 +711,22 @@ public class OperationController : MonoBehaviour
     #region Operation Control
     private void StartOperation()
     {
-        if (operations.Count == 0)
-            return;
-
         // 本次動作尚未開始，並等待每個動作的獨立延遲，可開始動作。
         Operation operation = operations.GetCurrentOperation();
-        if (!operation.running && !operation.stop)
+        if (operation == null)
+            return;
+
+        if (!operation.running && !operation.stop && !operation.finished)
         {
             StartCoroutine(operation.CallOperation());
             delayOperationDict.AddOperation(operation.name, operation);
         }
 
-        if (operation.finished)
+        if (operation.FinishedTrigger)
         {
             character.LockOperation(LockType.OperationAction, false);    // 重置角色動作
             InterruptAnimOperation();    // 重置角色動畫
-            operations.RemoveCurrentOperation();
+            operations.MoveToNextOperation();
             return;
         }
     }
@@ -719,8 +749,8 @@ public class OperationController : MonoBehaviour
         if (!CheckOperationDelay(operationName))
             return false;
 
-        int stackCount = operations.Count;
-        if (stackCount == 0)
+        Operation currentOperation = operations.GetCurrentOperation();
+        if (currentOperation == null || currentOperation.finished)
         {
             return true;
         }
@@ -728,15 +758,15 @@ public class OperationController : MonoBehaviour
         Operation lastOperation = operations.GetLastOperation();
         // 若為正在執行的動作，則檢查狀態，決定是否要打斷或是等待
         // 若否，則先檢查是否為相同動作，不是則會被其他動作覆蓋
-        if (lastOperation.running)
+        if (lastOperation != null && lastOperation.running)
         {
             return lastOperation.CheckOperationState(operationName);
         }
         else
         {
-            if (!lastOperation.CheckOperationSame(operationName))
+            if (lastOperation != null && !lastOperation.CheckOperationSame(operationName))
             {
-                operations.RemoveLastOperation();
+                operations.ReverseLastOperation();
                 return true;
             }
         }

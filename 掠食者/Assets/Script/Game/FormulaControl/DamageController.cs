@@ -40,8 +40,8 @@ public class DamageController : Singleton<DamageController>
         // 待修: 其他倍率 (碎片加成 => 多種倍率相乘....)
         float otherMagnification = 1;
 
-        // 實際造成傷害 = (最終Atk * (基礎防禦/100)% * 穿甲倍率 - (加成防禦 + 穿甲值)) * 其他倍率 * 抗性表
-        float resultDamage = (GetFinalDamageWithAttack(source, target, attackType, false, out isCritical) * (1 - targetBaseDefense / 100) * (1 - source.data.penetrationMagnification.Value / 100) - (targetAddDefense - source.data.penetrationValue.Value)) * otherMagnification * (targetElementMagnification / 100);
+        // 實際造成傷害 = ((最終Atk - (加成防禦 + 穿甲值)) * (基礎防禦/100)% * 穿甲倍率) * 其他倍率 * 抗性表
+        float resultDamage = ((GetFinalDamageWithAttack(source, target, attackType, false, out isCritical) - (targetAddDefense - source.data.penetrationValue.Value)) * (1 - targetBaseDefense / 100) * (1 - source.data.penetrationMagnification.Value / 100)) * otherMagnification * (targetElementMagnification / 100);
         return Mathf.Round(resultDamage);
     }
 
@@ -59,8 +59,8 @@ public class DamageController : Singleton<DamageController>
         // 待修: 其他倍率 (碎片加成 => 多種倍率相乘....)
         float otherMagnification = 1;
 
-        // 實際技能傷害 = (最終MAtk or Atk  * 技能倍率 * (基礎防禦/100)% * 穿甲倍率 - (加成防禦 + 穿甲值)) * 其他倍率 * 抗性表
-        float resultDamage = (GetFinalDamageWithAttack(source, target, currentSkill.skillType, true, out isCritical) * (currentSkill.damageMagnification.Value / 100) * (1 - targetBaseDefense / 100) * (1 - source.data.penetrationMagnification.Value / 100) - (targetAddDefense - source.data.penetrationValue.Value)) * otherMagnification * (targetElementMagnification / 100);
+        // 實際技能傷害 = ((最終MAtk or Atk - (加成防禦 + 穿甲值))  * 技能倍率 * (基礎防禦/100)% * 穿甲倍率) * 其他倍率 * 抗性表
+        float resultDamage = ((GetFinalDamageWithAttack(source, target, currentSkill.skillType, true, out isCritical) - (targetAddDefense - source.data.penetrationValue.Value)) * (currentSkill.damageMagnification.Value / 100) * (1 - targetBaseDefense / 100) * (1 - source.data.penetrationMagnification.Value / 100)) * otherMagnification * (targetElementMagnification / 100);
 
         return Mathf.Round(resultDamage);
     }

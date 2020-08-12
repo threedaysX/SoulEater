@@ -6,8 +6,14 @@ public class PlayerBlooding : MonoBehaviour
 {
     public Image blood;
     public Player player;
+
+    [Header("流血材質效果設定")]
     public PlayerBloodSetting minorInjuredSetting;
     public PlayerBloodSetting seriousInjuredSetting;
+    [Header("流血輪廓邊框效果設定")]
+    public VignetteSetting minorBleedVignette;
+    public VignetteSetting seriousBleedVignette;
+
     private Sequence bloodingSeq;
     private bool nonInjured;        // 無傷
     private bool minorInjured;      // 輕傷
@@ -25,16 +31,19 @@ public class PlayerBlooding : MonoBehaviour
         if (injuredTrigger && seriousInjured)
         {
             Blooding(seriousInjuredSetting);
+            ImageEffectController.Instance.BleedVignette(true, seriousBleedVignette);
             injuredTrigger = false;
         }
         else if (injuredTrigger && minorInjured)
         {
             Blooding(minorInjuredSetting);
+            ImageEffectController.Instance.BleedVignette(true, minorBleedVignette);
             injuredTrigger = false;
         }
         else if (injuredTrigger && nonInjured)
         {
             StopBleed();
+            ImageEffectController.Instance.BleedVignette(false);
             injuredTrigger = false;
         }
     }
@@ -57,8 +66,15 @@ public class PlayerBlooding : MonoBehaviour
 
     private void CheckInjured()
     {
+        if (!nonInjured && (player == null || player.CurrentHealth <= 0f || player.CurrentHealth > player.data.maxHealth.Value * 0.5f))
+        {
+            seriousInjured = false;
+            minorInjured = false;
+            nonInjured = true;
+            injuredTrigger = true;
+        }
         // 當不在重傷狀態時，就會檢查自己是否為重傷
-        if (!seriousInjured && player.CurrentHealth <= player.data.maxHealth.Value * 0.2f)
+        else if (!seriousInjured && player.CurrentHealth <= player.data.maxHealth.Value * 0.2f)
         {
             seriousInjured = true;
             minorInjured = false;
@@ -71,13 +87,6 @@ public class PlayerBlooding : MonoBehaviour
             seriousInjured = false;
             minorInjured = true;
             nonInjured = false;
-            injuredTrigger = true;
-        }
-        else if (!nonInjured && player.CurrentHealth > player.data.maxHealth.Value * 0.5f)
-        {
-            seriousInjured = false;
-            minorInjured = false;
-            nonInjured = true;
             injuredTrigger = true;
         }
     }
