@@ -49,6 +49,9 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         AddAffectEvent();
     }
 
+    /// <summary>
+    /// 技能於物件池中生成至畫面時(尚未開始詠唱與使用前)
+    /// </summary>
     public virtual void GenerateSkill(Character character, Skill skill)
     {
         this.gameObject.SetActive(true);
@@ -68,9 +71,8 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
     }
 
     /// <summary>
-    /// 技能生成。
+    /// 技能使用(詠唱後)
     /// </summary>
-    /// <param name="caster">施放技能的人</param>
     public virtual void UseSkill()
     {
         if (soundControl != null && inUsingSound != null)
