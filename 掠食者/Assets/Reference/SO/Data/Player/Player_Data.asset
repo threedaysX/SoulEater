@@ -49,8 +49,8 @@ MonoBehaviour:
     modifiers: []
   critical:
     BaseValue: 20
-    AdditionalValue: 0
-    FinalValue: 20
+    AdditionalValue: 200
+    FinalValue: 100
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []

@@ -363,6 +363,21 @@
     <Reference Include="DOTweenEditor">
       <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Assets/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
     </Reference>
+    <Reference Include="GitHub.Api.45">
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.Logging">
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.Unity.45">
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.UnityShim">
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll</HintPath>
+    </Reference>
+    <Reference Include="sfw.net">
+      <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/User/Desktop/Side Project/掠食者/主程式/掠食者/Library/PackageCache/com.unity.ads@3.4.5/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -740,6 +755,10 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{CB4C3E89-9911-2288-EBA0-2DFCB08C94D4}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
+      <Project>{2EE8AFA3-EA78-AD6B-7BC8-9742236B40D8}</Project>
+      <Name>Assembly-CSharp-Editor-firstpass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

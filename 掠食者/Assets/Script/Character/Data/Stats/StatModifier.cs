@@ -29,20 +29,20 @@ public enum StatModType
     /// <summary>
     /// [倍]數相乘 (+1倍 & +1倍 => 4倍 => 2*2)
     /// </summary>
-    Times,
+    TimesTime,
 
     /// <summary>
     /// [倍]數相加 (+1倍 & +1倍 => 2倍)
     /// </summary>
-    TimesOfAdd,
+    TimesAdd,
 
     /// <summary>
     /// [倍]率相乘 (+60% & +60% => 256% => 1.6*1.6)
     /// </summary>
-    Magnification,
+    PercentageTime,
 
     /// <summary>
     /// [倍]率相加 (+50% & +60% => 110%)
     /// </summary>
-    MagnificationAdd
+    PercentageAdd
 }

@@ -1,5 +1,4 @@
-﻿using StatsModifierModel;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PowerSlam : DisposableSkill
 {
@@ -14,10 +13,7 @@ public class PowerSlam : DisposableSkill
     /// </summary>
     private void DebuffArmorBreak()
     {
-        var armorstat = target.data.defense;
-        void affect() { armorstat.AddModifier(new StatModifier(-10, StatModType.MagnificationAdd, armorBreak)); }
-        void remove() { armorstat.RemoveModifier(new StatModifier(10, StatModType.MagnificationAdd, armorBreak)); }
-        target.buffController.AddBuff(armorBreak, affect, remove, 4f);
+        Debuff.Instance.ArmorBreakWithLevel(target, 1, 4f);
     }
 
     public override void OnTriggerEnter2D(Collider2D targetCol)

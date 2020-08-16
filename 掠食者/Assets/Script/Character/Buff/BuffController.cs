@@ -66,14 +66,14 @@ public class BuffController : MonoBehaviour
     }
 
     #region BuffList設定內容
-    private BuffContent CreateMemory(UnityEvent affect, UnityEvent removeEvent, float duration)
+    private BuffContent CreateMemory(UnityEvent affect, UnityEvent removeEvent, float duration, Func<bool> triggerCondition = null)
     {
         bool isStartCountDown = true;
         if (duration == -1)
         {
             isStartCountDown = false;   // 如果duration = -1，代表永遠不會開始倒數，代表Buff為永久效果
         }
-        return new BuffContent { affect = affect, removeEvent = removeEvent, duration = duration, endTime = Time.time + duration, isStartCountDown = isStartCountDown };
+        return new BuffContent { condition = triggerCondition , affect = affect, removeEvent = removeEvent, duration = duration, endTime = Time.time + duration, isStartCountDown = isStartCountDown };
     }
 
     private void SetBuffMemory(string name, BuffContent buffMemory)
@@ -101,7 +101,7 @@ public class BuffController : MonoBehaviour
     /// <param name="affect">持續時間內的影響效果</param>
     /// <param name="endAffect">當持續時間結束後，觸發的效果</param>
     /// <param name="duration">持續時間，當持續時間設為-1時，代表永久效果</param>
-    public void AddBuff(string affectName, UnityAction affect, UnityAction endAffect, float duration)
+    public void AddBuff(string affectName, UnityAction affect, UnityAction endAffect, float duration, Func<bool> triggerCondition = null)
     {
         if (!CheckIsBuffInList(affectName))
         {
@@ -109,7 +109,24 @@ public class BuffController : MonoBehaviour
             {
                 affect.Invoke();
             }
-            SetBuffMemory(affectName, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(endAffect), duration));
+            SetBuffMemory(affectName, CreateMemory(CreateAffectEvent(affect), CreateAffectEvent(endAffect), duration, triggerCondition));
+        }
+        else
+        {
+            // 重置時間
+            GetBuffMemory(affectName).ResetTick();
+        }
+    }
+
+    public void AddBuff(string affectName, UnityEvent affectEvent, UnityEvent endEvent, float duration, Func<bool> triggerCondition = null)
+    {
+        if (!CheckIsBuffInList(affectName))
+        {
+            if (affectEvent != null)
+            {
+                affectEvent.Invoke();
+            }
+            SetBuffMemory(affectName, CreateMemory(affectEvent, endEvent, duration, triggerCondition));
         }
         else
         {

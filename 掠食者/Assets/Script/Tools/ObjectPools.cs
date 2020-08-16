@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Necromancy.UI;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPools : Singleton<ObjectPools>
@@ -90,7 +91,7 @@ public class ObjectPools : Singleton<ObjectPools>
         return objectToSpawn;
     }
 
-    public GameObject DamagePopup(string name, bool isCritical, int damageAmount, Vector3 position)
+    public GameObject PopText(string name, bool isCritical, int damageAmount, Color color, Vector3 position)
     {
         if (poolDictionary == null || !poolDictionary.ContainsKey(name))
             return null;
@@ -103,7 +104,28 @@ public class ObjectPools : Singleton<ObjectPools>
         {
             objectToSpawn.SetActive(true);
             objectToSpawn.transform.position = position;
-            pooledObj.SetupDamage(isCritical, damageAmount);
+            pooledObj.SetupDamage(isCritical, damageAmount, color);
+        }
+
+        poolDictionary[name].Enqueue(objectToSpawn);
+
+        return objectToSpawn;
+    }
+
+    public GameObject PopText(string name, string message, Color color, Vector3 position)
+    {
+        if (poolDictionary == null || !poolDictionary.ContainsKey(name))
+            return null;
+
+        GameObject objectToSpawn = poolDictionary[name].Dequeue();
+
+        ITextGenerator pooledObj = objectToSpawn.GetComponent<ITextGenerator>();
+
+        if (pooledObj != null)
+        {
+            objectToSpawn.SetActive(true);
+            objectToSpawn.transform.position = position;
+            pooledObj.SetupTextMessage(message, color);
         }
 
         poolDictionary[name].Enqueue(objectToSpawn);

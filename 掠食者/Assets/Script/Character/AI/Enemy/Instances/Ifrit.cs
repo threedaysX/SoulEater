@@ -55,7 +55,7 @@ public class Ifrit : BossModel
         // 當血量小於50%，讓噴射詠唱更短
         if (!flamethrowerTypeChanged && CurrentHealth > 0 && CurrentHealth <= data.maxHealth.Value * 0.5)
         {
-            GetSkillByName(SkillNameDictionary.flamethrower).castTime.AddModifier(new StatModifier(-50, StatModType.Magnification));
+            GetSkillByName(SkillNameDictionary.flamethrower).castTime.AddModifier(new StatModifier(-50, StatModType.PercentageTime));
             flamethrowerTypeChanged = true;
         }
     }

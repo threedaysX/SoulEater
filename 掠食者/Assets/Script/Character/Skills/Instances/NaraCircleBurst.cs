@@ -17,8 +17,10 @@ public class NaraCircleBurst : DisposableSkill
 
         if (sourceCaster != null && !targetCol.CompareTag(sourceCaster.tag))
         {
-            DamageTarget();
-            hitAffect.Invoke();
+            if (DamageTarget())
+            {
+                hitAffect.Invoke();
+            }
             this.gameObject.SetActive(false);
         }
     }
@@ -39,7 +41,7 @@ public class NaraCircleBurst : DisposableSkill
 
     private void Ignite()
     {
-        DebuffControl.Instance.Ignite(sourceCaster, target, data.igniteDuration);
+        Debuff.Instance.Ignite(sourceCaster, target, data.igniteDuration);
     }
 
     private void CameraShakeWhenBurst()

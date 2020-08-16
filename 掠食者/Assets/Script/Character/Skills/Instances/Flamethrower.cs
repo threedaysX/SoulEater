@@ -50,8 +50,9 @@ public class Flamethrower : LastingSkill
     private void BuffFireResistance()
     {
         var fireStat = sourceCaster.data.resistance.fire;
-        void affect() { fireStat.AddModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
-        void remove() { fireStat.RemoveModifier(new StatModifier(-20, StatModType.FlatAdd, buffName)); }
+        var mod = new StatModifier(-20, StatModType.FlatAdd, buffName);
+        void affect() { fireStat.AddModifier(mod); }
+        void remove() { fireStat.RemoveModifier(mod); }
         sourceCaster.buffController.AddBuff(buffName, affect, remove, 5f);
     }
 
@@ -62,8 +63,9 @@ public class Flamethrower : LastingSkill
     private void DebuffFireResistance()
     {
         var fireStat = target.data.resistance.fire;
-        void affect() { fireStat.AddModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
-        void remove() { fireStat.RemoveModifier(new StatModifier(20, StatModType.FlatAdd, debuffName)); }
+        var mod = new StatModifier(20, StatModType.FlatAdd, debuffName);
+        void affect() { fireStat.AddModifier(mod); }
+        void remove() { fireStat.RemoveModifier(mod); }
         target.buffController.AddBuff(debuffName, affect, remove, 5f);
     }
 

@@ -1,5 +1,4 @@
-﻿using StatsModifierModel;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShockWave : DisposableSkill
 {
@@ -31,16 +30,12 @@ public class ShockWave : DisposableSkill
         ShiningCastHintEffectOnBody();
     }
 
-    public string slow = "緩速";
     /// <summary>
     /// 對命中的敵人造成-50%移動速度，持續1秒
     /// </summary>
     private void DebuffSlowDown()
     {
-        var speedstat = target.data.moveSpeed;
-        void affect() { speedstat.AddModifier(new StatModifier(-0.5f, StatModType.Magnification, slow)); }
-        void remove() { speedstat.RemoveModifier(new StatModifier(0.5f, StatModType.Magnification, slow)); }
-        target.buffController.AddBuff(slow, affect, remove, 1f);
+        Debuff.Instance.SlowMoveSpeed(target, 50, 1f);
     }
 
     public string tired = "疲累";
@@ -49,9 +44,7 @@ public class ShockWave : DisposableSkill
     /// </summary>
     private void DebuffTired()
     {
-        void affect() { target.jump.Lock(LockType.Lame); }
-        void remove() { target.jump.UnLock(LockType.Lame); }
-        target.buffController.AddBuff(tired, affect, remove, 0.6f);
+        Debuff.Instance.Lame(target, 0.6f);
     }
 
     private void KnockBackHitTarget()

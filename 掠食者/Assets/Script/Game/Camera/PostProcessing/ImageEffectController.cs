@@ -9,6 +9,7 @@ public class ImageEffectController : Singleton<ImageEffectController>
     public PostProcessVolume volume;
 
     private RadialBlurPP _radialBlur = null;
+
     private Vignette _vignette = null;
     private Sequence bleedSequence;
 
@@ -34,14 +35,15 @@ public class ImageEffectController : Singleton<ImageEffectController>
 
     public void BleedVignette(bool start, params VignetteSetting[] settings)
     {
-        bleedSequence.Kill();
-        bleedSequence = DOTween.Sequence();
+        bleedSequence.Kill(true);
         if (!start)
         {
-            _vignette.active = false;
+            _vignette.enabled.value = false;
             return;
         }
-        _vignette.active = true;
+        bleedSequence = DOTween.Sequence();
+        _vignette.enabled.value = true;
+
 
         foreach (var setting in settings)
         {

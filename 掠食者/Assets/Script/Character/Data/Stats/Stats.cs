@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using StatsModifierModel;
 using UnityEngine;
+using UnityEditor.Profiling.Memory.Experimental;
 
 namespace StatsModel
 {
@@ -60,16 +61,16 @@ namespace StatsModel
                     case StatModType.FlatAdd:
                         addMod += mod.Value;
                         break;
-                    case StatModType.Times:
+                    case StatModType.TimesTime:
                         timesMod *= (1 + mod.Value);
                         break;
-                    case StatModType.TimesOfAdd:
+                    case StatModType.TimesAdd:
                         timesOfAddMod += mod.Value;
                         break;
-                    case StatModType.Magnification:
+                    case StatModType.PercentageTime:
                         timesMod *= (1 + (mod.Value / 100));
                         break;
-                    case StatModType.MagnificationAdd:
+                    case StatModType.PercentageAdd:
                         timesOfAddMod += (mod.Value / 100);
                         break;
                 }

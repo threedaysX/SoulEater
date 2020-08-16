@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(SkillController))]
 [RequireComponent(typeof(BuffController))]
 [RequireComponent(typeof(CombatController))]
+[RequireComponent(typeof(IconController))]
 [RequireComponent(typeof(KnockStunSystem))]
 [RequireComponent(typeof(DieController))]
 public class Character : MonoBehaviour
@@ -89,7 +90,14 @@ public class Character : MonoBehaviour
     public CharacterData data;
     [Header("技能欄")]
     public List<Skill> skillFields;
-    private Dictionary<string, int> skillDictionary;    
+    private Dictionary<string, int> skillDictionary;
+
+    [Header("彈出文字訊息中心點")]
+    public Transform popupTextCenter;
+
+    [Header("受傷數字顏色")]
+    public Color normalDamagedColor = new Color32(255, 255, 255, 255);
+    public Color criticalDamagedColor = new Color32(255, 0, 0, 255);
     #endregion
 
     #region 控制器
@@ -101,6 +109,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public CombatController combatController; // 戰鬥控制
     [HideInInspector] public KnockStunSystem knockBackSystem; // 擊退控制
     [HideInInspector] public DieController dieController; // 死亡控制
+    [HideInInspector] public IconController iconController; // 提示圖示控制
     [HideInInspector] public Animator anim;
     #endregion
 
@@ -114,6 +123,7 @@ public class Character : MonoBehaviour
         combatController = GetComponent<CombatController>();
         knockBackSystem = GetComponent<KnockStunSystem>();
         dieController = GetComponent<DieController>();
+        iconController = GetComponent<IconController>();
         anim = GetComponent<Animator>();
 
         ReBorn();
@@ -131,7 +141,7 @@ public class Character : MonoBehaviour
     /// <param name="damageSource">傷害來源</param>
     /// <param name="damage">單次傷害</param>
     /// <param name="isCritical">是否爆擊</param>
-    /// <param name="damageDirectionX">傷害來源方向</param>
+    /// <param name="damageDirectionX">傷害來源方向(大於0為右側，小於為左)</param>
     /// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
     /// <param name="duration">持續時間</param>
     /// <param name="damageImmediate">是否立即造成傷害</param>
@@ -259,8 +269,22 @@ public class Character : MonoBehaviour
 
     public void DamagePopup(int damage, bool isCritical)
     {
-        ObjectPools.Instance.DamagePopup("DamageText", isCritical, damage,
-                transform.position + new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(2.2f, 2.6f), 0));
+        if (isCritical)
+        {
+            ObjectPools.Instance.PopText("CriticalDamageText", isCritical, damage, criticalDamagedColor, popupTextCenter.position);
+        }
+        else
+        {
+            ObjectPools.Instance.PopText("DamageText", isCritical, damage, normalDamagedColor, popupTextCenter.position);
+        }
+    }
+
+    /// <summary>
+    /// Pop english string message Only!
+    /// </summary>
+    public void PopTextMessage(string message, Color color)
+    {
+        ObjectPools.Instance.PopText("PopText", message, color, popupTextCenter.position);
     }
 
     public IEnumerator TakeDamageColorChanged(float duration)

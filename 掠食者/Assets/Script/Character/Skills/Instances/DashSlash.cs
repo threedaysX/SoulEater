@@ -33,7 +33,7 @@ public class DashSlash : DisposableSkill
         {
             isHit = true;
             Character target = targetCol.GetComponent<Character>();
-            StartCoroutine(LockEnemyAction(target, 1.8f));
+            BindEnemyAction(target, 1.8f);
             StartCoroutine(DamageTargetCoroutine(target));
         }
     }
@@ -85,11 +85,9 @@ public class DashSlash : DisposableSkill
     }
 
     // 使用技能後，立即鎖定敵人動作
-    private IEnumerator LockEnemyAction(Character target, float duration)
+    private void BindEnemyAction(Character target, float duration)
     {
-        target.LockOperation(LockType.SkillAction, true, duration);
-        yield return new WaitForSeconds(duration);
-        target.LockOperation(LockType.SkillAction, false);
+        Debuff.Instance.Bind(target, duration);
     }
 
     // 詠唱技能時，就立即進入無敵狀態

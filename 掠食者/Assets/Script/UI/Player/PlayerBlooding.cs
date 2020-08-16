@@ -66,7 +66,7 @@ public class PlayerBlooding : MonoBehaviour
 
     private void CheckInjured()
     {
-        if (!nonInjured && (player == null || player.CurrentHealth <= 0f || player.CurrentHealth > player.data.maxHealth.Value * 0.5f))
+        if (!nonInjured && (player == null || player.CurrentHealth <= 0f || player.CurrentHealth > player.data.maxHealth.Value * 0.3f))
         {
             seriousInjured = false;
             minorInjured = false;
@@ -74,7 +74,7 @@ public class PlayerBlooding : MonoBehaviour
             injuredTrigger = true;
         }
         // 當不在重傷狀態時，就會檢查自己是否為重傷
-        else if (!seriousInjured && player.CurrentHealth <= player.data.maxHealth.Value * 0.2f)
+        else if (!seriousInjured && player.CurrentHealth > 0f && player.CurrentHealth <= player.data.maxHealth.Value * 0.1f)
         {
             seriousInjured = true;
             minorInjured = false;
@@ -82,7 +82,7 @@ public class PlayerBlooding : MonoBehaviour
             injuredTrigger = true;
         }
         // 當不在輕傷狀態時，就會檢查自己是否為輕傷
-        else if (!minorInjured && player.CurrentHealth > player.data.maxHealth.Value * 0.2f && player.CurrentHealth <= player.data.maxHealth.Value * 0.5f)
+        else if (!minorInjured && player.CurrentHealth > player.data.maxHealth.Value * 0.1f && player.CurrentHealth <= player.data.maxHealth.Value * 0.3f)
         {
             seriousInjured = false;
             minorInjured = true;

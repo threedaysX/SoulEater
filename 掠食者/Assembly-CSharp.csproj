@@ -70,9 +70,6 @@
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
-    <Compile Include="Assets\Script\Affect\Debuff\DebuffControl.cs" />
-    <Compile Include="Assets\Script\Affect\KnockStunSystem.cs" />
-    <Compile Include="Assets\Script\Animation\AnimationBase.cs" />
     <Compile Include="Assets\Script\Character\AI\AI.cs" />
     <Compile Include="Assets\Script\Character\AI\AiActionStateController.cs" />
     <Compile Include="Assets\Script\Character\AI\AIHaviourBase.cs" />
@@ -173,6 +170,9 @@
     <Compile Include="Assets\Script\Endowment\Affix\Affixes.cs" />
     <Compile Include="Assets\Script\Endowment\Affix\IAffixTrigger.cs" />
     <Compile Include="Assets\Script\Endowment\Fragment\Frag.cs" />
+    <Compile Include="Assets\Script\Game\Affect\Debuff.cs" />
+    <Compile Include="Assets\Script\Game\Affect\KnockStunSystem.cs" />
+    <Compile Include="Assets\Script\Game\Animation\AnimationBase.cs" />
     <Compile Include="Assets\Script\Game\Camera\CameraShake.cs" />
     <Compile Include="Assets\Script\Game\Camera\CinemachineCameraControl.cs" />
     <Compile Include="Assets\Script\Game\Camera\FadeEvent.cs" />
@@ -180,8 +180,12 @@
     <Compile Include="Assets\Script\Game\Camera\PostProcessing\ImageEffectController.cs" />
     <Compile Include="Assets\Script\Game\Camera\PostProcessing\RadialBlur\RadialBlurPP.cs" />
     <Compile Include="Assets\Script\Game\Camera\TransitionPlayer.cs" />
-    <Compile Include="Assets\Script\Game\DamagePopup.cs" />
     <Compile Include="Assets\Script\Game\Door.cs" />
+    <Compile Include="Assets\Script\Game\Effect\DamagePopup.cs" />
+    <Compile Include="Assets\Script\Game\Effect\IDamageGenerator.cs" />
+    <Compile Include="Assets\Script\Game\Effect\ParticleAttractor.cs" />
+    <Compile Include="Assets\Script\Game\Effect\TextParticles\Scripts\TextParticlePopup.cs" />
+    <Compile Include="Assets\Script\Game\Effect\TextParticles\Scripts\TextRendererParticleSystem.cs" />
     <Compile Include="Assets\Script\Game\EndGameManager.cs" />
     <Compile Include="Assets\Script\Game\FormulaControl\DamageController.cs" />
     <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />
@@ -189,12 +193,12 @@
     <Compile Include="Assets\Script\Game\Music&amp;Sound\MusicTransition.cs" />
     <Compile Include="Assets\Script\Game\Music&amp;Sound\SoundStringData.cs" />
     <Compile Include="Assets\Script\Game\Music&amp;Sound\VolumeModifier.cs" />
-    <Compile Include="Assets\Script\Game\Particle\ParticleAttractor.cs" />
     <Compile Include="Assets\Script\Game\Player\HotKeyBinder.cs" />
     <Compile Include="Assets\Script\Game\Player\HotKeyController.cs" />
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />
     <Compile Include="Assets\Script\Game\TimeScaleController.cs" />
-    <Compile Include="Assets\Script\Tools\AdjustObject.cs" />
+    <Compile Include="Assets\Script\Tools\ObjectMovement\ParabolaController.cs" />
+    <Compile Include="Assets\Script\Tools\ObjectMovement\StraightController.cs" />
     <Compile Include="Assets\Script\Tools\ObjectPools.cs" />
     <Compile Include="Assets\Script\Tools\PrefabRenderer.cs" />
     <Compile Include="Assets\Script\Tools\Singleton.cs" />
@@ -212,6 +216,8 @@
     <Compile Include="Assets\Script\TSUMIKI\star.cs" />
     <Compile Include="Assets\Script\UI\Effect\UIShake.cs" />
     <Compile Include="Assets\Script\UI\EnemyUIControl.cs" />
+    <Compile Include="Assets\Script\UI\Icon\IconController.cs" />
+    <Compile Include="Assets\Script\UI\Icon\IconData.cs" />
     <Compile Include="Assets\Script\UI\Menu\ButtonEvent.cs" />
     <Compile Include="Assets\Script\UI\Menu\ButtonEvents.cs" />
     <Compile Include="Assets\Script\UI\Menu\ButtonSlotBase.cs" />
@@ -231,6 +237,7 @@
     <None Include="Assets\Script\Game\Shaders\RadialBlur.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Script\Game\Effect\TextParticles\Scripts\TextParticlesShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Script\Game\Shaders\Flash.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

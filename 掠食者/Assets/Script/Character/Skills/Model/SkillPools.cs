@@ -6,6 +6,7 @@ public class SkillPools : Singleton<SkillPools>
     [System.Serializable]
     public class Pool
     {
+        public string name;
         public GameObject prefab;
         public int size;
     }
@@ -13,7 +14,6 @@ public class SkillPools : Singleton<SkillPools>
     public List<Pool> skillPools;
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    // Start is called before the first frame update
     private void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
