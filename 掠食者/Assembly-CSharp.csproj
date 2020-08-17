@@ -144,6 +144,7 @@
     <Compile Include="Assets\Script\Character\Skills\Instances\BackStep.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\DashSlash.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\DoubleStrike.cs" />
+    <Compile Include="Assets\Script\Character\Skills\Instances\FireBall.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Flamethrower.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\Heal.cs" />
     <Compile Include="Assets\Script\Character\Skills\Instances\NaraBurst.cs" />
@@ -185,9 +186,13 @@
     <Compile Include="Assets\Script\Game\Camera\PostProcessing\RadialBlur\RadialBlurPPEditor.cs" />
     <Compile Include="Assets\Script\Game\Camera\TransitionPlayer.cs" />
     <Compile Include="Assets\Script\Game\DamagePopup.cs" />
+    <Compile Include="Assets\Script\Game\Dialogue\DialogueChunk.cs" />
+    <Compile Include="Assets\Script\Game\Dialogue\DialogueManager.cs" />
+    <Compile Include="Assets\Script\Game\Dialogue\DialogueTrigger.cs" />
     <Compile Include="Assets\Script\Game\Door.cs" />
     <Compile Include="Assets\Script\Game\EndGameManager.cs" />
     <Compile Include="Assets\Script\Game\EnvirnomentStuff\Teleporter.cs" />
+    <Compile Include="Assets\Script\Game\EnvirnomentStuff\Tutorial\TutorialLightFlash.cs" />
     <Compile Include="Assets\Script\Game\EnvirnomentStuff\Tutorial\TutorialTrapTrigger.cs" />
     <Compile Include="Assets\Script\Game\FormulaControl\DamageController.cs" />
     <Compile Include="Assets\Script\Game\Ground\BreakGround.cs" />

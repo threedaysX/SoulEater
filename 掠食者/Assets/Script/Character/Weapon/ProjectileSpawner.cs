@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class ProjectileSetting
+public struct ProjectileSetting
 {
     public Transform initialPosition;
     public int amount;
