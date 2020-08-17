@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Game Tutorial.unity
+- path: Assets/Scenes/HashBrown.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
