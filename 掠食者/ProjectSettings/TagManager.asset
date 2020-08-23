@@ -17,6 +17,7 @@ TagManager:
   - EffectSoundAudio
   - Soul
   - putFrag
+  - EnvironmentCollider
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - Soul
   - PostProcessing
   - UIText
-  - 
+  - Projectile
   - 
   - 
   - 

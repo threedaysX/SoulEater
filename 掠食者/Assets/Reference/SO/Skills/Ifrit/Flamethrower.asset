@@ -26,7 +26,7 @@ MonoBehaviour:
     toForceChangeValue: 0
     modifiers: []
   cost:
-    BaseValue: 0
+    BaseValue: 3
     AdditionalValue: 0
     FinalValue: 0
     ForceValue: 0
