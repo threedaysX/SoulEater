@@ -181,7 +181,8 @@ public class Debuff : Singleton<Debuff>
         // Damage Formula.
         float damage = (target.data.status.strength.BaseValue + 1) / 2 * ((target.data.status.intelligence.BaseValue + 1) / 2) * (target.data.maxHealth.Value * 0.001f);
         // [false] => Ignite would not trigger critical damage and damage target immediately.
-        target.TakeDamage(source.gameObject, (int)damage, false, 0, 0, damagePerTimes, duration, false);
+        DamageData damageData = new DamageData(source.gameObject, ElementType.Fire, (int)damage, false, 0, 0, damagePerTimes, duration, false);
+        target.TakeDamage(damageData);
     }
 
     protected virtual void RemoveIgniteEffect(Character target)

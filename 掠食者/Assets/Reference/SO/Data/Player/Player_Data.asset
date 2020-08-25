@@ -43,13 +43,13 @@ MonoBehaviour:
   defense:
     BaseValue: 8.8
     AdditionalValue: 0
-    FinalValue: 8.8
+    FinalValue: 28.8
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
   critical:
     BaseValue: 20
-    AdditionalValue: 200
+    AdditionalValue: 40
     FinalValue: 100
     ForceValue: 0
     toForceChangeValue: 0

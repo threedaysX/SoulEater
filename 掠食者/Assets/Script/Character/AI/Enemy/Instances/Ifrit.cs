@@ -83,9 +83,9 @@ public class Ifrit : BossModel
     //    this.CanAction = true;
     //}
 
-    public override bool TakeDamage(GameObject damageSource, int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    public override bool TakeDamage(DamageData damageData)
     {
-        bool isDamaged = base.TakeDamage(damageSource, damage, isCritical, damageDirectionX, weaponKnockBackForce, timesOfPerDamage, duration, damageImmediate);
+        bool isDamaged = base.TakeDamage(damageData);
         if (isDamaged && healthUI != null)
         {
             // 根據血量調整震動幅度
@@ -116,7 +116,7 @@ public class Ifrit : BossModel
 
     public override void Die()
     {
-        CameraShake.Instance.ShakeCamera(2f, 6f, dieController.dieDuration, 0f, true);
+        CameraShake.Instance.ShakeCamera(1f, 4f, dieController.dieDissolveDuration, 0f, true);
         base.Die();
     }
 }

@@ -13,7 +13,7 @@ public class ShockWave : DisposableSkill
         if (!targetCol.CompareTag(sourceCaster.tag))
         {
             DamageTarget();
-            InvokeAffect(hitAffect);
+            InvokeHitAffect();
         }
     }
 

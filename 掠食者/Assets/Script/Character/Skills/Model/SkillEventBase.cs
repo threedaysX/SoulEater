@@ -93,6 +93,7 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
 
         // 觸發立即性效果
         InvokeAffect(immediatelyAffect);
+        InvokeAffect(currentSkill.immediatelyEvent);
     }
 
     public virtual void CastSkill()
@@ -146,18 +147,57 @@ public abstract class SkillEventBase : MonoBehaviour, ISkillGenerator, ISkillUse
         this.gameObject.SetActive(active);
     }
 
-    protected void InvokeAffect(UnityEvent affectEvent)
+    protected void InvokeHitAffect()
+    {
+        InvokeAffect(hitAffect);
+        InvokeAffect(currentSkill.hitEvent);
+    }
+
+    private void InvokeAffect(UnityEvent affectEvent)
     {
         if (affectEvent == null)
             return;
         affectEvent.Invoke();
     }
 
-    public virtual bool DamageTarget(float damageDirectionX = 0)
+    public bool DamageTarget(float firstHitDelay = 0, float damageDirectionX = 0)
+    {
+        if (currentSkill.damageHitTimes.Value > 1)
+        {
+            StartCoroutine(DamageTargetTimes(firstHitDelay, damageDirectionX));
+            return true;
+        }
+        else
+        {
+            return Damage(damageDirectionX);
+        }
+    }
+
+    /// <summary>
+    /// 每下傷害多次打擊用
+    /// </summary>
+    /// <param name="firstHitDelay">造成第一次傷害前的延遲(預設為0，命中立即造成傷害)</param>
+    /// <param name="damageDirectionX">傷害來源方向</param>
+    /// <returns></returns>
+    protected virtual IEnumerator DamageTargetTimes(float firstHitDelay = 0, float damageDirectionX = 0)
+    {
+        // 避免觸發二次傷害，內心也會受傷
+        SetSkillEnable(false);
+        yield return new WaitForSeconds(firstHitDelay);
+
+        for (int i = 0; i < currentSkill.damageHitTimes.Value; i++)
+        {
+            Damage(damageDirectionX);
+            yield return new WaitForSeconds(currentSkill.timesOfPerDamage);
+        }
+    }
+
+    protected virtual bool Damage(float damageDirectionX = 0)
     {
         float damage = GetSkillDamage(out bool isCritical);
         sourceCaster.DamageDealtSteal(damage, false);
-        return target.TakeDamage(sourceCaster.gameObject, (int)damage, isCritical, damageDirectionX);
+        DamageData damageData = new DamageData(sourceCaster.gameObject, currentSkill.elementType, (int)damage, isCritical, damageDirectionX);
+        return target.TakeDamage(damageData);
     }
 
     public virtual float GetSkillDamage(out bool isCritical)

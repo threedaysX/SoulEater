@@ -22,5 +22,6 @@ public enum ElementType
     Air,
     Thunder,
     Light,
-    Dark
+    Dark,
+    Empty
 }

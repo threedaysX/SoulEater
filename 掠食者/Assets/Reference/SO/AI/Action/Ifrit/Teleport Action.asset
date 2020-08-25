@@ -19,9 +19,10 @@ MonoBehaviour:
   minusWeightAmountWhenNotSuccess: 1
   minusWeightAmountAfterAction: 2
   _diffCount: 0
-  actionType: 6
+  actionType: 7
   judjements:
   - {fileID: 11400000, guid: c78377fe85815fe4fae50cc5ce99dbfd, type: 2}
   - {fileID: 11400000, guid: 593dc4374afed154e8042d6ef04b4d72, type: 2}
   - {fileID: 11400000, guid: 838ad91220121094f8d43652302122ba, type: 2}
+  - {fileID: 11400000, guid: 0015fcb4c99c6a8428bb5f6f18a14d53, type: 2}
   skillActionObject: {fileID: 11400000, guid: 0affe81029eaff645adb52b132e369da, type: 2}

@@ -18,7 +18,7 @@ public class OverlapCircleDecision : Detect
         }
         else if (col.CompareTag("Player"))
         {
-            ai.chaseTarget = col.transform;
+            ai.SetChaseTarget(col.transform);
             return true;
         }
         return false;

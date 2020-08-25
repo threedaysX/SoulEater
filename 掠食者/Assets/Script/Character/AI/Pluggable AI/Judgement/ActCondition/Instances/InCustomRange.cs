@@ -11,10 +11,10 @@ public class InCustomRange : JudgeCondition
 
     private bool CheckCustomCloseDistance()
     {
-        if (ai.chaseTarget != null)
+        if (ai.ChaseTarget != null)
         {
             // 若在自定距離內(含)
-            if ((ai.chaseTarget.transform.position - ai.transform.position).sqrMagnitude <= customRange * customRange)
+            if ((ai.ChaseTarget.transform.position - ai.transform.position).sqrMagnitude <= customRange * customRange)
             {
                 return true;
             }

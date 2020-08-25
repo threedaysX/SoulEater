@@ -25,7 +25,7 @@ public class Flamethrower : LastingSkill
                 if (Time.time >= nextDamageTime)
                 {
                     DamageTarget();
-                    InvokeAffect(hitAffect);
+                    InvokeHitAffect();
                     nextDamageTime = Time.time + currentSkill.timesOfPerDamage;
                 }
             }

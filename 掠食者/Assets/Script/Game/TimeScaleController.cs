@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class TimeScaleController : Singleton<TimeScaleController>
 {
-
     private void Start()
     {
         TimeScale.global = new TimeScaleData();    
@@ -14,6 +13,10 @@ public class TimeScaleController : Singleton<TimeScaleController>
         Time.timeScale = TimeScale.global.currentTimeScale;
     }
 
+    /// <summary>
+    /// Custom for UI use.
+    /// (Flexable in any project).
+    /// </summary>
     public void OpenUI(bool open)
     {
         if (open)
@@ -27,6 +30,11 @@ public class TimeScaleController : Singleton<TimeScaleController>
             TimeScale.global.PauseMotion(false);
             TimeScale.global.currentTimeScale = TimeScale.global.originTimeScale;
         }
+    }
+
+    public void ResetTimeScale()
+    {
+        TimeScale.global.currentTimeScale = 1f;
     }
 
     public void DoSlowMotion(float slowdownFactor, float slowdownLength)

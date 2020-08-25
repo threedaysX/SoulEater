@@ -23,7 +23,7 @@ public class PowerSlam : DisposableSkill
         if (!targetCol.CompareTag(sourceCaster.tag))
         {
             DamageTarget();
-            InvokeAffect(hitAffect);
+            InvokeHitAffect();
         }
     }
 }

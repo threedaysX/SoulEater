@@ -138,31 +138,24 @@ public class Character : MonoBehaviour
     /// <summary>
     /// 受到傷害
     /// </summary>
-    /// <param name="damageSource">傷害來源</param>
-    /// <param name="damage">單次傷害</param>
-    /// <param name="isCritical">是否爆擊</param>
-    /// <param name="damageDirectionX">傷害來源方向(大於0為右側，小於為左)</param>
-    /// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
-    /// <param name="duration">持續時間</param>
-    /// <param name="damageImmediate">是否立即造成傷害</param>
-    public virtual bool TakeDamage(GameObject damageSource, int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    public virtual bool TakeDamage(DamageData data)
     {
-        lastAttackMeTarget = damageSource;
+        lastAttackMeTarget = data.damageSource;
         if (isImmune)
         {
             return false;
         }
-        if (damage <= 0)
+        if (data.damage <= 0)
         {
-            damage = 0;
-            DamagePopup(damage, isCritical);
+            data.damage = 0;
+            DamagePopup(data.damage, data.isCritical);
             return true;
         }
 
-        if (timesOfPerDamage <= 0 || duration <= 0)
+        if (data.timesOfPerDamage <= 0 || data.duration <= 0)
         {
-            CurrentHealth -= damage;
-            cumulativeDamageTake += damage;
+            CurrentHealth -= data.damage;
+            cumulativeDamageTake += data.damage;
             if (CurrentHealth <= 0)
             {
                 Die();
@@ -171,13 +164,13 @@ public class Character : MonoBehaviour
             {
                 StartCoroutine(TakeDamageColorChanged(0.1f));
             }
-            DamagePopup(damage, isCritical);
-            KnockBackCheck(damageDirectionX, weaponKnockBackForce);
+            DamagePopup(data.damage, data.isCritical);
+            KnockBackCheck(data.damageDirectionX, data.weaponKnockBackForce);
         }
         else
         {
             // 流血...等持續性傷害
-            StartCoroutine(TakeDamagePerSecondInDuration(damageSource, damage, timesOfPerDamage, duration, damageImmediate));
+            StartCoroutine(TakeDamagePerSecondInDuration(data));
         }
         return true;
     }
@@ -195,18 +188,24 @@ public class Character : MonoBehaviour
         }
     }
 
-    private IEnumerator TakeDamagePerSecondInDuration(GameObject damageSource, float damage, float timesOfPerDamage, float duration, bool damageImmediate)
+    private IEnumerator TakeDamagePerSecondInDuration(DamageData data)
     {
-        while(duration >= 0)
+        while(data.duration >= 0)
         {
-            if (damageImmediate)
+            if (data.damageImmediate)
             {
                 // Would not trigger critical. (Ex: Blood, Ignite, Poison...)
-                TakeDamage(damageSource, (int)damage, false);
+                DamageData newData = new DamageData(data)
+                {
+                    duration = 0,
+                    isCritical = false,
+                    timesOfPerDamage = 0
+                };
+                TakeDamage(newData);
             }
-            yield return new WaitForSeconds(timesOfPerDamage);
-            duration -= timesOfPerDamage;
-            damageImmediate = true;
+            yield return new WaitForSeconds(data.timesOfPerDamage);
+            data.duration -= data.timesOfPerDamage;
+            data.damageImmediate = true;
         }
         yield break;
     }
@@ -313,6 +312,13 @@ public class Character : MonoBehaviour
     public virtual void LearnSkill(Skill skill)
     {
         skillFields.Add(skill);
+        skillDictionary.Add(skill.skillName, skillFields.Count - 1);
+    }
+
+    public virtual void RemoveSkill(Skill skill)
+    {
+        skillFields.RemoveAll(x => x.skillName == skill.skillName);
+        ResetSkillDictionaryIndex();
     }
 
     public Skill GetSkillByName(string skillName)
@@ -502,7 +508,15 @@ public class Character : MonoBehaviour
 
     public void ResetSkillDictionaryIndex()
     {
-        skillDictionary = new Dictionary<string, int>();
+        if (skillDictionary == null)
+        {
+            skillDictionary = new Dictionary<string, int>();
+        }
+        else
+        {
+            skillDictionary.Clear();
+        }
+
         int index = 0;
         foreach (Skill skillField in skillFields)
         {
@@ -591,4 +605,50 @@ public class Character : MonoBehaviour
         return resultResistance;
     }
     #endregion
+}
+
+/// <param name="damageSource">傷害來源</param>
+/// <param name="damage">單次傷害</param>
+/// <param name="isCritical">是否爆擊</param>
+/// <param name="damageDirectionX">傷害來源方向(大於0為右側，小於為左)</param>
+/// <param name="timesOfPerDamage">造成單次傷害所需時間</param>
+/// <param name="duration">持續時間</param>
+/// <param name="damageImmediate">是否立即造成傷害</param>
+public struct DamageData
+{
+    public GameObject damageSource;
+    public ElementType element;
+    public int damage;
+    public bool isCritical;
+    public float damageDirectionX;
+    public float weaponKnockBackForce;
+    public float timesOfPerDamage;
+    public float duration;
+    public bool damageImmediate;
+
+    public DamageData(DamageData data)
+    {
+        this.damageSource = data.damageSource;
+        this.element = data.element;
+        this.damage = data.damage;
+        this.isCritical = data.isCritical;
+        this.damageDirectionX = data.damageDirectionX;
+        this.weaponKnockBackForce = data.weaponKnockBackForce;
+        this.timesOfPerDamage = data.timesOfPerDamage;
+        this.duration = data.duration;
+        this.damageImmediate = data.damageImmediate;
+    }
+
+    public DamageData(GameObject damageSource, ElementType element, int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    {
+        this.damageSource = damageSource;
+        this.element = element;
+        this.damage = damage;
+        this.isCritical = isCritical;
+        this.damageDirectionX = damageDirectionX;
+        this.weaponKnockBackForce = weaponKnockBackForce;
+        this.timesOfPerDamage = timesOfPerDamage;
+        this.duration = duration;
+        this.damageImmediate = damageImmediate;
+    }
 }

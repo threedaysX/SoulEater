@@ -6,6 +6,22 @@ public abstract class AI : Character
     public bool CanDetect { get; set; }
     public bool CanAction { get; set; }
 
+    [Header("開始運作AI")]
+    [SerializeField] private bool _switchOn = true;
+    public bool SwitchOn
+    {
+        get
+        {
+            return _switchOn;
+        }
+        protected set
+        {
+            _switchOn = value;
+            if (_switchOn)
+                switchOnTrigger = true;
+        }
+    }
+    protected bool switchOnTrigger;
     [Header("偵測動作")]
     [SerializeField] protected Detect[] detects;
     [Header("行為模式")]
@@ -33,7 +49,8 @@ public abstract class AI : Character
     private bool inCombatStateTrigger = false; // 是否進入戰鬥狀態
     private bool outOfCombatTrigger = false;
 
-    [HideInInspector] public Transform chaseTarget;
+    [HideInInspector] public Transform ChaseTarget { get; protected set; }
+    [HideInInspector] public Transform LastChaseTarget { get; protected set; }
     [HideInInspector] public LayerMask playerLayer;
     [HideInInspector] public DistanceDetect distanceDetect;
 
@@ -43,7 +60,7 @@ public abstract class AI : Character
         distanceDetect = GetComponent<DistanceDetect>();
         CanDetect = true;
         CanAction = true;
-        if (chaseTarget == null)
+        if (ChaseTarget == null)
         {
             outOfCombatTrigger = true;
         }
@@ -54,14 +71,22 @@ public abstract class AI : Character
     {
         playerLayer = LayerMask.GetMask("Player");
 
-        DoDetects();
-        Combat();
-        CheckOutOfCombatState();
+        if (switchOnTrigger)
+        {
+            ReturnDefaultAction();
+            switchOnTrigger = false;
+        }
+        if (SwitchOn)
+        {
+            DoDetects();
+            Combat();
+            CheckOutOfCombatState();
+        }
     }
 
     private void CheckOutOfCombatState()
     {
-        if (inCombatStateTrigger && chaseTarget == null)
+        if (inCombatStateTrigger && ChaseTarget == null)
         {
             inCombatStateTrigger = false;
             outOfCombatTrigger = true;
@@ -103,16 +128,22 @@ public abstract class AI : Character
             }
             else
             {
-                if (chaseTarget != null)
-                    chaseTarget = null;
+                if (ChaseTarget != null)
+                    ChaseTarget = null;
             }
         }
+    }
+
+    public void SetChaseTarget(Transform target)
+    {
+        ChaseTarget = target;
+        LastChaseTarget = ChaseTarget;
     }
 
     public void Combat()
     {
         // 進入戰鬥狀態
-        if (inCombatStateTrigger && chaseTarget != null)
+        if (inCombatStateTrigger && ChaseTarget != null)
         {
             if (CanAction && Time.time >= nextActTimes)
             {
@@ -236,10 +267,10 @@ public abstract class AI : Character
 
     public void FaceTarget(bool force = false)
     {
-        if ((chaseTarget == null || !freeDirection.canDo) && !force)
+        if ((ChaseTarget == null || !freeDirection.canDo) && !force)
             return;
 
-        float faceDirX = gameObject.transform.position.x - chaseTarget.transform.position.x;
+        float faceDirX = gameObject.transform.position.x - ChaseTarget.transform.position.x;
         if (faceDirX < 0)
         {
             gameObject.transform.eulerAngles = new Vector3(0, 0, 0);

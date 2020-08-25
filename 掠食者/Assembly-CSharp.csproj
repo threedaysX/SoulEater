@@ -118,6 +118,7 @@
     <Compile Include="Assets\Script\Character\CharacterEnumList.cs" />
     <Compile Include="Assets\Script\Character\Data\CharacterData.cs" />
     <Compile Include="Assets\Script\Character\Data\Resistance.cs" />
+    <Compile Include="Assets\Script\Character\Data\ResistanceController.cs" />
     <Compile Include="Assets\Script\Character\Data\ResistanceModel\AirResistance.cs" />
     <Compile Include="Assets\Script\Character\Data\ResistanceModel\DarkResistance.cs" />
     <Compile Include="Assets\Script\Character\Data\ResistanceModel\EarthResistance.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\Script\Character\Skills\Model\ISkillUse.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\LastingSkill.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\Skill.cs" />
+    <Compile Include="Assets\Script\Character\Skills\Model\SkillAttributesType.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\SkillEventBase.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\SkillPools.cs" />
     <Compile Include="Assets\Script\Character\Sound\OperationSoundController.cs" />
@@ -197,6 +199,7 @@
     <Compile Include="Assets\Script\Game\Player\HotKeyController.cs" />
     <Compile Include="Assets\Script\Game\ResourcesManager.cs" />
     <Compile Include="Assets\Script\Game\TimeScaleController.cs" />
+    <Compile Include="Assets\Script\Tools\AppControl.cs" />
     <Compile Include="Assets\Script\Tools\ObjectMovement\ParabolaController.cs" />
     <Compile Include="Assets\Script\Tools\ObjectMovement\StraightController.cs" />
     <Compile Include="Assets\Script\Tools\ObjectPools.cs" />
@@ -218,9 +221,9 @@
     <Compile Include="Assets\Script\UI\EnemyUIControl.cs" />
     <Compile Include="Assets\Script\UI\Icon\IconController.cs" />
     <Compile Include="Assets\Script\UI\Icon\IconData.cs" />
-    <Compile Include="Assets\Script\UI\Menu\ButtonEvent.cs" />
-    <Compile Include="Assets\Script\UI\Menu\ButtonEvents.cs" />
-    <Compile Include="Assets\Script\UI\Menu\ButtonSlotBase.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Button\ButtonEvent.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Button\ButtonEvents.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Button\ButtonSlotBase.cs" />
     <Compile Include="Assets\Script\UI\Menu\MenuControl.cs" />
     <Compile Include="Assets\Script\UI\Menu\MenuEvent.cs" />
     <Compile Include="Assets\Script\UI\Menu\MenuSkillSlot.cs" />
@@ -228,8 +231,10 @@
     <Compile Include="Assets\Script\UI\Menu\SkillDatabase.cs" />
     <Compile Include="Assets\Script\UI\Menu\SkillDescription.cs" />
     <Compile Include="Assets\Script\UI\Menu\SkillSlot.cs" />
-    <Compile Include="Assets\Script\UI\Menu\SliderEvent.cs" />
-    <Compile Include="Assets\Script\UI\Menu\TabsControl.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Slider\SliderEvent.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Tabs\TabsControl.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Toggle\ToggleEvent.cs" />
+    <Compile Include="Assets\Script\UI\Menu\Toggle\ToggleEvents.cs" />
     <Compile Include="Assets\Script\UI\Player\PlayerBlooding.cs" />
     <Compile Include="Assets\Script\UI\PlayerUIControl.cs" />
     <Compile Include="Assets\Script\UI\Title\TitleControl.cs" />
@@ -241,6 +246,7 @@
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Script\Game\Shaders\Flash.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\Pixel2DCastleTileset\about.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />

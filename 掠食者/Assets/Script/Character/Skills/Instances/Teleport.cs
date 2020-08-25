@@ -4,10 +4,12 @@ public class Teleport : DisposableSkill
 {
     public Transform lastAttackTarget;
     public AudioClip teleportSound;
+    public float timeSlowDuration;
 
     protected override void AddAffectEvent()
     {
         immediatelyAffect.AddListener(TeleportToTargetBack);
+        immediatelyAffect.AddListener(TimeSlow);
     }
 
     /// <summary>
@@ -31,5 +33,10 @@ public class Teleport : DisposableSkill
         float x = (lastAttackTarget.transform.position + lastAttackTarget.transform.right * -1.2f).x;
         sourceCaster.transform.position = new Vector3(x, sourceCaster.transform.position.y); 
         soundControl.PlaySound(teleportSound);
+    }
+
+    private void TimeSlow()
+    {
+        TimeScaleController.Instance.DoSlowMotion(0.05f, timeSlowDuration);
     }
 }

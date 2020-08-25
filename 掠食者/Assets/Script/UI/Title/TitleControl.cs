@@ -15,6 +15,7 @@ public class TitleControl : MonoBehaviour
         ButtonEvents.Instance.SelectButton(defaultTitleSelectedButton);
         options.SetActive(false);
         menuEscStack = new Stack<MenuEvent>();
+        TimeScaleController.Instance.ResetTimeScale();
     }
 
     private void Update()

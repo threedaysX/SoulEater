@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91baf6d2a6639469d52a59cb61126a, type: 3}
   m_Name: Teleport_J2
   m_EditorClassIdentifier: 
-  actionWeightAfterJudge: 7
-  conditionTrueCount: 2
+  actionWeightAfterJudge: 10
+  conditionTrueCount: 1
   conditions:
   - {fileID: 11400000, guid: 97ac49680b3fb2341a3fe94cd83284a6, type: 2}
   - {fileID: 11400000, guid: 2483b5169b8f89a4bb63d6af443a77bd, type: 2}

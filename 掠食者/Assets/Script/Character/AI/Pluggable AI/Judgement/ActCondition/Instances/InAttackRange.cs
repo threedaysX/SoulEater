@@ -10,10 +10,10 @@ public class InAttackRange : JudgeCondition
 
     private bool CheckCloseDistance()
     {
-        if (ai.chaseTarget != null)
+        if (ai.ChaseTarget != null)
         {
             // 若在攻擊距離內(含)
-            if ((ai.chaseTarget.transform.position - ai.transform.position).sqrMagnitude <=  ai.data.attackRange.Value * ai.data.attackRange.Value)
+            if ((ai.ChaseTarget.transform.position - ai.transform.position).sqrMagnitude <=  ai.data.attackRange.Value * ai.data.attackRange.Value)
             {
                 return true;
             }

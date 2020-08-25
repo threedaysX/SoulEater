@@ -189,7 +189,7 @@ public class Operation
                     Stop(0);
                 }
                 break;
-            case OperationStateType.Combo:
+            case OperationStateType.Link:
                 canStoreNextOperation = true;
                 if (isSameOperation)
                 {
@@ -283,7 +283,7 @@ public enum OperationStateType
     /// <summary>
     /// 用來判斷此動作【可不可以被連段】(同樣動作or不同動作- 預存打斷)
     /// </summary>
-    Combo
+    Link
 }
 
 /// <summary>
@@ -531,7 +531,7 @@ public class OperationController : MonoBehaviour
     {
         isJumping = true;
         
-        setOperationState(OperationStateType.Combo);        
+        setOperationState(OperationStateType.Link);        
         jumpMethod.Invoke();
 
         while (true)
@@ -658,7 +658,7 @@ public class OperationController : MonoBehaviour
         yield return new WaitForSeconds(attackAnimDuration - comboDuration);
 
         // 攻擊收尾，可連段
-        setOperationState(OperationStateType.Combo);
+        setOperationState(OperationStateType.Link);
 
         yield return new WaitForSeconds(comboDuration);
 

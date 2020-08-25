@@ -69,6 +69,7 @@ public class MenuControl : Singleton<MenuControl>
 
     public void CloseMainMenu()
     {
+        AppControl.MenuPausedGame(false);
         // Reset timeScale when close menu.
         TimeScaleController.Instance.OpenUI(false);
 
@@ -81,6 +82,7 @@ public class MenuControl : Singleton<MenuControl>
 
     public void OpenMainMenu()
     {
+        AppControl.MenuPausedGame(true);
         TimeScaleController.Instance.OpenUI(true);
 
         menu.SetActive(true);

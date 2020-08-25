@@ -1,11 +1,13 @@
 ﻿using StatsModel;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 [CreateAssetMenu(menuName = "Character/Skill")]
 public class Skill : ScriptableObject
 {
     public Sprite icon;
+    public SkillAttributesType[] attributes;
     public AttackType skillType;
     public ElementType elementType = ElementType.None;
     public string skillName;
@@ -33,6 +35,16 @@ public class Skill : ScriptableObject
     public Stats damageMagnification;
 
     /// <summary>
+    /// 技能攻擊次數
+    /// </summary>
+    public Stats damageHitTimes;
+
+    /// <summary>
+    /// 技能造成每次傷害所需的時間間隔(Ex: 每[0.2]秒造成100傷害...)
+    /// </summary>
+    public float timesOfPerDamage = 1f;
+
+    /// <summary>
     /// 技能詠唱時間
     /// </summary>
     public Stats castTime;
@@ -50,15 +62,20 @@ public class Skill : ScriptableObject
     public bool cooling = false;
 
     /// <summary>
-    /// 技能造成每次傷害所需的時間間隔(Ex: 每[0.2]秒造成100傷害...)
-    /// </summary>
-    public float timesOfPerDamage = 1f;
-
-    /// <summary>
     /// 技能的持續時間
     /// </summary>
     public float duration = 1f;
 
     public GameObject prefab;
+
+    /// <summary>
+    /// 詠唱時技能額外的觸發效果
+    /// </summary>
+    public UnityEvent immediatelyEvent;
+
+    /// <summary>
+    /// 命中時技能額外的觸發效果
+    /// </summary>
+    public UnityEvent hitEvent;
 }
 

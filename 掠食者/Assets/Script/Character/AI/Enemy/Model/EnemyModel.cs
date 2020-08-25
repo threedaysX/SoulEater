@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class EnemyModel : AI
 {
@@ -18,6 +17,13 @@ public abstract class EnemyModel : AI
         gameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 
+    public override void Update()
+    {
+        if (!AppControl.IsGamePaused())
+        {
+            base.Update();
+        }
+    }
     public override void LateUpdate()
     {
         base.LateUpdate();

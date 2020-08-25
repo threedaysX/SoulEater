@@ -26,7 +26,7 @@ public class Slow : DisposableSkill
 
         if (!targetCol.CompareTag(sourceCaster.tag))
         {
-            InvokeAffect(hitAffect);
+            InvokeHitAffect();
         }
     }
 }

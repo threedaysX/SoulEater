@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Teleport
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
+  attributes: 
   skillType: 2
   elementType: 0
   skillName: "\u76F8\u4F4D\u77AC\u79FB"
@@ -40,6 +41,14 @@ MonoBehaviour:
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
+  damageHitTimes:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  timesOfPerDamage: 0
   castTime:
     BaseValue: 0
     AdditionalValue: 0
@@ -56,12 +65,23 @@ MonoBehaviour:
     modifiers: []
   coolDown:
     BaseValue: 5
-    AdditionalValue: 0
+    AdditionalValue: -4
     FinalValue: 5
     ForceValue: 0
     toForceChangeValue: 0
     modifiers: []
+  trueCoolDown: 0
+  coolDownTimer: 0
   cooling: 1
-  timesOfPerDamage: 0
   duration: 0
   prefab: {fileID: 4112537811802141493, guid: 4dffa554663863444a5051b38b55e5ed, type: 3}
+  immediatelyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  hitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null

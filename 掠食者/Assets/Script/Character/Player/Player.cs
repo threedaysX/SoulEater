@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(PlayerSkillSlotKeyControl))]
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : Character
 {
+    [Header("靈魂吸取")]
+    public ParticleSystemForceField attractor;
+    public ParticleSystem burstEffect;
+
     [Header("死亡特效")]
     public ParticleSystem dieParticle;
 
@@ -26,9 +31,9 @@ public class Player : Character
         ResetBarUI();
     }
 
-    public override bool TakeDamage(GameObject damageSource, int damage, bool isCritical, float damageDirectionX = 0, float weaponKnockBackForce = 0, float timesOfPerDamage = 0, float duration = 0, bool damageImmediate = true)
+    public override bool TakeDamage(DamageData damageData)
     {
-        bool isDamaged = base.TakeDamage(damageSource, damage, isCritical, damageDirectionX, weaponKnockBackForce, timesOfPerDamage, duration, damageImmediate);
+        bool isDamaged = base.TakeDamage(damageData);
         if (isDamaged)
         {
             if (CurrentHealth <= data.maxHealth.Value * 0.25f)
@@ -52,6 +57,17 @@ public class Player : Character
         ResetBarUI();
         TimeScaleController.Instance.DoSlowMotion(0.05f, dieController.dieDuration);
         base.Die();
+    }
+
+    public void TriggerAttractorBurstEffect(float delay)
+    {
+        StartCoroutine(Burst(delay));
+    }
+
+    private IEnumerator Burst(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        burstEffect.Play(true);
     }
 
     private void ResetBarUI()

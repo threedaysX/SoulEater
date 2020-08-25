@@ -24,7 +24,7 @@ public class RayCastDecision : Detect
         }
         else if (hit.collider.CompareTag("Player"))
         {
-            ai.chaseTarget = hit.transform;
+            ai.SetChaseTarget(hit.transform);
             return true;
         }
         return false;

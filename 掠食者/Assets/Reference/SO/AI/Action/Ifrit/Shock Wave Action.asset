@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActionWeight: 6
   originalActionWeight: 6
-  commonActionDelay: 0.4
+  commonActionDelay: 1
   clips:
   - {fileID: 7400000, guid: 495a093930ba4e745b4a615b560c9ff6, type: 2}
   minusWeightAmountWhenNotSuccess: 2

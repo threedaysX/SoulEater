@@ -7,10 +7,4 @@ public class ResourcesManager : Singleton<ResourcesManager>
     {
         Resources.UnloadUnusedAssets();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

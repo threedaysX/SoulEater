@@ -28,6 +28,7 @@ public class BossModel : EnemyModel
                 knockOutRootParticle.Play(true);
                 LockHealthAvoidDie(2f);
             }
+            // True Die (And Generate Soul)
             else
             {
                 base.Die();

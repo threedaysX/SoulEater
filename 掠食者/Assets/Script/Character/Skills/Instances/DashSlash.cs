@@ -33,55 +33,26 @@ public class DashSlash : DisposableSkill
         {
             isHit = true;
             Character target = targetCol.GetComponent<Character>();
+            this.target = target;
             BindEnemyAction(target, 1.8f);
-            StartCoroutine(DamageTargetCoroutine(target));
+            DamageTarget(1f);
         }
     }
 
-    // 實際造成傷害的方式
-    private IEnumerator DamageTargetCoroutine(Character target)
+    protected override bool Damage(float damageDirectionX = 0)
     {
-        SetSkillEnable(false);  // 避免觸發二次傷害，內心也會受傷
-        yield return new WaitForSeconds(1f);
-
-        // 第1段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.1f);
-
-        // 第2段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.1f);
-
-        // 第3段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.1f);
-
-        // 第4段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.1f);
-
-        // 第5段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.1f);
-
-        // 第6段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.1f);
-
-        // 第7段攻擊
-        DamageTarget(target);
-        yield return new WaitForSeconds(0.2f);
+        TriggerHitEffect(target);
+        CameraShakeWhenHit();
+        return base.Damage(transform.right.x);
     }
 
-    protected void DamageTarget(Character target)
+    private void TriggerHitEffect(Character target)
     {
         if (target == null)
             return;
         slashHitEffect.transform.position = target.transform.position;
         slashHitEffect.Play(true);
         soundControl.PlaySound(slashHitSound);
-        base.DamageTarget(transform.right.x);
-        CameraShakeWhenHit();
     }
 
     // 使用技能後，立即鎖定敵人動作
