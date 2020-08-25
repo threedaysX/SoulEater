@@ -52,7 +52,7 @@ namespace Necromancy.UI
         public SymbolsTextureData textureData;        
 
         private ParticleSystemRenderer particleSystemRenderer;
-        private new ParticleSystem particleSystem;
+        private ParticleSystem ps;
 
         [ContextMenu("TestHelloWorld")]
         public void TestHelloWorld()
@@ -91,12 +91,12 @@ namespace Necromancy.UI
             var custom2Data = CreateCustomData(texCords, 12);
 
             // Caching link to ParticleSystem
-            if (particleSystem == null) particleSystem = GetComponent<ParticleSystem>();
+            if (ps == null) ps = GetComponent<ParticleSystem>();
 
             if (particleSystemRenderer == null)
             {
                 // If the link is to ParticleSystemRenderer, cash it and make sure we have right streams
-                particleSystemRenderer = particleSystem.GetComponent<ParticleSystemRenderer>();
+                particleSystemRenderer = ps.GetComponent<ParticleSystemRenderer>();
                 var streams = new List<ParticleSystemVertexStream>();
                 particleSystemRenderer.GetActiveVertexStreams(streams);
                 // Adding additional stream to Vector2(UV2, SizeXY, etc.), so that the coordinates in the script match the coordinates in the shader
@@ -119,23 +119,23 @@ namespace Necromancy.UI
             };
             // If we want to create particles of different sizes, then in the parameters of SpawnParticle it is necessary
             // to transfer the desired startSize value
-            if (startSize.HasValue) emitParams.startSize3D *= startSize.Value * particleSystem.main.startSizeMultiplier;
+            if (startSize.HasValue) emitParams.startSize3D *= startSize.Value * ps.main.startSizeMultiplier;
             // Directly the spawn of the particles
-            particleSystem.Emit(emitParams, 1);
+            ps.Emit(emitParams, 1);
 
             // Transferring the custom data to the needed streams
             var customData = new List<Vector4>();
             // Getting the stream ParticleSystemCustomData.Custom1 from ParticleSystem
-            particleSystem.GetCustomParticleData(customData, ParticleSystemCustomData.Custom1);
+            ps.GetCustomParticleData(customData, ParticleSystemCustomData.Custom1);
             // Changing the data of the last element, i.e. the particle, that we have just created
             customData[customData.Count - 1] = custom1Data;
             // Returning the data to ParticleSystem
-            particleSystem.SetCustomParticleData(customData, ParticleSystemCustomData.Custom1);
+            ps.SetCustomParticleData(customData, ParticleSystemCustomData.Custom1);
 
             // The same for ParticleSystemCustomData.Custom2
-            particleSystem.GetCustomParticleData(customData, ParticleSystemCustomData.Custom2);
+            ps.GetCustomParticleData(customData, ParticleSystemCustomData.Custom2);
             customData[customData.Count - 1] = custom2Data;
-            particleSystem.SetCustomParticleData(customData, ParticleSystemCustomData.Custom2);
+            ps.SetCustomParticleData(customData, ParticleSystemCustomData.Custom2);
         }
 
         // Vector2 array packing function with symbols' coordinates in "float" 

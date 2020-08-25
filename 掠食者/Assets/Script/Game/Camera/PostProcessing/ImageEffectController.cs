@@ -1,36 +1,19 @@
 ﻿using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Rendering.PostProcessing;
 using System;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
-[RequireComponent(typeof(PostProcessVolume))]
 public class ImageEffectController : Singleton<ImageEffectController>
 {
-    public PostProcessVolume volume;
-
-    private RadialBlurPP _radialBlur = null;
+    public Volume volume;
 
     private Vignette _vignette = null;
     private Sequence bleedSequence;
 
     private void Start()
     {
-        _radialBlur = volume.sharedProfile.GetSetting<RadialBlurPP>();
-        _vignette = volume.sharedProfile.GetSetting<Vignette>();
-    }
-
-    public void StartRadialBlur(Ease ease, params RadialBlurSetting[] settings)
-    {
-        Sequence effectSequence = DOTween.Sequence();
-
-        foreach (var setting in settings)
-        {
-            effectSequence
-                .Append(DOTween.To(() => _radialBlur.m_Strength.value, x => _radialBlur.m_Strength.value = x, setting.strength, setting.duration).SetEase(ease))
-                .Insert(0f, DOTween.To(() => _radialBlur.m_Dist.value, x => _radialBlur.m_Dist.value = x, setting.dist, setting.duration).SetEase(ease));
-        }
-
-        effectSequence.Play();
+        volume.sharedProfile.TryGet(out _vignette);
     }
 
     public void BleedVignette(bool start, params VignetteSetting[] settings)
@@ -38,11 +21,11 @@ public class ImageEffectController : Singleton<ImageEffectController>
         bleedSequence.Kill(true);
         if (!start)
         {
-            _vignette.enabled.value = false;
+            _vignette.active = false;
             return;
         }
         bleedSequence = DOTween.Sequence();
-        _vignette.enabled.value = true;
+        _vignette.active = true;
 
 
         foreach (var setting in settings)
@@ -50,12 +33,28 @@ public class ImageEffectController : Singleton<ImageEffectController>
             bleedSequence
                 .Append(DOTween.To(() => _vignette.color.value, x => _vignette.color.value = x, setting.color, setting.duration))
                 .Insert(0f, DOTween.To(() => _vignette.intensity.value, x => _vignette.intensity.value = x, setting.intensity, setting.duration))
-                .Insert(0f, DOTween.To(() => _vignette.smoothness.value, x => _vignette.smoothness.value = x, setting.smoothness, setting.duration))
-                .Insert(0f, DOTween.To(() => _vignette.roundness.value, x => _vignette.roundness.value = x, setting.roundness, setting.duration));
+                .Insert(0f, DOTween.To(() => _vignette.smoothness.value, x => _vignette.smoothness.value = x, setting.smoothness, setting.duration));
         }
 
         bleedSequence.Play();
     }
+
+    #region Old Post-Processing
+    //// Old Blur for Post-Processing.
+    //public void StartRadialBlur(Ease ease, params RadialBlurSetting[] settings)
+    //{
+    //    Sequence effectSequence = DOTween.Sequence();
+
+    //    foreach (var setting in settings)
+    //    {
+    //        effectSequence
+    //            .Append(DOTween.To(() => _radialBlur.m_Strength.value, x => _radialBlur.m_Strength.value = x, setting.strength, setting.duration).SetEase(ease))
+    //            .Insert(0f, DOTween.To(() => _radialBlur.m_Dist.value, x => _radialBlur.m_Dist.value = x, setting.dist, setting.duration).SetEase(ease));
+    //    }
+
+    //    effectSequence.Play();
+    //}
+    #endregion
 }
 
 [Serializable]
@@ -72,6 +71,5 @@ public struct VignetteSetting
     public Color color;
     public float intensity;
     public float smoothness;
-    public float roundness;
     public float duration;
 }

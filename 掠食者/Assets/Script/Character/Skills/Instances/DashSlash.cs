@@ -74,10 +74,12 @@ public class DashSlash : DisposableSkill
         ZoomInSetting zoomInSetting = new ZoomInSetting { finalZoomSize = 5.5f, duration = 0.1f, startDelay = 0f };
         ZoomInSetting resetCameraSetting = new ZoomInSetting { finalZoomSize = 6f, duration = 0.5f, startDelay = 0.6f };
         CinemachineCameraControl.Instance.ZoomInCamera(zoomInSetting, resetCameraSetting);
-        ImageEffectController.Instance.StartRadialBlur(DG.Tweening.Ease.Linear,
-                new[] {
-                    new RadialBlurSetting { strength = 2f, dist = 1f, duration = 0.3f },
-                    new RadialBlurSetting { strength = 0f, dist = 1f, duration = 0.2f }  });
+
+        //// Old Blur for Post-Processing.
+        //ImageEffectController.Instance.StartRadialBlur(DG.Tweening.Ease.Linear,
+        //        new[] {
+        //            new RadialBlurSetting { strength = 2f, dist = 1f, duration = 0.3f },
+        //            new RadialBlurSetting { strength = 0f, dist = 1f, duration = 0.2f }  });
     }
 
     /// <summary>

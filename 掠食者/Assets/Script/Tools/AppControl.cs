@@ -2,9 +2,18 @@
 
 public class AppControl : Singleton<AppControl>
 {
+    [SerializeField] private bool on;
     public GameObject gamePauseBlocker;
     public static bool GamePaused { get; private set; }
     public static bool MenuPaused { get; private set; }
+
+    private void Start()
+    {
+        on = true;
+#if UNITY_EDITOR
+        on = false;
+#endif
+    }
 
     public void SetAppRunInBackground(bool runInBackground)
     {
@@ -24,18 +33,24 @@ public class AppControl : Singleton<AppControl>
     private void OnApplicationFocus(bool hasFocus)
     {
         GamePaused = !hasFocus;
-        if (GamePaused)
-            gamePauseBlocker.SetActive(true);
-        else
-            gamePauseBlocker.SetActive(false);
+        if (on)
+        {
+            if (GamePaused)
+                gamePauseBlocker.SetActive(true);
+            else
+                gamePauseBlocker.SetActive(false);
+        }
     }
 
     private void OnApplicationPause(bool pauseStatus)
     {
         GamePaused = pauseStatus;
-        if (GamePaused)
-            gamePauseBlocker.SetActive(true);
-        else
-            gamePauseBlocker.SetActive(false);
+        if (on)
+        {
+            if (GamePaused)
+                gamePauseBlocker.SetActive(true);
+            else
+                gamePauseBlocker.SetActive(false);
+        }
     }
 }
