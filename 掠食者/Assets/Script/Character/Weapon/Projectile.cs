@@ -72,11 +72,7 @@ public class Projectile : MonoBehaviour
             float damage = DamageController.Instance.GetAttackDamage(sourceCaster, targetToDamage, AttackType.Attack, elementType, out bool isCritical);
             collision.GetComponent<Character>().TakeDamage(sourceCaster.gameObject, (int)damage, isCritical);
         }
-        else if(sourceCaster == null)   //not character shooting projectile
-        {
-            //write a GetTrapDamage Function in DamageController
-        }
-        else if(targetToDamage == sourceCaster)
+        else if(targetToDamage == sourceCaster && sourceCaster == null)
         {
             return;
         }

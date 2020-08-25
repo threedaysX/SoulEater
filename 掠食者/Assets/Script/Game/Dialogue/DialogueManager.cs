@@ -21,9 +21,9 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private void Update()
     {
-        //if(isDialoguing)
-            //player.move.canDo = isDialoguing ? false : true;  //
-            //player.attack.canDo = isDialoguing ? false : true;  //
+        if(isDialoguing)
+            player.move.canDo = isDialoguing ? false : true;  //
+            player.attack.canDo = isDialoguing ? false : true;  //
     }
 
     public void StartDialogueChunk(DialogueChunk dialogueChunk)
