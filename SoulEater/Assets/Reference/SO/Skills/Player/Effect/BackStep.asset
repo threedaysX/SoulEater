@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c44ff9a5d9fd4baefebf89b9e4601, type: 3}
+  m_Name: BackStep
+  m_EditorClassIdentifier: 
+  icon: {fileID: 3228302888562765310, guid: 6bf794657c699b545a388d63eaace8f0, type: 3}
+  attributes: 
+  skillType: 2
+  elementType: 0
+  skillName: "\u80CC\u5411\u77AC\u79FB"
+  description: "\u53EF\u4EE5\u4E2D\u65B7\u4EFB\u4F55\u52D5\u4F5C\uFF0C\u4E26\u5FEB\u901F\u5411\u81EA\u8EAB\u7684\u5F8C\u65B9\u9000\u79FB4.5m(\u7FFB\u6EFE\u8DDD\u96E2)\uFF0C\u4E14\u6703\u9032\u5165\u77ED\u66AB\u7684\u7121\u6575\u72C0\u614B\u3002"
+  centerPositionOffset: 0
+  range:
+    BaseValue: 4.5
+    AdditionalValue: 0
+    FinalValue: 4.5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 0.5
+    AdditionalValue: 0
+    FinalValue: 0.5
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  costType: 1
+  damageMagnification:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  damageHitTimes:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  timesOfPerDamage: 0
+  castTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 3
+    AdditionalValue: 0
+    FinalValue: 3
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  trueCoolDown: 0
+  coolDownTimer: 0
+  cooling: 0
+  coolDownType: 1
+  duration: 0
+  prefab: {fileID: 8923207562362310752, guid: 267ec028ba338704d80dcd8c2c47829e, type: 3}
+  immediatelyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  hitEvent:
+    m_PersistentCalls:
+      m_Calls: []

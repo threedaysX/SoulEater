@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c44ff9a5d9fd4baefebf89b9e4601, type: 3}
+  m_Name: Flamethrower
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  attributes: 
+  skillType: 1
+  elementType: 1
+  skillName: "\u70C8\u7130\u5674\u5C04"
+  description: 
+  centerPositionOffset: 0
+  range:
+    BaseValue: 20
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  cost:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  costType: 1
+  damageMagnification:
+    BaseValue: 30
+    AdditionalValue: 0
+    FinalValue: 30
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  damageHitTimes:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  timesOfPerDamage: 0.1
+  castTime:
+    BaseValue: 1.2
+    AdditionalValue: 0
+    FinalValue: 1.2
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  fixedCastTime:
+    BaseValue: 0
+    AdditionalValue: 0
+    FinalValue: 0
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  coolDown:
+    BaseValue: 8
+    AdditionalValue: 0
+    FinalValue: 8
+    ForceValue: 0
+    toForceChangeValue: 0
+    modifiers: []
+  trueCoolDown: 7.36
+  coolDownTimer: 3.614252
+  cooling: 1
+  coolDownType: 1
+  duration: 1
+  prefab: {fileID: 7390867264986258557, guid: 9a443091373ab4543a1f19b81e549b9d, type: 3}
+  immediatelyEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  hitEvent:
+    m_PersistentCalls:
+      m_Calls: []
