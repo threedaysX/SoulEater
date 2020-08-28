@@ -169,6 +169,7 @@
     <Compile Include="Assets\Script\Character\Buff\BuffController.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\SkillAttributesType.cs" />
     <Compile Include="Assets\Script\Character\Weapon\WeaponController.cs" />
+    <Compile Include="Assets\Script\Character\DamageStoreController.cs" />
     <Compile Include="Assets\Script\Character\Die\SoulCharacter.cs" />
     <Compile Include="Assets\Script\UI\Player\PlayerBlooding.cs" />
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\InAttackRange.cs" />
@@ -234,7 +235,6 @@
     <Compile Include="Assets\Script\Character\AI\Pluggable AI\Judgement\ActCondition\Instances\CheckLastAction.cs" />
     <Compile Include="Assets\Script\Tools\CoroutineController.cs" />
     <Compile Include="Assets\Script\Character\Skills\Model\Skill.cs" />
-    <Compile Include="Assets\Script\Character\DamageStoreController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
