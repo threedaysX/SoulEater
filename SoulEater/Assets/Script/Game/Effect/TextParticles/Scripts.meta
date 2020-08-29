@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:掠食者/Assets/Script/Game/Effect/TextParticles/Scripts.meta
 guid: a8a26401a337bca47beef876fbf88c14
+=======
+guid: 1e355668c15f40243b1f65cc51225a7d
+>>>>>>> merge:掠食者/Assets/Script/Game/EnvirnomentStuff.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

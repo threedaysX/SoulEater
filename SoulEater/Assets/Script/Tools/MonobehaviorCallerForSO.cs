@@ -1,0 +1,1 @@
+﻿public class MonobehaviorCallerForSO : Singleton<MonobehaviorCallerForSO> { }
